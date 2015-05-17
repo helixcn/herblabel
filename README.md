@@ -3,4 +3,4 @@
 library(devtools)
 ### if you haven't had devtools installed, please install it 
 ### by typing "install.packages("devtools")" in R console
-
+install_git("git://github.com/helixcn/herblabel.git")

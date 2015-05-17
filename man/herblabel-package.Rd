@@ -14,8 +14,8 @@ modified in MS Word or compiled using pdfLatex.
 \tabular{ll}{
 Package: \tab herblabel\cr
 Type: \tab Package\cr
-Version: \tab 0.3.3\cr
-Date: \tab 2015-05-01\cr
+Version: \tab 0.3.4\cr
+Date: \tab 2015-05-17\cr
 License: \tab GLP-2\cr
 LazyLoad: \tab yes\cr
 }
