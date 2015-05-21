@@ -2,7 +2,7 @@ annotation_tex <- function(infile = NULL, outfile = "annotation.tex"){
     herbdat000 <- read.csv(infile, header = TRUE)
     temp1 <- c("\\documentclass[a4paper,5pt,twocolumn]{article}",
                 "\\pagestyle{empty} ",
-                "\\usepackage{geometry}", # 
+                "\\usepackage{geometry}",
                 "\\usepackage{CJK}",
                 "\\geometry{left=0.8cm,right=0.2cm,
                  top=0.8cm,bottom=0.2cm}",
@@ -24,12 +24,10 @@ annotation_tex <- function(infile = NULL, outfile = "annotation.tex"){
         res <- c(
         ### Set the size for each label
         "\\begin{tabular}{@{}p{8.5cm}}",
-        
         #### Title of the Herbarium
         ifelse(is.na(herbdat$PROJECT), "\\vspace{4mm}", 
             paste("\\centerline{", as.character(herbdat$PROJECT), 
             "}\\vspace{1mm}", sep = "")),
-        
         #### SPECIES INFO
         ifelse(is.na(herbdat$INFRASPECIFIC_RANK),
               paste("\\large{\\textsl{\\textbf{",
