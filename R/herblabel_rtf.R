@@ -38,11 +38,11 @@ herblabel_rtf <- function(infile = NULL, spellcheck = FALSE, outfile = "herblabe
              paste(which(is.na(herbdat000$COUNTY)) + 1, collapse = ", ")))
         }
     if(any(is.na(herbdat000$LOCALITY))){
-        stop(paste("\"LOCALITY\" must be provided  for row: ", 
+        warning(paste("\"LOCALITY\" not provided  for row: ", 
              paste(which(is.na(herbdat000$LOCALITY)) + 1, collapse = ", ")))
         }
     if(any(is.na(herbdat000$REMARKS))){
-        stop(paste("\"REMARKS\" must be provided for row: ", 
+        warning(paste("\"REMARKS\" not provided for row: ", 
              paste(which(is.na(herbdat000$REMARKS)) + 1, collapse = ", ")))
         }
     if(any(is.na(herbdat000$IDENTIFIED_BY))){
@@ -50,7 +50,7 @@ herblabel_rtf <- function(infile = NULL, spellcheck = FALSE, outfile = "herblabe
              paste(which(is.na(herbdat000$DETERMINOR)) + 1, collapse = ", ")))
         }
     if(any(is.na(herbdat000$DATE_IDENTIFIED))){
-        stop(paste("\"DATE_IDENTIFIED\" must be provided for row: ", 
+        warning(paste("\"DATE_IDENTIFIED\" not provided for row: ", 
              paste(which(is.na(herbdat000$DATE_IDENTIFIED)) + 1, collapse = ", ")))
         }
     
@@ -186,8 +186,8 @@ herblabel_rtf <- function(infile = NULL, spellcheck = FALSE, outfile = "herblabe
 
         ##### Attributes and Remarks
         paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb60", 
-        ifelse(is.na(herbdat$ATTRIBUTES), "", as.character(herbdat$ATTRIBUTES)),
-               " ", ifelse(is.na(herbdat$REMARKS), "", as.character(herbdat$REMARKS)), 
+        ifelse(is.na(herbdat$ATTRIBUTES), " ", as.character(herbdat$ATTRIBUTES)),
+               " ", ifelse(is.na(herbdat$REMARKS), " ", as.character(herbdat$REMARKS)), 
                "\\sa80\\par}", sep = ""), 
                 
         ##### COLLECTOR and COLLECTION NUMBER !
