@@ -1,3 +1,5 @@
+#### Create RTF annotation labels 
+
 annotation_rtf <- function(infile = NULL, outfile = "annotations.rtf") {
     # Sys.setlocale('LC_TIME', 'English')
     herbdat000 <- read.csv(infile, header = TRUE)

@@ -1,3 +1,5 @@
+#### create herbarium labels in RTF, default size of paper is A4.
+
 herblabel_rtf <- function(infile = NULL, spellcheck = TRUE, outfile = "herblabel.rtf"){
     
     herbdat000 <- read.csv(infile, header = TRUE, stringsAsFactors = FALSE)

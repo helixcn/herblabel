@@ -1,3 +1,5 @@
+#### Create herbarium labels in LaTeX
+
 herblabel_tex <- function(infile = NULL, spellcheck = TRUE, outfile = "herblabel.tex"){
     #Sys.setlocale("LC_TIME", "English")
     herbdat000 <- read.csv(infile, header = TRUE, stringsAsFactors = FALSE)

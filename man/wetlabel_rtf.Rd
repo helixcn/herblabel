@@ -7,7 +7,7 @@ Making labels for spirit specimens
 Making labels for spirit specimens
 }
 \usage{
-wetlabel_rtf(infile = NULL, outfile = "Wet_Labels.RTF", spellcheck = FALSE)
+wetlabel_rtf(infile = NULL, outfile = "Wet_Labels.RTF", spellcheck = TRUE)
 }
 
 \arguments{
@@ -26,9 +26,9 @@ This function reads csv template, and generate a RTF file
 containing herbarium labels. Users need to fill the columns 
 as many as possible. Only a limited number of the columns within
 the csv file can be left blank. This function was inspired by the PLable 
-software developed at the University of Florida. 
+software developed at the Herbarium of University of Florida. 
 
-Columns of the template:
+Columns of the template include:
 
 1	GLOBAL_UNIQUE_IDENTIFIER: Institution code plus the number
 
@@ -125,9 +125,6 @@ Columns of the template:
 47	PROCESSED_BY: data entered by
 
 48	DATE_LASTMODIFIED: date of the modification
-
-
-
 
 }
 

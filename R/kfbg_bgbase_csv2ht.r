@@ -1,3 +1,5 @@
+# Convert the BG-BASE exported csv file to herbarium templated
+
 kfbg_bgbase_csv2ht  <- function(infile, outfile = NULL, 
                                 HERBARIUM = "Kadoorie Farm and Botanic Garden Herbarium",
                                 HERBARIUM_CODE = "KFBG", 

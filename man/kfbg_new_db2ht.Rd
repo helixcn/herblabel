@@ -51,8 +51,8 @@ Date of the update made.
 }
 }
 \details{
-The csv file exported from the KFBG New specimen database has the following column names. 
 
+The csv file exported from the KFBG New specimen database has the following column names. 
 
 1. PREVIOUS_HERB_NO: Herbarium Number previously assigned. 
 
@@ -100,8 +100,9 @@ The csv file exported from the KFBG New specimen database has the following colu
 This csv file could be converted to herblabel template csv file for printing herbarium labels. 
 Before label printing, additional editing must be made. 
 }
+
 \value{
-The dataframe as a herblabel template. 
+This function returns a dataframe as a herblabel template, and generated a herbarium template csv file.  
 }
 \references{
 1. The Darwin Core: \url{http://rs.tdwg.org/dwc/}

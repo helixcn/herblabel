@@ -59,53 +59,41 @@ The template of South China Botanic Garden Collection Notebook has the following
 2.VOLUMN: volumn of the record. 
 
 3.COLLECTOR: name of the collector
-
+
 4.DATE_COLLECTED: Date collected.
-
+
 5.LOCALITY: precise location where the specimen collected.
-
+
 6.ELEVATION: elevation in meters
-
-7.TOPOLOGY: description of topology
-
-8.REMARKS_1: Environment
-
-9.DISTRIBUTION: Distribution of the species
-
-10.ATTRIBUTES_1: Growth form
-
-11.ATTRIBUTES_2: Bark
-
+
+7.TOPOLOGY: description of topology
+8.REMARKS_1: Environment
+9.DISTRIBUTION: Distribution of the species
+10.ATTRIBUTES_1: Growth form
+11.ATTRIBUTES_2: Bark
 12.ATTRIBUTES_3: leaves
-
-13.ATTRIBUTES_4: flower
-
+
+13.ATTRIBUTES_4: flower
 14.ATTRIBUTES_5: fruit
-
+
 15.USAGE: usage of the plant
-
+
 16.REMARKS_2: additional notes
-
+
 17.REPLICATES: number of copies
-
+
 18.SEEDLINGS: notes on seedlings 
-
+
 19.SEEDS: notes on seeds
-
-20.SPIRIT_SAMPLES: whether spirit samples was collected.
-
+
+20.SPIRIT_SAMPLES: whether spirit samples was collected.
 21.LOCAL_NAME: Chinese Name
-
-22.FAMILY: Family
-
-23.SCIENTIFIC_NAME: Scientific Name of the species
-
-24.IDENTIFIED_BY: Name who identified the plant. 
-
-25.DATE_IDENTIFIED: Date of the identification
-
-26.GENUS: Genus 
-
+
+22.FAMILY: Family
+23.SCIENTIFIC_NAME: Scientific Name of the species
+24.IDENTIFIED_BY: Name who identified the plant. 
+25.DATE_IDENTIFIED: Date of the identification
+26.GENUS: Genus 
 27.SPECIES: species
 }
 

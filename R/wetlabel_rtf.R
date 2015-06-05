@@ -1,3 +1,5 @@
+#### Create short herbarium labels, espetially for herbarium spirit samples in RTF
+
 wetlabel_rtf <- function(infile = NULL, outfile = "Wet_Labels.RTF", 
                          spellcheck = FALSE)
 {
@@ -100,26 +102,26 @@ wetlabel_rtf <- function(infile = NULL, outfile = "Wet_Labels.RTF",
                 herbdat$FAMILY <- paste("\\highlight6 ", as.character(temp.family), 
                 "\\highlight9  (not found among the APGIII families.)\\highlight0 ", sep = "")
             }
-		    
-		    ### check if the family provided in the excel matches APGIII or not, 
-		    ### the results will be highlighted in yellow 
+    
+            ### check if the family provided in the excel matches APGIII or not, 
+        ### the results will be highlighted in yellow 
             fam.genus.temp <- data.frame(FAMILY = as.character(herbdat$FAMILY), 
                                          GENUS = as.character(herbdat$GENUS))
             fgmerge.temp <- merge(x = fam.genus.temp, y = pgenus, by.x = "GENUS", by.y = "GENUS", 
                              all.x = TRUE, sort = FALSE)
             if(any(as.character(Cap(fgmerge.temp$FAMILY.x)) !=  as.character(Cap(fgmerge.temp$FAMILY.y)) 
                         & !is.na(as.character(fgmerge.temp$FAMILY.y)))){
-		        if(unique(as.character(Cap(fgmerge.temp$FAMILY.x))) %in% as.character(Cap(fgmerge.temp$FAMILY.y))){
-		    		herbdat$FAMILY <- paste("\\highlight3 ", unique(as.character(fgmerge.temp$FAMILY.x)), 
+            if(unique(as.character(Cap(fgmerge.temp$FAMILY.x))) %in% as.character(Cap(fgmerge.temp$FAMILY.y))){
+                    herbdat$FAMILY <- paste("\\highlight3 ", unique(as.character(fgmerge.temp$FAMILY.x)), 
                                         "\\highlight0 ", sep = "")
-		    		herbdat$GENUS <- paste("\\highlight3 ", unique(as.character(fgmerge.temp$GENUS)), 
+                    herbdat$GENUS <- paste("\\highlight3 ", unique(as.character(fgmerge.temp$GENUS)), 
                                        "\\i0 \\highlight9  (could also be in \"", 
                                        paste(as.character(Cap(fgmerge.temp$FAMILY.y))[
                                                !as.character(Cap(fgmerge.temp$FAMILY.y))%in%as.character(Cap(fgmerge.temp$FAMILY.x))], 
                                        collapse = "\", \"") ,
                                        "\" according to the plantlist genera database.)\\highlight0 ", sep = "")
-		    			
-		    	} else{
+                                       
+                } else{
                 herbdat$FAMILY <- paste("\\highlight3 ", unique(as.character(fgmerge.temp$FAMILY.x)), 
                                         "\\highlight0 ", sep = "")
                 herbdat$GENUS <- paste("\\highlight3 ", unique(as.character(fgmerge.temp$GENUS)), 
@@ -127,7 +129,7 @@ wetlabel_rtf <- function(infile = NULL, outfile = "Wet_Labels.RTF",
                                        paste(as.character(fgmerge.temp$FAMILY.y), 
                                        collapse = "\", \"") ,
                                        "\" according to the plantlist genera database.)\\highlight0 ", sep = "")
-		    	}
+                }
             }
         }
         herbdat$GLOBAL_UNIQUE_IDENTIFIER <- as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER)
@@ -223,5 +225,5 @@ wetlabel_rtf <- function(infile = NULL, outfile = "Wet_Labels.RTF",
     writeLines(res, outfile)
     ### Notice
     cat("Herbarium Labels have been saved to:\n", getwd(), 
-        "/Wet_Labels.RTF\n", sep = "")
+        outfile,"\n", sep = "")
 }
