@@ -16,11 +16,11 @@ Character strings for the name of the csv file.
 }
 
   \item{outfile}{
-the output rtf file.
+the names of the output rtf file.
 }
 }
 \details{
-This function reads csv template, and generate an RTF file containing 
+This function reads csv template, and generates an RTF file containing 
 annotation labels. 
 }
 

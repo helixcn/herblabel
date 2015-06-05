@@ -113,8 +113,8 @@ The template of South China Botanic Garden Collection Notebook has the following
 The data frame in herblabel template format. 
 }
 \references{
-1. The Darwin Core: http://rs.tdwg.org/dwc/
-2. http://www.cvh.ac.cn/news/3
+1. The Darwin Core: \url{http://rs.tdwg.org/dwc/}
+2. \url{http://www.cvh.ac.cn/news/3}
 }
 
 \author{

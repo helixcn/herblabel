@@ -60,9 +60,12 @@ editing or by specifying during the conversion (see the arguments).
 The data frame
 }
 \references{
-BG-BASE http://www.bg-base.com/
+
+BG-BASE \url{http://www.bg-base.com/}
+
 Relationship between the BG-BASE SPECIMENS TABLE and the herblabel 
 template.xlsx
+
 }
 \author{
 Jinlong Zhang

@@ -12,7 +12,7 @@ annotation_tex(infile = NULL,  outfile = "annotation.tex")
 
 \arguments{
   \item{infile}{
-Character string specifies the excel template. 
+Character string specifies the csv template. 
 }
   \item{outfile}{
 The file name for the latex source code.
@@ -20,7 +20,7 @@ The file name for the latex source code.
 }
 \details{
 This function generates herbarium annotation labels based on the template of 
-annotations. This function will create a Latex file containing the annotation 
+annotations. It creates a Latex file containing the annotation 
 labels. The latex file could be compiled to PDF via pdfLatex in MikTeX, 
 TexLive etc.
 }

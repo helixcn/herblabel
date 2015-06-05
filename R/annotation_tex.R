@@ -56,8 +56,8 @@ annotation_tex <- function(infile = NULL, outfile = "annotation.tex"){
         ##### IDENTIFICATION INFOMATION
         paste("\\rightline{",  "Det.: ", herbdat$IDENTIFIED_BY, " ",
         herbdat$INSTITUTION," \\hfill ", 
-                 " ", toupper(format(as.Date(herbdat$DATE_IDENTIFIED), 
-                 format="%d %b %Y")), "}\\\\",sep = ""), 
+                 " ", format(as.Date(herbdat$DATE_IDENTIFIED), 
+                 format="%d %b %Y"), "}\\\\",sep = ""), 
         "\\vspace{3mm}\\\\", 
         "\\end{tabular}\\\\"
          )                            ### End of one label

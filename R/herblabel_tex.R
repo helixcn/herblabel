@@ -1,4 +1,4 @@
-herblabel_tex <- function(infile = NULL, spellcheck = FALSE, outfile = "herblabel.tex"){
+herblabel_tex <- function(infile = NULL, spellcheck = TRUE, outfile = "herblabel.tex"){
     #Sys.setlocale("LC_TIME", "English")
     herbdat000 <- read.csv(infile, header = TRUE, stringsAsFactors = FALSE)
 	
@@ -172,11 +172,11 @@ herblabel_tex <- function(infile = NULL, spellcheck = FALSE, outfile = "herblabe
         ##### COLLECTOR and COLLECTION NUMBER !
         ifelse(is.na(herbdat$ADDITIONAL_COLLECTOR), 
             paste("\\textbf{",
-                   herbdat$COLLECTOR,"} \\textbf{ $\\#$ " ,herbdat$COLLECTOR_NUMBER,"}\\hfill " ,toupper(format(as.Date(herbdat$DATE_COLLECTED), format="%d %b %Y")),
+                   herbdat$COLLECTOR,"} \\textbf{ $\\#$ " ,herbdat$COLLECTOR_NUMBER,"}\\hfill " ,format(as.Date(herbdat$DATE_COLLECTED), format="%d %b %Y"),
                    "\\\\",sep = ""), 
             paste("\\textbf{",
                    herbdat$COLLECTOR,"}, \\textbf{",herbdat$ADDITIONAL_COLLECTOR,"} \\textbf{ $\\#$ " ,
-                   herbdat$COLLECTOR_NUMBER,"}\\hfill " ,toupper(format(as.Date(herbdat$DATE_COLLECTED), format="%d %b %Y")),"\\\\",sep = "")
+                   herbdat$COLLECTOR_NUMBER,"}\\hfill " ,format(as.Date(herbdat$DATE_COLLECTED), format="%d %b %Y"),"\\\\",sep = "")
             ), 
         ##### Project
         ifelse(is.na(herbdat$PROJECT), "", 
@@ -185,11 +185,11 @@ herblabel_tex <- function(infile = NULL, spellcheck = FALSE, outfile = "herblabe
         ##### IDENTIFICATION INFOMATION
         ifelse(!is.na(herbdat$TYPE_STATUS), 
             paste("\\rightline{", gsub("_", "", ifelse(is.na(as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER)), "", as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER))) ," \\hfill ", herbdat$TYPE_STATUS,
-                 "  Det.: ",herbdat$IDENTIFIED_BY,", ", toupper(format(as.Date(herbdat$DATE_IDENTIFIED), 
-                 format="%d %b %Y")), "}\\\\",sep = ""),
+                 "  Det.: ",herbdat$IDENTIFIED_BY,", ", format(as.Date(herbdat$DATE_IDENTIFIED), 
+                 format="%d %b %Y"), "}\\\\",sep = ""),
             paste("\\rightline{", gsub("_", "", ifelse(is.na(as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER)), "", as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER)))," \\hfill ", "Det.: ",
-                 herbdat$IDENTIFIED_BY,", ", toupper(format(as.Date(herbdat$DATE_IDENTIFIED), 
-                 format="%d %b %Y")), "}\\\\",sep = "")
+                 herbdat$IDENTIFIED_BY,", ", format(as.Date(herbdat$DATE_IDENTIFIED), 
+                 format="%d %b %Y"), "}\\\\",sep = "")
             ),
         "\\vspace{3mm}",
         "\\end{tabular}\\\\"

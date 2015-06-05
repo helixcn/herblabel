@@ -99,8 +99,8 @@ Columns names of the KFBG field book
 Dataframe in herblabel format. 
 }
 \references{
-1. The Darwin Core: http://rs.tdwg.org/dwc/
-2. http://www.cvh.ac.cn/news/3
+1. The Darwin Core: \url{http://rs.tdwg.org/dwc/}
+2. \url{http://www.cvh.ac.cn/news/3}
 }
 \author{
 Jinlong Zhang

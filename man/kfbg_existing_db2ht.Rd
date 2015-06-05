@@ -150,8 +150,8 @@ The existing database of plant collection records in KFBG herbarium has the foll
 Data frame in herblabel template format. 
 }
 \references{
-1. The Darwin Core: http://rs.tdwg.org/dwc/
-2. http://www.cvh.ac.cn/news/3
+1. The Darwin Core: \url{http://rs.tdwg.org/dwc/}
+2. \url{http://www.cvh.ac.cn/news/3}
 }
 \author{
 Jinlong Zhang

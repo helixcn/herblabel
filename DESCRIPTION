@@ -1,8 +1,8 @@
 Package: herblabel
 Type: Package
 Title: Preparing herbarium labels in LaTeX and RTF
-Version: 0.3.4
-Date: 2015-05-17
+Version: 0.3.5
+Date: 2015-06-05
 Authors@R: person("Jinlong", "Zhang", role = c("aut", "cre"),
 		     email = "jinlongzhang01@gmail.com")
 Author: Jinlong Zhang [aut, cre]

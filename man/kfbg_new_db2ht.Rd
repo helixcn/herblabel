@@ -104,8 +104,8 @@ Before label printing, additional editing must be made.
 The dataframe as a herblabel template. 
 }
 \references{
-1. The Darwin Core: http://rs.tdwg.org/dwc/
-2. http://www.cvh.ac.cn/news/3
+1. The Darwin Core: \url{http://rs.tdwg.org/dwc/}
+2. \url{http://www.cvh.ac.cn/news/3}
 }
 \author{
 Jinlong Zhang
