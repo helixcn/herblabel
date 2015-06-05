@@ -29,6 +29,7 @@ Jinlong Zhang
 }
 
 \examples{
+   Sys.setlocale("LC_TIME", "English")
    path <- system.file("extdata", "ANNOTATION_TEMPLATE.csv", 
                        package = "herblabel")
    annotation_rtf(infile = path,  outfile = "annotations.rtf")
