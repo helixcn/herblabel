@@ -16,7 +16,7 @@ Character strings for the name of the csv file.
 }
 
   \item{outfile}{
-the output rtf file.
+the names of the output rtf file.
 }
 }
 \details{
@@ -29,6 +29,7 @@ Jinlong Zhang
 }
 
 \examples{
+   Sys.setlocale("LC_TIME", "English")
    path <- system.file("extdata", "ANNOTATION_TEMPLATE.csv", 
                        package = "herblabel")
    annotation_rtf(infile = path,  outfile = "annotations.rtf")
