@@ -1,5 +1,5 @@
-\name{herblabel_tex}
-\alias{herblabel_tex}
+\name{ht2herblabel_tex}
+\alias{ht2herblabel_tex}
 \title{
 Make herbarium labels in Latex
 }
@@ -7,7 +7,7 @@ Make herbarium labels in Latex
 Make herbarium labels in Latex
 }
 \usage{
-herblabel_tex(infile = NULL, spellcheck = TRUE, outfile = "herblabel.tex")
+ht2herblabel_tex(infile = NULL, spellcheck = TRUE, outfile = "herblabel.tex")
 }
 
 \arguments{
@@ -147,14 +147,14 @@ Jinlong Zhang
 }
 
 \seealso{
-\code{\link{herblabel_rtf}}
+\code{\link{ht2herblabel_rtf}}
 }
 \examples{
 
 path <- system.file("extdata", "HERBARIUM_RECORDS_TEMPLATE.csv", 
                     package = "herblabel")
                     
-herblabel_tex(infile = path, 
+ht2herblabel_tex(infile = path, 
              outfile = "herblabel.HERBARIUM_RECORDS_TEMPLATE.csv.tex")
 
 }

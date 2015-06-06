@@ -7,7 +7,7 @@ Authors@R: person("Jinlong", "Zhang", role = c("aut", "cre"),
 		     email = "jinlongzhang01@gmail.com")
 Author: Jinlong Zhang [aut, cre]
 Maintainer: Jinlong Zhang <jinlongzhang01@gmail.com>
-Description: Preparing herbarium labels based on the information based on Darwin Core.
+Description: Preparing herbarium labels based on Darwin Core, and conversion utilities.
 License: GPL-2
 LazyLoad: yes
 URL: https://github.com/helixcn/herblabel

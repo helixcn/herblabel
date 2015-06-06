@@ -31,8 +31,8 @@ Maintainer: Jinlong Zhang <jinlongzhang01@gmail.com>
 \examples{
     path <- system.file("extdata", "HERBARIUM_RECORDS_TEMPLATE.csv", 
                          package = "herblabel")
-    herblabel_tex(infile = path,  
+    ht2herblabel_tex(infile = path,  
                  outfile = "HERBARIUM_RECORDS_TEMPLATE.csv.tex")
-    herblabel_rtf(infile = path,  
+    ht2herblabel_rtf(infile = path,  
                  outfile = "HERBARIUM_RECORDS_TEMPLATE.csv.rtf")
 }

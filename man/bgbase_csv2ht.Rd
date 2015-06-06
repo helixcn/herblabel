@@ -1,7 +1,7 @@
 \name{bgbase_csv2ht}
 \alias{bgbase_csv2ht}
 \title{
-BG-BASE SPECIMENS table Conversion
+Convert the exported BG-BASE SPECIMENS csv to the Darwin Core CSV file.
 }
 \description{
 Convert the exported BG-BASE SPECIMENS CSV to herblabel template

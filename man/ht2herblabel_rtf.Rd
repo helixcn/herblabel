@@ -1,5 +1,5 @@
-\name{herblabel_rtf}
-\alias{herblabel_rtf}
+\name{ht2herblabel_rtf}
+\alias{ht2herblabel_rtf}
 \title{
 Making herbarium labels
 }
@@ -7,7 +7,7 @@ Making herbarium labels
 Making herbarium labels in RTF
 }
 \usage{
-herblabel_rtf(infile = NULL, spellcheck = TRUE, outfile = "herblabel.rtf")
+ht2herblabel_rtf(infile = NULL, spellcheck = TRUE, outfile = "herblabel.rtf")
 }
 
 \arguments{
@@ -133,6 +133,11 @@ Columns of the template:
 
 }
 
+\seealso{
+\code{\link{ht2herblabel_tex}}
+}
+
+
 \author{
 Jinlong Zhang 
 }
@@ -141,7 +146,7 @@ Jinlong Zhang
 
     path <- system.file("extdata", "HERBARIUM_RECORDS_TEMPLATE.csv", 
                         package = "herblabel")
-    herblabel_rtf(infile = path,  
+    ht2herblabel_rtf(infile = path,  
                   outfile = "herblabel.csv.HERBARIUM_RECORDS_TEMPLATE.rtf")
     
 }

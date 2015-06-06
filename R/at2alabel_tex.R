@@ -1,6 +1,6 @@
 #### Create annotation labels in Latex
 
-annotation_tex <- function(infile = NULL, outfile = "annotation.tex"){
+at2alabel_tex <- function(infile = NULL, outfile = "annotation.tex"){
     herbdat000 <- read.csv(infile, header = TRUE)
     temp1 <- c("\\documentclass[a4paper,5pt,twocolumn]{article}",
                 "\\pagestyle{empty} ",

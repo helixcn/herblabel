@@ -1,5 +1,5 @@
-\name{annotation_rtf}
-\alias{annotation_rtf}
+\name{at2alabel_rtf}
+\alias{at2alabel_rtf}
 \title{
     Making Annotation labels
 }
@@ -7,12 +7,12 @@
     Making annotation labels in RTF
 }
 \usage{
-    annotation_rtf(infile = NULL, outfile = "annotations.rtf")
+    at2alabel_rtf(infile = NULL, outfile = "annotations.rtf")
 }
 
 \arguments{
   \item{infile}{
-Character strings for the name of the csv file.
+Character string, the name of the csv file.
 }
 
   \item{outfile}{
@@ -24,6 +24,10 @@ This function reads csv template, and generates an RTF file containing
 annotation labels. 
 }
 
+\seealso{
+\code{\link{at2alabel_tex}}
+}
+
 \author{
 Jinlong Zhang 
 }
@@ -33,6 +37,6 @@ Jinlong Zhang
    path <- system.file("extdata", "ANNOTATION_TEMPLATE.csv", 
                        package = "herblabel")
                        
-   annotation_rtf(infile = path,  outfile = "annotations.rtf")
+   at2alabel_rtf(infile = path,  outfile = "annotations.rtf")
    
 }

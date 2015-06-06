@@ -140,7 +140,8 @@ compact_label_rtf <- function(infile = NULL, outfile = "Wet_Labels.RTF",
         #### Title of the Herbarium
         paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\qc\\sa80\\qc ", 
                 herbdat$HERBARIUM, "      \\b ", gsub("_", "", 
-                ifelse(is.na(herbdat$GLOBAL_UNIQUE_IDENTIFIER), "", herbdat$GLOBAL_UNIQUE_IDENTIFIER)), "\\b0\\f10\\par }", sep = ""),
+                ifelse(is.na(herbdat$GLOBAL_UNIQUE_IDENTIFIER), "", 
+                herbdat$GLOBAL_UNIQUE_IDENTIFIER)), "\\b0\\f10\\par }", sep = ""),
         
         #### #### FLORA OF SOME PLACE
         #### ifelse(is.na(herbdat$TITLE), "", paste("{\\pard\\keep\\keepn\\fi0\\li0\\fs20\\sb60 \\b ",
