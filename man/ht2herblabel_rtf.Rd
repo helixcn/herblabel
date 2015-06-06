@@ -22,7 +22,7 @@ the output rtf file.
 }
 }
 \details{
-This function reads csv template, and generates a RTF file containing 
+This function reads Darwin Core herbarium records template in CSV, and generates a RTF file containing 
 herbarium labels. Only a limited number of the columns can be left blank. 
 This function was inspired The Plabel program developed by Kent D. Perkins at the University of 
 Florida Herbarium.
@@ -127,6 +127,10 @@ Columns of the template:
 47	PROCESSED_BY: data entered by
 
 48	DATE_LASTMODIFIED: date of the modification
+
+If spellcheck is TRUE, the text will be highlighted if the genus does not match the family. 
+Comments will be automatically generated. If you do not want to change 
+the information, just suppress it by changing "spellcheck = FALSE". 
 
 }
 

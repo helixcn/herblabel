@@ -23,8 +23,8 @@ Logical, indicating whether the spell check will be performed.
 }
 \details{
 This function reads csv template, and generates a RTF file
-containing herbarium labels. Users need to fill the columns 
-as many as possible. Only a limited number of the columns within
+containing herbarium labels. Users need to fill as many columns 
+as possible. Only a limited number of the columns within
 the csv file can be left blank. This function was inspired by the PLable 
 software developed at the Herbarium of University of Florida. 
 

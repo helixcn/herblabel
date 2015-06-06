@@ -130,9 +130,9 @@ Columns of the template:
 \value{
 This function will create a Latex file containing the herbarium labels. 
 The latex file could be compiled to PDF via pdfLatex in Miktex, TexLive etc. 
-The text will be highlighted if the genus does not match the family. 
+If spellcheck is TRUE, the text will be highlighted if the genus does not match the family. 
 Comments will be automatically generated. If you do not want to change 
-the information, just change "spellcheck = FALSE". 
+the information, just suppress it by changing "spellcheck = FALSE". 
 
 }
 \references{

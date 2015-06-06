@@ -50,6 +50,7 @@ Date of the update.
 }
 \details{
 Columns names of the KFBG field book
+
 1.COLL_NUMBER: collector's Number
 
 2.COLL_DATE: collection date

@@ -52,6 +52,7 @@ The date of last update.
 }
 \details{
 The existing database of plant collection records in KFBG herbarium has the following column names: 
+
 1. NUMBER: previous herbarium number. 
 
 2. CURRENT_LOCATION: location of the specimen.
@@ -152,8 +153,11 @@ The existing database of plant collection records in KFBG herbarium has the foll
 This function returns a dataframe as a Darwin Core herbarium records template, and saves it to a csv file.  
 }
 \references{
+
 1. The Darwin Core: \url{http://rs.tdwg.org/dwc/}
+
 2. \url{http://www.cvh.ac.cn/news/3}
+
 }
 \author{
 Jinlong Zhang
