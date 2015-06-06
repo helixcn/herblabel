@@ -1,20 +1,20 @@
 \name{kfbg_existing_db2ht}
 \alias{kfbg_existing_db2ht}
 \title{
-Convert the existing herbarium specimens records format to herblabel template format
+Convert the existing herbarium specimens records to Darwin Core herblabel template in CSV
 }
 \description{
-Convert the KFBG existing herbarium specimen records to herblabel template. Both of the input and the output should be in csv. 
+Convert the KFBG existing herbarium specimen records to Darwin Core herblabel template in CSV. Both of the input and the output file are csv. 
 }
 \usage{
 
 kfbg_existing_db2ht(infile, outfile = "herblabel_temp.csv", 
-HERBARIUM_ARGUMENT = "Kadoorie Farm and Botanic Garden Herbarium", 
-HERBARIUM_CODE_ARGUMENT = "KFBG", TITLE_ARGUMENT = NA, 
-PROJECT_ARGUMENT = NA, IDENTIFIED_BY_ARGUMENT = NA, 
-DATE_IDENTIFIED_ARGUMENT = NA, 
-PROCESSED_BY_ARGUMENT = NA, 
-DATE_LASTMODIFIED_ARGUMENT = NA)
+    HERBARIUM_ARGUMENT = "Kadoorie Farm and Botanic Garden Herbarium", 
+    HERBARIUM_CODE_ARGUMENT = "KFBG", TITLE_ARGUMENT = NA, 
+    PROJECT_ARGUMENT = NA, IDENTIFIED_BY_ARGUMENT = NA, 
+    DATE_IDENTIFIED_ARGUMENT = NA, 
+    PROCESSED_BY_ARGUMENT = NA, 
+    DATE_LASTMODIFIED_ARGUMENT = NA)
 
 }
 
@@ -149,7 +149,7 @@ The existing database of plant collection records in KFBG herbarium has the foll
 
 }
 \value{
-Data frame in herblabel template format. 
+This function returns a dataframe as a Darwin Core herbarium records template, and saves it to a csv file.  
 }
 \references{
 1. The Darwin Core: \url{http://rs.tdwg.org/dwc/}

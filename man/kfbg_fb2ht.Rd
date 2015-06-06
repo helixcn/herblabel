@@ -1,20 +1,20 @@
 \name{kfbg_fb2ht}
 \alias{kfbg_fb2ht}
 \title{
-Converting KFBG field book template format to herblabel format
+Converting KFBG field book template format to Darwin Core herblabel template in CSV
 }
 \description{
-Converting the KFBG field book template csv file to the herblabel template csv 
+Converting the KFBG field book template csv file to Darwin Core herblabel template in CSV 
 }
 \usage{
 kfbg_fb2ht(infile, outfile = "herblabel_temp.csv", 
-HERBARIUM_ARGUMENT = "Kadoorie Farm and Botanic Garden Herbarium", 
-HERBARIUM_CODE_ARGUMENT = "KFBG", 
-TITLE_ARGUMENT = NA, PROJECT_ARGUMENT = NA, 
-IDENTIFIED_BY_ARGUMENT = NA, 
-DATE_IDENTIFIED_ARGUMENT = NA, 
-PROCESSED_BY_ARGUMENT = NA, 
-DATE_LASTMODIFIED_ARGUMENT = NA)
+    HERBARIUM_ARGUMENT = "Kadoorie Farm and Botanic Garden Herbarium", 
+    HERBARIUM_CODE_ARGUMENT = "KFBG", 
+    TITLE_ARGUMENT = NA, PROJECT_ARGUMENT = NA, 
+    IDENTIFIED_BY_ARGUMENT = NA, 
+    DATE_IDENTIFIED_ARGUMENT = NA, 
+    PROCESSED_BY_ARGUMENT = NA, 
+    DATE_LASTMODIFIED_ARGUMENT = NA)
 }
 \arguments{
   \item{infile}{
@@ -96,7 +96,7 @@ Columns names of the KFBG field book
 
 }
 \value{
-Dataframe in herblabel format. 
+This function returns a dataframe as a Darwin Core herbarium records template, and saves it to a csv file.  
 }
 \references{
 1. The Darwin Core: \url{http://rs.tdwg.org/dwc/}

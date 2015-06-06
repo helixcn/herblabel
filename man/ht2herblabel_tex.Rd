@@ -1,10 +1,10 @@
 \name{ht2herblabel_tex}
 \alias{ht2herblabel_tex}
 \title{
-Make herbarium labels in Latex
+Creating herbarium labels in Latex based on Darwin Core herblabel template in CSV
 }
 \description{
-Make herbarium labels in Latex
+Creating herbarium labels in Latex based on Darwin Core herblabel template in CSV.
 }
 \usage{
 ht2herblabel_tex(infile = NULL, spellcheck = TRUE, outfile = "herblabel.tex")
@@ -151,10 +151,10 @@ Jinlong Zhang
 }
 \examples{
 
-path <- system.file("extdata", "HERBARIUM_RECORDS_TEMPLATE.csv", 
+path <- system.file("extdata", "DARWIN_CORE_HERBARIUM_RECORDS_TEMPLATE.csv", 
                     package = "herblabel")
                     
 ht2herblabel_tex(infile = path, 
-             outfile = "herblabel.HERBARIUM_RECORDS_TEMPLATE.csv.tex")
+             outfile = "DARWIN_CORE_HERBARIUM_RECORDS_TEMPLATE_ht2herblabel_tex")
 
 }

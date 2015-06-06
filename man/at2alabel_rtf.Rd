@@ -1,10 +1,10 @@
 \name{at2alabel_rtf}
 \alias{at2alabel_rtf}
 \title{
-    Making Annotation labels
+    Making RTF Annotation labels based on annotation template in CSV
 }
 \description{
-    Making annotation labels in RTF
+    Making RTF Annotation labels based on annotation template in CSV
 }
 \usage{
     at2alabel_rtf(infile = NULL, outfile = "annotations.rtf")

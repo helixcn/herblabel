@@ -1,21 +1,21 @@
 \name{kfbg_new_db2ht}
 \alias{kfbg_new_db2ht}
 \title{
-Converting KFBG new records to herblabel template
+Converting KFBG new records to Darwin Core herblabel template in CSV
 }
 \description{
-Converting the KFBG new specimen record database to herblabel template csv format.
+Converting the KFBG new specimen record database to Darwin Core herblabel template in CSV.
 }
 \usage{
 kfbg_new_db2ht(infile, outfile = "herblabel_temp.csv", 
-HERBARIUM_ARGUMENT = "Kadoorie Farm and Botanic Garden Herbarium", 
-HERBARIUM_CODE_ARGUMENT = "KFBG",
- TITLE_ARGUMENT = NA, 
-PROJECT_ARGUMENT = NA, 
-IDENTIFIED_BY_ARGUMENT = NA, 
-DATE_IDENTIFIED_ARGUMENT = NA, 
-PROCESSED_BY_ARGUMENT = NA, 
-DATE_LASTMODIFIED_ARGUMENT = NA)
+    HERBARIUM_ARGUMENT = "Kadoorie Farm and Botanic Garden Herbarium", 
+    HERBARIUM_CODE_ARGUMENT = "KFBG",
+    TITLE_ARGUMENT = NA, 
+    PROJECT_ARGUMENT = NA, 
+    IDENTIFIED_BY_ARGUMENT = NA, 
+    DATE_IDENTIFIED_ARGUMENT = NA, 
+    PROCESSED_BY_ARGUMENT = NA, 
+    DATE_LASTMODIFIED_ARGUMENT = NA)
 }
 
 \arguments{
@@ -97,12 +97,13 @@ The csv file exported from the KFBG New specimen database has the following colu
 21. LIVE: if live specimen was collected and transplanted. 
 
 22. SPIRIT: if spirit sample was collected. 
+
 This csv file could be converted to herblabel template csv file for printing herbarium labels. 
 Before label printing, additional editing must be made. 
 }
 
 \value{
-This function returns a dataframe as a herblabel template, and generated a herbarium template csv file.  
+This function returns a dataframe as a Darwin Core herbarium records template, and saves it to a csv file.  
 }
 \references{
 1. The Darwin Core: \url{http://rs.tdwg.org/dwc/}
@@ -120,6 +121,7 @@ Jinlong Zhang
 infile <- system.file("extdata", "KFBG_NEW_DB.csv", 
                              package = "herblabel")
 kfbg_new_db2ht(infile)
+
 }
 
 \keyword{ format }

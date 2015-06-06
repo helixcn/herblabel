@@ -4,7 +4,7 @@
 Making compact labels for spirit specimens
 }
 \description{
-Making compact labels for spirit specimens
+Making compact labels for spirit specimens based on Darwin Core herbarium records template in CSV
 }
 \usage{
 compact_label_rtf(infile = NULL, outfile = "Wet_Labels.RTF", spellcheck = TRUE)
@@ -22,7 +22,7 @@ Logical, indicating whether the spell check will be performed.
 }
 }
 \details{
-This function reads csv template, and generate a RTF file
+This function reads csv template, and generates a RTF file
 containing herbarium labels. Users need to fill the columns 
 as many as possible. Only a limited number of the columns within
 the csv file can be left blank. This function was inspired by the PLable 
@@ -134,7 +134,7 @@ Jinlong Zhang
 
 \examples{
 
-    path <- system.file("extdata", "HERBARIUM_RECORDS_TEMPLATE.csv", 
+    path <- system.file("extdata", "DARWIN_CORE_HERBARIUM_RECORDS_TEMPLATE.csv", 
                         package = "herblabel")
                         
     compact_label_rtf(infile = path)

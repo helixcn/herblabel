@@ -1,10 +1,10 @@
 \name{at2alabel_tex}
 \alias{at2alabel_tex}
 \title{
-Making annotation labels in Latex
-}
+Making annotation labels in Latex based on Darwin Core herbarium records template in CSV
+} 
 \description{
-Making herbarium labels in Latex
+Making annotation labels in Latex based on Darwin Core herbarium records template in CSV
 }
 \usage{
 at2alabel_tex(infile = NULL,  outfile = "annotation.tex")
@@ -19,7 +19,7 @@ The file name for the latex source code.
 }
 } 
 \details{
-This function generates LaTeX code containing herbarium annotation labels based on the csv template. 
+This function generates LaTeX code containing herbarium annotation labels based on annotation template in CSV. 
 The latex file could be compiled to PDF via pdfLatex in MikTeX, TexLive etc.
 }
 \value{

@@ -1,10 +1,10 @@
 \name{ht2herblabel_rtf}
 \alias{ht2herblabel_rtf}
 \title{
-Making herbarium labels
+Creating RTF herbarium labels in Latex based on Darwin Core herbarium records template in CSV
 }
 \description{
-Making herbarium labels in RTF
+Creating RTF herbarium labels in Latex based on Darwin Core herbarium records template in CSV.
 }
 \usage{
 ht2herblabel_rtf(infile = NULL, spellcheck = TRUE, outfile = "herblabel.rtf")
@@ -12,7 +12,7 @@ ht2herblabel_rtf(infile = NULL, spellcheck = TRUE, outfile = "herblabel.rtf")
 
 \arguments{
   \item{infile}{
-Character representing the template file in Excel2003.
+Character representing the template file in csv.
 }
   \item{spellcheck}{ 
 Logical, indicating whether the spell check will be performed.
@@ -22,12 +22,9 @@ the output rtf file.
 }
 }
 \details{
-This function read csv template, and generate a RTF file containing 
+This function reads csv template, and generates a RTF file containing 
 herbarium labels. Only a limited number of the columns can be left blank. 
-This function was inspired by the PLable software developed at the University
- of Florida Herbarium. 
-
-See The Plabel program developed by Kent D. Perkins at the University of 
+This function was inspired The Plabel program developed by Kent D. Perkins at the University of 
 Florida Herbarium.
 
 \url{ http://www.flmnh.ufl.edu/natsci/herbarium/pl/ }
@@ -144,9 +141,9 @@ Jinlong Zhang
 
 \examples{
 
-    path <- system.file("extdata", "HERBARIUM_RECORDS_TEMPLATE.csv", 
+    path <- system.file("extdata", "DARWIN_CORE_HERBARIUM_RECORDS_TEMPLATE.csv", 
                         package = "herblabel")
     ht2herblabel_rtf(infile = path,  
-                  outfile = "herblabel.csv.HERBARIUM_RECORDS_TEMPLATE.rtf")
+                  outfile = "DARWIN_CORE_HERBARIUM_RECORDS_TEMPLATE_ht2herblabel_rtf.rtf")
     
 }

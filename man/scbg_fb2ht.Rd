@@ -2,10 +2,10 @@
 \alias{scbg_fb2ht}
 
 \title{
-Converting the South China Botanic Garden field collection format to herblabel template
+Converting the South China Botanic Garden field collection format to Darwin Core herbarium records template in CSV
 }
 \description{
-Converting the South China Botanic Garden field collection format to herblabel template in CSV. 
+Converting the South China Botanic Garden field collection format to Darwin Core herblabel template in CSV. 
 }
 \usage{
 scbg_fb2ht(infile, outfile = "herblabel_temp.csv", 
@@ -98,7 +98,7 @@ The template of South China Botanic Garden Collection Notebook has the following
 }
 
 \value{
-The data frame in herblabel template format. 
+This function returns a dataframe as a Darwin Core herbarium records template, and saves it to a csv file.  
 }
 \references{
 1. The Darwin Core: \url{http://rs.tdwg.org/dwc/}

@@ -3,12 +3,14 @@
 \alias{herblabel}
 \docType{package}
 \title{
-Preparing Labels for Herbarium Specimens
+Preparing Herbarium Labels based on Darwin Core Herbarium Records Template
 }
 \description{
-This package provides features for preparing herbarium labels. It uses information 
-stored in csv files. The outputs are RTF or LaTeX file, so the labels can be viewed and be 
-modified in MS Word or compiled using pdfLatex.
+This package provides funtionalities for preparing herbarium labels. 
+It uses information stored in Darwin Core Herbarium Records Template 
+csv files. The outputs are RTF or LaTeX file, so the labels can be 
+viewed and modified in MS Word or compiled using pdfLatex. 
+It also provides a number of conversion utilities.
 }
 \details{
 \tabular{ll}{
@@ -29,10 +31,10 @@ Maintainer: Jinlong Zhang <jinlongzhang01@gmail.com>
 
 \keyword{ package }
 \examples{
-    path <- system.file("extdata", "HERBARIUM_RECORDS_TEMPLATE.csv", 
+    path <- system.file("extdata", "DARWIN_CORE_HERBARIUM_RECORDS_TEMPLATE.csv", 
                          package = "herblabel")
     ht2herblabel_tex(infile = path,  
-                 outfile = "HERBARIUM_RECORDS_TEMPLATE.csv.tex")
+                 outfile = "HERBARIUM_LABELS.tex")
     ht2herblabel_rtf(infile = path,  
-                 outfile = "HERBARIUM_RECORDS_TEMPLATE.csv.rtf")
+                 outfile = "HERBARIUM_LABELS.rtf")
 }
