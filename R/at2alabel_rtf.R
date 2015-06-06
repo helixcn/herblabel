@@ -1,7 +1,6 @@
 #### Create RTF annotation labels 
 
 at2alabel_rtf <- function(infile = NULL, outfile = "annotations.rtf") {
-    # Sys.setlocale('LC_TIME', 'English')
     herbdat000 <- read.csv(infile, header = TRUE)
     if (any(is.na(herbdat000$GENUS))) {
         stop(paste("\"GENUS\" must be provided for row: ", 
@@ -78,5 +77,6 @@ at2alabel_rtf <- function(infile = NULL, outfile = "annotations.rtf") {
     res <- template[!template %in% ""]
     writeLines(res, outfile)
     ### Notice
-    cat("Annotations have been saved to:\n", getwd(), "/", outfile, "\n", sep = "")
+    cat("Annotation labels have been saved to:\n", 
+        file.path(getwd(), outfile), "\n", sep = "")
 } 

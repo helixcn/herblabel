@@ -74,6 +74,6 @@ at2alabel_tex <- function(infile = NULL, outfile = "annotation.tex"){
     res <- template[!template %in% ""]
     writeLines(res, outfile)
     ### Notice
-    cat("Annotation Labels have been saved to:\n", getwd(), 
-        "/", outfile, "\n", sep = "")
+    cat("Annotation Labels have been saved to:\n", 
+         file.path(getwd(), outfile),"\n", sep = "")
 }

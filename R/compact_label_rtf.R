@@ -225,6 +225,6 @@ compact_label_rtf <- function(infile = NULL, outfile = "Wet_Labels.RTF",
     res <- template[!template %in% ""]
     writeLines(res, outfile)
     ### Notice
-    cat("Herbarium Labels have been saved to:\n", getwd(), 
-        outfile,"\n", sep = "")
+    cat("Compact herbarium labels have been saved to:\n", 
+        file.path(getwd(), outfile),"\n", sep = "")
 }

@@ -82,6 +82,9 @@ bgbase_csv2ht  <- function(infile, outfile = NULL,
                              SPECIMEN_LOCATION)
     if(!is.null(outfile)){
         write.csv(res.final, outfile, row.names = FALSE)
+        cat("herbarium records have been converted and saved to:\n", 
+            file.path(getwd(), outfile),"\n", sep = "")
     }
     return(res.final)
+
 }

@@ -105,6 +105,8 @@ kfbg_fb2ht  <- function(infile, outfile = "herblabel_temp.csv",
                              PROCESSED_BY, DATE_LASTMODIFIED, SPECIMEN_LOCATION)
     if(!is.null(outfile)){
         write.csv(res, outfile, row.names = FALSE)
+        cat("Herbarium records have been converted and saved to:\n", 
+        file.path(getwd(), outfile),"\n", sep = "")
     }
     return(res)
 }
