@@ -1,7 +1,7 @@
 #### Create short herbarium labels, espetially for herbarium spirit samples in RTF
 
-wetlabel_rtf <- function(infile = NULL, outfile = "Wet_Labels.RTF", 
-                         spellcheck = FALSE)
+compact_label_rtf <- function(infile = NULL, outfile = "Wet_Labels.RTF", 
+                         spellcheck = TRUE)
 {
     herbdat000 <- read.csv(infile, header = TRUE, stringsAsFactors = FALSE)
     

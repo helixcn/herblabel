@@ -1,5 +1,5 @@
-\name{kfbg_bgbase_csv2ht}
-\alias{kfbg_bgbase_csv2ht}
+\name{bgbase_csv2ht}
+\alias{bgbase_csv2ht}
 \title{
 BG-BASE SPECIMENS table Conversion
 }
@@ -7,7 +7,7 @@ BG-BASE SPECIMENS table Conversion
 Convert the exported BG-BASE SPECIMENS CSV to herblabel template
 }
 \usage{
-kfbg_bgbase_csv2ht(infile, outfile = NULL, 
+bgbase_csv2ht(infile, outfile = NULL, 
 HERBARIUM = "Kadoorie Farm and Botanic Garden Herbarium", 
 HERBARIUM_CODE = "KFBG", TITLE = NA, 
 PROJECT = NA, PROCESSED_BY = NA, DATE_LASTMODIFIED = NA)
@@ -73,9 +73,9 @@ Jinlong Zhang
 
 \examples{
 
-bbsp_csv_file <- system.file("extdata", "EXPORT20150121.CSV", 
+bbsp_csv_file <- system.file("extdata", "BG_BASE_EXPORT20150121.CSV", 
                              package = "herblabel")
                              
-kfbg_bgbase_csv2ht(infile = bbsp_csv_file,  outfile = "herblabel.csv")
+bgbase_csv2ht(infile = bbsp_csv_file,  outfile = "herblabel.csv")
 
 }

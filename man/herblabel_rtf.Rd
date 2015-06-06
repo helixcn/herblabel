@@ -131,8 +131,6 @@ Columns of the template:
 
 48	DATE_LASTMODIFIED: date of the modification
 
-
-
 }
 
 \author{
@@ -145,10 +143,5 @@ Jinlong Zhang
                         package = "herblabel")
     herblabel_rtf(infile = path,  
                   outfile = "herblabel.csv.HERBARIUM_RECORDS_TEMPLATE.rtf")
-    
-    path <- system.file("extdata", "res_converted.csv", 
-                        package = "herblabel")
-    herblabel_rtf(infile = path,  
-                  outfile = "herblabel.csv_reconverted.rtf")
     
 }

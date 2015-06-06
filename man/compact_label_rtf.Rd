@@ -1,13 +1,13 @@
-\name{wetlabel_rtf}
-\alias{wetlabel_rtf}
+\name{compact_label_rtf}
+\alias{compact_label_rtf}
 \title{
-Making labels for spirit specimens
+Making compact labels for spirit specimens
 }
 \description{
-Making labels for spirit specimens
+Making compact labels for spirit specimens
 }
 \usage{
-wetlabel_rtf(infile = NULL, outfile = "Wet_Labels.RTF", spellcheck = TRUE)
+compact_label_rtf(infile = NULL, outfile = "Wet_Labels.RTF", spellcheck = TRUE)
 }
 
 \arguments{
@@ -137,6 +137,6 @@ Jinlong Zhang
     path <- system.file("extdata", "HERBARIUM_RECORDS_TEMPLATE.csv", 
                         package = "herblabel")
                         
-    wetlabel_rtf(infile = path)
+    compact_label_rtf(infile = path)
     
 }
