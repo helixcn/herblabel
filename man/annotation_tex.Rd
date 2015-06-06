@@ -36,7 +36,7 @@ Jinlong Zhang
 \code{\link{annotation_rtf}}
 }
 \examples{
-path <- system.file("extdata", "ANNOTATION_TEMPLATE.csv", 
-                    package = "herblabel")
-annotation_tex(infile = path)
+    path <- system.file("extdata", "ANNOTATION_TEMPLATE.csv", 
+                         package = "herblabel")
+    annotation_tex(infile = path)
 }

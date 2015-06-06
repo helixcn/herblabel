@@ -114,7 +114,12 @@ Jinlong Zhang
 }
 
 \examples{
-### To be added. 
+
+infile <- system.file("extdata", "SCBG_FB_TEMPLATE.csv", 
+                             package = "herblabel")
+                             
+scbg_fb2ht(infile)
+
 }
 
 \keyword{ format }

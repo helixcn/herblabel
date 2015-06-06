@@ -136,6 +136,7 @@ Jinlong Zhang
 
     path <- system.file("extdata", "HERBARIUM_RECORDS_TEMPLATE.csv", 
                         package = "herblabel")
+                        
     wetlabel_rtf(infile = path)
     
 }

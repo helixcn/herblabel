@@ -152,11 +152,15 @@ Jinlong Zhang
 \examples{
 
 path <- system.file("extdata", "HERBARIUM_RECORDS_TEMPLATE.csv", 
-package = "herblabel")
+                    package = "herblabel")
+                    
 herblabel_tex(infile = path, 
              outfile = "herblabel.HERBARIUM_RECORDS_TEMPLATE.csv.tex")
+             
 
 path <- system.file("extdata", "res_converted.csv", package = "herblabel")
+
 herblabel_tex(infile = path, outfile = "herblabel.res_converted.csv.tex")
+
 
 }

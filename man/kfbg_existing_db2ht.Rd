@@ -7,6 +7,7 @@ Convert the existing herbarium specimens records format to herblabel template fo
 Convert the KFBG existing herbarium specimen records to herblabel template. Both of the input and the output should be in csv. 
 }
 \usage{
+
 kfbg_existing_db2ht(infile, outfile = "herblabel_temp.csv", 
 HERBARIUM_ARGUMENT = "Kadoorie Farm and Botanic Garden Herbarium", 
 HERBARIUM_CODE_ARGUMENT = "KFBG", TITLE_ARGUMENT = NA, 
@@ -14,6 +15,7 @@ PROJECT_ARGUMENT = NA, IDENTIFIED_BY_ARGUMENT = NA,
 DATE_IDENTIFIED_ARGUMENT = NA, 
 PROCESSED_BY_ARGUMENT = NA, 
 DATE_LASTMODIFIED_ARGUMENT = NA)
+
 }
 
 \arguments{
@@ -161,7 +163,12 @@ Jinlong Zhang
 \code{\link{kfbg_fb2ht}}, \code{\link{scbg_fb2ht}},  \code{\link{kfbg_new_db2ht}} 
 }
 \examples{
-### To be added. 
+
+    path <- system.file("extdata", "KFBG_EXISTING_DB.csv", 
+                        package = "herblabel")
+                        
+    kfbg_existing_db2ht(path)
+
 }
 
 \keyword{ format }

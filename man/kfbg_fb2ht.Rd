@@ -110,7 +110,11 @@ Jinlong Zhang
 \code{\link{scbg_fb2ht}},  \code{\link{kfbg_new_db2ht}} , \code{\link{kfbg_existing_db2ht}}
 }
 \examples{
-### To be added. 
+
+bbsp_csv_file <- system.file("extdata", "KFBG_FIELDBOOK.csv", 
+                             package = "herblabel")
+kfbg_fb2ht(bbsp_csv_file)
+
 }
 
 \keyword{ format }

@@ -72,7 +72,10 @@ Jinlong Zhang
 }
 
 \examples{
+
 bbsp_csv_file <- system.file("extdata", "EXPORT20150121.CSV", 
                              package = "herblabel")
+                             
 kfbg_bgbase_csv2ht(infile = bbsp_csv_file,  outfile = "herblabel.csv")
+
 }

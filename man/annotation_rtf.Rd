@@ -1,13 +1,13 @@
 \name{annotation_rtf}
 \alias{annotation_rtf}
 \title{
-Making Annotation labels
+    Making Annotation labels
 }
 \description{
-Making annotation labels in RTF
+    Making annotation labels in RTF
 }
 \usage{
-annotation_rtf(infile = NULL, outfile = "annotations.rtf")
+    annotation_rtf(infile = NULL, outfile = "annotations.rtf")
 }
 
 \arguments{
@@ -29,8 +29,10 @@ Jinlong Zhang
 }
 
 \examples{
-   Sys.setlocale("LC_TIME", "English")
+
    path <- system.file("extdata", "ANNOTATION_TEMPLATE.csv", 
                        package = "herblabel")
+                       
    annotation_rtf(infile = path,  outfile = "annotations.rtf")
+   
 }
