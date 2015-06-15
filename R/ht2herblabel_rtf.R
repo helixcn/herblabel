@@ -198,12 +198,12 @@ ht2herblabel_rtf <- function(infile = NULL, spellcheck = TRUE, outfile = "herbla
                    herbdat$COLLECTOR,", #" ,herbdat$COLLECTOR_NUMBER,"\\b0", 
                    "\\qj0","\\tab ",
                    format(as.Date(herbdat$DATE_COLLECTED), 
-                   format="%d %b %Y"),"\\par }",sep = ""), 
+                   format="%d %B %Y"),"\\par }",sep = ""), 
             paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb50\\sa100\\tqr\\tx5045\\qj\\b ",
                    herbdat$COLLECTOR,", ",herbdat$ADDITIONAL_COLLECTOR,"\\qj0  #" ,
                    herbdat$COLLECTOR_NUMBER, "\\b0", "\\tab ",
                    format(as.Date(herbdat$DATE_COLLECTED), 
-                   format="%d %b %Y"), "\\par }",sep = "")
+                   format="%d %B %Y"), "\\par }",sep = "")
             ), 
         
         ##### Project
@@ -221,13 +221,13 @@ ht2herblabel_rtf <- function(infile = NULL, spellcheck = TRUE, outfile = "herbla
                   "\\tx5045\\tab ", herbdat$TYPE_STATUS,
                  " \\tql Det.: ",herbdat$IDENTIFIED_BY,", ", 
                  format(as.Date(herbdat$DATE_IDENTIFIED), 
-                 format="%d %b %Y"), " \\par }",sep = ""),
+                 format="%d %B %Y"), " \\par }",sep = ""),
             paste("{\\pard\\keep\\sa40\\keepn\\fi0\\li0\\tqr ", gsub("_", 
                   "", ifelse(is.na(as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER)), 
                  "", as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER))),
                  "\\tx5045\\tab \\tql Det.: ", herbdat$IDENTIFIED_BY,", ", 
                  format(as.Date(herbdat$DATE_IDENTIFIED), 
-                 format="%d %b %Y"), " \\par }",sep = "")
+                 format="%d %B %Y"), " \\par }",sep = "")
             ),
         "{\\pard\\sa200 \\par }"
          )                            ### End of one label
