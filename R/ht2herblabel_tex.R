@@ -58,7 +58,7 @@ ht2herblabel_tex <- function(infile = NULL, spellcheck = TRUE, outfile = "herbla
         }
     
     #################### 
-    dirpgenus <- system.file("extdata", "plantlist_genera20141118.csv", package = "herblabel")
+    dirpgenus <- system.file("extdata", "APGIII_GENERA.csv", package = "herblabel")
     pgenus <- read.csv(dirpgenus, header = TRUE)
     
     Cap <- function(x) {
