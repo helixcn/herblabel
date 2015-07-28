@@ -155,6 +155,6 @@ path <- system.file("extdata", "DARWIN_CORE_HERBARIUM_RECORDS_TEMPLATE.csv",
                     package = "herblabel")
                     
 ht2herblabel_tex(infile = path, 
-             outfile = "DARWIN_CORE_HERBARIUM_RECORDS_TEMPLATE_ht2herblabel_tex")
+             outfile = "DARWIN_CORE_HERBARIUM_RECORDS_TEMPLATE_ht2herblabel_tex.tex")
 
 }
