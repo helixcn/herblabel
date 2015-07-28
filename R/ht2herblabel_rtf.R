@@ -43,10 +43,6 @@ ht2herblabel_rtf <- function(infile = NULL, spellcheck = TRUE, outfile = "herbla
         warning(paste("\"LOCALITY\" not provided  for row: ", 
              paste(which(is.na(herbdat000$LOCALITY)) + 1, collapse = ", ")))
         }
-    if(any(is.na(herbdat000$REMARKS))){
-        warning(paste("\"REMARKS\" not provided for row: ", 
-             paste(which(is.na(herbdat000$REMARKS)) + 1, collapse = ", ")))
-        }
     if(any(is.na(herbdat000$IDENTIFIED_BY))){
         stop(paste("\"IDENTIFIED_BY\" must be provided for row: ", 
              paste(which(is.na(herbdat000$DETERMINOR)) + 1, collapse = ", ")))
