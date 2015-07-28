@@ -21,6 +21,10 @@ at2alabel_tex <- function(infile = NULL, outfile = "annotation.tex"){
     #### Default Font Size if 18
     #### Default font is Time New Roman
     temp2 <- c()
+    formatdate <- function(x){
+        format(as.Date(herbdat$DATE_IDENTIFIED),"%d %B %Y")
+    }
+
     for(i in 1:nrow(herbdat000)){
         herbdat <- herbdat000[i,]
         res <- c(
@@ -58,8 +62,8 @@ at2alabel_tex <- function(infile = NULL, outfile = "annotation.tex"){
         ##### IDENTIFICATION INFOMATION
         paste("\\rightline{",  "Det.: ", herbdat$IDENTIFIED_BY, " ",
             herbdat$INSTITUTION," \\hfill ", 
-            " ", format(tryCatch(as.Date(herbdat$DATE_IDENTIFIED), 
-            error= function(e) {print("Date format incorrect, using original string");herbdat$DATE_IDENTIFIED}),"%d %B %Y"), 
+            " ", tryCatch(formatdate(herbdat$DATE_IDENTIFIED), 
+            error= function(e) {print("Warning: Date format incorrect, using original string"); herbdat$DATE_IDENTIFIED}), 
             "}\\\\",sep = ""), 
         "\\vspace{3mm}\\\\", 
         "\\end{tabular}\\\\"
