@@ -59,7 +59,7 @@ at2alabel_tex <- function(infile = NULL, outfile = "annotation.tex"){
         paste("\\rightline{",  "Det.: ", herbdat$IDENTIFIED_BY, " ",
             herbdat$INSTITUTION," \\hfill ", 
             " ", format(tryCatch(as.Date(herbdat$DATE_IDENTIFIED), 
-            error= function(e) {print("Date format incorrect, using original string");x}),"%d %B %Y"), 
+            error= function(e) {print("Date format incorrect, using original string");herbdat$DATE_IDENTIFIED}),"%d %B %Y"), 
             "}\\\\",sep = ""), 
         "\\vspace{3mm}\\\\", 
         "\\end{tabular}\\\\"
