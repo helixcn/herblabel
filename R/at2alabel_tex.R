@@ -22,7 +22,7 @@ at2alabel_tex <- function(infile = NULL, outfile = "annotation.tex"){
     #### Default font is Time New Roman
     temp2 <- c()
     formatdate <- function(x){
-        format(as.Date(herbdat$DATE_IDENTIFIED),"%d %B %Y")
+        format(as.Date(x),"%d %B %Y")
     }
 
     for(i in 1:nrow(herbdat000)){
