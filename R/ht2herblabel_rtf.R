@@ -198,13 +198,13 @@ ht2herblabel_rtf <- function(infile = NULL, spellcheck = TRUE, outfile = "herbla
                    herbdat$COLLECTOR,", #" ,herbdat$COLLECTOR_NUMBER,"\\b0", 
                    "\\qj0","\\tab ",
                    format(tryCatch(as.Date(herbdat$DATE_COLLECTED), 
-                          error= function(e) {print("Date format incorrect, using original string");x}), 
+                          error= function(e) {print("Date format incorrect, using original string");herbdat$DATE_COLLECTED}), 
                           "%d %B %Y") ,"\\par}",sep = ""), 
             paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb50\\sa100\\tqr\\tx5045\\qj\\b ",
                    herbdat$COLLECTOR,", ",herbdat$ADDITIONAL_COLLECTOR,"\\qj0  #" ,
                    herbdat$COLLECTOR_NUMBER, "\\b0", "\\tab ",
                    format(tryCatch(as.Date(herbdat$DATE_COLLECTED), 
-                          error= function(e) {print("Date format incorrect, using original string");x}), 
+                          error= function(e) {print("Date format incorrect, using original string");herbdat$DATE_COLLECTED}), 
                           "%d %B %Y"),"\\par}",sep = "")
             ), 
         
@@ -223,14 +223,14 @@ ht2herblabel_rtf <- function(infile = NULL, spellcheck = TRUE, outfile = "herbla
                   "\\tx5045\\tab ", herbdat$TYPE_STATUS,
                  " \\tql Det.: ",herbdat$IDENTIFIED_BY,", ", 
                  format(tryCatch(as.Date(herbdat$DATE_IDENTIFIED), 
-                                error= function(e) {print("Date format incorrect, using original string");x}), 
+                                error= function(e) {print("Date format incorrect, using original string");herbdat$DATE_IDENTIFIED}), 
                         "%d %B %Y"), "\\par}",sep = ""),
             paste("{\\pard\\keep\\sa40\\keepn\\fi0\\li0\\tqr ", gsub("_", 
                   "", ifelse(is.na(as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER)), 
                  "", as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER))),
                  "\\tx5045\\tab \\tql Det.: ", herbdat$IDENTIFIED_BY,", ", 
                  format(tryCatch(as.Date(herbdat$DATE_IDENTIFIED), 
-                                error= function(e) {print("Date format incorrect, using original string");x}), 
+                                error= function(e) {print("Date format incorrect, using original string");herbdat$DATE_IDENTIFIED}), 
                         "%d %B %Y"), "\\par}",sep = "")
             ),
         "{\\pard\\sa400 \\par }"
