@@ -119,7 +119,7 @@ ht2herblabel_rtf <- function(infile = NULL, spellcheck = TRUE, outfile = "herbla
                                              !as.character(Cap(fgmerge.temp$FAMILY.y)) %in% 
                                               as.character(Cap(fgmerge.temp$FAMILY.x))], 
                                        collapse = "\", \"") ,
-                                       "\" according to the plantlist genera database.)\\highlight0 ", sep = "")
+                                       "\" according to the Plantlist Database.)\\highlight0 ", sep = "")
                         
                 } else{
                 herbdat$FAMILY <- paste("\\highlight3 ", unique(as.character(fgmerge.temp$FAMILY.x)), 
@@ -128,8 +128,7 @@ ht2herblabel_rtf <- function(infile = NULL, spellcheck = TRUE, outfile = "herbla
                                        "\\i0 \\highlight9  (should be in \"", 
                                        paste(as.character(fgmerge.temp$FAMILY.y), 
                                        collapse = "\", \"") ,
-                                       "\" according to the plantlist 
-                                       genera database.)\\highlight0 ", sep = "")
+                                       "\" according to the Plantlist Database.)\\highlight0 ", sep = "")
                  }
             }
         }
