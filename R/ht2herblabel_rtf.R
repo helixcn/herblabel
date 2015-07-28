@@ -55,7 +55,7 @@ ht2herblabel_rtf <- function(infile = NULL, spellcheck = TRUE, outfile = "herbla
         warning(paste("\"DATE_IDENTIFIED\" not provided for row: ", 
              paste(which(is.na(herbdat000$DATE_IDENTIFIED)) + 1, collapse = ", ")))
         }
-    formatdate <- function(x){format(as.Date(herbdat$DATE_IDENTIFIED),"%d %B %Y")}
+    formatdate <- function(x){format(as.Date(x),"%d %B %Y")}
     #################### 
     
     dirpgenus <- system.file("extdata", "APGIII_GENERA.csv", 
