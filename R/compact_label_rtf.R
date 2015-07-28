@@ -58,7 +58,7 @@ compact_label_rtf <- function(infile = NULL, outfile = "Wet_Labels.RTF",
              paste(which(is.na(herbdat000$DATE_IDENTIFIED)) + 1, collapse = ", ")))
         }
     formatdate <- function(x){
-        format(as.Date(herbdat$DATE_IDENTIFIED),"%d %B %Y")
+        format(as.Date(x),"%d %B %Y")
     }
 
     #################### 
