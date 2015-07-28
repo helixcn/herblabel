@@ -67,9 +67,11 @@ at2alabel_rtf <- function(infile = NULL, outfile = "annotations.rtf") {
                   paste("{\\pard\\keep\\sb100\\sa50\\keepn\\fi0\\li0Det. Source:", 
                   as.character(herbdat$DET_SOURCE), "}")), 
                   paste("{\\pard\\keep\\sb150\\sa50\\keepn\\fi0\\li0\\tqr\\tx5045 Det.: ", 
-            herbdat$IDENTIFIED_BY, ", ", herbdat$INSTITUTION, "  \\tab ", 
-                 format(as.Date(herbdat$DATE_IDENTIFIED), 
-                format = "%d %b %Y"), " \\par }", sep = ""), "{\\pard\\sa400 \\par }")
+                         herbdat$IDENTIFIED_BY, ", ", herbdat$INSTITUTION, "  \\tab ", 
+                         format(tryCatch(as.Date(herbdat$DATE_IDENTIFIED), 
+                         error= function(e) {print("Date format incorrect, using original string");x}),"%d %B %Y"), 
+                         " \\par }", sep = ""), 
+                "{\\pard\\sa400 \\par }")
         ### End of one label
         temp2 <- c(temp2, res)  ### Add label to the RTF file.
     }
