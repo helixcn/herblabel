@@ -182,10 +182,12 @@ ht2herblabel_rtf <- function(infile = NULL, spellcheck = TRUE, outfile = "herbla
                herbdat$ELEVATION,"m\\par }",sep = "")),
 
         ##### Attributes and Remarks
-        paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb60", 
-        ifelse(is.na(herbdat$ATTRIBUTES), " ", as.character(herbdat$ATTRIBUTES)),
-               " ", ifelse(is.na(herbdat$REMARKS), " ", as.character(herbdat$REMARKS)), 
-               "\\sa80\\par}", sep = ""), 
+        ifelse(is.na(herbdat$ATTRIBUTES) & is.na(herbdat$REMARKS)|herbdat$ATTRIBUTES == "" & herbdat$REMARKS == "", "",    
+                paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb60", 
+                    ifelse(is.na(herbdat$ATTRIBUTES)|herbdat$ATTRIBUTES == "", "", as.character(herbdat$ATTRIBUTES)),
+                    ifelse(is.na(herbdat$ATTRIBUTES)|herbdat$ATTRIBUTES == "", "", " "), 
+                    ifelse(is.na(herbdat$REMARKS)|herbdat$REMARKS == "", "", as.character(herbdat$REMARKS)), 
+                     "\\sa80\\par}", sep = "")), 
                 
         ##### COLLECTOR and COLLECTION NUMBER !
         ifelse(is.na(herbdat$ADDITIONAL_COLLECTOR), 
@@ -236,6 +238,7 @@ ht2herblabel_rtf <- function(infile = NULL, spellcheck = TRUE, outfile = "herbla
     }
     template <- c(temp1, temp2, "}") ## End of the RTF file
     res <- template[!template %in% ""]
+    res <- res[!res %in% " "]
     writeLines(res, outfile)
     ### Notice
     cat("Herbarium Labels have been saved to:\n", 
