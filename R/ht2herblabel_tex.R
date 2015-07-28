@@ -186,15 +186,16 @@ ht2herblabel_tex <- function(infile = NULL, spellcheck = TRUE, outfile = "herbla
             paste("\\textbf{",
                    herbdat$COLLECTOR,"} \\textbf{ $\\#$ " ,
                    herbdat$COLLECTOR_NUMBER,"}\\hfill " ,
-                   format(as.Date(herbdat$DATE_COLLECTED), 
-                          format="%d %B %Y"),
-                   "\\\\",sep = ""), 
+                   format(tryCatch(as.Date(herbdat$DATE_COLLECTED), 
+                                  error= function(e) {print("Date format incorrect, using original string");x}), 
+                   "%d %B %Y"), "\\\\",sep = ""), 
             paste("\\textbf{",
                    herbdat$COLLECTOR,"}, \\textbf{",
                    herbdat$ADDITIONAL_COLLECTOR,"} \\textbf{ $\\#$ " ,
                    herbdat$COLLECTOR_NUMBER,"}\\hfill " ,
-                   format(as.Date(herbdat$DATE_COLLECTED), 
-                   format="%d %B %Y"),"\\\\",sep = "")
+                   format(tryCatch(as.Date(herbdat$DATE_COLLECTED), 
+                                   error= function(e) {print("Date format incorrect, using original string");x}), 
+                          "%d %B %Y"),"\\\\",sep = "")
             ), 
         ##### Project
         ifelse(is.na(herbdat$PROJECT), "", 
@@ -207,14 +208,16 @@ ht2herblabel_tex <- function(infile = NULL, spellcheck = TRUE, outfile = "herbla
             as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER))) ,
             " \\hfill ", herbdat$TYPE_STATUS,
                  "  Det.: ",herbdat$IDENTIFIED_BY,", ", 
-                 format(as.Date(herbdat$DATE_IDENTIFIED), 
-                 format="%d %B %Y"), "}\\\\",sep = ""),
+                 format(tryCatch(as.Date(herbdat$DATE_IDENTIFIED), 
+                                 error= function(e) {print("Date format incorrect, using original string");x}), 
+                        "%d %B %Y"), "}\\\\",sep = ""),
             paste("\\rightline{", gsub("_", "", 
                  ifelse(is.na(as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER)), "", 
                  as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER)))," \\hfill ", "Det.: ",
                  herbdat$IDENTIFIED_BY,", ", 
-                 format(as.Date(herbdat$DATE_IDENTIFIED), 
-                 format="%d %B %Y"), "}\\\\",sep = "")
+                 format(tryCatch(as.Date(herbdat$DATE_IDENTIFIED), 
+                                error= function(e) {print("Date format incorrect, using original string");x}), 
+                       "%d %B %Y"), "}\\\\",sep = "")
             ),
         "\\vspace{3mm}",
         "\\end{tabular}\\\\"
