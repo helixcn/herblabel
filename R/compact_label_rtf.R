@@ -170,7 +170,7 @@ compact_label_rtf <- function(infile = NULL, outfile = "Wet_Labels.RTF",
             paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb80\\tqr\\tx5045\\qj ",
                    herbdat$COLLECTOR,", #" ,herbdat$COLLECTOR_NUMBER,
                    "                             ", 
-                   format(as.Date(herbdat$DATE_COLLECTED), format="%d %b %Y"), 
+                   format(tryCatch(as.Date(herbdat$DATE_COLLECTED),error= function(e) {print("Date format incorrect, using original string");x}), "%d %B %Y"), 
                    "\\qj0\\par}",sep = ""), 
             paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb80\\tqr\\tx5045\\qj ",
                    herbdat$COLLECTOR,
@@ -179,7 +179,7 @@ compact_label_rtf <- function(infile = NULL, outfile = "Wet_Labels.RTF",
                    ", #",
                    herbdat$COLLECTOR_NUMBER, 
                    "                  ",
-                   format(as.Date(herbdat$DATE_COLLECTED), format="%d %b %Y"),
+                   format(tryCatch(as.Date(herbdat$DATE_COLLECTED),error= function(e) {print("Date format incorrect, using original string");x}), "%d %B %Y"),
                    "\\qj0\\par}",sep = "")
             ), 
         ##### COUNTY and LOCALITY
@@ -211,11 +211,9 @@ compact_label_rtf <- function(infile = NULL, outfile = "Wet_Labels.RTF",
         ##### IDENTIFICATION INFOMATION
         ifelse(!is.na(herbdat$TYPE_STATUS), 
             paste("{\\pard\\keep\\sa40\\keepn\\fi0\\li0\\tqr\\tx5045\\qr ", herbdat$TYPE_STATUS,
-                 "  Det.: ",herbdat$IDENTIFIED_BY,", ", format(as.Date(herbdat$DATE_IDENTIFIED), 
-                 format="%d %b %Y"), " \\qr0\\par }",sep = ""),
+                 "  Det.: ",herbdat$IDENTIFIED_BY,", ", format(tryCatch(as.Date(herbdat$DATE_IDENTIFIED), error= function(e) {print("Date format incorrect, using original string");x}),"%d %B %Y"), " \\qr0\\par }",sep = ""),
             paste("{\\pard\\keep\\sa40\\keepn\\fi0\\li0\\tqr\\tx5045\\qr Det.: ",
-                 herbdat$IDENTIFIED_BY,", ", format(as.Date(herbdat$DATE_IDENTIFIED), 
-                 format="%d %b %Y"), " \\qr0\\par }",sep = "")
+                 herbdat$IDENTIFIED_BY,", ", format(tryCatch(as.Date(herbdat$DATE_IDENTIFIED), error= function(e) {print("Date format incorrect, using original string");x}),"%d %B %Y"), " \\qr0\\par }",sep = "")
             ),
         "{\\pard\\sa120 \\par }"
          )                            ### End of one label
