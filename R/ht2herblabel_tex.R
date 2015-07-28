@@ -64,7 +64,8 @@ ht2herblabel_tex <- function(infile = NULL, spellcheck = TRUE, outfile = "herbla
     Cap <- function(x) {
         paste(toupper(substring(x, 1, 1)), tolower(substring(x, 2)), sep = "")
     }
- 
+    formatdate <- function(x){format(as.Date(herbdat$DATE_IDENTIFIED),"%d %B %Y")}
+
     ### match.gf(herbdat000$FAMIL, herbdat000$GENUS)
 
     temp1 <- c("\\documentclass[a4paper,5pt,twocolumn]{article}",
@@ -186,16 +187,16 @@ ht2herblabel_tex <- function(infile = NULL, spellcheck = TRUE, outfile = "herbla
             paste("\\textbf{",
                    herbdat$COLLECTOR,"} \\textbf{ $\\#$ " ,
                    herbdat$COLLECTOR_NUMBER,"}\\hfill " ,
-                   format(tryCatch(as.Date(herbdat$DATE_COLLECTED), 
-                                  error= function(e) {print("Date format incorrect, using original string");herbdat$DATE_COLLECTED}), 
-                   "%d %B %Y"), "\\\\",sep = ""), 
+                   tryCatch(formatdate(herbdat$DATE_COLLECTED), 
+                   error= function(e) {print("Warning: Date format incorrect, using original string"); 
+                   herbdat$DATE_COLLECTED}), "\\\\",sep = ""), 
             paste("\\textbf{",
                    herbdat$COLLECTOR,"}, \\textbf{",
                    herbdat$ADDITIONAL_COLLECTOR,"} \\textbf{ $\\#$ " ,
                    herbdat$COLLECTOR_NUMBER,"}\\hfill " ,
-                   format(tryCatch(as.Date(herbdat$DATE_COLLECTED), 
-                                   error= function(e) {print("Date format incorrect, using original string");herbdat$DATE_COLLECTED}), 
-                          "%d %B %Y"),"\\\\",sep = "")
+                   tryCatch(formatdate(herbdat$DATE_COLLECTED), 
+                   error= function(e) {print("Warning: Date format incorrect, using original string"); 
+                   herbdat$DATE_COLLECTED}),"\\\\",sep = "")
             ), 
         ##### Project
         ifelse(is.na(herbdat$PROJECT), "", 
@@ -215,9 +216,9 @@ ht2herblabel_tex <- function(infile = NULL, spellcheck = TRUE, outfile = "herbla
                  ifelse(is.na(as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER)), "", 
                  as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER)))," \\hfill ", "Det.: ",
                  herbdat$IDENTIFIED_BY,", ", 
-                 format(tryCatch(as.Date(herbdat$DATE_IDENTIFIED), 
-                                error= function(e) {print("Date format incorrect, using original string");herbdat$DATE_IDENTIFIED}), 
-                       "%d %B %Y"), "}\\\\",sep = "")
+                tryCatch(formatdate(herbdat$DATE_IDENTIFIED), 
+                    error= function(e) {print("Warning: Date format incorrect, using original string"); 
+                    herbdat$DATE_IDENTIFIED}), "}\\\\",sep = "")
             ),
         "\\vspace{3mm}",
         "\\end{tabular}\\\\"
