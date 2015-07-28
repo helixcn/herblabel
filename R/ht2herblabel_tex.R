@@ -64,7 +64,7 @@ ht2herblabel_tex <- function(infile = NULL, spellcheck = TRUE, outfile = "herbla
     Cap <- function(x) {
         paste(toupper(substring(x, 1, 1)), tolower(substring(x, 2)), sep = "")
     }
-    formatdate <- function(x){format(as.Date(herbdat$DATE_IDENTIFIED),"%d %B %Y")}
+    formatdate <- function(x){format(as.Date(x),"%d %B %Y")}
 
     ### match.gf(herbdat000$FAMIL, herbdat000$GENUS)
 
