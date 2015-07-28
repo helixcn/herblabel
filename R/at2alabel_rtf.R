@@ -18,7 +18,7 @@ at2alabel_rtf <- function(infile = NULL, outfile = "annotations.rtf") {
             1, collapse = ", ")))
     }
     formatdate <- function(x){
-        format(as.Date(herbdat$DATE_IDENTIFIED),"%d %B %Y")
+        format(as.Date(x),"%d %B %Y")
     }
     #################### 
     dirpgenus <- system.file("extdata", "APGIII_GENERA.csv", 
