@@ -57,9 +57,10 @@ at2alabel_tex <- function(infile = NULL, outfile = "annotation.tex"){
             paste("Det. Source: ", herbdat$DET_SOURCE, "\\\\",sep = "")), 
         ##### IDENTIFICATION INFOMATION
         paste("\\rightline{",  "Det.: ", herbdat$IDENTIFIED_BY, " ",
-        herbdat$INSTITUTION," \\hfill ", 
-                 " ", format(as.Date(herbdat$DATE_IDENTIFIED), 
-                 format="%d %b %Y"), "}\\\\",sep = ""), 
+            herbdat$INSTITUTION," \\hfill ", 
+            " ", format(tryCatch(as.Date(herbdat$DATE_IDENTIFIED), 
+            error= function(e) {print("Date format incorrect, using original string");x}),"%d %B %Y"), 
+            "}\\\\",sep = ""), 
         "\\vspace{3mm}\\\\", 
         "\\end{tabular}\\\\"
          )                            ### End of one label
