@@ -17,7 +17,9 @@ at2alabel_rtf <- function(infile = NULL, outfile = "annotations.rtf") {
         paste(which(is.na(herbdat000$DATE_IDENTIFIED)) + 
             1, collapse = ", ")))
     }
-    
+    formatdate <- function(x){
+        format(as.Date(herbdat$DATE_IDENTIFIED),"%d %B %Y")
+    }
     #################### 
     dirpgenus <- system.file("extdata", "APGIII_GENERA.csv", 
                             package = "herblabel")
@@ -68,8 +70,8 @@ at2alabel_rtf <- function(infile = NULL, outfile = "annotations.rtf") {
                   as.character(herbdat$DET_SOURCE), "}")), 
                   paste("{\\pard\\keep\\sb150\\sa50\\keepn\\fi0\\li0\\tqr\\tx5045 Det.: ", 
                          herbdat$IDENTIFIED_BY, ", ", herbdat$INSTITUTION, "  \\tab ", 
-                         format(tryCatch(as.Date(herbdat$DATE_IDENTIFIED), 
-                         error= function(e) {print("Date format incorrect, using original string");herbdat$DATE_IDENTIFIED}),"%d %B %Y"), 
+                         tryCatch(formatdate(herbdat$DATE_IDENTIFIED), 
+                         error= function(e) {print("Warning: Date format incorrect, using original string"); herbdat$DATE_IDENTIFIED}), 
                          " \\par }", sep = ""), 
                 "{\\pard\\sa400 \\par }")
         ### End of one label
