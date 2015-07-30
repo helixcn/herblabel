@@ -69,7 +69,7 @@ at2alabel_rtf <- function(infile = NULL, outfile = "annotations.rtf") {
                   paste("{\\pard\\keep\\sb100\\sa50\\keepn\\fi0\\li0Det. Source:", 
                   as.character(herbdat$DET_SOURCE), "}")), 
                   paste("{\\pard\\keep\\sb150\\sa50\\keepn\\fi0\\li0\\tqr\\tx5045 Det.: ", 
-                         herbdat$IDENTIFIED_BY, ", ", herbdat$INSTITUTION, "  \\tab ", 
+                         herbdat$IDENTIFIED_BY, "  ", herbdat$INSTITUTION, "  \\tab ", 
                          tryCatch(formatdate(herbdat$DATE_IDENTIFIED), 
                          error= function(e) {print("Warning: Date format incorrect, using original string"); herbdat$DATE_IDENTIFIED}), 
                          " \\par }", sep = ""), 
