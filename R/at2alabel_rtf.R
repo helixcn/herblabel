@@ -3,17 +3,17 @@
 at2alabel_rtf <- function(infile = NULL, outfile = "annotations.rtf") {
     herbdat000 <- read.csv(infile, header = TRUE)
     if (any(is.na(herbdat000$GENUS))) {
-        stop(paste("\"GENUS\" must be provided for row: ", 
+        warning(paste("\"GENUS\" must be provided for row: ", 
         paste(which(is.na(herbdat000$GENUS)) + 
             1, collapse = ", ")))
     }
     if (any(is.na(herbdat000$IDENTIFIED_BY))) {
-        stop(paste("\"IDENTIFIED_BY\" must be provided for row: ", 
+        warning(paste("\"IDENTIFIED_BY\" must be provided for row: ", 
         paste(which(is.na(herbdat000$DETERMINOR)) + 
             1, collapse = ", ")))
     }
     if (any(is.na(herbdat000$DATE_IDENTIFIED))) {
-        stop(paste("\"DATE_IDENTIFIED\" must be provided for row: ", 
+        warning(paste("\"DATE_IDENTIFIED\" must be provided for row: ", 
         paste(which(is.na(herbdat000$DATE_IDENTIFIED)) + 
             1, collapse = ", ")))
     }
