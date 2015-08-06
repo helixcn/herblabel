@@ -1,8 +1,17 @@
 #### create herbarium labels in RTF, default size of paper is A4.
 
-ht2herblabel_rtf <- function(infile = NULL, spellcheck = TRUE, outfile = "herblabel.rtf"){
-    
-    herbdat000 <- read.csv(infile, header = TRUE, stringsAsFactors = FALSE)
+ht2herblabel_rtf <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfile = "herblabel.rtf"){
+    if(is.null(dat)&is.null(infile)){
+        stop("at least dat or infile should be specified")
+    }
+    if(!is.null(dat)&!is.null(infile)){
+        stop("dat and infile should be not be specified together")
+    }
+    if(is.null(dat)){
+        herbdat000 <- read.csv(infile, header = TRUE, stringsAsFactors = FALSE)
+    } else {
+        herbdat000 <- dat
+    }
     if(any(is.na(herbdat000$HERBARIUM))){
         stop(paste("\"HERBARIUM\" must be provided for row: ", 
              paste(which(is.na(herbdat000$HERBARIUM))+1, collapse = ", ")))
@@ -64,8 +73,7 @@ ht2herblabel_rtf <- function(infile = NULL, spellcheck = TRUE, outfile = "herbla
     
     ### match.gf(herbdat000$FAMIL, herbdat000$GENUS)
     temp1 <- c("{\\rtf1\\ansi\\deff0", #### Staring a RTF 
-               "{\\fonttbl{\\f01\\froman\\fcharset01 Times New Roman;
-                 \\f02\\fmodern\\fmorden Arial;}}",    
+               "{\\fonttbl{\\f01\\froman\\fcharset01 Times New Roman;\\f02\\fmodern\\fmorden Arial;}}",    
                "{\\colortbl;\\red0\\green0\\blue0;\\red0\\green0\\blue255;
                 \\red0\\green255\\blue255; \\red0\\green255\\blue0;
                 \\red255\\green0\\blue255;\\red255\\green0\\blue0;
@@ -137,7 +145,7 @@ ht2herblabel_rtf <- function(infile = NULL, spellcheck = TRUE, outfile = "herbla
         "\\margt360\\margb360\\margl360\\margr360\\cols2\\colsx600",
         
         #### Title of the Herbarium
-        paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\qc\\sb100\\sa80\\fs20", 
+        paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\qc\\sb350\\sa80\\fs20", 
                 herbdat$HERBARIUM,"\\par }", sep = ""),
         ####  
         ### FLORA OF SOME PLACE
@@ -232,11 +240,12 @@ ht2herblabel_rtf <- function(infile = NULL, spellcheck = TRUE, outfile = "herbla
                  error= function(e) {print("Warning: Date format incorrect, using original string"); 
                  herbdat$DATE_IDENTIFIED}), "\\par}",sep = "")
             ),
-        "{\\pard\\sa400 \\par }"
+        "{\\pard\\sa200 \\par }", 
+        "{\\pard \\qc .    .    .    .    .    .    .    .    .    .  \\par}" 
          )                            ### End of one label
         temp2 <- c(temp2, res)        ### Add label to the RTF file.
     }
-    template <- c(temp1, temp2, "}") ## End of the RTF file
+    template <- c(temp1, temp2, "}")  ## End of the RTF file
     res <- template[!template %in% ""]
     res <- res[!res %in% " "]
     writeLines(res, outfile)

@@ -1,8 +1,17 @@
 #### Create herbarium labels in LaTeX
 
-ht2herblabel_tex <- function(infile = NULL, spellcheck = TRUE, outfile = "herblabel.tex"){
-    #Sys.setlocale("LC_TIME", "English")
-    herbdat000 <- read.csv(infile, header = TRUE, stringsAsFactors = FALSE)
+ht2herblabel_tex <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfile = "herblabel.tex"){
+    if(is.null(dat)&is.null(infile)){
+        stop("at least dat or infile should be specified")
+    }
+    if(!is.null(dat)&!is.null(infile)){
+        stop("dat and infile should be not be specified together")
+    }
+    if(is.null(dat)){
+        herbdat000 <- read.csv(infile, header = TRUE, stringsAsFactors = FALSE)
+    } else {
+        herbdat000 <- dat
+    }
 	
     if(any(is.na(herbdat000$HERBARIUM))){
         stop(paste("\"HERBARIUM\" not provided for row: ", 
@@ -222,6 +231,7 @@ ht2herblabel_tex <- function(infile = NULL, spellcheck = TRUE, outfile = "herbla
                     herbdat$DATE_IDENTIFIED}), "}\\\\",sep = "")
             ),
         "\\vspace{3mm}",
+        "\\centerline{. . . . . . . . . . . . . . . . . . }",
         "\\end{tabular}\\\\"
          )                            ### End of one label
         temp2 <- c(temp2, res)        ### Add label to the RTF file.

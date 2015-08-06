@@ -7,10 +7,13 @@ Making compact labels for spirit specimens
 Making compact labels for spirit specimens based on Darwin Core herbarium records template in CSV
 }
 \usage{
-compact_label_rtf(infile = NULL, outfile = "Wet_Labels.RTF", spellcheck = TRUE)
+compact_label_rtf(dat = NULL, infile = NULL, outfile = "Wet_Labels.RTF", spellcheck = TRUE)
 }
 
 \arguments{
+   \item{dat}{
+data frame of Darwin Core Template.  
+}
   \item{infile}{
 Character representing the name of the csv file.
 }

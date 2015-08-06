@@ -7,10 +7,13 @@ Creating herbarium labels in Latex based on Darwin Core herblabel template in CS
 Creating herbarium labels in Latex based on Darwin Core herblabel template in CSV.
 }
 \usage{
-ht2herblabel_tex(infile = NULL, spellcheck = TRUE, outfile = "herblabel.tex")
+ht2herblabel_tex(dat = NULL, infile = NULL, spellcheck = TRUE, outfile = "herblabel.tex")
 }
 
 \arguments{
+   \item{dat}{
+data frame of Darwin Core Template.  
+}
   \item{infile}{
 Character string specifies the csv file. 
 }

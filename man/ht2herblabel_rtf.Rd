@@ -7,11 +7,14 @@ Creating RTF herbarium labels in Latex based on Darwin Core herbarium records te
 Creating RTF herbarium labels in Latex based on Darwin Core herbarium records template in CSV.
 }
 \usage{
-ht2herblabel_rtf(infile = NULL, spellcheck = TRUE, outfile = "herblabel.rtf")
+ht2herblabel_rtf(dat = NULL, infile = NULL, spellcheck = TRUE, outfile = "herblabel.rtf")
 }
 
 \arguments{
-  \item{infile}{
+   \item{dat}{
+data frame of Darwin Core Template.  
+}
+   \item{infile}{
 Character representing the template file in csv.
 }
   \item{spellcheck}{ 

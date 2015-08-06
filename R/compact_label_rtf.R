@@ -1,9 +1,19 @@
 #### Create short herbarium labels, espetially for herbarium spirit samples in RTF
 
-compact_label_rtf <- function(infile = NULL, outfile = "Wet_Labels.RTF", 
+compact_label_rtf <- function(dat = NULL, infile = NULL, outfile = "Wet_Labels.RTF", 
                          spellcheck = TRUE)
 {
-    herbdat000 <- read.csv(infile, header = TRUE, stringsAsFactors = FALSE)
+    if(is.null(dat)&is.null(infile)){
+        stop("at least dat or infile should be specified")
+    }
+    if(!is.null(dat)&!is.null(infile)){
+        stop("dat and infile should be not be specified together")
+    }
+    if(is.null(dat)){
+        herbdat000 <- read.csv(infile, header = TRUE, stringsAsFactors = FALSE)
+    } else {
+        herbdat000 <- dat
+    }
     
     if(any(is.na(herbdat000$HERBARIUM))){
         stop(paste("\"HERBARIUM\" must be provided for row: ", 
@@ -173,7 +183,9 @@ compact_label_rtf <- function(infile = NULL, outfile = "Wet_Labels.RTF",
             paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb80\\tqr\\tx5045\\qj ",
                    herbdat$COLLECTOR,", #" ,herbdat$COLLECTOR_NUMBER,
                    "                             ", 
-                   tryCatch(formatdate(herbdat$DATE_COLLECTED), error= function(e) {print("Warning: Date format incorrect, using original string"); herbdat$DATE_COLLECTED}), 
+                   tryCatch(formatdate(herbdat$DATE_COLLECTED), error= function(e) {
+                        print("Warning: Date format incorrect, using original string"); 
+                        herbdat$DATE_COLLECTED}), 
                    "\\qj0\\par}",sep = ""), 
             paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb80\\tqr\\tx5045\\qj ",
                    herbdat$COLLECTOR,
@@ -182,7 +194,9 @@ compact_label_rtf <- function(infile = NULL, outfile = "Wet_Labels.RTF",
                    ", #",
                    herbdat$COLLECTOR_NUMBER, 
                    "                  ",
-                   tryCatch(formatdate(herbdat$DATE_COLLECTED), error= function(e) {print("Warning: Date format incorrect, using original string"); herbdat$DATE_COLLECTED}),
+                   tryCatch(formatdate(herbdat$DATE_COLLECTED), error= function(e) {
+                        print("Warning: Date format incorrect, using original string"); 
+                        herbdat$DATE_COLLECTED}),
                    "\\qj0\\par}",sep = "")
             ), 
         ##### COUNTY and LOCALITY
@@ -224,7 +238,8 @@ compact_label_rtf <- function(infile = NULL, outfile = "Wet_Labels.RTF",
                  error= function(e) {print("Warning: Date format incorrect, using original string"); herbdat$DATE_IDENTIFIED}), 
                  " \\qr0\\par }",sep = "")
             ),
-        "{\\pard\\sa120 \\par }"
+        "{\\pard\\sa120 \\par }", 
+        "{\\pard \\qc .  .  .  .  .  .  .  .  .  . \\par}" 
          )                            ### End of one label
         temp2 <- c(temp2, res)        ### Add label to the RTF file.
     }
