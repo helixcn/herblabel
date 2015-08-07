@@ -155,7 +155,7 @@ ht2herblabel_rtf <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfi
         
         #### FAMILY, in BOLD FACE, must be either in Flora of Hong Kong, or The Plant List
         paste("{\\pard\\keep\\keepn\\fi0\\li0\\qc\\sb10\\sa100 \\b ",
-               herbdat$FAMILY,"\\b0\\qc0 \\par }", sep = ""),
+               toupper(herbdat$FAMILY),"\\b0\\qc0 \\par }", sep = ""),
 
         #### SPECIES INFO
         ifelse(is.na(herbdat$INFRASPECIFIC_RANK),
