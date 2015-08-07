@@ -7,7 +7,7 @@ compact_label_rtf <- function(dat = NULL, infile = NULL, outfile = "Wet_Labels.R
         stop("at least dat or infile should be specified")
     }
     if(!is.null(dat)&!is.null(infile)){
-        stop("dat and infile should be not be specified together")
+        stop("dat and infile should be not be specified at the same time")
     }
     if(is.null(dat)){
         herbdat000 <- read.csv(infile, header = TRUE, stringsAsFactors = FALSE)
@@ -151,7 +151,7 @@ compact_label_rtf <- function(dat = NULL, infile = NULL, outfile = "Wet_Labels.R
         "\\margt360\\margb360\\margl360\\margr360\\cols2\\colsx600",
         
         #### Title of the Herbarium
-        paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\qc\\sa80\\qc ", 
+        paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\qc\\sb200\\sa80\\qc ", 
                 herbdat$HERBARIUM, "      \\b ", gsub("_", "", 
                 ifelse(is.na(herbdat$GLOBAL_UNIQUE_IDENTIFIER), "", 
                 herbdat$GLOBAL_UNIQUE_IDENTIFIER)), "\\b0\\f10\\par }", sep = ""),
