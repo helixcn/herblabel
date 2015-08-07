@@ -1,10 +1,10 @@
 \name{ht2herblabel_rtf}
 \alias{ht2herblabel_rtf}
 \title{
-Creating RTF herbarium labels in Latex based on Darwin Core herbarium records template in CSV
+Creating RTF herbarium labels based on Darwin Core herbarium records template in CSV
 }
 \description{
-Creating RTF herbarium labels in Latex based on Darwin Core herbarium records template in CSV.
+Creating RTF herbarium labels based on Darwin Core herbarium records template in CSV.
 }
 \usage{
 ht2herblabel_rtf(dat = NULL, infile = NULL, spellcheck = TRUE, outfile = "herblabel.rtf")
@@ -131,26 +131,19 @@ Columns of the template:
 
 48	DATE_LASTMODIFIED: date of the modification
 
-If spellcheck is TRUE, the text will be highlighted if the genus does not match the family. 
+If spellcheck is TRUE, text will be highlighted if the genus does not match the family. 
 Comments will be automatically generated. If you do not want to change 
 the information, just suppress it by changing "spellcheck = FALSE". 
 
 }
-
-\seealso{
-\code{\link{ht2herblabel_tex}}
-}
-
 
 \author{
 Jinlong Zhang 
 }
 
 \examples{
-
     path <- system.file("extdata", "DARWIN_CORE_HERBARIUM_RECORDS_TEMPLATE.csv", 
                         package = "herblabel")
     ht2herblabel_rtf(infile = path,  
                   outfile = "DARWIN_CORE_HERBARIUM_RECORDS_TEMPLATE_ht2herblabel_rtf.rtf")
-    
 }

@@ -24,10 +24,6 @@ This function reads csv template, and generates an RTF file containing
 annotation labels. 
 }
 
-\seealso{
-\code{\link{at2alabel_tex}}
-}
-
 \author{
 Jinlong Zhang 
 }
