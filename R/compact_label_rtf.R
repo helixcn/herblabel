@@ -241,8 +241,8 @@ compact_label_rtf <- function(dat = NULL, infile = NULL, outfile = "Compact_Spec
                  error= function(e) {print("Warning: Date format incorrect, using original string"); herbdat$DATE_IDENTIFIED}), 
                  " \\qr0\\par }",sep = "")
             ),
-        "{\\pard\\sa120 \\par }", 
-        "{\\pard \\qc .  .  .  .  .  .  .  .  .  . \\par}" 
+        "{\\pard\\keep\\keepn\\sa120 \\par }", 
+        "{\\pard\\keep\\qc .  .  .  .  .  .  .  .  .  . \\par}" 
          )                            ### End of one label
         temp2 <- c(temp2, res)        ### Add label to the RTF file.
     }

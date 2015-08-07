@@ -237,8 +237,8 @@ ht2herblabel_rtf <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfi
                  error= function(e) {print("Warning: Date format incorrect, using original string"); 
                  herbdat$DATE_IDENTIFIED}), "\\par}",sep = "")
             ),
-        "{\\pard\\sa200 \\par }", 
-        "{\\pard \\qc .    .    .    .    .    .    .    .    .    .  \\par}" 
+        "{\\pard\\keep\\keepn\\sa100 \\par }", 
+        "{\\pard\\keep\\qc .    .    .    .    .    .    .    .    .    .  \\par}" 
          )                            ### End of one label
         temp2 <- c(temp2, res)        ### Add label to the RTF file.
     }
