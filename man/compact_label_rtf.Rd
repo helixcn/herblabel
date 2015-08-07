@@ -137,9 +137,10 @@ Jinlong Zhang
 
 \examples{
 
-    path <- system.file("extdata", "DARWIN_CORE_HERBARIUM_RECORDS_TEMPLATE.csv", 
-                        package = "herblabel")
-                        
+    path <- system.file("extdata", "DARWIN_CORE_HERBARIUM_RECORDS_TEMPLATE.csv", package = "herblabel")
     compact_label_rtf(infile = path)
+    
+    dat2 <- read.csv(path)
+    compact_label_rtf(dat = dat2, outfile = "Compact_Specimen_Labels_data_frame.RTF")
     
 }
