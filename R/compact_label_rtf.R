@@ -1,6 +1,6 @@
 #### Create short herbarium labels, espetially for herbarium spirit samples in RTF
 
-compact_label_rtf <- function(dat = NULL, infile = NULL, outfile = "Wet_Labels.RTF", 
+compact_label_rtf <- function(dat = NULL, infile = NULL, outfile = "Compact_Specimen_Labels.RTF", 
                          spellcheck = TRUE)
 {
     if(is.null(dat)&is.null(infile)){
@@ -106,43 +106,46 @@ compact_label_rtf <- function(dat = NULL, infile = NULL, outfile = "Wet_Labels.R
             temp.genus <- herbdat$GENUS
             if(!Cap(as.character(temp.genus)) %in% Cap(as.character(pgenus$GENUS))){
                 herbdat$GENUS <- paste("\\highlight6 ", as.character(temp.genus), 
-                "\\highlight9 \\i0  (not found in the plantlist genera database.)\\highlight0 ", sep = "")
+                "\\highlight6\\i0  (not found in the plantlist genera 
+                  database)\\highlight0 ", sep = "")
             }
-    
-             #### Check the family spelling 
+            
+            #### Check the family spelling 
             temp.family <- herbdat$FAMILY
             if(!Cap(as.character(temp.family)) %in% Cap(as.character(pgenus$FAMILY))){
                 herbdat$FAMILY <- paste("\\highlight6 ", as.character(temp.family), 
-                "\\highlight9  (not found among the APGIII families.)\\highlight0 ", sep = "")
+                "\\highlight6 (not found among the APGIII families)\\highlight0 ", sep = "")
             }
-    
-            ### check if the family provided in the excel matches APGIII or not, 
-        ### the results will be highlighted in yellow 
+                
+            ### check if the family provided in the excel matches APGIII or not, the results 
+            ### will be highlighted in yellow 
             fam.genus.temp <- data.frame(FAMILY = as.character(herbdat$FAMILY), 
                                          GENUS = as.character(herbdat$GENUS))
             fgmerge.temp <- merge(x = fam.genus.temp, y = pgenus, by.x = "GENUS", by.y = "GENUS", 
                              all.x = TRUE, sort = FALSE)
             if(any(as.character(Cap(fgmerge.temp$FAMILY.x)) !=  as.character(Cap(fgmerge.temp$FAMILY.y)) 
                         & !is.na(as.character(fgmerge.temp$FAMILY.y)))){
-            if(unique(as.character(Cap(fgmerge.temp$FAMILY.x))) %in% as.character(Cap(fgmerge.temp$FAMILY.y))){
-                    herbdat$FAMILY <- paste("\\highlight3 ", unique(as.character(fgmerge.temp$FAMILY.x)), 
-                                        "\\highlight0 ", sep = "")
-                    herbdat$GENUS <- paste("\\highlight3 ", unique(as.character(fgmerge.temp$GENUS)), 
-                                       "\\i0 \\highlight9  (could also be in \"", 
+                if(unique(as.character(Cap(fgmerge.temp$FAMILY.x))) 
+                          %in% as.character(Cap(fgmerge.temp$FAMILY.y))){
+                    herbdat$FAMILY <- paste("\\highlight6 ", unique(as.character(fgmerge.temp$FAMILY.x)), 
+                                        " \\highlight0 ", sep = "")
+                    herbdat$GENUS <- paste("\\highlight6 ", unique(as.character(fgmerge.temp$GENUS)), 
+                                       "\\i0\\highlight6 (could also be in \"", 
                                        paste(as.character(Cap(fgmerge.temp$FAMILY.y))[
-                                               !as.character(Cap(fgmerge.temp$FAMILY.y))%in%as.character(Cap(fgmerge.temp$FAMILY.x))], 
+                                             !as.character(Cap(fgmerge.temp$FAMILY.y)) %in% 
+                                              as.character(Cap(fgmerge.temp$FAMILY.x))], 
                                        collapse = "\", \"") ,
-                                       "\" according to the plantlist genera database.)\\highlight0 ", sep = "")
-                                       
+                                       "\" according to the Plantlist Database.)\\highlight0 ", sep = "")
+                        
                 } else{
-                herbdat$FAMILY <- paste("\\highlight3 ", unique(as.character(fgmerge.temp$FAMILY.x)), 
-                                        "\\highlight0 ", sep = "")
-                herbdat$GENUS <- paste("\\highlight3 ", unique(as.character(fgmerge.temp$GENUS)), 
-                                       "\\i0 \\highlight9  (should be in \"", 
+                herbdat$FAMILY <- paste("\\highlight6 ", unique(as.character(fgmerge.temp$FAMILY.x)), 
+                                        "\\highlight0", sep = "")
+                herbdat$GENUS <- paste("\\highlight6 ", unique(as.character(fgmerge.temp$GENUS)), 
+                                       "\\i0\\highlight6 (should be in \"", 
                                        paste(as.character(fgmerge.temp$FAMILY.y), 
                                        collapse = "\", \"") ,
-                                       "\" according to the plantlist genera database.)\\highlight0 ", sep = "")
-                }
+                                       "\" according to the Plantlist Database.)\\highlight0 ", sep = "")
+                 }
             }
         }
         herbdat$GLOBAL_UNIQUE_IDENTIFIER <- as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER)
@@ -162,7 +165,7 @@ compact_label_rtf <- function(dat = NULL, infile = NULL, outfile = "Wet_Labels.R
         #### SPECIES INFO
         #### FAMILY, in BOLD FACE, must be either in Flora of Hong Kong, or The Plant List
         paste("{\\pard\\keep\\keepn\\fi0\\li0\\b\\qc\\sa60\\fs14 ",
-               toupper(herbdat$FAMILY),"\\b0\\par }", sep = ""), 
+               herbdat$FAMILY,"\\b0\\par }", sep = ""), 
                
         ifelse(is.na(herbdat$INFRASPECIFIC_RANK),
               paste("{\\pard\\keep\\keepn\\fi-288\\li288\\b\\fs18\\i ",

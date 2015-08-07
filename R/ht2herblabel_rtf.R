@@ -74,14 +74,12 @@ ht2herblabel_rtf <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfi
     ### match.gf(herbdat000$FAMIL, herbdat000$GENUS)
     temp1 <- c("{\\rtf1\\ansi\\deff0", #### Staring a RTF 
                "{\\fonttbl{\\f01\\froman\\fcharset01 Times New Roman;\\f02\\fmodern\\fmorden Arial;}}",    
-               "{\\colortbl;\\red0\\green0\\blue0;\\red0\\green0\\blue255;
-                \\red0\\green255\\blue255; \\red0\\green255\\blue0;
-                \\red255\\green0\\blue255;\\red255\\green0\\blue0;
-                \\red255\\green255\\blue0;\\red255\\green255\\blue255;
-                \\red0\\green0\\blue128;\\red0\\green128\\blue128;
-                \\red0\\green128\\blue0;\\red128\\green0\\blue128;
-                \\red128\\green0\\blue0;\\red128\\green128\\blue0;
-                \\red128\\green128\\blue128; \\red192\\green192\\blue192;}",
+               "{\\colortbl;\\red0\\green0\\blue0;\\red0\\green0\\blue255;\\red0\\green255\\blue255;
+               \\red0\\green255\\blue0;\\red255\\green0\\blue255;\\red255\\green0\\blue0;
+               \\red255\\green255\\blue0;\\red255\\green255\\blue255;\\red0\\green0\\blue128;
+               \\red0\\green128\\blue128;\\red0\\green128\\blue0;\\red128\\green0\\blue128;
+               \\red128\\green0\\blue0;\\red128\\green128\\blue0;\\red128\\green128\\blue128;
+               \\red192\\green192\\blue192;}",
                 "\\viewkind4\\uc1\\pard\\f01\\fs18\\fi-144\\li288\\ri3480 ",
                 "\\paperw11906\\paperh16838\\margl567\\margr567\\margt567\\margb567 "
                ) 
@@ -98,15 +96,14 @@ ht2herblabel_rtf <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfi
             temp.genus <- herbdat$GENUS
             if(!Cap(as.character(temp.genus)) %in% Cap(as.character(pgenus$GENUS))){
                 herbdat$GENUS <- paste("\\highlight6 ", as.character(temp.genus), 
-                "\\highlight9 \\i0  (not found in the plantlist genera 
-                  database.)\\highlight0 ", sep = "")
+                "\\highlight6 \\i0  (not found in the plantlist website.)\\highlight0 ", sep = "")
             }
             
             #### Check the family spelling 
             temp.family <- herbdat$FAMILY
             if(!Cap(as.character(temp.family)) %in% Cap(as.character(pgenus$FAMILY))){
                 herbdat$FAMILY <- paste("\\highlight6 ", as.character(temp.family), 
-                "\\highlight9  (not found among the APGIII families.)\\highlight0 ", sep = "")
+                "\\highlight6 (not found among the APGIII families.) \\highlight0 ", sep = "")
             }
                 
             ### check if the family provided in the excel matches APGIII or not, the results 
@@ -119,24 +116,24 @@ ht2herblabel_rtf <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfi
                         & !is.na(as.character(fgmerge.temp$FAMILY.y)))){
                 if(unique(as.character(Cap(fgmerge.temp$FAMILY.x))) 
                           %in% as.character(Cap(fgmerge.temp$FAMILY.y))){
-                    herbdat$FAMILY <- paste("\\highlight3 ", unique(as.character(fgmerge.temp$FAMILY.x)), 
-                                        "\\highlight0 ", sep = "")
-                    herbdat$GENUS <- paste("\\highlight3 ", unique(as.character(fgmerge.temp$GENUS)), 
-                                       "\\i0 \\highlight9  (could also be in \"", 
+                    herbdat$FAMILY <- paste("\\highlight6 ", unique(as.character(fgmerge.temp$FAMILY.x)), 
+                                        " \\highlight0 ", sep = "")
+                    herbdat$GENUS <- paste("\\highlight6 ", unique(as.character(fgmerge.temp$GENUS)), 
+                                       "\\i0\\highlight6 (could also be in \"", 
                                        paste(as.character(Cap(fgmerge.temp$FAMILY.y))[
                                              !as.character(Cap(fgmerge.temp$FAMILY.y)) %in% 
                                               as.character(Cap(fgmerge.temp$FAMILY.x))], 
                                        collapse = "\", \"") ,
-                                       "\" according to the Plantlist Database.)\\highlight0 ", sep = "")
+                                       "\" according to the plantlist website)\\highlight0 ", sep = "")
                         
                 } else{
-                herbdat$FAMILY <- paste("\\highlight3 ", unique(as.character(fgmerge.temp$FAMILY.x)), 
+                herbdat$FAMILY <- paste("\\highlight6 ", unique(as.character(fgmerge.temp$FAMILY.x)), 
                                         "\\highlight0 ", sep = "")
-                herbdat$GENUS <- paste("\\highlight3 ", unique(as.character(fgmerge.temp$GENUS)), 
-                                       "\\i0 \\highlight9  (should be in \"", 
+                herbdat$GENUS <- paste("\\highlight6 ", unique(as.character(fgmerge.temp$GENUS)), 
+                                       "\\i0 \\highlight6 (should be in \"", 
                                        paste(as.character(fgmerge.temp$FAMILY.y), 
                                        collapse = "\", \"") ,
-                                       "\" according to the Plantlist Database.)\\highlight0 ", sep = "")
+                                       "\" according to the plantlist website)\\highlight0 ", sep = "")
                  }
             }
         }
@@ -155,7 +152,7 @@ ht2herblabel_rtf <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfi
         
         #### FAMILY, in BOLD FACE, must be either in Flora of Hong Kong, or The Plant List
         paste("{\\pard\\keep\\keepn\\fi0\\li0\\qc\\sb10\\sa100 \\b ",
-               toupper(herbdat$FAMILY),"\\b0\\qc0 \\par }", sep = ""),
+               herbdat$FAMILY,"\\b0\\qc0 \\par }", sep = ""),
 
         #### SPECIES INFO
         ifelse(is.na(herbdat$INFRASPECIFIC_RANK),
