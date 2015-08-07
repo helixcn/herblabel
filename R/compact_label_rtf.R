@@ -176,10 +176,10 @@ compact_label_rtf <- function(dat = NULL, infile = NULL, outfile = "Compact_Spec
                     "\\b0\\par }", sep = ""),
               paste("{\\pard\\keep\\keepn\\fi-288\\li288\\b\\fs18\\i ",
                     herbdat$GENUS,"\\i0\\i  ",ifelse((is.na(herbdat$SPECIES)|herbdat$SPECIES == "sp."), 
-                    "\\i0 sp.", as.character(herbdat$SPECIES)),"\\i0 ",
+                    "\\i0 sp.", as.character(herbdat$SPECIES)),"\\i0  ",
                     ifelse(is.na(herbdat$AUTHOR_OF_SPECIES), " ", herbdat$AUTHOR_OF_SPECIES), 
                     " ", 
-                    herbdat$INFRASPECIFIC_RANK,"\\i ",herbdat$INFRASPECIFIC_EPITHET, "\\i0 ", 
+                    herbdat$INFRASPECIFIC_RANK,"\\i  ",herbdat$INFRASPECIFIC_EPITHET, "\\i0  ", 
                     herbdat$AUTHOR_OF_INFRASPECIFIC_RANK," \\b0\\par }", sep = "")),
                     ##### COLLECTOR and COLLECTION NUMBER !
         ifelse(is.na(herbdat$ADDITIONAL_COLLECTOR), 
