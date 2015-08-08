@@ -33,8 +33,8 @@ Maintainer: Jinlong Zhang <jinlongzhang01@gmail.com>
 \examples{
     path <- system.file("extdata", "DARWIN_CORE_HERBARIUM_RECORDS_TEMPLATE.csv", 
                          package = "herblabel")
-    ht2herblabel_rtf(infile = path,  
+    herbarium_label(infile = path,  
                  outfile = "HERBARIUM_LABELS.rtf")
     dat_test <- read.csv(path)
-    ht2herblabel_rtf(dat = dat_test, outfile = "HERBARIUM_LABELS_dat.rtf")
+    herbarium_label(dat = dat_test, outfile = "HERBARIUM_LABELS_dat.rtf")
 }

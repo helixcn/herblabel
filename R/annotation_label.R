@@ -1,7 +1,19 @@
 #### Create RTF annotation labels 
 
-at2alabel_rtf <- function(infile = NULL, outfile = "annotations.rtf") {
-    herbdat000 <- read.csv(infile, header = TRUE)
+annotation_label <- function(dat = NULL, infile = NULL, outfile = "Annotation_Labels.rtf") {
+    
+    if(is.null(dat)&is.null(infile)){
+        stop("at least dat or infile should be specified")
+    }
+    if(!is.null(dat)&!is.null(infile)){
+        stop("dat and infile should be not be specified at the same time")
+    }
+    if(is.null(dat)){
+        herbdat000 <- read.csv(infile, header = TRUE, stringsAsFactors = FALSE)
+    } else {
+        herbdat000 <- dat
+    }
+    
     if (any(is.na(herbdat000$GENUS))) {
         warning(paste("\"GENUS\" must be provided for row: ", 
         paste(which(is.na(herbdat000$GENUS)) + 
