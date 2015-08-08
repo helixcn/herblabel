@@ -1,4 +1,4 @@
-#### Create short herbarium labels, espetially for herbarium spirit samples in RTF
+#### Create short herbarium labels, especially for herbarium spirit samples in RTF
 
 compact_label <- function(dat = NULL, infile = NULL, outfile = "Compact_Specimen_Labels.RTF", 
                          spellcheck = TRUE)
