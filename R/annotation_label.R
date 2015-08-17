@@ -43,7 +43,7 @@ annotation_label <- function(dat = NULL, infile = NULL, outfile = "Annotation_La
     
     ### match.gf(herbdat000$FAMIL, herbdat000$GENUS)
     temp1 <- c("{\\rtf1\\ansi\\deff0", 
-                "{\\fonttbl{\\f01\\froman\\fcharset01 Times New Roman;\\f02\\fmodern\\fmorden Arial;}}", 
+                "{\\fonttbl{\\f01\\froman\\fcharset01 Times New Roman;}}", 
                 "{\\colortbl;\\red0\\green0\\blue0;\\red0\\green0\\blue255;
                 \\red0\\green255\\blue255;\n \\red0\\green255\\blue0;
                 \\red255\\green0\\blue255;\\red255\\green0\\blue0;\n
