@@ -53,14 +53,14 @@ annotation_label <- function(dat = NULL, infile = NULL, outfile = "Annotation_La
                 \\red128\\green0\\blue0;\\red128\\green128\\blue0;
                 \\red128\\green128\\blue128;\n\\red192\\green192\\blue192;}", 
                 "\\viewkind4\\uc1\\pard\\f01\\fs18\\fi-144\\li288\\ri3480 ",
-                "\\paperw11906\\paperh16838\\margl567\\margr567\\margt567\\margb567 ")
+                "\\paperw11906\\paperh16838\\margt720\\margb360\\margl600\\margr600\\cols2\\colsx720 ")
     ### fcharset134 to specify Chinese Font Herbarium Label Default Font Size if 18
     ### Default font is Time New Roman
     temp2 <- c()
     for (i in 1:nrow(herbdat000)) {
         herbdat <- herbdat000[i, ]
         ### Set the size for each label
-        res <- c("\\margt360\\margb360\\margl360\\margr360\\cols2\\colsx600", 
+        res <- c(
         ifelse(is.na(herbdat$PROJECT), 
             "", paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\qc\\sb300\\sa100\\fs16", 
                 as.character(herbdat$PROJECT), "\\par }", sep = "")), 
@@ -79,7 +79,7 @@ annotation_label <- function(dat = NULL, infile = NULL, outfile = "Annotation_La
                 "\\b0\\par }", sep = "")), ifelse(is.na(herbdat$DET_SOURCE), "", 
                   paste("{\\pard\\keep\\sb100\\sa50\\keepn\\fi0\\li0Det. Source:", 
                   as.character(herbdat$DET_SOURCE), "}")), 
-                  paste("{\\pard\\keep\\sb150\\sa50\\keepn\\fi0\\li0\\tqr\\tx5045 Det.: ", 
+                  paste("{\\pard\\keep\\sb150\\sa50\\keepn\\fi0\\li0\\tqr\\tx4850 Det.: ", 
                          herbdat$IDENTIFIED_BY, "  ", herbdat$INSTITUTION, "  \\tab ", 
                          tryCatch(formatdate(herbdat$DATE_IDENTIFIED), 
                          error= function(e) {print("Warning: Date format incorrect, using original string"); 

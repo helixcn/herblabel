@@ -71,6 +71,8 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         paste(toupper(substring(x, 1, 1)), tolower(substring(x, 2)), sep = "")
     }
     
+    herbdat000$FAMILY <- toupper(herbdat000$FAMILY)
+    
     ### match.gf(herbdat000$FAMIL, herbdat000$GENUS)
     temp1 <- c("{\\rtf1\\ansi\\deff0", #### Staring a RTF 
                "{\\fonttbl{\\f01\\froman\\fcharset01 Times New Roman;}}",    
@@ -81,7 +83,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
                \\red128\\green0\\blue0;\\red128\\green128\\blue0;\\red128\\green128\\blue128;
                \\red192\\green192\\blue192;}",
                 "\\viewkind4\\uc1\\pard\\f01\\fs18\\fi-144\\li288\\ri3480 ",
-                "\\paperw11906\\paperh16838\\margl567\\margr567\\margt567\\margb567 "
+                "\\paperw11906\\paperh16838\\margt720\\margb360\\margl600\\margr600\\cols2\\colsx720 "
                ) 
     ### fcharset134 to specify Chinese Font
     #### Herbarium Label
@@ -138,9 +140,6 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
             }
         }
         res <- c(
-        ### Set the size for each label
-        "\\margt360\\margb360\\margl360\\margr360\\cols2\\colsx600",
-        
         #### Title of the Herbarium
         paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\qc\\sb350\\sa80\\fs20", 
                 herbdat$HERBARIUM,"\\par }", sep = ""),
@@ -196,14 +195,14 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
                 
         ##### COLLECTOR and COLLECTION NUMBER !
         ifelse(is.na(herbdat$ADDITIONAL_COLLECTOR), 
-            paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb50\\sa100\\tqr\\tx5045\\qj\\b ",
+            paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb50\\sa100\\tqr\\tx4850\\qj\\b ",
                    herbdat$COLLECTOR,", #" ,herbdat$COLLECTOR_NUMBER,"\\b0", 
                    "\\qj0","\\tab ",
                    tryCatch(formatdate(herbdat$DATE_COLLECTED), 
                    error= function(e) {print("Warning: Date format incorrect, using original string"); 
                    herbdat$DATE_COLLECTED}),
                    "\\par}",sep = ""), 
-            paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb50\\sa100\\tqr\\tx5045\\qj\\b ",
+            paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb50\\sa100\\tqr\\tx4850\\qj\\b ",
                    herbdat$COLLECTOR,", ",herbdat$ADDITIONAL_COLLECTOR,"\\qj0  #" ,
                    herbdat$COLLECTOR_NUMBER, "\\b0", "\\tab ",
                    tryCatch(formatdate(herbdat$DATE_COLLECTED), 
@@ -224,7 +223,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
             paste("{\\pard\\keep\\sa40\\keepn\\fi0\\li0\\tqr ",
                   gsub("_", "", ifelse(is.na(as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER)), 
                   "", as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER))), 
-                  "\\tx5045\\tab ", herbdat$TYPE_STATUS,
+                  "\\tx4850\\tab ", herbdat$TYPE_STATUS,
                  " \\tql Det.: ",herbdat$IDENTIFIED_BY,", ", 
                  tryCatch(formatdate(herbdat$DATE_IDENTIFIED), 
                  error= function(e) {print("Warning: Date format incorrect, using original string"); 
@@ -232,7 +231,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
             paste("{\\pard\\keep\\sa40\\keepn\\fi0\\li0\\tqr ", gsub("_", 
                   "", ifelse(is.na(as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER)), 
                  "", as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER))),
-                 "\\tx5045\\tab \\tql Det.: ", herbdat$IDENTIFIED_BY,", ", 
+                 "\\tx4850\\tab \\tql Det.: ", herbdat$IDENTIFIED_BY,", ", 
                  tryCatch(formatdate(herbdat$DATE_IDENTIFIED), 
                  error= function(e) {print("Warning: Date format incorrect, using original string"); 
                  herbdat$DATE_IDENTIFIED}), "\\par}",sep = "")
