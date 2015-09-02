@@ -72,8 +72,14 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
     }
     
     herbdat000$FAMILY <- toupper(herbdat000$FAMILY)
+    herbdat000$FAMILY <- gsub("^[[:space:]]+|[[:space:]]+$", "", herbdat000$FAMILY)
+    herbdat000$GENUS <- gsub("^[[:space:]]+|[[:space:]]+$", "", herbdat000$GENUS)
+    herbdat000$SPECIES <- gsub("^[[:space:]]+|[[:space:]]+$", "", herbdat000$SPECIES)
+    herbdat000$AUTHOR_OF_SPECIES <- gsub("^[[:space:]]+|[[:space:]]+$", "", herbdat000$AUTHOR_OF_SPECIES)
+    herbdat000$INFRASPECIFIC_RANK <- gsub("^[[:space:]]+|[[:space:]]+$", "", herbdat000$INFRASPECIFIC_RANK)
+    herbdat000$INFRASPECIFIC_EPITHET <- gsub("^[[:space:]]+|[[:space:]]+$", "", herbdat000$INFRASPECIFIC_EPITHET)
+    herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK <- gsub("^[[:space:]]+|[[:space:]]+$", "", herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK)
     
-    ### match.gf(herbdat000$FAMIL, herbdat000$GENUS)
     temp1 <- c("{\\rtf1\\ansi\\deff0", #### Staring a RTF 
                "{\\fonttbl{\\f01\\froman\\fcharset01 Times New Roman;}}",    
                "{\\colortbl;\\red0\\green0\\blue0;\\red0\\green0\\blue255;\\red0\\green255\\blue255;
@@ -92,6 +98,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
     temp2 <- c()
     for(i in 1:nrow(herbdat000)){
         herbdat <- herbdat000[i,]
+
         ########## Highlighting the names with problem 
         ### Check the genus spelling 
         if(spellcheck){ ### = TRUE

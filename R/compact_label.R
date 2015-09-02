@@ -73,6 +73,13 @@ compact_label <- function(dat = NULL, infile = NULL, outfile = "Compact_Specimen
 
     #################### 
     herbdat000$FAMILY <- toupper(herbdat000$FAMILY)
+    herbdat000$FAMILY <- gsub("^[[:space:]]+|[[:space:]]+$", "", herbdat000$FAMILY)
+    herbdat000$GENUS <- gsub("^[[:space:]]+|[[:space:]]+$", "", herbdat000$GENUS)
+    herbdat000$SPECIES <- gsub("^[[:space:]]+|[[:space:]]+$", "", herbdat000$SPECIES)
+    herbdat000$AUTHOR_OF_SPECIES <- gsub("^[[:space:]]+|[[:space:]]+$", "", herbdat000$AUTHOR_OF_SPECIES)
+    herbdat000$INFRASPECIFIC_RANK <- gsub("^[[:space:]]+|[[:space:]]+$", "", herbdat000$INFRASPECIFIC_RANK)
+    herbdat000$INFRASPECIFIC_EPITHET <- gsub("^[[:space:]]+|[[:space:]]+$", "", herbdat000$INFRASPECIFIC_EPITHET)
+    herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK <- gsub("^[[:space:]]+|[[:space:]]+$", "", herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK)
     
     dirpgenus <- system.file("extdata", "APGIII_GENERA.csv", package = "herblabel")
     pgenus <- read.csv(dirpgenus, header = TRUE)
