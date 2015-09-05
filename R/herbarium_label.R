@@ -75,12 +75,16 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         paste(toupper(substring(x, 1, 1)), tolower(substring(x, 2)), sep = "")
     }
     
+        #### replace the whitespace from the start or end of a string
+    replace_space <- function(x){gsub("^[[:space:]]+|[[:space:]]+$", "", x)}
+    
     #### replace multiple commas and white space, and delete comma if it is the last one.
     REPLACE <- function(x){
         if(length(x) > 1){
            stop("only one string is allowed")
         }
-        bbb <- gsub(",+", ",",gsub(" [[:space:]]+", ",", x))
+        bbb <- gsub(",+", ", ", gsub(", +", ",", x))
+        bbb <- gsub("^[[:space:]]+|[[:space:]]+$", "", bbb)
         endchar <- substr(bbb, nchar(bbb), nchar(bbb))
         if(endchar == ","){ 
             yyy <- gregexpr(pattern = ",", bbb)
@@ -92,9 +96,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         return(res)
     }
     
-    #### replace the whitespace from the start or end of a string
-    replace_space <- function(x){gsub("^[[:space:]]+|[[:space:]]+$", "", x)}
-    
+
     #### To keep all of the fields clean and tidy.
     herbdat000$FAMILY                           <- toupper(herbdat000$FAMILY)
     herbdat000$GLOBAL_UNIQUE_IDENTIFIER         <- replace_space(herbdat000$GLOBAL_UNIQUE_IDENTIFIER         )
@@ -249,10 +251,10 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
                     herbdat$AUTHOR_OF_INFRASPECIFIC_RANK,"\\b0\\par }", sep = "")),
               
         ##### COUNTY and LOCALITY
-        REPLACE(paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb120\\sa20 ", 
-        toupper(herbdat$COUNTRY),", ", herbdat$STATE_PROVINCE,
+        paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb120\\sa20 ", 
+        REPLACE(paste(toupper(herbdat$COUNTRY),", ", herbdat$STATE_PROVINCE,
                  ", ", herbdat$COUNTY, ", ", ifelse(is.na(herbdat$LOCALITY), 
-                 "", as.character(herbdat$LOCALITY)), "\\par}",sep = "")), 
+                 "", as.character(herbdat$LOCALITY)), sep = "")), "\\par}",sep = ""), 
         
         ##### LONGITUDE, LATITUDE and ELEVATION
         REPLACE(ifelse(is.na(herbdat$LAT_DEGREE), "", 
