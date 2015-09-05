@@ -61,18 +61,21 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         warning(paste("\"DATE_IDENTIFIED\" not provided for row: ", 
              paste(which(is.na(herbdat000$DATE_IDENTIFIED)) + 1, collapse = ", ")))
         }
-    formatdate <- function(x){format(as.Date(x),"%d %B %Y")}
-    #################### 
-    
+
+    #### Load the internal Data base to check Genus-Family relationship in APGIII system
     dirpgenus <- system.file("extdata", "APGIII_GENERA.csv", 
                               package = "herblabel")
     pgenus <- read.csv(dirpgenus, header = TRUE)
     
+    #### Formating Date
+    formatdate <- function(x){format(as.Date(x),"%d %B %Y")}
+        
     #### Convert the first Letter to capital
     Cap <- function(x) {
         paste(toupper(substring(x, 1, 1)), tolower(substring(x, 2)), sep = "")
     }
     
+    #### replace multiple commas and white space, and delete comma if it is the last one.
     REPLACE <- function(x){
         if(length(x) > 1){
            stop("only one string is allowed")
@@ -81,22 +84,71 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         endchar <- substr(bbb, nchar(bbb), nchar(bbb))
         if(endchar == ","){ 
             yyy <- gregexpr(pattern = ",", bbb)
-            res <- substr(bbb, start = 1, stop = ifelse(unlist(lapply(yyy, function(x){max(x)-1})) > 1, unlist(lapply(yyy, function(x){max(x)-1})) , nchar(bbb)))
+            res <- substr(bbb, start = 1, stop = ifelse(unlist(lapply(yyy, function(x){max(x)-1})) > 1, 
+                          unlist(lapply(yyy, function(x){max(x)-1})) , nchar(bbb)))
         } else {
             res <- bbb
         }
         return(res)
     }
+    
+    #### replace the whitespace from the start or end of a string
+    replace_space <- function(x){gsub("^[[:space:]]+|[[:space:]]+$", "", x)}
+    
+    #### To keep all of the fields clean and tidy.
+    herbdat000$FAMILY                           <- toupper(herbdat000$FAMILY)
+    herbdat000$GLOBAL_UNIQUE_IDENTIFIER         <- replace_space(herbdat000$GLOBAL_UNIQUE_IDENTIFIER         )
+    herbdat000$HERBARIUM                        <- replace_space(herbdat000$HERBARIUM                        )
+    herbdat000$TITLE                            <- replace_space(herbdat000$TITLE                            )
+    herbdat000$COLLECTOR                        <- replace_space(herbdat000$COLLECTOR                        )
+    herbdat000$ADDITIONAL_COLLECTOR             <- replace_space(herbdat000$ADDITIONAL_COLLECTOR             )
+    herbdat000$COLLECTOR_NUMBER                 <- replace_space(herbdat000$COLLECTOR_NUMBER                 )
+    herbdat000$DATE_COLLECTED                   <- replace_space(herbdat000$DATE_COLLECTED                   )
+    herbdat000$LOCAL_NAME                       <- replace_space(herbdat000$LOCAL_NAME                       )
+    herbdat000$FAMILY                           <- replace_space(herbdat000$FAMILY                           )
+    herbdat000$GENUS                            <- replace_space(herbdat000$GENUS                            )
+    herbdat000$SPECIES                          <- replace_space(herbdat000$SPECIES                          )
+    herbdat000$AUTHOR_OF_SPECIES                <- replace_space(herbdat000$AUTHOR_OF_SPECIES                )
+    herbdat000$INFRASPECIFIC_RANK               <- replace_space(herbdat000$INFRASPECIFIC_RANK               )
+    herbdat000$INFRASPECIFIC_EPITHET            <- replace_space(herbdat000$INFRASPECIFIC_EPITHET            )
+    herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK     <- replace_space(herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK     )
+    herbdat000$COUNTRY                          <- replace_space(herbdat000$COUNTRY                          )
+    herbdat000$STATE_PROVINCE                   <- replace_space(herbdat000$STATE_PROVINCE                   )
+    herbdat000$COUNTY                           <- replace_space(herbdat000$COUNTY                           )
+    herbdat000$LOCALITY                         <- replace_space(herbdat000$LOCALITY                         )
+    herbdat000$IMAGE_URL                        <- replace_space(herbdat000$IMAGE_URL                        )
+    herbdat000$RELATED_INFORMATION              <- replace_space(herbdat000$RELATED_INFORMATION              )
+    herbdat000$LAT_DEGREE                       <- replace_space(herbdat000$LAT_DEGREE                       )
+    herbdat000$LAT_MINUTE                       <- replace_space(herbdat000$LAT_MINUTE                       )
+    herbdat000$LAT_SECOND                       <- replace_space(herbdat000$LAT_SECOND                       )
+    herbdat000$LAT_FLAG                         <- replace_space(herbdat000$LAT_FLAG                         )
+    herbdat000$LON_DEGREE                       <- replace_space(herbdat000$LON_DEGREE                       )
+    herbdat000$LON_MINUTE                       <- replace_space(herbdat000$LON_MINUTE                       )
+    herbdat000$LON_SECOND                       <- replace_space(herbdat000$LON_SECOND                       )
+    herbdat000$LON_FLAG                         <- replace_space(herbdat000$LON_FLAG                         )
+    herbdat000$ELEVATION                        <- replace_space(herbdat000$ELEVATION                        )
+    herbdat000$ATTRIBUTES                       <- replace_space(herbdat000$ATTRIBUTES                       )
+    herbdat000$REMARKS                          <- replace_space(herbdat000$REMARKS                          )
+    herbdat000$GEOREFERENCE_SOURCES             <- replace_space(herbdat000$GEOREFERENCE_SOURCES             )
+    herbdat000$PROJECT                          <- replace_space(herbdat000$PROJECT                          )
+    herbdat000$IDENTIFIED_BY                    <- replace_space(herbdat000$IDENTIFIED_BY                    )
+    herbdat000$DATE_IDENTIFIED                  <- replace_space(herbdat000$DATE_IDENTIFIED                  )
+    herbdat000$TYPE_STATUS                      <- replace_space(herbdat000$TYPE_STATUS                      )
+    herbdat000$PROCESSED_BY                     <- replace_space(herbdat000$PROCESSED_BY                     )
+    herbdat000$DATE_LASTMODIFIED                <- replace_space(herbdat000$DATE_LASTMODIFIED                )
 
+    ####################
+    ##### truncated the the very small error introduced by openxlsx for seconds
+    
+    herbdat000$LAT_DEGREE   <- as.character(as.integer(herbdat000$LAT_DEGREE ))
+    herbdat000$LAT_MINUTE   <- as.character(as.integer(herbdat000$LAT_MINUTE ))
+    ### truncated the the very small error introduced by openxlsx
+    herbdat000$LAT_SECOND   <- as.character(round(as.numeric(herbdat000$LAT_SECOND ), digits = 2)) 
+    herbdat000$LON_DEGREE   <- as.character(as.integer(herbdat000$LON_DEGREE ))
+    herbdat000$LON_MINUTE   <- as.character(as.integer(herbdat000$LON_MINUTE ))
+    ### truncated the the very small error introduced by openxlsx
+    herbdat000$LON_SECOND   <- as.character(round(as.numeric(herbdat000$LON_SECOND ), digits = 2)) 
 
-    herbdat000$FAMILY <- toupper(herbdat000$FAMILY)
-    herbdat000$FAMILY <- gsub("^[[:space:]]+|[[:space:]]+$", "", herbdat000$FAMILY)
-    herbdat000$GENUS <- gsub("^[[:space:]]+|[[:space:]]+$", "", herbdat000$GENUS)
-    herbdat000$SPECIES <- gsub("^[[:space:]]+|[[:space:]]+$", "", herbdat000$SPECIES)
-    herbdat000$AUTHOR_OF_SPECIES <- gsub("^[[:space:]]+|[[:space:]]+$", "", herbdat000$AUTHOR_OF_SPECIES)
-    herbdat000$INFRASPECIFIC_RANK <- gsub("^[[:space:]]+|[[:space:]]+$", "", herbdat000$INFRASPECIFIC_RANK)
-    herbdat000$INFRASPECIFIC_EPITHET <- gsub("^[[:space:]]+|[[:space:]]+$", "", herbdat000$INFRASPECIFIC_EPITHET)
-    herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK <- gsub("^[[:space:]]+|[[:space:]]+$", "", herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK)
     
     temp1 <- c("{\\rtf1\\ansi\\deff0", #### Staring a RTF 
                "{\\fonttbl{\\f01\\froman\\fcharset01 Times New Roman;}}",    
@@ -214,7 +266,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         REPLACE(ifelse(is.na(herbdat$ATTRIBUTES) & is.na(herbdat$REMARKS)|herbdat$ATTRIBUTES == "" & herbdat$REMARKS == "", "",    
                 paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb60", 
                     ifelse(is.na(herbdat$ATTRIBUTES)|herbdat$ATTRIBUTES == "", "", as.character(herbdat$ATTRIBUTES)),
-                    ifelse(is.na(herbdat$ATTRIBUTES)|herbdat$ATTRIBUTES == "", "", " "), 
+                    ifelse(is.na(herbdat$ATTRIBUTES)|herbdat$ATTRIBUTES == "", "", ""), 
                     ifelse(is.na(herbdat$REMARKS)|herbdat$REMARKS == "", "", as.character(herbdat$REMARKS)), 
                      "\\sa80\\par}", sep = ""))), 
                 
@@ -267,12 +319,13 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         temp2 <- c(temp2, res)        ### Add label to the RTF file.
     }
     template <- c(temp1, temp2, "}")  ## End of the RTF file
-    res <- template[!template %in% ""]
-    res <- res[!res %in% " "]
-    ###  ### replace multiple commas or space from the string
+    res <- template[!template %in% ""] ## Omit the rows without any information
+    res <- res[!res %in% " "]  ### Omit the rows without any information
+    res <- replace_space(res)  ### replace the space at the beginning or ending. 
+    ###### replace multiple commas or space from the string
+    ### Create the RTF file
     writeLines(res, outfile)
     ### Notice
     cat("Herbarium Labels have been saved to:\n", 
          file.path(getwd(), outfile),"\n", sep = "")
 }
-
