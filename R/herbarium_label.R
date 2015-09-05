@@ -45,8 +45,9 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
              paste(which(is.na(herbdat000$STATE_PROVINCE)) + 1, collapse = ", ")))
         }
     if(any(is.na(herbdat000$COUNTY))){
-        stop(paste("\"COUNTY\" must be provided for row: ", 
+        warning(paste("\"COUNTY\" has not been provided for row: ", 
              paste(which(is.na(herbdat000$COUNTY)) + 1, collapse = ", ")))
+             herbdat000$COUNTY[is.na(herbdat000$COUNTY)] <- " "
         }
     if(any(is.na(herbdat000$LOCALITY))){
         warning(paste("\"LOCALITY\" not provided  for row: ", 
@@ -67,10 +68,27 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
                               package = "herblabel")
     pgenus <- read.csv(dirpgenus, header = TRUE)
     
+    #### Convert the first Letter to capital
     Cap <- function(x) {
         paste(toupper(substring(x, 1, 1)), tolower(substring(x, 2)), sep = "")
     }
     
+    REPLACE <- function(x){
+        if(length(x) > 1){
+           stop("only one string is allowed")
+        }
+        bbb <- gsub(",+", ",",gsub(" [[:space:]]+", ",", x))
+        endchar <- substr(bbb, nchar(bbb), nchar(bbb))
+        if(endchar == ","){ 
+            yyy <- gregexpr(pattern = ",", bbb)
+            res <- substr(bbb, start = 1, stop = ifelse(unlist(lapply(yyy, function(x){max(x)-1})) > 1, unlist(lapply(yyy, function(x){max(x)-1})) , nchar(bbb)))
+        } else {
+            res <- bbb
+        }
+        return(res)
+    }
+
+
     herbdat000$FAMILY <- toupper(herbdat000$FAMILY)
     herbdat000$FAMILY <- gsub("^[[:space:]]+|[[:space:]]+$", "", herbdat000$FAMILY)
     herbdat000$GENUS <- gsub("^[[:space:]]+|[[:space:]]+$", "", herbdat000$GENUS)
@@ -179,26 +197,26 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
                     herbdat$AUTHOR_OF_INFRASPECIFIC_RANK,"\\b0\\par }", sep = "")),
               
         ##### COUNTY and LOCALITY
-        paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb120\\sa20 ", 
+        REPLACE(paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb120\\sa20 ", 
         toupper(herbdat$COUNTRY),", ", herbdat$STATE_PROVINCE,
-                 ", ", herbdat$COUNTY, ": ", ifelse(is.na(herbdat$LOCALITY), 
-                 "", as.character(herbdat$LOCALITY)), "\\par}",sep = ""), 
+                 ", ", herbdat$COUNTY, ", ", ifelse(is.na(herbdat$LOCALITY), 
+                 "", as.character(herbdat$LOCALITY)), "\\par}",sep = "")), 
         
         ##### LONGITUDE, LATITUDE and ELEVATION
-        ifelse(is.na(herbdat$LAT_DEGREE), "", 
+        REPLACE(ifelse(is.na(herbdat$LAT_DEGREE), "", 
                paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb20\\sa150\\qj ",
                herbdat$LAT_DEGREE,"\\u176;", herbdat$LAT_MINUTE, "\\u39;",herbdat$LAT_SECOND, 
                "\\u34;", herbdat$LAT_FLAG,", ",herbdat$LON_DEGREE,"\\u176;",herbdat$LON_MINUTE,
                "\\u39;",herbdat$LON_SECOND,"\\u34;", herbdat$LON_FLAG,"; ", 
-               herbdat$ELEVATION,"m\\par }",sep = "")),
+               herbdat$ELEVATION,"m\\par }",sep = ""))),
 
         ##### Attributes and Remarks
-        ifelse(is.na(herbdat$ATTRIBUTES) & is.na(herbdat$REMARKS)|herbdat$ATTRIBUTES == "" & herbdat$REMARKS == "", "",    
+        REPLACE(ifelse(is.na(herbdat$ATTRIBUTES) & is.na(herbdat$REMARKS)|herbdat$ATTRIBUTES == "" & herbdat$REMARKS == "", "",    
                 paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb60", 
                     ifelse(is.na(herbdat$ATTRIBUTES)|herbdat$ATTRIBUTES == "", "", as.character(herbdat$ATTRIBUTES)),
                     ifelse(is.na(herbdat$ATTRIBUTES)|herbdat$ATTRIBUTES == "", "", " "), 
                     ifelse(is.na(herbdat$REMARKS)|herbdat$REMARKS == "", "", as.character(herbdat$REMARKS)), 
-                     "\\sa80\\par}", sep = "")), 
+                     "\\sa80\\par}", sep = ""))), 
                 
         ##### COLLECTOR and COLLECTION NUMBER !
         ifelse(is.na(herbdat$ADDITIONAL_COLLECTOR), 
@@ -251,6 +269,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
     template <- c(temp1, temp2, "}")  ## End of the RTF file
     res <- template[!template %in% ""]
     res <- res[!res %in% " "]
+    ###  ### replace multiple commas or space from the string
     writeLines(res, outfile)
     ### Notice
     cat("Herbarium Labels have been saved to:\n", 
