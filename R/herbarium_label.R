@@ -161,7 +161,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
                \\red128\\green0\\blue0;\\red128\\green128\\blue0;\\red128\\green128\\blue128;
                \\red192\\green192\\blue192;}",
                 "\\viewkind4\\uc1\\pard\\f01\\fs18\\fi-144\\li288\\ri3480 ",
-                "\\paperw11906\\paperh16838\\margt720\\margb360\\margl600\\margr600\\cols2\\colsx720 "
+                "\\paperw11906\\paperh16838\\margt720\\margb360\\margl600\\margr600\\cols2\\colsx720\\linebetcol"
                ) 
     ### fcharset134 to specify Chinese Font
     #### Herbarium Label
@@ -262,7 +262,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
                herbdat$LAT_DEGREE,"\\u176;", herbdat$LAT_MINUTE, "\\u39;",herbdat$LAT_SECOND, 
                "\\u34;", herbdat$LAT_FLAG,", ",herbdat$LON_DEGREE,"\\u176;",herbdat$LON_MINUTE,
                "\\u39;",herbdat$LON_SECOND,"\\u34;", herbdat$LON_FLAG,"; ", 
-               herbdat$ELEVATION,"m\\par }",sep = ""))),
+               ifelse(is.na(herbdat$ELEVATION), "", paste(herbdat$ELEVATION, "m")),"\\par }",sep = ""))),
 
         ##### Attributes and Remarks
         REPLACE(ifelse(is.na(herbdat$ATTRIBUTES) & is.na(herbdat$REMARKS)|herbdat$ATTRIBUTES == "" & herbdat$REMARKS == "", "",    
