@@ -161,7 +161,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
                \\red128\\green0\\blue0;\\red128\\green128\\blue0;\\red128\\green128\\blue128;
                \\red192\\green192\\blue192;}",
                 "\\viewkind4\\uc1\\pard\\f01\\fs18\\fi-144\\li288\\ri3480 ",
-                "\\paperw11906\\paperh16838\\margt720\\margb360\\margl600\\margr600\\cols2\\colsx720\\linebetcol"
+                "\\paperw11906\\paperh16838\\margt720\\margb0\\margl600\\margr600\\cols2\\colsx1080\\linebetcol"
                ) 
     ### fcharset134 to specify Chinese Font
     #### Herbarium Label
