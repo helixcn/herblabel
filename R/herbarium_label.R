@@ -173,7 +173,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         if(length(which(ind)) > 0){
              message_txt <- paste("The following Species: \n", paste(sptemp2[ind], collapse = "\n"), 
                        "\nin rown", paste( which(ind), collapse = ","), 
-                 "\n are not accepted at The Plant List Database Ver 1.1, \ncheck spelling or synonym of the scientific name" )
+                 "\n are not accepted at The Plant List Database Ver 1.1, \ncheck spelling or synonyms for the scientific names" )
              warning(message_txt)
              ### cat(message_txt, file = paste(gsub(":", "", Sys.time()), "herblabel_scientific_name_warning.txt", sep = ""))  
         }
