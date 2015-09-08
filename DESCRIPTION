@@ -1,8 +1,8 @@
 Package: herblabel
 Type: Package
 Title: Preparing RTF herbarium labels based on Darwin Core Herbarium templates
-Version: 0.3.12
-Date: 2015-09-05
+Version: 0.3.13
+Date: 2015-09-08
 Authors@R: person("Jinlong", "Zhang", role = c("aut", "cre"),
 		     email = "jinlongzhang01@gmail.com")
 Author: Jinlong Zhang [aut, cre]
