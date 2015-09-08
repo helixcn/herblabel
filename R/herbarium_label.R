@@ -83,7 +83,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         if(length(x) > 1){
            stop("only one string is allowed")
         }
-        bbb <- gsub(",+", ", ", gsub(", +", ",", x))
+        bbb <- gsub(" +", " ", gsub(",+", ", ", gsub(", +", ",", x)))
         bbb <- gsub("^[[:space:]]+|[[:space:]]+$", "", bbb)
         endchar <- substr(bbb, nchar(bbb), nchar(bbb))
         if(endchar == ","){ 
@@ -151,6 +151,38 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
     ### truncated the the very small error introduced by openxlsx
     herbdat000$LON_SECOND   <- as.character(round(as.numeric(herbdat000$LON_SECOND ), digits = 2)) 
 
+    ##################################################################################################
+    #### Check the spelling of the scientific names
+    #### Issue a warning if the names generated do not match with the accepted names at the Plant List Website
+    if(spellcheck){
+        sptemp <- paste( ifelse(is.na(herbdat000$GENUS), "", herbdat000$GENUS ),
+                     ifelse(is.na(herbdat000$SPECIES), "", herbdat000$SPECIES                    ),
+                     ifelse(is.na(herbdat000$AUTHOR_OF_SPECIES ), "",  herbdat000$AUTHOR_OF_SPECIES        ),
+                     ifelse(is.na(herbdat000$INFRASPECIFIC_RANK  ), "", herbdat000$INFRASPECIFIC_RANK      ) ,
+                     ifelse(is.na(herbdat000$INFRASPECIFIC_EPITHET ), "", herbdat000$INFRASPECIFIC_EPITHET)     ,
+                     ifelse(is.na(herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK), "",herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK), 
+                     sep = " ")
+        sptemp2 <- c()
+        for(i in 1:length(sptemp)){
+            sptemp2[i] <- REPLACE(sptemp[i])   
+        }
+        tplsplistdir <- system.file("extdata", "tplsplist.txt", 
+                                   package = "herblabel")
+        tplsplist <- readLines(tplsplistdir)
+        ind <- !sptemp2 %in% tplsplist
+        if(length(which(ind)) > 0){
+             message_txt <- paste("The following Species: \n", paste(sptemp2[ind], collapse = "\n"), 
+                       "\nin rown", paste( which(ind), collapse = ","), 
+                 "\n are not accepted at The Plant List Database Ver 1.1, \ncheck spelling or synonym of the scientific name" )
+             warning(message_txt)
+             ### cat(message_txt, file = paste(gsub(":", "", Sys.time()), "herblabel_scientific_name_warning.txt", sep = ""))  
+        }
+        
+        herbdat000$GENUS[ind] <- paste("\\cf2 \\i0 This name is not accepted at the TPL Database. Check spell or synonmym or space for: \\i ", herbdat000$GENUS[ind], sep = "")
+        herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind] <- paste(herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind], "\\cf1 ", sep = "")
+   }
+   ###########################################################################################################
+   
     
     temp1 <- c("{\\rtf1\\ansi\\deff0", #### Staring a RTF 
                "{\\fonttbl{\\f01\\froman\\fcharset01 Times New Roman;}}",    
@@ -175,11 +207,12 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         ### Check the genus spelling 
         if(spellcheck){ ### = TRUE
             temp.genus <- herbdat$GENUS
-            if(!Cap(as.character(temp.genus)) %in% Cap(as.character(pgenus$GENUS))){
-                herbdat$GENUS <- paste("\\highlight6 ", as.character(temp.genus), 
-                "\\highlight6 \\i0  (Genus not accepted at The Plant List Website.)\\highlight0 ", sep = "")
+            if(!grepl("This name is not accepted at the TPL Database", as.character(temp.genus))){ ### It the name is accepted, then check the match of the genus/family
+                if(!Cap(as.character(temp.genus)) %in% Cap(as.character(pgenus$GENUS)) ){          ### 
+                    herbdat$GENUS <- paste("\\highlight6 ", as.character(temp.genus), 
+                    "\\highlight6 \\i0  (Genus not accepted at The Plant List Website.)\\highlight0 ", sep = "")
+                  }
             }
-            
             #### Check the family spelling 
             temp.family <- herbdat$FAMILY
             if(!Cap(as.character(temp.family)) %in% Cap(as.character(pgenus$FAMILY))){
@@ -201,7 +234,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
                                         " \\highlight0 ", sep = "")
                     herbdat$GENUS <- paste("\\highlight6 ", unique(as.character(fgmerge.temp$GENUS)), 
                                        "\\i0\\highlight6  (could also be under \"", 
-                                       paste(as.character(Cap(fgmerge.temp$FAMILY.y))[
+                                        paste(as.character(Cap(fgmerge.temp$FAMILY.y))[
                                              !as.character(Cap(fgmerge.temp$FAMILY.y)) %in% 
                                               as.character(Cap(fgmerge.temp$FAMILY.x))], 
                                        collapse = "\", \"") ,
@@ -233,22 +266,22 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
                herbdat$FAMILY,"\\b0\\qc0 \\par }", sep = ""),
 
         #### SPECIES INFO
-        ifelse(is.na(herbdat$INFRASPECIFIC_RANK),
+       ifelse(is.na(herbdat$INFRASPECIFIC_RANK),
               paste("{\\pard\\keep\\keepn\\fi-288\\li288\\sb100\\sa200\\fs20\\b\\i ",
-                    herbdat$GENUS,"\\i0  \\i ", 
+                    REPLACE(paste(herbdat$GENUS,"\\i0  \\i ", 
                     ifelse((is.na(herbdat$SPECIES)|herbdat$SPECIES == "sp."), 
                     "\\i0 sp.", as.character(herbdat$SPECIES)),"\\i0  ",
-                    ifelse(is.na(herbdat$AUTHOR_OF_SPECIES), "", 
-                    as.character(herbdat$AUTHOR_OF_SPECIES)), 
-                    "\\b0\\par }", sep = ""),
+                    ifelse(is.na(herbdat$AUTHOR_OF_SPECIES), " ", 
+                    as.character(herbdat$AUTHOR_OF_SPECIES)), sep = " ")), 
+                    "\\b0\\par}", sep = ""),
               paste("{\\pard\\keep\\keepn\\fi-288\\li288\\sb100\\sa200\\fs20\\b\\i ",
-                    herbdat$GENUS,"\\i0  \\i ",
+                    REPLACE(paste(herbdat$GENUS,"\\i0  \\i ",
                     ifelse((is.na(herbdat$SPECIES)|herbdat$SPECIES == "sp."), 
                     "\\i0 sp.", as.character(herbdat$SPECIES)),"\\i0  ",
-                    ifelse(is.na(herbdat$AUTHOR_OF_SPECIES), "", 
+                    ifelse(is.na(herbdat$AUTHOR_OF_SPECIES), " ", 
                     as.character(herbdat$AUTHOR_OF_SPECIES))," ", 
                     herbdat$INFRASPECIFIC_RANK," \\i ",herbdat$INFRASPECIFIC_EPITHET, "\\i0  ", 
-                    herbdat$AUTHOR_OF_INFRASPECIFIC_RANK,"\\b0\\par }", sep = "")),
+                    herbdat$AUTHOR_OF_INFRASPECIFIC_RANK, sep = " ")),"\\b0\\par}", sep = "")),
               
         ##### COUNTY and LOCALITY
         paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb120\\sa20 ", 
