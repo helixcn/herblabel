@@ -286,10 +286,10 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         ##### LONGITUDE, LATITUDE and ELEVATION
         REPLACE(ifelse(is.na(herbdat$LAT_DEGREE), "", 
                paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb20\\sa150\\qj ",
-               herbdat$LAT_DEGREE,"\\u176;", herbdat$LAT_MINUTE, "\\u39;",herbdat$LAT_SECOND, 
-               "\\u34;", herbdat$LAT_FLAG,", ",herbdat$LON_DEGREE,"\\u176;",herbdat$LON_MINUTE,
-               "\\u39;",herbdat$LON_SECOND,"\\u34;", herbdat$LON_FLAG,"; ", 
-               ifelse(is.na(herbdat$ELEVATION), "", paste(herbdat$ELEVATION, "m")),"\\par }",sep = ""))),
+                     herbdat$LAT_DEGREE,"\\u176;", herbdat$LAT_MINUTE, "\\u39;",herbdat$LAT_SECOND, 
+                     "\\u34;", herbdat$LAT_FLAG,", ",herbdat$LON_DEGREE,"\\u176;",herbdat$LON_MINUTE,
+                     "\\u39;",herbdat$LON_SECOND,"\\u34;", herbdat$LON_FLAG,"; ", 
+                     ifelse(is.na(herbdat$ELEVATION), "", paste(herbdat$ELEVATION, "m", sep = "")),"\\par }",sep = ""))),
 
         ##### Attributes and Remarks
         REPLACE(ifelse(is.na(herbdat$ATTRIBUTES) & is.na(herbdat$REMARKS)|herbdat$ATTRIBUTES == "" & herbdat$REMARKS == "", "",    
@@ -344,13 +344,13 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
             ),
         "{\\pard\\keep\\keepn\\sa100 \\par }", 
         "{\\pard\\keep\\qc  .    .    .    .    .    .    .    .    .    .    .    . \\par}" 
-         )                            ### End of one label
-        temp2 <- c(temp2, res)        ### Add label to the RTF file.
+         )                             ### End of one label
+        temp2 <- c(temp2, res)         ### Add label to the RTF file.
     }
-    template <- c(temp1, temp2, "}")  ## End of the RTF file
+    template <- c(temp1, temp2, "}")   ## End of the RTF file
     res <- template[!template %in% ""] ## Omit the rows without any information
-    res <- res[!res %in% " "]  ### Omit the rows without any information
-    res <- replace_space(res)  ### replace the space at the beginning or ending. 
+    res <- res[!res %in% " "]          ### Omit the rows without any information
+    res <- replace_space(res)          ### replace the space at the beginning or ending. 
     ###### replace multiple commas or space from the string
     ### Create the RTF file
     writeLines(res, outfile)
