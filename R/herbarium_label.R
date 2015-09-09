@@ -181,6 +181,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         
         herbdat000$GENUS[ind] <- paste("\\cf2\\i0 The name is not accepted in the TPL Database. Check spelling, synonmym or whitespace at http://www.theplantlist.org/ for:  \\i ", herbdat000$GENUS[ind], sep = "")
         herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind] <- paste(herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind], "\\cf1", sep = "")
+        herbdat000$INFRASPECIFIC_RANK[ind] <- " "
    }
    ###########################################################################################################
    
@@ -207,6 +208,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         ########## Highlighting the names with problem 
         ### Check the genus spelling 
         if(spellcheck){ ### = TRUE
+            
             temp.genus <- herbdat$GENUS
             if(!grepl("The name is not accepted in the TPL Database.", as.character(temp.genus))){
                  ### It the name is accepted, then check the match of the genus/family
@@ -268,7 +270,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
                herbdat$FAMILY,"\\b0\\qc0 \\par }", sep = ""),
 
         #### SPECIES INFO
-       ifelse(herbdat$INFRASPECIFIC_RANK == "",
+       ifelse(herbdat$INFRASPECIFIC_RANK == " ",
               paste("{\\pard\\keep\\keepn\\fi-288\\li288\\sb100\\sa200\\fs20\\b\\i ",
                     REPLACE(paste(herbdat$GENUS,"\\i0 \\i ", 
                     ifelse((is.na(herbdat$SPECIES)|herbdat$SPECIES == "sp."), 
@@ -305,7 +307,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
                     ifelse(is.na(herbdat$ATTRIBUTES)|herbdat$ATTRIBUTES == "", "", as.character(herbdat$ATTRIBUTES)),
                     ifelse(is.na(herbdat$ATTRIBUTES)|herbdat$ATTRIBUTES == "", "", ""), 
                     ifelse(is.na(herbdat$REMARKS)|herbdat$REMARKS == "", "", as.character(herbdat$REMARKS)), 
-                     "\\sa80\\par}", sep = ""))), 
+                     "\\sa80\\par}", sep = " "))), 
                 
         ##### COLLECTOR and COLLECTION NUMBER !
         ifelse(is.na(herbdat$ADDITIONAL_COLLECTOR), 
