@@ -178,7 +178,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
              ### cat(message_txt, file = paste(gsub(":", "", Sys.time()), "herblabel_scientific_name_warning.txt", sep = ""))  
         }
         
-        herbdat000$GENUS[ind] <- paste("\\cf2 \\i0 This name is not accepted at the TPL Database. Check spell or synonmym or space for: \\i ", herbdat000$GENUS[ind], sep = "")
+        herbdat000$GENUS[ind] <- paste("\\cf2 \\i0 The name is not accepted in the TPL Database. Check spelling, synonmym or whitespace at http://www.theplantlist.org/ for: \\i ", herbdat000$GENUS[ind], sep = "")
         herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind] <- paste(herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind], "\\cf1 ", sep = "")
    }
    ###########################################################################################################
@@ -207,7 +207,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         ### Check the genus spelling 
         if(spellcheck){ ### = TRUE
             temp.genus <- herbdat$GENUS
-            if(!grepl("This name is not accepted at the TPL Database", as.character(temp.genus))){ ### It the name is accepted, then check the match of the genus/family
+            if(!grepl("The name is not accepted in the TPL Database.", as.character(temp.genus))){ ### It the name is accepted, then check the match of the genus/family
                 if(!Cap(as.character(temp.genus)) %in% Cap(as.character(pgenus$GENUS)) ){          ### 
                     herbdat$GENUS <- paste("\\highlight6 ", as.character(temp.genus), 
                     "\\highlight6 \\i0  (Genus not accepted at The Plant List Website.)\\highlight0 ", sep = "")
