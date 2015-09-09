@@ -93,6 +93,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         } else {
             res <- bbb
         }
+        res <- gsub("^[[:space:]]+|[[:space:]]+$", "", res)
         return(res)
     }
     
@@ -178,8 +179,8 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
              ### cat(message_txt, file = paste(gsub(":", "", Sys.time()), "herblabel_scientific_name_warning.txt", sep = ""))  
         }
         
-        herbdat000$GENUS[ind] <- paste("\\cf2 \\i0 The name is not accepted in the TPL Database. Check spelling, synonmym or whitespace at http://www.theplantlist.org/ for: \\i ", herbdat000$GENUS[ind], sep = "")
-        herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind] <- paste(herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind], "\\cf1 ", sep = "")
+        herbdat000$GENUS[ind] <- paste("\\cf2\\i0 The name is not accepted in the TPL Database. Check spelling, synonmym or whitespace at http://www.theplantlist.org/ for:  \\i ", herbdat000$GENUS[ind], sep = "")
+        herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind] <- paste(herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind], "\\cf1", sep = "")
    }
    ###########################################################################################################
    
@@ -207,7 +208,8 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         ### Check the genus spelling 
         if(spellcheck){ ### = TRUE
             temp.genus <- herbdat$GENUS
-            if(!grepl("The name is not accepted in the TPL Database.", as.character(temp.genus))){ ### It the name is accepted, then check the match of the genus/family
+            if(!grepl("The name is not accepted in the TPL Database.", as.character(temp.genus))){
+                 ### It the name is accepted, then check the match of the genus/family
                 if(!Cap(as.character(temp.genus)) %in% Cap(as.character(pgenus$GENUS)) ){          ### 
                     herbdat$GENUS <- paste("\\highlight6 ", as.character(temp.genus), 
                     "\\highlight6 \\i0  (Genus not accepted at The Plant List Website.)\\highlight0 ", sep = "")
@@ -266,21 +268,21 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
                herbdat$FAMILY,"\\b0\\qc0 \\par }", sep = ""),
 
         #### SPECIES INFO
-       ifelse(is.na(herbdat$INFRASPECIFIC_RANK),
+       ifelse(herbdat$INFRASPECIFIC_RANK == "",
               paste("{\\pard\\keep\\keepn\\fi-288\\li288\\sb100\\sa200\\fs20\\b\\i ",
-                    REPLACE(paste(herbdat$GENUS,"\\i0  \\i ", 
+                    REPLACE(paste(herbdat$GENUS,"\\i0 \\i ", 
                     ifelse((is.na(herbdat$SPECIES)|herbdat$SPECIES == "sp."), 
-                    "\\i0 sp.", as.character(herbdat$SPECIES)),"\\i0  ",
-                    ifelse(is.na(herbdat$AUTHOR_OF_SPECIES), " ", 
+                    "\\i0 sp.", as.character(herbdat$SPECIES)),"\\i0 ",
+                    ifelse(is.na(herbdat$AUTHOR_OF_SPECIES), "", 
                     as.character(herbdat$AUTHOR_OF_SPECIES)), sep = " ")), 
                     "\\b0\\par}", sep = ""),
               paste("{\\pard\\keep\\keepn\\fi-288\\li288\\sb100\\sa200\\fs20\\b\\i ",
-                    REPLACE(paste(herbdat$GENUS,"\\i0  \\i ",
+                    REPLACE(paste(herbdat$GENUS,"\\i0\\i ", 
                     ifelse((is.na(herbdat$SPECIES)|herbdat$SPECIES == "sp."), 
-                    "\\i0 sp.", as.character(herbdat$SPECIES)),"\\i0  ",
-                    ifelse(is.na(herbdat$AUTHOR_OF_SPECIES), " ", 
-                    as.character(herbdat$AUTHOR_OF_SPECIES))," ", 
-                    herbdat$INFRASPECIFIC_RANK," \\i ",herbdat$INFRASPECIFIC_EPITHET, "\\i0  ", 
+                    "\\i0 sp.", as.character(herbdat$SPECIES)),"\\i0 ", 
+                    ifelse(is.na(herbdat$AUTHOR_OF_SPECIES), "", 
+                    as.character(herbdat$AUTHOR_OF_SPECIES)),
+                    herbdat$INFRASPECIFIC_RANK,"\\i", herbdat$INFRASPECIFIC_EPITHET, "\\i0",
                     herbdat$AUTHOR_OF_INFRASPECIFIC_RANK, sep = " ")),"\\b0\\par}", sep = "")),
               
         ##### COUNTY and LOCALITY
