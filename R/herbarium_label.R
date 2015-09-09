@@ -181,7 +181,6 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         
         herbdat000$GENUS[ind] <- paste("\\cf2\\i0 The name is not accepted in the TPL Database. Check spelling, synonmym or whitespace at {\\field{\\*\\fldinst{HYPERLINK \"http://www.theplantlist.org/\"}}{\\fldrslt{\\ul\\cf2 http://www.theplantlist.org/}}}  for:  \\i ", herbdat000$GENUS[ind], sep = "")
         herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind] <- paste(herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind], "\\cf1", sep = "")
-        herbdat000$INFRASPECIFIC_RANK[ind] <- " "
    }
    ###########################################################################################################
    
@@ -270,23 +269,14 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
                herbdat$FAMILY,"\\b0\\qc0 \\par }", sep = ""),
 
         #### SPECIES INFO
-       ifelse(herbdat$INFRASPECIFIC_RANK == " ",
-              paste("{\\pard\\keep\\keepn\\fi-288\\li288\\sb100\\sa200\\fs20\\b\\i ",
-                    REPLACE(paste(herbdat$GENUS,"\\i0 \\i ", 
-                    ifelse((is.na(herbdat$SPECIES)|herbdat$SPECIES == "sp."), 
-                    "\\i0 sp.", as.character(herbdat$SPECIES)),"\\i0 ",
-                    ifelse(is.na(herbdat$AUTHOR_OF_SPECIES), "", 
-                    as.character(herbdat$AUTHOR_OF_SPECIES)), sep = " ")), 
-                    "\\b0\\par}", sep = ""),
-              paste("{\\pard\\keep\\keepn\\fi-288\\li288\\sb100\\sa200\\fs20\\b\\i ",
-                    REPLACE(paste(herbdat$GENUS,"\\i0\\i ", 
-                    ifelse((is.na(herbdat$SPECIES)|herbdat$SPECIES == "sp."), 
-                    "\\i0 sp.", as.character(herbdat$SPECIES)),"\\i0 ", 
-                    ifelse(is.na(herbdat$AUTHOR_OF_SPECIES), "", 
-                    as.character(herbdat$AUTHOR_OF_SPECIES)),
-                    herbdat$INFRASPECIFIC_RANK,"\\i", herbdat$INFRASPECIFIC_EPITHET, "\\i0",
-                    herbdat$AUTHOR_OF_INFRASPECIFIC_RANK, sep = " ")),"\\b0\\par}", sep = "")),
-              
+        paste("{\\pard\\keep\\keepn\\fi-288\\li288\\sb100\\sa200\\fs20\\b\\i ",
+                    REPLACE(paste(herbdat$GENUS,"\\i0 \\i", 
+                                  ifelse((is.na(herbdat$SPECIES)|herbdat$SPECIES == "sp."),  "\\i0 sp.", paste(" ", as.character(herbdat$SPECIES),                          sep = "")), "\\i0",
+                                  ifelse( is.na(herbdat$AUTHOR_OF_SPECIES),                  "",         paste(" ", as.character(herbdat$AUTHOR_OF_SPECIES),                sep = "")),
+                                  ifelse( is.na(herbdat$INFRASPECIFIC_RANK),                 "",         paste(" ", as.character(herbdat$INFRASPECIFIC_RANK),               sep = "")), "\\i",
+                                  ifelse( is.na(herbdat$INFRASPECIFIC_EPITHET),              "",         paste(" ", as.character(herbdat$INFRASPECIFIC_EPITHET),            sep = "")), "\\i0",
+                                  ifelse( is.na(herbdat$AUTHOR_OF_INFRASPECIFIC_RANK),       "",         paste(" ", as.character(herbdat$AUTHOR_OF_INFRASPECIFIC_RANK),     sep = "")), sep = " ")),
+                                  "\\b0\\par}", sep = ""),
         ##### COUNTY and LOCALITY
         paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb120\\sa20 ", 
         REPLACE(paste(toupper(herbdat$COUNTRY),", ", herbdat$STATE_PROVINCE,
