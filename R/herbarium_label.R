@@ -214,14 +214,14 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
                  ### It the name is accepted, then check the match of the genus/family
                 if(!Cap(as.character(temp.genus)) %in% Cap(as.character(pgenus$GENUS)) ){          ### 
                     herbdat$GENUS <- paste("\\highlight6 ", as.character(temp.genus), 
-                    "\\highlight6 \\i0  (Genus not accepted at The Plant List Website.)\\highlight0 ", sep = "")
+                    "\\highlight6 \\i0  (Genus not accepted at The Plant List Website.)\\highlight0", sep = "")
                   }
             }
             #### Check the family spelling 
             temp.family <- herbdat$FAMILY
             if(!Cap(as.character(temp.family)) %in% Cap(as.character(pgenus$FAMILY))){
                 herbdat$FAMILY <- paste("\\highlight6 ", as.character(temp.family), 
-                "\\highlight6  (Family not accepted at The Plant List Website.) \\highlight0 ", sep = "")
+                "\\highlight6 (Family not accepted at The Plant List Website.) \\highlight0", sep = "")
             }
                 
             ### check if the family provided in the excel matches APGIII or not, the results 
