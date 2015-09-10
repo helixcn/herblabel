@@ -97,6 +97,18 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         return(res)
     }
     
+    #### Change the Scientific names in the Remarks section into Italic. 
+    italic_latin <- function(x, latin_source) {
+        dirlatin <- system.file("extdata", "latin_source.txt", package = "herblabel")
+        latin_source <- readLines(dirlatin)
+        res.split <- unlist(strsplit(x, split = " "))
+        res.split2 <- tolower(gsub(",|\\.", "", res.split))
+        found <- res.split2 %in% latin_source
+        res.split[found] <- paste("\\i ",res.split[found], "\\i0 ", sep = "")
+        paste(res.split, collapse = " ", sep = "")
+    }
+
+
 
     #### To keep all of the fields clean and tidy.
     herbdat000$FAMILY                           <- toupper(herbdat000$FAMILY)
@@ -292,12 +304,12 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
                      ifelse(is.na(herbdat$ELEVATION), "", paste(herbdat$ELEVATION, "m", sep = "")),"\\par }",sep = ""))),
 
         ##### Attributes and Remarks
-        REPLACE(ifelse(is.na(herbdat$ATTRIBUTES) & is.na(herbdat$REMARKS)|herbdat$ATTRIBUTES == "" & herbdat$REMARKS == "", "",    
+        italic_latin(gsub("\\.  ", "\\. ", gsub(" \\.", "\\.", gsub("\\. \\.", "\\. ", gsub("\\. +", "\\. ", REPLACE(ifelse(is.na(herbdat$ATTRIBUTES) & is.na(herbdat$REMARKS)|herbdat$ATTRIBUTES == "" & herbdat$REMARKS == "", "",    
                 paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb60", 
                     ifelse(is.na(herbdat$ATTRIBUTES)|herbdat$ATTRIBUTES == "", "", as.character(herbdat$ATTRIBUTES)),
-                    ifelse(is.na(herbdat$ATTRIBUTES)|herbdat$ATTRIBUTES == "", "", ""), 
+                    ifelse(is.na(herbdat$ATTRIBUTES)|herbdat$ATTRIBUTES == "", "", ""), ".",
                     ifelse(is.na(herbdat$REMARKS)|herbdat$REMARKS == "", "", as.character(herbdat$REMARKS)), 
-                     "\\sa80\\par}", sep = " "))), 
+                     "\\sa80\\par}", sep = " ")))))))), 
                 
         ##### COLLECTOR and COLLECTION NUMBER !
         ifelse(is.na(herbdat$ADDITIONAL_COLLECTOR), 
