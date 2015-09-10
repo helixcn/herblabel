@@ -156,13 +156,13 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
     #### Check the spelling of the scientific names
     #### Issue a warning if the names generated do not match with the accepted names at the Plant List Website
     if(spellcheck){
-        sptemp <- paste( ifelse(is.na(herbdat000$GENUS), "", herbdat000$GENUS ),
-                     ifelse(is.na(herbdat000$SPECIES), "", herbdat000$SPECIES                    ),
-                     ifelse(is.na(herbdat000$AUTHOR_OF_SPECIES ), "",  herbdat000$AUTHOR_OF_SPECIES        ),
-                     ifelse(is.na(herbdat000$INFRASPECIFIC_RANK  ), "", herbdat000$INFRASPECIFIC_RANK      ) ,
-                     ifelse(is.na(herbdat000$INFRASPECIFIC_EPITHET ), "", herbdat000$INFRASPECIFIC_EPITHET)     ,
-                     ifelse(is.na(herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK), "",herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK), 
-                     sep = " ")
+        sptemp <- paste( ifelse(is.na(herbdat000$GENUS),                        "",  herbdat000$GENUS                       ),
+                         ifelse(is.na(herbdat000$SPECIES),                      "",  herbdat000$SPECIES                     ),
+                         ifelse(is.na(herbdat000$AUTHOR_OF_SPECIES),            "",  herbdat000$AUTHOR_OF_SPECIES           ),
+                         ifelse(is.na(herbdat000$INFRASPECIFIC_RANK),           "",  herbdat000$INFRASPECIFIC_RANK          ),
+                         ifelse(is.na(herbdat000$INFRASPECIFIC_EPITHET),        "",  herbdat000$INFRASPECIFIC_EPITHET       ),
+                         ifelse(is.na(herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK), "",  herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK), 
+                         sep = " ")
         sptemp2 <- c()
         for(i in 1:length(sptemp)){
             sptemp2[i] <- REPLACE(sptemp[i])   
@@ -179,8 +179,8 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
              ### cat(message_txt, file = paste(gsub(":", "", Sys.time()), "herblabel_scientific_name_warning.txt", sep = ""))  
         }
         
-        herbdat000$GENUS[ind] <- paste("\\cf2\\i0 The name is not accepted in the TPL Database. Check spelling, synonmym or whitespace at {\\field{\\*\\fldinst{HYPERLINK \"http://www.theplantlist.org/\"}}{\\fldrslt{\\ul\\cf2 http://www.theplantlist.org/}}}  for:  \\i ", herbdat000$GENUS[ind], sep = "")
-        herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind] <- paste(herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind], "\\cf1", sep = "")
+        herbdat000$GENUS[ind] <- paste("\\cf2\\i0 The name is not accepted in the TPL Database. Check (1) Spelling, (2) Synonmym, (3) Author Abbreviation or (4) Whitespace at {\\field{\\*\\fldinst{HYPERLINK \"http://www.theplantlist.org/\"}}{\\fldrslt{\\ul\\cf2 http://www.theplantlist.org/}}} for:\\i  ", herbdat000$GENUS[ind], sep = "")
+        herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind] <- paste(ifelse(is.na(herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind]), "", herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind]), "\\cf1", sep = "")
    }
    ###########################################################################################################
    
