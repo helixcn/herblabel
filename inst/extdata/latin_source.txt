@@ -22860,7 +22860,7 @@ brecknockiensis
 breconense
 breconensis
 breconicola
-breda)
+breda
 bredae
 bredai
 bredasdorpense
@@ -25979,7 +25979,6 @@ calderi
 calderiana
 caldericola
 calderillensis
-calder¨®n)
 calderonella
 calderonense
 calderoni
@@ -56808,8 +56807,6 @@ eytianum
 ezannoi
 ezoloba
 ezosciadium
-f
-f)
 faadoouensis
 faasenii
 faassenii
@@ -69380,7 +69377,7 @@ hanekomii
 haneltii
 hanensis
 hanesii
-hangbaizhi'
+hangbaizhi
 hangchouense
 hangchouensis
 hangchowensis
@@ -86342,7 +86339,7 @@ kyzylkiensis
 kyzylkumica
 kyzylkyrensis
 kzyl-kumi
-l'heritieri
+lheritieri
 la-doradense
 la-sierrana
 laaevefacta
@@ -96472,7 +96469,6 @@ lytteltonensis
 lyttoniana
 lyxium
 lzndera
-m
 ma-huang
 ma-yuen
 maabudii
@@ -113204,8 +113200,6 @@ nlemfuensis
 nlonakensis
 nmcinata
 nnbilior
-no
-no?anum
 noachia
 noackii
 noaea
@@ -113400,7 +113394,6 @@ nompa
 nomurae
 nomurana
 nomuranus
-non
 non-scripta
 non-scriptum
 non-scriptus
@@ -133351,7 +133344,6 @@ pruinocarpa
 pruinocarpum
 pruinora
 pruinosa
-pruinosa£¨schrenk)
 pruinosicaulis
 pruinosifolia
 pruinosum
@@ -138907,7 +138899,7 @@ qianwuensis
 qianyangense
 qiaojiaense
 qiaojiaensis
-qibaizhi'
+qibaizhi
 qiemoensis
 qii
 qiliangshanensis
