@@ -61,7 +61,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         warning(paste("\"DATE_IDENTIFIED\" not provided for row: ", 
              paste(which(is.na(herbdat000$DATE_IDENTIFIED)) + 1, collapse = ", ")))
         }
-
+    print(paste(nrow(herbdat000), "labels for herbarium specimens to create:"))
     #### Load the internal Data base to check Genus-Family relationship in APGIII system
     dirpgenus <- system.file("extdata", "APGIII_GENERA.csv", 
                               package = "herblabel")
@@ -184,8 +184,8 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         tplsplist <- readLines(tplsplistdir)
         ind <- !sptemp2 %in% tplsplist
         if(length(which(ind)) > 0){
-             message_txt <- paste("The following Species: \n", paste(sptemp2[ind], collapse = "\n"), 
-                       "\nin rown", paste( which(ind), collapse = ","), 
+             message_txt <- paste("Species:\n", paste(sptemp2[ind], collapse = "\n"), 
+                       "\nin row", paste( which(ind), collapse = ","), 
                  "\n are not accepted at The Plant List Database Ver 1.1, \ncheck spelling or synonyms for the scientific names" )
              warning(message_txt)
              ### cat(message_txt, file = paste(gsub(":", "", Sys.time()), "herblabel_scientific_name_warning.txt", sep = ""))  
@@ -213,9 +213,17 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
     #### Default Font Size if 18
     #### Default font is Time New Roman
     temp2 <- c()
+    temp_count <- seq(0, nrow(herbdat000), by = 5)  ### Counter
+    temp_count[1] <- 1
+    
     for(i in 1:nrow(herbdat000)){
         herbdat <- herbdat000[i,]
-
+        
+        if(nrow(herbdat000) > 5){  ### Imply the progress of printing
+            if(i %in% temp_count){
+                print(paste("Creating label for row: ", i))
+            }
+        }
         ########## Highlighting the names with problem 
         ### Check the genus spelling 
         if(spellcheck){ ### = TRUE
