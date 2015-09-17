@@ -6,11 +6,33 @@ bgbase_csv2ht  <- function(infile, outfile = NULL,
                                 TITLE = NA,
                                 PROJECT = NA, 
                                 PROCESSED_BY = NA, 
-                                DATE_LASTMODIFIED = NA)
+                                DATE_LASTMODIFIED = NA
+                                )
 {
     cap  <- function(x) {
         paste(toupper(substring(x, 1, 1)), tolower(substring(x, 2)), sep = "")
     }
+
+    format_GUID <- function(x){
+        no2guid <- function(x, HERBARIUM_CODE = "KFBG", digits = 6){  ## digits for generating barcodes
+           if(nchar(x) > 6){
+              stop("Number of digits in Coll ID is greater than digits.")
+           }
+           res <-  paste(HERBARIUM_CODE, paste(rep("0", digits - nchar(x)), collapse = ""), x, sep = "")
+           return(res)
+        }
+        res <- c()
+        for(i in 1:length(x)){
+        if(is.na(x[i])|x[i] == ""){
+            res[i] <- " "
+        } else {
+            res[i] <- no2guid(x[i])
+            }
+        }
+            return(res)
+    }
+    
+    ###
     bg_base_export_dat    <- read.csv( infile, header = TRUE, stringsAsFactors = FALSE)
     bg_base_export_dat    <- bg_base_export_dat[1:(nrow(bg_base_export_dat)-1),]
     ADDITIONAL_COLLECTOR  <- ifelse(bg_base_export_dat$COLLECTED_WITH            == " ",NA,  bg_base_export_dat$COLLECTED_WITH     )      
@@ -25,9 +47,10 @@ bgbase_csv2ht  <- function(infile, outfile = NULL,
     FAMILY                <- ifelse(toupper(bg_base_export_dat$FAMILY)           == " ",NA,  toupper(bg_base_export_dat$FAMILY     ))           
     GENUS                 <- ifelse(cap(bg_base_export_dat$GENUS)                == " ",NA,  cap(bg_base_export_dat$GENUS          ))         
     GEOREFERENCE_SOURCES  <- ifelse(bg_base_export_dat$GEOREF                    == " ",NA,  bg_base_export_dat$GEOREF             )       
-    GLOBAL_UNIQUE_IDENTIFIER <- paste("", paste(HERBARIUM_CODE, 
-                                ifelse(bg_base_export_dat$REC_ID== " ",NA, 
-                                bg_base_export_dat$REC_ID), sep = "_"), sep = "")              
+    
+
+    GLOBAL_UNIQUE_IDENTIFIER <- format_GUID(bg_base_export_dat$REC_ID)
+    
     IDENTIFIED_BY <- ifelse(bg_base_export_dat$BY              == " ",NA,      bg_base_export_dat$BY  )                
     LAT_DEGREE    <- ifelse(bg_base_export_dat$LATD            == " ",NA,      bg_base_export_dat$LATD  )              
     LAT_FLAG      <- ifelse(bg_base_export_dat$LADI            == " ",NA,      bg_base_export_dat$LADI )                
@@ -86,5 +109,4 @@ bgbase_csv2ht  <- function(infile, outfile = NULL,
             file.path(getwd(), outfile),"\n", sep = "")
     }
     return(res.final)
-
 }
