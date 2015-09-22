@@ -104,7 +104,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         res.split <- unlist(strsplit(x, split = " "))
         res.split2 <- tolower(gsub(",|\\.", "", res.split))
         found <- res.split2 %in% latin_source
-        res.split[found] <- paste("\\i ",res.split[found], "\\i0 ", sep = "")
+        res.split[found] <- paste("\\cf6 \\i ",res.split[found], "\\i0 \\cf1 ", sep = "")
         paste(res.split, collapse = " ", sep = "")
     }
 
