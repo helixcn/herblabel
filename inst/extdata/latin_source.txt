@@ -4850,7 +4850,6 @@ alicahuensis
 alicanescens
 alicantensis
 alicastrum
-alice
 alice-clarkae
 aliceae
 aliceara
@@ -5401,7 +5400,6 @@ alpin-
 alpina
 alpinariae
 alpinarii
-alpine
 alpinenses
 alpini
 alpinia
@@ -7956,7 +7954,6 @@ angclica
 angcorensis
 angeia
 angeiothecium
-angel
 angelae
 angelamorae
 angelana
@@ -9462,7 +9459,6 @@ anwheiense
 anwsia
 anxanthica
 anxius
-any
 anychia
 anychiastrum
 anychioides
@@ -15677,7 +15673,6 @@ bakaianus
 bakaliensis
 bakalinii
 bakembei
-baker
 bakerana
 bakerantha
 bakerella
@@ -15980,7 +15975,6 @@ ballsiana
 ballsianum
 ballsii
 ballstedtensis
-bally
 ballyana
 ballyanthus
 ballyi
@@ -17195,7 +17189,6 @@ basuticum
 basuticus
 basutoensis
 basutorum
-bat
 bataanense
 bataanensis
 batacensis
@@ -26075,7 +26068,6 @@ caliensis
 calientensis
 califani
 califanoi
-california
 californiaca
 californiacum
 californiacus
@@ -29638,7 +29630,6 @@ casuarinoides
 casupito
 casupoides
 casureperta
-cat
 catabostrychos
 catabrosa
 catabrosella
@@ -31934,7 +31925,6 @@ chamonobrychis
 chamophila
 chamorchis
 chamorgensis
-champ
 champaca
 champagnatii
 champagneuxii
@@ -31993,7 +31983,6 @@ chanensis
 chaneti
 chanetii
 chaneyi
-chang
 changaica
 changaicum
 changaicus
@@ -35469,7 +35458,6 @@ clarionoides
 clarisia
 clarissae
 claritae
-clark
 clarkcowanii
 clarke
 clarkeana
@@ -35869,7 +35857,6 @@ cliftonsmithii
 cliinervis
 climacium
 climacoptera
-climax
 climaxantha
 clin-
 clinacanthus
@@ -37210,7 +37197,6 @@ combrista
 combsii
 combsioides
 comense
-comes
 comesiana
 comesii
 comesperma
@@ -37766,7 +37752,6 @@ confetta
 confinale
 confinalensis
 confinalis
-confine
 confiniorum
 confinis
 confinium
@@ -37893,7 +37878,6 @@ coniculatus
 conicum
 conicus
 coniellum
-conifer
 conifera
 coniferum
 coniferus
@@ -38510,7 +38494,6 @@ copallinum
 copallinus
 copanensis
 copavilquensis
-cope
 copeana
 copeanum
 copeanus
@@ -41222,7 +41205,6 @@ cruziana
 cruzianum
 cruzianus
 cruzii
-cry
 cryandra
 crycocalyx
 crymnopteris
@@ -41532,7 +41514,6 @@ cuatrecazanum
 cuatresia
 cuatrocienegensis
 cuautlensis
-cuba
 cubaea
 cubaetensis
 cubana
@@ -42746,7 +42727,6 @@ cybianthus
 cybistax
 cybister
 cybistetes
-cycad
 cycadifolia
 cycadifolium
 cycadifolius
@@ -44636,7 +44616,6 @@ davenportii
 daveyanum
 daveyi
 davianum
-david
 david-smithii
 davidai
 davidbramwellii
@@ -56603,7 +56582,6 @@ exped
 expedita
 expeditionis
 expedunculatum
-expense
 expers
 experscandens
 expersum
@@ -57213,7 +57191,6 @@ fandra
 fandrarazanensis
 fanerana
 faneva
-fang
 fangana
 fangchengense
 fangchengensis
@@ -57623,7 +57600,6 @@ fawcettiana
 fawcettianum
 fawcettii
 fawkneri
-fax
 faxinensis
 faxlucens
 faxonia
@@ -58084,7 +58060,6 @@ ferrusii
 ferruspiculata
 ferryae
 fert-
-fertile
 fertilis
 fertilissima
 fertilium
@@ -59433,7 +59408,6 @@ flonbundus
 flongatum
 floodii
 flor-
-flora
 flora-plena
 florada
 florariensis
@@ -63222,7 +63196,6 @@ genuini
 genuinum
 genuinus
 genuiquum
-genus
 genuxna
 genuzna
 genychila
@@ -69318,7 +69291,6 @@ hanburyanum
 hanburyi
 hanburyophyton
 hanccekii
-hance
 hancea
 hanceana
 hanceanum
@@ -69337,7 +69309,6 @@ hancorneifolius
 hancornia
 hancorniifolia
 hancorniifolius
-hand
 handeana
 handel-maxxetii
 handel-mazzetti
@@ -71678,7 +71649,6 @@ herniarioioes
 herniarium
 hernistepta
 hernyi
-hero
 herodotia
 heromeulenia
 heronensis
@@ -74026,7 +73996,6 @@ hooglandianum
 hooglandianus
 hooglandii
 hooglenii
-hook
 hooker-grayi
 hookerae
 hookerana
@@ -77625,8 +77594,6 @@ inderiense
 inderiensis
 indesis
 indetonsus
-index
-india
 indiana
 indianense
 indianolensis
@@ -78318,7 +78285,6 @@ intectus
 integ-
 integelliformis
 integellus
-integer
 integerifolia
 integerriina
 integerrima
@@ -79972,7 +79938,6 @@ jackinpyxa
 jackiopsis
 jackmanii
 jacksharpii
-jackson
 jacksonago
 jacksonense
 jacksonia
@@ -89901,7 +89866,6 @@ leipoldii
 leipoldtia
 leipoldtiana
 leipoldtii
-leipzig
 leiseringii
 leishanensis
 leishanicum
@@ -90109,7 +90073,6 @@ lenormandianum
 lenormandii
 lenorrnandi
 lenotopodioides
-lens
 lensayuensis
 lensei
 lensii
@@ -94751,7 +94714,6 @@ lontodon
 loochooensis
 loochristianum
 loogemanianum
-look
 loomisii
 loomsii
 looseri
@@ -95099,7 +95061,6 @@ lotteri
 lottiae
 lottiana
 lotungensis
-lotus
 louae
 loubetiana
 loubryana
@@ -95119,7 +95080,6 @@ lougzhoueusis
 louhavate
 loui
 louicandensis
-louis
 louis-williamsii
 louisabolusiae
 louisae
@@ -99160,7 +99120,6 @@ manglietia
 manglietiastrum
 manglilla
 manglillo
-mango
 mangoides
 mangokensis
 mangokiensis
@@ -100771,7 +100730,6 @@ matayba
 mataybifolia
 mataybifolium
 matczkasensis
-mate
 matehualae
 matehualensis
 matelea
@@ -101149,8 +101107,6 @@ maxillariella
 maxillarioides
 maxillaris
 maxilliflora
-maxim
-maxim-
 maxima
 maximae
 maximartinezii
@@ -101582,7 +101538,6 @@ mediterranea
 mediterraneum
 mediterraneus
 mediterraniforme
-medium
 medius
 mediusella
 medlerae
@@ -106670,7 +106625,6 @@ monini
 monioicum
 monistrolensis
 monitoni
-monitor
 moniwana
 moniza
 monizi
@@ -113359,7 +113313,6 @@ nomaniana
 nomaphila
 nombae
 nomen
-nomenclature
 nomenyae
 nomimium
 nomimum
@@ -113486,7 +113439,6 @@ norlindhii
 norlindiana
 norlindii
 normae
-normal
 normale
 normalis
 normanbiensc
@@ -117714,7 +117666,6 @@ orinus
 oriolanus
 oriolii-bolosii
 oriomensis
-orion
 orionis
 oripicoranense
 orishae
@@ -120513,7 +120464,6 @@ pamporicum
 pampsiloides
 pampsilum
 pampylocarpa
-pan
 panacea
 panaceae
 panaces
@@ -120590,7 +120540,6 @@ panctatum
 panctenis
 panculata
 pancurana
-panda
 pandacaqui
 pandaica
 pandaneti
@@ -122505,7 +122454,6 @@ patellum
 patemachensis
 patencana
 patenipila
-patens
 patenti-flexuosum
 patenti-mexicana
 patenti-pilosus
@@ -122879,7 +122827,6 @@ pauhoi
 paui
 pauia
 paujiensis
-paul
 paula
 paulae
 paularense
@@ -123916,7 +123863,6 @@ peniculinum
 peniculus
 penicum
 peninna
-peninsula
 peninsulae
 peninsulare
 peninsularis
@@ -125460,7 +125406,6 @@ pesthiensis
 pestifer
 pestigridis
 pestinense
-pet
 petagnaea
 petagnia
 petagnioides
@@ -126554,7 +126499,6 @@ phoenicorhizus
 phoenicospermum
 phoenicticum
 phoeniogramma
-phoenix
 phoenixopus
 phoeoleucus
 phofarensis
@@ -133349,7 +133293,6 @@ prunellii
 prunellinae
 prunelloides
 pruneola
-prunes
 prunetii
 prunicarpa
 prunicola
@@ -141775,7 +141718,6 @@ reptans
 reptantitormentilla
 reptatum
 reptens
-reptile
 reptiliforme
 reptilis
 reptonia
@@ -143904,7 +143846,6 @@ robecchii
 robeechiana
 robeorum
 robergia
-robert
 robert-readii
 roberti
 robertia
@@ -144565,8 +144506,6 @@ roscidus
 roscoea
 roscoeana
 roscyna
-rose
-rose-
 rosea
 rosea-aenia
 rosea-oenia
@@ -144723,7 +144662,6 @@ roseoviolacea
 roseoviride
 roseoviridis
 roseris
-roses
 rosescens
 rosetana
 rosetta
@@ -145666,7 +145604,6 @@ ruddia
 ruddiae
 ruddiana
 ruddianum
-rude
 rudenkoana
 rudens
 rudentum
@@ -152839,7 +152776,6 @@ seorsus
 seoulense
 seoulensis
 sepacuitensis
-sepal
 sepalanthus
 sepaliferum
 sepaliloba
@@ -153204,7 +153140,6 @@ sericus
 seridia
 seridis
 seridoensis
-series
 seriferum
 seriflora
 seriflorum
@@ -154723,7 +154658,6 @@ sierraleonensis
 sierramadreana
 sierrarafolsiana
 siettiana
-sieve
 sievekingia
 sievekingii
 sieversandreas
@@ -154891,7 +154825,6 @@ silheticus
 silhouettae
 silhouettanum
 silic-
-silica
 silicatum
 silicea
 silicensis
@@ -155338,7 +155271,6 @@ sinesis
 sinforosensis
 sinforosi
 sinforosii
-sing
 singalaensis
 singalana
 singalanense
@@ -155932,7 +155864,6 @@ skardicum
 skeaniana
 skeatianum
 skeldingii
-skeleton
 skelii
 skeneae
 skepostachys
@@ -156109,7 +156040,6 @@ smilacinum
 smilacinus
 smilacocladum
 smilax
-smile
 smilesianum
 smilesii
 smillieae
@@ -156117,8 +156047,6 @@ smilodon
 smirnovii
 smirnowia
 smirnowii
-smitb
-smith
 smithatris
 smitheppiella
 smithersii
@@ -156738,7 +156666,6 @@ sonoranus
 sonorense
 sonorensis
 sonoriensis
-sons
 sonsonatense
 sonsonense
 sonsonensis
@@ -163337,7 +163264,6 @@ subsessilifolium
 subsessilifolius
 subsessililimbum
 subsessilis
-subset
 subsetacea
 subsetaceus
 subsetct
@@ -168932,7 +168858,6 @@ thadhowardii
 thaectolepium
 thaenicum
 thaeroides
-thai
 thaia
 thaiana
 thaianum
@@ -175186,7 +175111,6 @@ typhonium
 typhonodorum
 typhura
 typica
-typical
 typicalusus
 typico
 typicum
@@ -177784,7 +177708,6 @@ variopile
 variopinnatum
 variostriata
 variostriatus
-various
 variovestita
 varioviolaceum
 varipeltata
@@ -178348,7 +178271,6 @@ venulosoides
 venulosum
 venulosus
 venuosum
-venus
 venusiana
 venussum
 venust-
@@ -180750,7 +180672,6 @@ wairauensis
 waireia
 wairua
 waisbeckeri
-waist
 waitaha
 waitakii
 waitianum
@@ -180828,7 +180749,6 @@ walkeriana
 walkerianus
 walkerii
 walkingtonii
-wall
 walla
 wallacea
 wallaceana
@@ -181973,7 +181893,6 @@ willemoti
 willemsei
 willershausensis
 willia
-william
 williamii
 williamioides
 williamlobbii
