@@ -5840,7 +5840,6 @@ alyxioides
 alzapaniensis
 alzatea
 alzatei
-am
 amabalis
 amabayensis
 amabi
@@ -27455,7 +27454,6 @@ canaca
 canacae
 canacomyrica
 canacorum
-canada
 canadanthus
 canadasii
 canadense
@@ -37211,7 +37209,6 @@ combretum
 combrista
 combsii
 combsioides
-come
 comense
 comes
 comesiana
@@ -46241,7 +46238,6 @@ depavitus
 depazium
 depend-
 dependens
-depends
 dependula
 deperdita
 depexa
@@ -59978,7 +59974,6 @@ forgiarinii
 foribunda
 forida
 forisiense
-form
 forma
 formafoliosa
 formaneki
@@ -66702,7 +66697,6 @@ gravinae
 gravis
 gravisiana
 gravostellum
-gray
 graya
 grayae
 grayana
@@ -67208,7 +67202,6 @@ grotei
 grothausii
 grotianum
 grottagliensis
-group
 groupe
 groutia
 groutiella
@@ -71464,7 +71457,6 @@ heptopotamica
 heptopotamicus
 heqingense
 heqingensis
-her
 heracantha
 heraceum
 heraclea
@@ -78443,7 +78435,6 @@ intergrifolius
 interhomesianum
 interiaciens
 interiectus
-interior
 interioris
 interioroides
 interiorubra
@@ -79064,7 +79055,6 @@ iripa
 irirensis
 iris
 irisana
-irish
 irishiana
 irisuensis
 irkeschtami
@@ -83682,10 +83672,8 @@ keusgenii
 kevandensis
 kevediana
 kevoensis
-kew
 kewense
 kewensis
-key
 keyanum
 keyense
 keyensis
@@ -88471,7 +88459,6 @@ lassiticum
 lassonia
 lassonneriei
 lassum
-last
 lastarriaca
 lastarriaea
 lastarrianus
@@ -94103,7 +94090,6 @@ longepilosa
 longepilosum
 longepilosus
 longepinnulatum
-longer
 longeracemosa
 longeracemosum
 longeracemosus
@@ -126357,7 +126343,6 @@ philippinarum
 philippinense
 philippinensiis
 philippinensis
-philippines
 philippinica
 philippinum
 philippinus
@@ -145223,7 +145208,6 @@ rub-
 ruba
 rubacer
 ruballiflora
-rubber
 rube-
 rubea
 rubeacea
@@ -158730,7 +158714,6 @@ staminosus
 stammarium
 stammleri
 stampferi
-stance
 standenii
 standens
 standeri
@@ -158881,7 +158864,6 @@ statsce
 statteriana
 statterianum
 staturale
-status
 statutii
 staubii
 staudtia
@@ -177652,7 +177634,6 @@ vapincensis
 vapincis
 vaporalis
 vaporarius
-var
 var-iabilis
 varactensis
 varadarajanii
