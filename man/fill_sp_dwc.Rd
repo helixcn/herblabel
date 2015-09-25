@@ -47,8 +47,8 @@ if(syst == "Windows"){
     dat <- read.csv(system.file("extdata", "DARWIN_CORE_HERBARIUM_RECORDS_TEMPLATE2.csv", package = "herblabel"), header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
 }
 
-fill_sp_dwc(dat)
-
+dwc_filled <- fill_sp_dwc(dat)
+herbarium_label(dat = dwc_filled, outfile = "herblabel_fill_sp_dwc_example.rtf")
 }
 
 \keyword{ Darwin Core }
