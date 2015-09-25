@@ -85,6 +85,6 @@ parse_taxa <- function(taxa){
                         "AUTHOR_OF_INFRASPECIFIC_RANK_PARSED" )
         return(res)
     }
-    res <- data.frame(t(sapply(taxa, parse_taxon)), stringsAsFactors = FALSE)
+    res <- data.frame(t(sapply(taxa, parse_taxon, USE.NAMES = FALSE)), stringsAsFactors = FALSE)
     return(res)
 }
