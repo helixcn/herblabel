@@ -18,11 +18,11 @@ fill_sp_dwc(dat)
 }
 \details{
 The function 
-(1)looks for the Scientific Name for each species if the Chinese Name is provided as LOCAL_NAME, and it will go to the SCIENTIFIC_NAME column. 
+(1) looks for the Scientific Name for each species if the Chinese Name is provided as LOCAL_NAME, and it will go to the SCIENTIFIC_NAME column. 
 (2) If the full scientific name is also provided as LOCAL_NAME, it will be goes directly to the SCIENTIFIC_NAME column
 (3) parse the scientific name to GENUS, SPECIES, AUTHOR_OF_SPECIES, INFRASPECIFIC_RANK, INFRASPECIFIC_EPITHET, AUTHOR_OF_INFRASPECIFIC_RANK
 (4) Search the FAMILY for each species adopted by The Plant List Website.
-(5) If any field among FAMILY,GENUS, SPECIES, AUTHOR_OF_SPECIES, INFRASPECIFIC_RANK, INFRASPECIFIC_EPITHET, AUTHOR_OF_INFRASPECIFIC_RANK has not been provided, the function will try to fill the corresponding fields. 
+(5) If any field among FAMILY, GENUS, SPECIES, AUTHOR_OF_SPECIES, INFRASPECIFIC_RANK, INFRASPECIFIC_EPITHET, AUTHOR_OF_INFRASPECIFIC_RANK has not been provided, the function will try to fill the corresponding fields. 
 (6) If there are multiple matches, the function can will issue an warning.
 (7) Only the columns in the dat will be selected.  
 }
@@ -40,7 +40,13 @@ See Also as \code{\link{herbarium_label}}
 }
 \examples{
 
-dat <- read.csv(system.file("extdata", "DARWIN_CORE_HERBARIUM_RECORDS_TEMPLATE2.csv",         package = "herblabel"), header = TRUE, stringsAsFactors = FALSE)
+syst <- Sys.info()[['sysname']]
+if(syst == "Windows"){
+    dat <- read.csv(system.file("extdata", "DARWIN_CORE_HERBARIUM_RECORDS_TEMPLATE2_win.csv", package = "herblabel"), header = TRUE, stringsAsFactors = FALSE)
+} else {
+    dat <- read.csv(system.file("extdata", "DARWIN_CORE_HERBARIUM_RECORDS_TEMPLATE2.csv", package = "herblabel"), header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
+}
+
 fill_sp_dwc(dat)
 
 }
