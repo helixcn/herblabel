@@ -602,7 +602,6 @@ Agrocharis,Apiaceae
 Agroelymus,Poaceae
 Agrohordeum,Poaceae
 Agropogon,Poaceae
-Agropogon,Poaceae
 Agropyrohordeum,Poaceae
 Agropyron,Poaceae
 Agropyropsis,Poaceae
@@ -963,7 +962,6 @@ Amburana,Fabaceae
 Ameghinoa,Asteraceae
 Amelanchier,Rosaceae
 Amelasorbus,Rosaceae
-Amelasorbus,Rosaceae
 Amellus,Asteraceae
 Amentotaxus,Taxaceae
 Amerimnon,Fabaceae
@@ -989,7 +987,6 @@ Ammanthus,Asteraceae
 Ammi,Apiaceae
 Ammobium,Asteraceae
 Ammobroma,Boraginaceae
-Ammocalamagrostis,Poaceae
 Ammocalamagrostis,Poaceae
 Ammocharis,Amaryllidaceae
 Ammochloa,Poaceae
@@ -1830,7 +1827,6 @@ Arguzia,Boraginaceae
 Argylia,Bignoniaceae
 Argyranthemum,Asteraceae
 Argyrautia,Asteraceae
-Argyrautia,Asteraceae
 Argyreia,Convolvulaceae
 Argyrella,Melastomataceae
 Argyrobryum,Bryaceae
@@ -1928,7 +1924,6 @@ Artemisiopsis,Asteraceae
 Arthraerua,Amaranthaceae
 Arthragrostis,Poaceae
 Arthratherum,Poaceae
-Arthraxon,Poaceae
 Arthraxon,Poaceae
 Arthrobotrya,Dryopteridaceae
 Arthrobotrys,Dryopteridaceae
@@ -2041,7 +2036,6 @@ Aspleniopsis,Pteridaceae
 Asplenium,Aspleniaceae
 Asplenoceterach,Aspleniaceae
 Asplenophyllitis,Aspleniaceae
-Asplenosorus,Aspleniaceae
 Asplenosorus,Aspleniaceae
 Asplundia,Cyclanthaceae
 Asplundianthus,Asteraceae
@@ -3227,7 +3221,6 @@ Brassica,Brassicaceae
 Brassicaceae,Brassicaceae
 Brassiophoenix,Arecaceae
 Brassocattleya,Orchidaceae
-Brassocattleya,Orchidaceae
 Brassolaeliocattleya,Orchidaceae
 Braunblanquetia,Scrophulariaceae
 Braunea,Menispermaceae
@@ -3331,8 +3324,6 @@ Brucea,Simaroubaceae
 Bruchia,Bruchiaceae
 Bruchiaceae,Bruchiaceae
 Brugmansia,Solanaceae
-Brugmansia,Solanaceae
-Bruguiera,Rhizophoraceae
 Bruguiera,Rhizophoraceae
 Bruguieria,Rhizophoraceae
 Bruinsmia,Styracaceae
@@ -3395,7 +3386,6 @@ Bryowijkia,Trachypodaceae
 Bryoxiphiaceae,Bryoxiphiaceae
 Bryoxiphium,Bryoxiphiaceae
 Bryum,Bryaceae
-Bubbia,Winteraceae
 Bubbia,Winteraceae
 Bubon,Apiaceae
 Bucanion,Boraginaceae
@@ -3995,7 +3985,6 @@ Cardotia,Dicranaceae
 Cardotiella,Orthotrichaceae
 Carduncellus,Asteraceae
 Carduocirsium,Asteraceae
-Carduocirsium,Asteraceae
 Carduogalactites,Asteraceae
 Carduus,Asteraceae
 Cardwellia,Proteaceae
@@ -4340,7 +4329,6 @@ Cephalomedinilla,Melastomataceae
 Cephalomitrion,Cephaloziellaceae
 Cephalonema,Malvaceae
 Cephalonoplos,Asteraceae
-Cephalopactis,Orchidaceae
 Cephalopactis,Orchidaceae
 Cephalopappus,Asteraceae
 Cephalopentandra,Cucurbitaceae
@@ -6390,7 +6378,6 @@ Dactylocladus,Penaeaceae
 Dactyloctenium,Poaceae
 Dactylodenia,Orchidaceae
 Dactyloglossum,Orchidaceae
-Dactyloglossum,Orchidaceae
 Dactylogymnadenia,Orchidaceae
 Dactyloides,Saxifragaceae
 Dactylolejeunea,Lejeuneaceae
@@ -7587,7 +7574,6 @@ Duckeodendron,Solanaceae
 Duckesia,Humiriaceae
 Ducrosia,Apiaceae
 Dudleveria,Crassulaceae
-Dudleveria,Crassulaceae
 Dudleya,Crassulaceae
 Dufourea,Podostemaceae
 Dufrenoya,Santalaceae
@@ -8212,7 +8198,6 @@ Eremurus,Xanthorrhoeaceae
 Erepsia,Aizoaceae
 Ergocarpon,Apiaceae
 Eria,Orchidaceae
-Eria,Orchidaceae
 Eriachaenium,Asteraceae
 Eriachne,Poaceae
 Eriandra,Polygalaceae
@@ -8289,7 +8274,6 @@ Erioscirpus,Cyperaceae
 Eriosema,Fabaceae
 Eriosemopsis,Rubiaceae
 Eriosolena,Thymelaeaceae
-Eriosonia,Pteridaceae
 Eriosonia,Pteridaceae
 Eriosoriopsis,Woodsiaceae
 Eriosorus,Pteridaceae
@@ -8443,7 +8427,6 @@ Euchlaena,Poaceae
 Euchlaezea,Poaceae
 Euchorium,Sapindaceae
 Euchresta,Fabaceae
-Euchresta,Fabaceae
 Euchroma,Scrophulariaceae
 Eucladium,Pottiaceae
 Euclasta,Poaceae
@@ -8452,7 +8435,6 @@ Euclidium,Brassicaceae
 Euclinia,Rubiaceae
 Eucnide,Loasaceae
 Eucodonia,Gesneriaceae
-Eucodonopsis,Gesneriaceae
 Eucodonopsis,Gesneriaceae
 Eucomis,Asparagaceae
 Eucommia,Eucommiaceae
@@ -9121,7 +9103,6 @@ Gastonia,Araliaceae
 Gastranthus,Acanthaceae
 Gastridium,Poaceae
 Gastrocalyx,Caryophyllaceae
-Gastrochilus,Orchidaceae
 Gastrochilus,Orchidaceae
 Gastrococos,Arecaceae
 Gastrocotyle,Boraginaceae
@@ -9813,9 +9794,7 @@ Gymnostomiella,Pottiaceae
 Gymnostomum,Pottiaceae
 Gymnostyles,Asteraceae
 Gymnotheca,Saururaceae
-Gymnotheca,Saururaceae
 Gymnothrix,Poaceae
-Gymnotraunsteinera,Orchidaceae
 Gymnotraunsteinera,Orchidaceae
 Gymnouratella,Ochnaceae
 Gymplatanthera,Orchidaceae
@@ -10417,7 +10396,6 @@ Henriquezia,Rubiaceae
 Henrya,Acanthaceae
 Henslowia,Santalaceae
 Hensmania,Xanthorrhoeaceae
-Hepatica,Ranunculaceae
 Hepatica,Ranunculaceae
 Hepatostolonophora,Geocalycaceae
 Hepetis,Bromeliaceae
@@ -12159,7 +12137,6 @@ Ladyginia,Apiaceae
 Laelia,Orchidaceae
 Laelichilis,Orchidaceae
 Laeliocattleya,Orchidaceae
-Laeliocattleya,Orchidaceae
 Laeliopsis,Orchidaceae
 Laennecia,Asteraceae
 Laestadia,Asteraceae
@@ -12723,7 +12700,6 @@ Leptopogon,Poaceae
 Leptopterigynandrum,Thuidiaceae
 Leptopteris,Osmundaceae
 Leptopus,Phyllanthaceae
-Leptopyrum,Ranunculaceae
 Leptopyrum,Ranunculaceae
 Leptorchis,Orchidaceae
 Leptorhabdos,Orobanchaceae
@@ -13719,7 +13695,6 @@ Mandoniella,Brachytheciaceae
 Mandragora,Solanaceae
 Manekia,Piperaceae
 Manettia,Rubiaceae
-Manettia,Rubiaceae
 Manfreda,Asparagaceae
 Manga,Anacardiaceae
 Mangenotia,Apocynaceae
@@ -14544,7 +14519,6 @@ Milnea,Meliaceae
 Miltianthus,Zygophyllaceae
 Miltitzia,Boraginaceae
 Miltonia,Orchidaceae
-Miltonidium,Orchidaceae
 Miltonidium,Orchidaceae
 Miltoniopsis,Orchidaceae
 Milula,Amaryllidaceae
@@ -16211,18 +16185,15 @@ Orchiaceras,Orchidaceae
 Orchicoeloglossum,Orchidaceae
 Orchidaceae,Orchidaceae
 Orchidactyla,Orchidaceae
-Orchidactyla,Orchidaceae
 Orchidactylorhiza,Orchidaceae
 Orchidanacamptis,Orchidaceae
 Orchidantha,Lowiaceae
-Orchigymnadenia,Orchidaceae
 Orchigymnadenia,Orchidaceae
 Orchimantoglossum,Orchidaceae
 Orchinea,Orchidaceae
 Orchipedum,Orchidaceae
 Orchiplatanthera,Orchidaceae
 Orchis,Orchidaceae
-Orchiserapias,Orchidaceae
 Orchiserapias,Orchidaceae
 Orcuttia,Poaceae
 Oreamunoa,Juglandaceae
@@ -16322,7 +16293,6 @@ Ornithoboea,Gesneriaceae
 Ornithocarpa,Brassicaceae
 Ornithocephalus,Orchidaceae
 Ornithochilus,Orchidaceae
-Ornithocidium,Orchidaceae
 Ornithocidium,Orchidaceae
 Ornithogalum,Asparagaceae
 Ornithoglossum,Colchicaceae
@@ -16676,7 +16646,6 @@ Pachystroma,Euphorbiaceae
 Pachystylidium,Euphorbiaceae
 Pachystylus,Rubiaceae
 Pachythamnus,Asteraceae
-Pachyveria,Crassulaceae
 Pachyveria,Crassulaceae
 Pacifigeron,Asteraceae
 Packera,Asteraceae
@@ -18072,7 +18041,6 @@ Pityrocarpa,Fabaceae
 Pityrodia,Lamiaceae
 Pityrogramma,Pteridaceae
 Pityromeria,Pteridaceae
-Pityromeria,Pteridaceae
 Placea,Amaryllidaceae
 Placioscyphus,Sapindaceae
 Placocarpa,Rubiaceae
@@ -18909,7 +18877,6 @@ Pseudabutilon,Malvaceae
 Pseudacacia,Fabaceae
 Pseudacanthopale,Acanthaceae
 Pseudadenia,Orchidaceae
-Pseudadenia,Orchidaceae
 Pseudaechmanthera,Acanthaceae
 Pseudaegle,Rutaceae
 Pseudagrostistachys,Euphorbiaceae
@@ -18939,13 +18906,11 @@ Pseudeugenia,Myrtaceae
 Pseudibatia,Apocynaceae
 Pseudima,Sapindaceae
 Pseudinium,Orchidaceae
-Pseudinium,Orchidaceae
 Pseudiosma,Rutaceae
 Pseudipomoea,Convolvulaceae
 Pseudiris,Iridaceae
 Pseudisothecium,Lembophyllaceae
 Pseuditea,Pittosporaceae
-Pseuditella,Orchidaceae
 Pseuditella,Orchidaceae
 Pseudo-acacia,Fabaceae
 Pseudoacanthocereus,Cactaceae
@@ -19119,7 +19084,6 @@ Pseudoraphis,Poaceae
 Pseudorchis,Orchidaceae
 Pseudoreoxis,Apiaceae
 Pseudorhipsalis,Cactaceae
-Pseudorhiza,Orchidaceae
 Pseudorhiza,Orchidaceae
 Pseudorhynchostegiella,Brachytheciaceae
 Pseudoridolfia,Apiaceae
@@ -20100,7 +20064,6 @@ Ricciella,Ricciaceae
 Ricciocarpos,Ricciaceae
 Richaeia,Rhizophoraceae
 Richardia,Rubiaceae
-Richardia,Rubiaceae
 Richardsiella,Poaceae
 Richardsiopsis,Amblystegiaceae
 Richardsonia,Rubiaceae
@@ -20189,7 +20152,6 @@ Roehlingia,Dilleniaceae
 Roella,Campanulaceae
 Roellia,Bryaceae
 Roemeria,Papaveraceae
-Roemeria,Papaveraceae
 Roepera,Zygophyllaceae
 Roeperocharis,Orchidaceae
 Roettlera,Gesneriaceae
@@ -20237,7 +20199,6 @@ Rosa,Rosaceae
 Rosaceae,Rosaceae
 Rosanowia,Gesneriaceae
 Roscheria,Arecaceae
-Roscoea,Zingiberaceae
 Roscoea,Zingiberaceae
 Roseia,Cactaceae
 Rosenbergiodendron,Rubiaceae
@@ -21245,7 +21206,6 @@ Sequoia,Cupressaceae
 Sequoiadendron,Cupressaceae
 Serapias,Orchidaceae
 Serapicamptis,Orchidaceae
-Serapicamptis,Orchidaceae
 Serapirhiza,Orchidaceae
 Serenoa,Arecaceae
 Sergia,Campanulaceae
@@ -21701,9 +21661,7 @@ Sorapilla,Sorapillaceae
 Sorapillaceae,Sorapillaceae
 Sorbaria,Rosaceae
 Sorbaronia,Rosaceae
-Sorbaronia,Rosaceae
 Sorbocotoneaster,Rosaceae
-Sorbopyrus,Rosaceae
 Sorbopyrus,Rosaceae
 Sorbus,Rosaceae
 Sorema,Solanaceae
@@ -23839,7 +23797,6 @@ Trisepalum,Gesneriaceae
 Trisetaria,Poaceae
 Trisetella,Orchidaceae
 Trisetokoeleria,Poaceae
-Trisetokoeleria,Poaceae
 Trisetum,Poaceae
 Trismegistia,Sematophyllaceae
 Trismeria,Pteridaceae
@@ -23867,8 +23824,6 @@ Trithecanthera,Loranthaceae
 Trithrinax,Arecaceae
 Trithuria,Hydatellaceae
 Triticale,Poaceae
-Triticale,Poaceae
-Triticosecale,Poaceae
 Triticosecale,Poaceae
 Triticum,Poaceae
 Tritihaynaldia,Poaceae
@@ -24084,7 +24039,6 @@ Umbilicus,Crassulaceae
 Umtiza,Fabaceae
 Unamia,Asteraceae
 Uncaria,Rubiaceae
-Uncaria,Rubiaceae
 Uncarina,Pedaliaceae
 Uncifera,Orchidaceae
 Uncinia,Cyperaceae
@@ -24156,7 +24110,6 @@ Ursinia,Asteraceae
 Ursopuntia,Cactaceae
 Ursulaea,Bromeliaceae
 Urtica,Urticaceae
-Urtica,Urticaceae
 Urticaceae,Urticaceae
 Urticastrum,Urticaceae
 Uruparia,Rubiaceae
@@ -24221,7 +24174,6 @@ Vandera,Euphorbiaceae
 Vandiemenia,Vandiemeniaceae
 Vandiemeniaceae,Vandiemeniaceae
 Vandoglossum,Orchidaceae
-Vandopsis,Orchidaceae
 Vandopsis,Orchidaceae
 Vangueria,Rubiaceae
 Vangueriella,Rubiaceae
@@ -24976,7 +24928,6 @@ Zizania,Poaceae
 Zizaniopsis,Poaceae
 Zizia,Apiaceae
 Ziziphora,Lamiaceae
-Ziziphus,Rhamnaceae
 Ziziphus,Rhamnaceae
 Zoegea,Asteraceae
 Zollernia,Fabaceae
