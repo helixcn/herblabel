@@ -1,5 +1,6 @@
 fill_sp_dwc <- function(dat){
-    
+    add.sort.id <- 1:nrow(dat)
+    dat <- data.frame(dat, add.sort.id)
     syst <- Sys.info()[['sysname']]
     if(syst == "Windows"){
         families <- read.csv(system.file("extdata", "APGIII_GENERA.csv",         package = "herblabel"), header = TRUE, stringsAsFactors = FALSE)
@@ -31,7 +32,10 @@ fill_sp_dwc <- function(dat){
     datspcn2 <- merge(datspcn2, families, by.x = "GENUS",by.y = "GENUS", all.x = TRUE, sort = FALSE)
     datspcn2$FAMILY                        <- ifelse(is.na(datspcn2$FAMILY.x)                    |datspcn2$FAMILY.x                     == "", datspcn2$FAMILY.y,                            datspcn2$FAMILY.x                     )
     
+    
+    datspcn2 <- datspcn2[order(datspcn2$add.sort.id), ]
     res <- subset(datspcn2, select = colnames(dat)) 
+    
     return(res)
 }
 
