@@ -61,6 +61,13 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         warning(paste("\"DATE_IDENTIFIED\" not provided for row: ", 
              paste(which(is.na(herbdat000$DATE_IDENTIFIED)) + 1, collapse = ", ")))
         }
+        
+    if((is.na(herbdat000$DATE_IDENTIFIED))){
+        warning(paste("\"DATE_IDENTIFIED\" not provided for row: ", 
+             paste(which(is.na(herbdat000$DATE_IDENTIFIED)) + 1, collapse = ", ")))
+    }    
+        
+        
     print(paste(nrow(herbdat000), "herbarium specimen labels to create:"))
     #### Load the internal Data base to check Genus-Family relationship in APGIII system
     dirpgenus <- system.file("extdata", "APGIII_GENERA.csv", 
@@ -191,12 +198,10 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
              ### cat(message_txt, file = paste(gsub(":", "", Sys.time()), "herblabel_scientific_name_warning.txt", sep = ""))  
         }
         
-        herbdat000$GENUS[ind] <- paste("\\cf2\\i0 The name is not accepted in the TPL Database. Check (1) Spelling, (2) Synonmym, (3) Author Abbreviation or (4) Whitespace at {\\field{\\*\\fldinst{HYPERLINK \"http://www.theplantlist.org/\"}}{\\fldrslt{\\ul\\cf2 http://www.theplantlist.org/}}} for:\\i  ", herbdat000$GENUS[ind], sep = "")
+        herbdat000$GENUS[ind] <- paste("\\cf2\\i0 The name is not accepted in the TPL/ Database. Check (1) Spelling, (2) Synonmym, (3) Author Abbreviation or (4) Whitespace at {\\field{\\*\\fldinst{HYPERLINK \"http://www.theplantlist.org/\"}}{\\fldrslt{\\ul\\cf2 http://www.theplantlist.org/}}} for:\\i  ", herbdat000$GENUS[ind], sep = "")
         herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind] <- paste(ifelse(is.na(herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind]), "", herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind]), "\\cf1", sep = "")
    }
    ###########################################################################################################
-   
-    
     temp1 <- c("{\\rtf1\\ansi\\deff0", #### Staring a RTF 
                "{\\fonttbl{\\f01\\froman\\fcharset01 Times New Roman;}}",    
                "{\\colortbl;\\red0\\green0\\blue0;\\red0\\green0\\blue255;\\red0\\green255\\blue255;
