@@ -62,12 +62,11 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
              paste(which(is.na(herbdat000$DATE_IDENTIFIED)) + 1, collapse = ", ")))
         }
         
-    if((is.na(herbdat000$DATE_IDENTIFIED))){
+    if(any(is.na(herbdat000$DATE_IDENTIFIED))){
         warning(paste("\"DATE_IDENTIFIED\" not provided for row: ", 
              paste(which(is.na(herbdat000$DATE_IDENTIFIED)) + 1, collapse = ", ")))
-    }    
-        
-        
+    } 
+
     print(paste(nrow(herbdat000), "herbarium specimen labels to create:"))
     #### Load the internal Data base to check Genus-Family relationship in APGIII system
     dirpgenus <- system.file("extdata", "APGIII_GENERA.csv", 
@@ -194,11 +193,11 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
              message_txt <- paste("Species:\n", paste(sptemp2[ind], collapse = "\n"), 
                        "\nin row", paste( which(ind), collapse = ","), 
                  "\n are not accepted in The Plant List Database Ver 1.1, \ncheck spelling or synonyms for the scientific names" )
-             warning(message_txt)
+             ### warning(message_txt)
              ### cat(message_txt, file = paste(gsub(":", "", Sys.time()), "herblabel_scientific_name_warning.txt", sep = ""))  
         }
         
-        herbdat000$GENUS[ind] <- paste("\\cf2\\i0 The name is not accepted in the TPL/ Database. Check (1) Spelling, (2) Synonmym, (3) Author Abbreviation or (4) Whitespace at {\\field{\\*\\fldinst{HYPERLINK \"http://www.theplantlist.org/\"}}{\\fldrslt{\\ul\\cf2 http://www.theplantlist.org/}}} for:\\i  ", herbdat000$GENUS[ind], sep = "")
+        herbdat000$GENUS[ind] <- paste("\\cf2\\i0 Name not accepted at The Plant List Website. Check Spelling or Validity at {\\field{\\*\\fldinst{HYPERLINK \"http://www.theplantlist.org/\"}}{\\fldrslt{\\ul\\cf2 http://www.theplantlist.org/}}} for:\\i  ", herbdat000$GENUS[ind], sep = "")
         herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind] <- paste(ifelse(is.na(herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind]), "", herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind]), "\\cf1", sep = "")
    }
    ###########################################################################################################
@@ -234,7 +233,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         if(spellcheck){ ### = TRUE
             
             temp.genus <- herbdat$GENUS
-            if(!grepl("The name is not accepted in the TPL Database.", as.character(temp.genus))){
+            if(!grepl("Name not accepted at The Plant List Website", as.character(temp.genus))){
                  ### It the name is accepted, then check the match of the genus/family
                 if(!Cap(as.character(temp.genus)) %in% Cap(as.character(pgenus$GENUS)) ){          ### 
                     herbdat$GENUS <- paste("\\highlight6 ", as.character(temp.genus), 
