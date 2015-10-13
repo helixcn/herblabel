@@ -44,8 +44,7 @@ bgbase_csv2ht  <- function(infile, outfile = NULL,
     DATE_COLLECTED        <- ifelse(bg_base_export_dat$COLL_DT                   == " ", NA,  bg_base_export_dat$COLL_DT                  )
     DATE_IDENTIFIED       <- ifelse(bg_base_export_dat$REC_UPDATE                == " ", NA,  bg_base_export_dat$REC_UPDATE               )
     ELEVATION             <- ifelse(bg_base_export_dat$ALTITUDE                  == " ", NA,  bg_base_export_dat$ALTITUDE                 )
-    FAMILY                <- ifelse(toupper(bg_base_export_dat$FAMILY)           == " ", NA,  toupper(bg_base_export_dat$FAMILY)          )
-    GENUS                 <- ifelse(cap(bg_base_export_dat$GENUS)                == " ", NA,  cap(bg_base_export_dat$GENUS)               )
+
     GEOREFERENCE_SOURCES  <- ifelse(bg_base_export_dat$GEOREF                    == " ", NA,  bg_base_export_dat$GEOREF                   )
     
 
@@ -65,13 +64,17 @@ bgbase_csv2ht  <- function(infile, outfile = NULL,
     REMARKS1              <- ifelse(bg_base_export_dat$COLLECTION_MISC           == " ", NA,  bg_base_export_dat$COLLECTION_MISC          )
     REMARKS2              <- ifelse(bg_base_export_dat$HABITAT                   == " ", NA,  bg_base_export_dat$HABITAT                  )
     REMARKS3              <- ifelse(bg_base_export_dat$ACCESSION_.               == " ", NA,  bg_base_export_dat$ACCESSION_.              )
-    SPECIES               <- ifelse(bg_base_export_dat$SCIENTIFIC_NAME           == " ", NA,  bg_base_export_dat$SCIENTIFIC_NAME          )
+
+
     SPECIMEN_LOCATION     <- ifelse(bg_base_export_dat$LOCN                      == " ", NA,  bg_base_export_dat$LOCN                     )
     STATE_PROVINCE        <- ifelse(bg_base_export_dat$SUB.COUNTRY               == " ", NA,  bg_base_export_dat$SUB.COUNTRY              )
     LOCAL_NAME            <- ifelse(bg_base_export_dat$SCIENTIFIC_NAME           == " ", NA,  bg_base_export_dat$SCIENTIFIC_NAME          )
     
     HERBARIUM                    <- rep(HERBARIUM,         nrow(bg_base_export_dat))
     TITLE                        <- rep(TITLE,             nrow(bg_base_export_dat))
+    FAMILY                       <- rep(NA,                nrow(bg_base_export_dat))
+    GENUS                        <- rep(NA,                nrow(bg_base_export_dat))
+    SPECIES                      <- rep(NA,                nrow(bg_base_export_dat))
     AUTHOR_OF_SPECIES            <- rep(NA,                nrow(bg_base_export_dat))
     INFRASPECIFIC_RANK           <- rep(NA,                nrow(bg_base_export_dat))
     INFRASPECIFIC_EPITHET        <- rep(NA,                nrow(bg_base_export_dat))
