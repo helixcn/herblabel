@@ -16,8 +16,8 @@ It also provides a number of conversion utilities.
 \tabular{ll}{
 Package: \tab herblabel\cr
 Type: \tab Package\cr
-Version: \tab 0.3.18\cr
-Date: \tab 2015-10-13\cr
+Version: \tab 0.3.19\cr
+Date: \tab 2015-10-14\cr
 License: \tab GLP-2\cr
 LazyLoad: \tab yes\cr
 }

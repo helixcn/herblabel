@@ -1,8 +1,8 @@
 Package: herblabel
 Type: Package
 Title: Make herbarium labels based on Darwin Core Herbarium templates
-Version: 0.3.18
-Date: 2015-10-13
+Version: 0.3.19
+Date: 2015-10-14
 Authors@R: person("Jinlong", "Zhang", role = c("aut", "cre"),
                   email = "jinlongzhang01@gmail.com")
 Author: Jinlong Zhang [aut, cre]
