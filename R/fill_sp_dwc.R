@@ -36,6 +36,6 @@ fill_sp_dwc <- function(dat){
     datspcn2 <- datspcn2[order(datspcn2$add.sort.id), ]
     res <- subset(datspcn2, select = colnames(dat)) 
     
-    return(res)
+    return(res[,-ncol(res)])
 }
 
