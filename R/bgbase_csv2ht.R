@@ -35,6 +35,7 @@ bgbase_csv2ht  <- function(infile, outfile = NULL,
     ###
     bg_base_export_dat    <- read.csv( infile, header = TRUE, stringsAsFactors = FALSE)
     bg_base_export_dat    <- bg_base_export_dat[1:(nrow(bg_base_export_dat)-1),]
+    bg_base_export_dat    <- bg_base_export_dat[!bg_base_export_dat$SPECIMENS == " ", ]
     ADDITIONAL_COLLECTOR  <- ifelse(bg_base_export_dat$COLLECTED_WITH            == " ", NA,  bg_base_export_dat$COLLECTED_WITH           )
     ATTRIBUTES            <- ifelse(bg_base_export_dat$DESCRIPTION               == " ", NA,  bg_base_export_dat$DESCRIPTION              )
     COLLECTOR             <- ifelse(bg_base_export_dat$COLLECTOR                 == " ", NA,  bg_base_export_dat$COLLECTOR                )
