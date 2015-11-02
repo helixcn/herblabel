@@ -39,6 +39,8 @@ fill_sp_dwc <- function(dat){
     res.test <- subset(datspcn2_unique, select = colnames(dat))
     
     res.test_combine_tax <- paste(
+        res.test$COLLECTOR,
+        res.test$COLLECTOR_NUMBER,
         res.test$FAMILY,
         res.test$GENUS,
         res.test$SPECIES,
@@ -48,6 +50,8 @@ fill_sp_dwc <- function(dat){
         res.test$AUTHOR_OF_INFRASPECIFIC_RANK, sep = "_")
     
     dat_combine_tax <- paste(
+        dat$COLLECTOR,
+        dat$COLLECTOR_NUMBER,
         dat$FAMILY,
         dat$GENUS,
         dat$SPECIES,
