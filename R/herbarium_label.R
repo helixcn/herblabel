@@ -259,12 +259,9 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
                           %in% as.character(Cap(fgmerge.temp$FAMILY.y))){
                     herbdat$FAMILY <- paste("\\highlight6 ", unique(as.character(fgmerge.temp$FAMILY.x)), 
                                         " \\highlight0 ", sep = "")
-                    herbdat$GENUS <- paste("\\highlight6 ", unique(as.character(fgmerge.temp$GENUS)), 
+                    herbdat$GENUS  <- paste("\\highlight6 ", unique(as.character(fgmerge.temp$GENUS)), 
                                        "\\i0\\highlight6  (could also be under \"", 
-                                        paste(as.character(Cap(fgmerge.temp$FAMILY.y))[
-                                             !as.character(Cap(fgmerge.temp$FAMILY.y)) %in% 
-                                              as.character(Cap(fgmerge.temp$FAMILY.x))], 
-                                       collapse = "\", \"") ,
+                                        toupper(paste(as.character(Cap(fgmerge.temp$FAMILY.y))[!as.character(Cap(fgmerge.temp$FAMILY.y)) %in% as.character(Cap(fgmerge.temp$FAMILY.x))],   collapse = "\", \"")) ,
                                        "\" according to The Plant List Website.)\\highlight0 ", sep = "")
                         
                 } else{
@@ -272,8 +269,8 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
                                         "\\highlight0 ", sep = "")
                 herbdat$GENUS <- paste("\\highlight6 ", unique(as.character(fgmerge.temp$GENUS)), 
                                        "\\i0 \\highlight6  (should be under \"", 
-                                       paste(as.character(fgmerge.temp$FAMILY.y), 
-                                       collapse = "\", \"") ,
+                                       toupper(paste(as.character(fgmerge.temp$FAMILY.y), 
+                                       collapse = "\", \"")) ,
                                        "\" according to The Plant List Website.)\\highlight0 ", sep = "")
                  }
             }
