@@ -1,7 +1,6 @@
 #### Create RTF annotation labels 
 
-annotation_label <- function(dat = NULL, infile = NULL, outfile = "Annotation_Labels.rtf") {
-    
+annotation_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfile = "Annotation_Labels.rtf") {
     if(is.null(dat)&is.null(infile)){
         stop("at least dat or infile should be specified")
     }
@@ -15,20 +14,21 @@ annotation_label <- function(dat = NULL, infile = NULL, outfile = "Annotation_La
     }
     
     if (any(is.na(herbdat000$GENUS))) {
-        warning(paste("\"GENUS\" must be provided for row: ", 
+        warning(paste("\"GENUS\" not provided for row: ", 
         paste(which(is.na(herbdat000$GENUS)) + 
             1, collapse = ", ")))
     }
     if (any(is.na(herbdat000$IDENTIFIED_BY))) {
-        warning(paste("\"IDENTIFIED_BY\" must be provided for row: ", 
-        paste(which(is.na(herbdat000$DETERMINOR)) + 
+        warning(paste("\"IDENTIFIED_BY\" not provided for row: ", 
+        paste(which(is.na(herbdat000$IDENTIFIED_BY)) + 
             1, collapse = ", ")))
     }
     if (any(is.na(herbdat000$DATE_IDENTIFIED))) {
-        warning(paste("\"DATE_IDENTIFIED\" must be provided for row: ", 
+        warning(paste("\"DATE_IDENTIFIED\" not provided for row: ", 
         paste(which(is.na(herbdat000$DATE_IDENTIFIED)) + 
             1, collapse = ", ")))
     }
+    
     formatdate <- function(x){
         format(as.Date(x),"%d %B %Y")
     }
@@ -37,9 +37,49 @@ annotation_label <- function(dat = NULL, infile = NULL, outfile = "Annotation_La
                             package = "herblabel")
     pgenus <- read.csv(dirpgenus, header = TRUE)
     
-    Cap <- function(x) {
-        paste(toupper(substring(x, 1, 1)), tolower(substring(x, 2)), sep = "")
+    ### Cap <- function(x) {
+    ###     paste(toupper(substring(x, 1, 1)), tolower(substring(x, 2)), sep = "")
+    ### }
+    
+        #### replace multiple commas and white space, and delete comma if it is the last one.
+    REPLACE <- function(x){
+        if(length(x) > 1){
+           stop("only one string is allowed")
+        }
+        bbb <- gsub(" +", " ", gsub(",+", ", ", gsub(", +", ",", x)))
+        bbb <- gsub("^[[:space:]]+|[[:space:]]+$", "", bbb)
+        endchar <- substr(bbb, nchar(bbb), nchar(bbb))
+        if(endchar == ","){ 
+            yyy <- gregexpr(pattern = ",", bbb)
+            res <- substr(bbb, start = 1, stop = ifelse(unlist(lapply(yyy, function(x){max(x)-1})) > 1, 
+                          unlist(lapply(yyy, function(x){max(x)-1})) , nchar(bbb)))
+        } else {
+            res <- bbb
+        }
+        res <- gsub("^[[:space:]]+|[[:space:]]+$", "", res)
+        return(res)
     }
+    
+    if(spellcheck){
+        sptemp <- paste( ifelse(is.na(herbdat000$GENUS),                        "",  herbdat000$GENUS                       ),
+                         ifelse(is.na(herbdat000$SPECIES),                      "",  herbdat000$SPECIES                     ),
+                         ifelse(is.na(herbdat000$AUTHOR_OF_SPECIES),            "",  herbdat000$AUTHOR_OF_SPECIES           ),
+                         ifelse(is.na(herbdat000$INFRASPECIFIC_RANK),           "",  herbdat000$INFRASPECIFIC_RANK          ),
+                         ifelse(is.na(herbdat000$INFRASPECIFIC_EPITHET),        "",  herbdat000$INFRASPECIFIC_EPITHET       ),
+                         ifelse(is.na(herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK), "",  herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK), 
+                         sep = " ")
+        sptemp2 <- c()
+        for(i in 1:length(sptemp)){
+            sptemp2[i] <- REPLACE(sptemp[i])   
+        }
+        tplsplistdir <- system.file("extdata", "tplsplist.txt", 
+                                   package = "herblabel")
+        tplsplist <- readLines(tplsplistdir)
+        ind <- (!sptemp2 %in% tplsplist) & (!gsub(" ", "", sptemp2 ) == "")  ### Make sure the empty entries were excluded. 
+        herbdat000$GENUS[ind] <- paste("\\cf2\\i0 Name can not be found at The Plant List Website or in Flora of China (Chinese Ver.). Check Spelling or Validity at {\\field{\\*\\fldinst{HYPERLINK \"http://www.theplantlist.org/\"}}{\\fldrslt{\\ul\\cf2 http://www.theplantlist.org/}}} or {\\field{\\*\\fldinst{HYPERLINK \"http://frps.eflora.cn/\"}}{\\fldrslt{\\ul\\cf2 http://frps.eflora.cn/}}} for:\\i  ", herbdat000$GENUS[ind], sep = "")
+        herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind] <- paste(ifelse(is.na(herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind]), "", herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind]), "\\cf1", sep = "")
+        
+   }
     
     ### match.gf(herbdat000$FAMIL, herbdat000$GENUS)
     temp1 <- c("{\\rtf1\\ansi\\deff0", 
@@ -52,8 +92,8 @@ annotation_label <- function(dat = NULL, infile = NULL, outfile = "Annotation_La
                 \\red0\\green128\\blue0;\\red128\\green0\\blue128;\n
                 \\red128\\green0\\blue0;\\red128\\green128\\blue0;
                 \\red128\\green128\\blue128;\n\\red192\\green192\\blue192;}", 
-                "\\viewkind4\\uc1\\pard\\f01\\fs18\\fi-144\\li288\\ri3480 ",
-                "\\paperw11906\\paperh16838\\margt720\\margb360\\margl600\\margr600\\cols2\\colsx720 ")
+                "\\viewkind4\\uc1\\pard\\f01\\fs19\\fi-144\\li288\\ri3480 ",
+                "\\paperw11906\\paperh16838\\margt720\\margb10\\margl600\\margr600\\cols2\\colsx1080\\linebetcol ")
     ### fcharset134 to specify Chinese Font Herbarium Label Default Font Size if 18
     ### Default font is Time New Roman
     temp2 <- c()
@@ -61,33 +101,42 @@ annotation_label <- function(dat = NULL, infile = NULL, outfile = "Annotation_La
         herbdat <- herbdat000[i, ]
         ### Set the size for each label
         res <- c(
-        ifelse(is.na(herbdat$PROJECT), 
-            "", paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\qc\\sb300\\sa100\\fs16", 
-                as.character(herbdat$PROJECT), "\\par }", sep = "")), 
-                ifelse(is.na(herbdat$INFRASPECIFIC_RANK), 
-            paste("{\\pard\\keep\\keepn\\fi-288\\li288\\sb300\\sa200\\fs20\\b\\i ", 
-                herbdat$GENUS, "\\i0  \\i ", ifelse((is.na(herbdat$SPECIES) | herbdat$SPECIES == 
-                  "sp."), "\\i0 sp.", as.character(herbdat$SPECIES)), "\\i0  ", 
+        ifelse(is.na(herbdat$TYPE_STATUS), "", 
+            paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\sb200\\sa50\\fs20\\b ", 
+                ifelse(is.na(herbdat$TYPE_STATUS), "", toupper(as.character(herbdat$TYPE_STATUS))), "\\b0 ", ifelse(is.na(herbdat$TYPE_STATUS), "", " of: "),"\\par }", sep = "")), 
+                
+        ifelse(is.na(herbdat$INFRASPECIFIC_RANK), 
+            paste("{\\pard\\keep\\keepn\\fi-288\\li288", ifelse(is.na(herbdat$TYPE_STATUS), "\\sb200", "\\sb50"), "\\sa100\\fs20\\b\\i ",
+                ifelse(is.na(herbdat$GENUS), "", as.character(herbdat$GENUS)), "\\i0  \\i ", ifelse((is.na(herbdat$SPECIES)), "\\i0 ", as.character(herbdat$SPECIES)), "\\i0  ", 
                   ifelse(is.na(herbdat$AUTHOR_OF_SPECIES), 
                   "", as.character(herbdat$AUTHOR_OF_SPECIES)), "\\b0\\par }", sep = ""), 
-            paste("{\\pard\\keep\\keepn\\fi-288\\li288\\sb300\\sa200\\fs20\\b\\i ", 
-                herbdat$GENUS, "\\i0  \\i ", ifelse((is.na(herbdat$SPECIES) | herbdat$SPECIES == 
-                  "sp."), "\\i0 sp.", as.character(herbdat$SPECIES)), "\\i0  ", 
+            paste("{\\pard\\keep\\keepn\\fi-288\\li288", ifelse(is.na(herbdat$TYPE_STATUS), "\\sb200", "\\sb50"),"\\sa100\\fs20\\b\\i ", 
+                ifelse(is.na(herbdat$GENUS), "", as.character(herbdat$GENUS)), "\\i0  \\i ", ifelse((is.na(herbdat$SPECIES)), "\\i0 ", as.character(herbdat$SPECIES)), "\\i0  ", 
                   ifelse(is.na(herbdat$AUTHOR_OF_SPECIES), 
                   "", as.character(herbdat$AUTHOR_OF_SPECIES)), " ", herbdat$INFRASPECIFIC_RANK, 
                 " \\i ", herbdat$INFRASPECIFIC_EPITHET, "\\i0  ", herbdat$AUTHOR_OF_INFRASPECIFIC_RANK, 
-                "\\b0\\par }", sep = "")), ifelse(is.na(herbdat$DET_SOURCE), "", 
-                  paste("{\\pard\\keep\\sb100\\sa50\\keepn\\fi0\\li0Det. Source:", 
-                  as.character(herbdat$DET_SOURCE), "}")), 
-                  paste("{\\pard\\keep\\sb150\\sa50\\keepn\\fi0\\li0\\tqr\\tx4850 Det.: ", 
-                         herbdat$IDENTIFIED_BY, "  ", herbdat$INSTITUTION, "  \\tab ", 
-                         tryCatch(formatdate(herbdat$DATE_IDENTIFIED), 
+                "\\b0\\par }", sep = "")), 
+        ifelse(is.na(herbdat$TYPE_REF), "",        
+            paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\sb50\\sa50\\fs18  " , ifelse(is.na(herbdat$TYPE_REF ), "", herbdat$TYPE_REF), " \\par}")), 
+        paste("{\\pard\\keep\\sb300", ifelse(is.na(herbdat$DET_NOTE)&is.na(herbdat$PROJECT), "\\sa200","\\sa30"), "\\keepn\\fi0\\li0\\tqr\\tx4850   Det.: ", 
+                  ifelse(is.na(herbdat$IDENTIFIED_BY), "", as.character(herbdat$IDENTIFIED_BY)), 
+                  "  ", 
+                  ifelse(is.na(herbdat$INSTITUTION),"", as.character(herbdat$INSTITUTION)), 
+                  "  \\tab ", 
+                  ifelse(is.na(herbdat$DATE_IDENTIFIED), "", tryCatch(formatdate(herbdat$DATE_IDENTIFIED), 
                          error= function(e) {print("Warning: Date format incorrect, using original string"); 
-                                             herbdat$DATE_IDENTIFIED}), 
-                         " \\par }", sep = ""), 
-                "{\\pard\\keep\\keepn\\sa200 \\par }",
-                "{\\pard\\keep\\qc .    .    .    .    .    .    .    .    .    .    .    . \\par}" 
-                )
+                                             herbdat$DATE_IDENTIFIED})), 
+                         " \\par }", sep = ""),
+                         
+        ifelse(is.na(herbdat$DET_NOTE), "", 
+            paste("{\\pard\\keep\\sb20", ifelse(is.na(herbdat$PROJECT), "\\sa200", "\\sa20"), "\\keepn\\fi0\\li0\\fs18   Note:", as.character(herbdat$DET_NOTE), " \\par}")
+            ), 
+            
+        ifelse(is.na(herbdat$PROJECT), "", 
+            paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\qc\\sb20\\sa200\\fs18 ", 
+                as.character(herbdat$PROJECT), "\\par }", sep = "")),
+            "{\\pard\\keep\\qc .    .    .    .    .    .    .    .    .    .\\par}" 
+             )
         ### End of one label
         temp2 <- c(temp2, res)  ### Add label to the RTF file.
     }

@@ -210,7 +210,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
                \\red128\\green0\\blue0;\\red128\\green128\\blue0;\\red128\\green128\\blue128;
                \\red192\\green192\\blue192;}",
                 "\\viewkind4\\uc1\\pard\\f01\\fs18\\fi-144\\li288\\ri3480 ",
-                "\\paperw11906\\paperh16838\\margt720\\margb0\\margl600\\margr600\\cols2\\colsx1080\\linebetcol"
+                "\\paperw11906\\paperh16838\\margt720\\margb10\\margl600\\margr600\\cols2\\colsx1080\\linebetcol"
                ) 
     ### fcharset134 to specify Chinese Font
     #### Herbarium Label
@@ -277,8 +277,8 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         }
         res <- c(
         #### Title of the Herbarium
-        paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\qc\\sb350\\sa80\\fs20", 
-                herbdat$HERBARIUM,"\\par }", sep = ""),
+        paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\qc\\sb350\\sa80\\fs18", 
+                herbdat$HERBARIUM,"\\b0\\par }", sep = ""),
         ####  
         ### FLORA OF SOME PLACE
         ifelse(is.na(herbdat$TITLE)|herbdat$TITLE == "", "", 
@@ -286,7 +286,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
                 herbdat$TITLE,"\\b0 \\par }", sep = "")),
         
         #### FAMILY, in BOLD FACE, must be either in Flora of Hong Kong, or The Plant List
-        paste("{\\pard\\keep\\keepn\\fi0\\li0\\qc\\sb10\\sa100\\fs20\\b ",
+        paste("{\\pard\\keep\\keepn\\fi0\\li0\\qc\\sb10\\sa100\\fs18\\b ",
                herbdat$FAMILY,"\\b0\\qc0 \\par }", sep = ""),
 
         #### SPECIES INFO
@@ -364,7 +364,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
                  herbdat$DATE_IDENTIFIED}), "\\par}",sep = "")
             ),
         "{\\pard\\keep\\keepn\\sa100 \\par }", 
-        "{\\pard\\keep\\qc  .    .    .    .    .    .    .    .    .    .    .    . \\par}" 
+        "{\\pard\\keep\\qc  .    .    .    .    .    .    .    .    .    .\\par}" 
          )                             ### End of one label
         temp2 <- c(temp2, res)         ### Add label to the RTF file.
     }

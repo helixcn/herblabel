@@ -121,5 +121,4 @@ scbg_fb2ht  <- function(infile, outfile = "herblabel_temp.csv",
         cat("Herbarium records have been converted and saved to:\n", file.path(getwd(), outfile),"\n", sep = "")
     }
     return(res)
-
 }

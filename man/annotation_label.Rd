@@ -7,7 +7,7 @@
     Making RTF Annotation labels based on annotation template in CSV
 }
 \usage{
-    annotation_label(dat = NULL, infile = NULL, outfile = "Annotation_Labels.rtf")
+    annotation_label(dat = NULL, infile = NULL, spellcheck = TRUE, outfile = "Annotation_Labels.rtf")
 }
 
 \arguments{
@@ -17,7 +17,9 @@ data frame of Annotation Template.
   \item{infile}{
 Character string, the name of the csv file.
 }
-
+  \item{spellcheck}{
+Logical, whether the spell checking for species should be porformed. 
+}
   \item{outfile}{
 the names of the output rtf file.
 }
