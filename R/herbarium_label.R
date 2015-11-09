@@ -12,60 +12,55 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
     } else {
         herbdat000 <- dat
     }
-    if(any(is.na(herbdat000$HERBARIUM))){
+    if(any(is.na(herbdat000$HERBARIUM)|herbdat000$HERBARIUM == "")){
         stop(paste("\"HERBARIUM\" must be provided for row: ", 
              paste(which(is.na(herbdat000$HERBARIUM))+1, collapse = ", ")))
         }
-    if(any(is.na(herbdat000$COLLECTOR))){
+    if(any(is.na(herbdat000$COLLECTOR)|herbdat000$COLLECTOR == "")){
         stop(paste("\"COLLECTOR\" must be provided for row: ", 
              paste(which(is.na(herbdat000$COLLECTOR))+1, collapse = ", ")))
         }
-    if(any(is.na(herbdat000$COLLECTOR_NUMBER))){
+    if(any(is.na(herbdat000$COLLECTOR_NUMBER)|herbdat000$COLLECTOR_NUMBER == "")){
         stop(paste("\"COLLECTOR_NUMBER\" must be provided for row: ", 
              paste(which(is.na(herbdat000$COLLECTOR_NUMBER)) + 1, collapse = ", ")))
         }
-    if(any(is.na(herbdat000$DATE_COLLECTED))){
+    if(any(is.na(herbdat000$DATE_COLLECTED)|herbdat000$DATE_COLLECTED == "")){
         stop(paste("\"DATE_COLLECTED\" must be provided for row: ", 
              paste(which(is.na(herbdat000$DATE_COLLECTED)) + 1, collapse = ", ")))
         }
-    if(any(is.na(herbdat000$FAMILY))){
+    if(any(is.na(herbdat000$FAMILY)|herbdat000$FAMILY=="" )){
         stop(paste("\"FAMILY\" must be provided for row: ", 
              paste(which(is.na(herbdat000$FAMILY)) + 1, collapse = ", ")))
         }
-    if(any(is.na(herbdat000$GENUS))){
+    if(any(is.na(herbdat000$GENUS)|herbdat000$GENUS == "")){
         stop(paste("\"GENUS\" must be provided for row: ", 
              paste(which(is.na(herbdat000$GENUS)) + 1, collapse = ", ")))
         }
-    if(any(is.na(herbdat000$COUNTRY))){
+    if(any(is.na(herbdat000$COUNTRY)|herbdat000$COUNTRY == "")){
         stop(paste("\"COUNTRY\" must be provided for row: ", 
              paste(which(is.na(herbdat000$COUNTRY)) + 1, collapse = ", ")))
          }
-    if(any(is.na(herbdat000$STATE_PROVINCE))){
+    if(any(is.na(herbdat000$STATE_PROVINCE)|herbdat000$STATE_PROVINCE == "")){
         stop(paste("\"STATE_PROVINCE\" must be provided for row: ", 
              paste(which(is.na(herbdat000$STATE_PROVINCE)) + 1, collapse = ", ")))
         }
-    if(any(is.na(herbdat000$COUNTY))){
+    if(any(is.na(herbdat000$COUNTY)|herbdat000$COUNTY == "")){
         warning(paste("\"COUNTY\" has not been provided for row: ", 
              paste(which(is.na(herbdat000$COUNTY)) + 1, collapse = ", ")))
              herbdat000$COUNTY[is.na(herbdat000$COUNTY)] <- " "
         }
-    if(any(is.na(herbdat000$LOCALITY))){
+    if(any(is.na(herbdat000$LOCALITY)|herbdat000$LOCALITY == "")){
         warning(paste("\"LOCALITY\" not provided  for row: ", 
              paste(which(is.na(herbdat000$LOCALITY)) + 1, collapse = ", ")))
         }
-    if(any(is.na(herbdat000$IDENTIFIED_BY))){
+    if(any(is.na(herbdat000$IDENTIFIED_BY)|herbdat000$IDENTIFIED_BY == "")){
         stop(paste("\"IDENTIFIED_BY\" must be provided for row: ", 
              paste(which(is.na(herbdat000$DETERMINOR)) + 1, collapse = ", ")))
         }
-    if(any(is.na(herbdat000$DATE_IDENTIFIED))){
+    if(any(is.na(herbdat000$DATE_IDENTIFIED)|herbdat000$DATE_IDENTIFIED == "")){
         warning(paste("\"DATE_IDENTIFIED\" not provided for row: ", 
-             paste(which(is.na(herbdat000$DATE_IDENTIFIED)) + 1, collapse = ", ")))
+             paste(which(is.na(herbdat000$DATE_IDENTIFIED)|herbdat000$DATE_IDENTIFIED == "") + 1, collapse = ", ")))
         }
-        
-    if(any(is.na(herbdat000$DATE_IDENTIFIED))){
-        warning(paste("\"DATE_IDENTIFIED\" not provided for row: ", 
-             paste(which(is.na(herbdat000$DATE_IDENTIFIED)) + 1, collapse = ", ")))
-    } 
 
     print(paste(nrow(herbdat000), "herbarium specimen labels to create:"))
     #### Load the internal Data base to check Genus-Family relationship in APGIII system
@@ -174,12 +169,12 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
     #### Check the spelling of the scientific names
     #### Issue a warning if the names generated do not match with the accepted names at the Plant List Website
     if(spellcheck){
-        sptemp <- paste( ifelse(is.na(herbdat000$GENUS),                        "",  herbdat000$GENUS                       ),
-                         ifelse(is.na(herbdat000$SPECIES),                      "",  herbdat000$SPECIES                     ),
-                         ifelse(is.na(herbdat000$AUTHOR_OF_SPECIES),            "",  herbdat000$AUTHOR_OF_SPECIES           ),
-                         ifelse(is.na(herbdat000$INFRASPECIFIC_RANK),           "",  herbdat000$INFRASPECIFIC_RANK          ),
-                         ifelse(is.na(herbdat000$INFRASPECIFIC_EPITHET),        "",  herbdat000$INFRASPECIFIC_EPITHET       ),
-                         ifelse(is.na(herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK), "",  herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK), 
+        sptemp <- paste( ifelse(is.na(herbdat000$GENUS)                       |herbdat000$GENUS                       == "", "",  herbdat000$GENUS                       ),
+                         ifelse(is.na(herbdat000$SPECIES)                     |herbdat000$SPECIES                     == "", "",  herbdat000$SPECIES                     ),
+                         ifelse(is.na(herbdat000$AUTHOR_OF_SPECIES)           |herbdat000$AUTHOR_OF_SPECIES           == "", "",  herbdat000$AUTHOR_OF_SPECIES           ),
+                         ifelse(is.na(herbdat000$INFRASPECIFIC_RANK)          |herbdat000$INFRASPECIFIC_RANK          == "", "",  herbdat000$INFRASPECIFIC_RANK          ),
+                         ifelse(is.na(herbdat000$INFRASPECIFIC_EPITHET)       |herbdat000$INFRASPECIFIC_EPITHET       == "", "",  herbdat000$INFRASPECIFIC_EPITHET       ),
+                         ifelse(is.na(herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK)|herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK== "", "",  herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK), 
                          sep = " ")
         sptemp2 <- c()
         for(i in 1:length(sptemp)){
@@ -198,7 +193,8 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         }
         
         herbdat000$GENUS[ind] <- paste("\\cf2\\i0 Name can not be found at The Plant List Website or in Flora of China (Chinese Ver.). Check Spelling or Validity at {\\field{\\*\\fldinst{HYPERLINK \"http://www.theplantlist.org/\"}}{\\fldrslt{\\ul\\cf2 http://www.theplantlist.org/}}} or {\\field{\\*\\fldinst{HYPERLINK \"http://frps.eflora.cn/\"}}{\\fldrslt{\\ul\\cf2 http://frps.eflora.cn/}}} for:\\i  ", herbdat000$GENUS[ind], sep = "")
-        herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind] <- paste(ifelse(is.na(herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind]), "", herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind]), "\\cf1", sep = "")
+        herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind] <- paste(ifelse(is.na(herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind])|herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind] == "", 
+                                                                     "", herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind]), "\\cf1", sep = "")
    }
    ###########################################################################################################
     temp1 <- c("{\\rtf1\\ansi\\deff0", #### Staring a RTF 
@@ -313,15 +309,16 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
                      ifelse(is.na(herbdat$ELEVATION), "", paste(herbdat$ELEVATION, "m", sep = "")),"\\par }",sep = ""))),
 
         ##### Attributes and Remarks
-        italic_latin(gsub("\\.  ", "\\. ", gsub(" \\.", "\\.", gsub("\\. \\.", "\\. ", gsub("\\. +", "\\. ", REPLACE(ifelse(is.na(herbdat$ATTRIBUTES) & is.na(herbdat$REMARKS)|herbdat$ATTRIBUTES == "" & herbdat$REMARKS == "", "",    
+        italic_latin(gsub("\\.  ", "\\. ", gsub(" \\.", "\\.", gsub("\\. \\.", "\\. ", gsub("\\. +", "\\. ", 
+                     REPLACE(ifelse((is.na(herbdat$ATTRIBUTES)) & (is.na(herbdat$REMARKS))|(herbdat$ATTRIBUTES == "" & herbdat$REMARKS == ""), "",    
                 paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb60", 
                     ifelse(is.na(herbdat$ATTRIBUTES)|herbdat$ATTRIBUTES == "", "", as.character(herbdat$ATTRIBUTES)),
                     ifelse(is.na(herbdat$ATTRIBUTES)|herbdat$ATTRIBUTES == "", "", ". "),
-                    ifelse(is.na(herbdat$REMARKS)|herbdat$REMARKS == "", "", as.character(herbdat$REMARKS)), 
+                    ifelse(is.na(herbdat$REMARKS)   |herbdat$REMARKS    == "", "", as.character(herbdat$REMARKS)), 
                      "\\sa80\\par}", sep = " ")))))))), 
                 
         ##### COLLECTOR and COLLECTION NUMBER !
-        ifelse(is.na(herbdat$ADDITIONAL_COLLECTOR), 
+        ifelse(is.na(herbdat$ADDITIONAL_COLLECTOR)|herbdat$ADDITIONAL_COLLECTOR == "", 
             paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb50\\sa100\\tqr\\tx4850\\b ",
                    herbdat$COLLECTOR,", #" ,herbdat$COLLECTOR_NUMBER,"\\b0", 
                    "","\\tab ",
@@ -346,9 +343,9 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
               ),
         ##### IDENTIFICATION INFOMATION
         ##### "    ", gsub("_", "", as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER)), 
-        ifelse(!is.na(herbdat$TYPE_STATUS), 
+        ifelse(!(is.na(herbdat$TYPE_STATUS)| herbdat$TYPE_STATUS == ""), 
             paste("{\\pard\\keep\\sa40\\keepn\\fi0\\li0\\tqr ",
-                  gsub("_", "", ifelse(is.na(as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER)), 
+                  gsub("_", "", ifelse(is.na(herbdat$GLOBAL_UNIQUE_IDENTIFIER)| herbdat$GLOBAL_UNIQUE_IDENTIFIER == "", 
                   "", as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER))), 
                   "\\tx4850\\tab ", herbdat$TYPE_STATUS,
                  " Det.: ",herbdat$IDENTIFIED_BY,", ", 
@@ -356,7 +353,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
                  error= function(e) {print("Warning: Date format incorrect, using original string"); 
                  herbdat$DATE_IDENTIFIED}), "\\par}",sep = ""),
             paste("{\\pard\\keep\\sa40\\keepn\\fi0\\li0\\tqr ", gsub("_", 
-                  "", ifelse(is.na(as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER)), 
+                  "", ifelse(is.na(herbdat$GLOBAL_UNIQUE_IDENTIFIER)| herbdat$GLOBAL_UNIQUE_IDENTIFIER == "", 
                  "", as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER))),
                  "\\tx4850\\tab Det.: ", herbdat$IDENTIFIED_BY,", ", 
                  tryCatch(formatdate(herbdat$DATE_IDENTIFIED), 
@@ -364,7 +361,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
                  herbdat$DATE_IDENTIFIED}), "\\par}",sep = "")
             ),
         "{\\pard\\keep\\keepn\\sa100 \\par }", 
-        "{\\pard\\keep\\qc  .    .    .    .    .    .    .    .    .    .\\par}" 
+        "{\\pard\\keep\\qc  .                                      .\\par}" 
          )                             ### End of one label
         temp2 <- c(temp2, res)         ### Add label to the RTF file.
     }
