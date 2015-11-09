@@ -131,7 +131,7 @@ annotation_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfi
         ifelse(is.na(herbdat$PROJECT)|is.null(herbdat$PROJECT)|herbdat$PROJECT == "", "", 
             paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\qc\\sb20\\sa200\\fs18 ", 
                 as.character(herbdat$PROJECT), "\\par }", sep = "")),
-            "{\\pard\\keep\\qc .                     .                    .\\par}" 
+            "{\\pard\\keep\\qc .                     .                    .\\sa100\\par}" 
              )
         ### End of one label
         temp2 <- c(temp2, res)  ### Add label to the RTF file.

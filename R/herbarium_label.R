@@ -192,7 +192,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
              ### cat(message_txt, file = paste(gsub(":", "", Sys.time()), "herblabel_scientific_name_warning.txt", sep = ""))  
         }
         
-        herbdat000$GENUS[ind] <- paste("\\cf2\\i0 Name can not be found at The Plant List Website or in Flora of China (Chinese Ver.). Check Spelling or Validity at {\\field{\\*\\fldinst{HYPERLINK \"http://www.theplantlist.org/\"}}{\\fldrslt{\\ul\\cf2 http://www.theplantlist.org/}}} or {\\field{\\*\\fldinst{HYPERLINK \"http://frps.eflora.cn/\"}}{\\fldrslt{\\ul\\cf2 http://frps.eflora.cn/}}} for:\\i  ", herbdat000$GENUS[ind], sep = "")
+        herbdat000$GENUS[ind] <- paste("\\cf2\\i0 Name not found. Check Spelling or Validity at {\\field{\\*\\fldinst{HYPERLINK \"http://www.theplantlist.org/\"}}{\\fldrslt{\\ul\\cf2 http://www.theplantlist.org/}}} or {\\field{\\*\\fldinst{HYPERLINK \"http://frps.eflora.cn/\"}}{\\fldrslt{\\ul\\cf2 http://frps.eflora.cn/}}} for:\\i  ", herbdat000$GENUS[ind], sep = "")
         herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind] <- paste(ifelse(is.na(herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind])|herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind] == "", 
                                                                      "", herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind]), "\\cf1", sep = "")
    }
@@ -229,7 +229,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         if(spellcheck){ ### = TRUE
             
             temp.genus <- herbdat$GENUS
-            if(!grepl("Name can not be found at The Plant List Website or in Flora of China", as.character(temp.genus))){
+            if(!grepl("Name not found. Check Spelling or Validity at", as.character(temp.genus))){
                  ### It the name is accepted, then check the match of the genus/family
                 if(!Cap(as.character(temp.genus)) %in% Cap(as.character(pgenus$GENUS)) ){          ### 
                     herbdat$GENUS <- paste("\\highlight6 ", as.character(temp.genus), 
