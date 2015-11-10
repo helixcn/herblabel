@@ -273,7 +273,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         }
         res <- c(
         #### Title of the Herbarium
-        paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\qc\\sb350\\sa80\\fs18", 
+        paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\qc\\sb350\\sa80\\fs20", 
                 herbdat$HERBARIUM,"\\b0\\par }", sep = ""),
         ####  
         ### FLORA OF SOME PLACE
@@ -305,8 +305,8 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
                paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb20\\sa150\\qj ",
                      herbdat$LAT_DEGREE,"\\u176;", herbdat$LAT_MINUTE, "\\u39;",herbdat$LAT_SECOND, 
                      "\\u34;", herbdat$LAT_FLAG,", ",herbdat$LON_DEGREE,"\\u176;",herbdat$LON_MINUTE,
-                     "\\u39;",herbdat$LON_SECOND,"\\u34;", herbdat$LON_FLAG,"; ", 
-                     ifelse(is.na(herbdat$ELEVATION), "", paste(herbdat$ELEVATION, "m", sep = "")),"\\par }",sep = ""))),
+                     "\\u39;",herbdat$LON_SECOND,"\\u34;", herbdat$LON_FLAG, 
+                     ifelse(is.na(herbdat$ELEVATION), "", paste("; ", herbdat$ELEVATION, "m", sep = "")),"\\par }",sep = ""))),
 
         ##### Attributes and Remarks
         italic_latin(gsub("\\.  ", "\\. ", gsub(" \\.", "\\.", gsub("\\. \\.", "\\. ", gsub("\\. +", "\\. ", 
@@ -361,7 +361,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
                  herbdat$DATE_IDENTIFIED}), "\\par}",sep = "")
             ),
         "{\\pard\\keep\\keepn\\sa100 \\par }", 
-        "{\\pard\\keep\\qc  .                                      .\\par}" 
+        "{\\pard\\keep\\qc  .                  .                   .\\par}" 
          )                             ### End of one label
         temp2 <- c(temp2, res)         ### Add label to the RTF file.
     }
