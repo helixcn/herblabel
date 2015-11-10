@@ -100,12 +100,12 @@ annotation_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfi
             paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\sb100\\sa50\\fs20\\b ", toupper(as.character(herbdat$TYPE_STATUS)), "\\b0  of:\\par }", sep = "")), 
                 
         ifelse(is.na(herbdat$INFRASPECIFIC_RANK)|herbdat$INFRASPECIFIC_RANK == "", 
-            paste("{\\pard\\keep\\keepn\\fi-288\\li288", ifelse(is.na(herbdat$TYPE_STATUS)|herbdat$TYPE_STATUS == "", "\\sb200", "\\sb20"), "\\sa20\\fs20\\b\\i ",
+            paste("{\\pard\\keep\\keepn\\fi-288\\li288", ifelse(is.na(herbdat$TYPE_STATUS)|herbdat$TYPE_STATUS == "", "\\sb180", "\\sb20"), "\\sa20\\fs20\\b\\i ",
                 ifelse(is.na(herbdat$GENUS)|herbdat$GENUS == "", "", as.character(herbdat$GENUS)), "\\i0  \\i ", 
                    ifelse((is.na(herbdat$SPECIES)|herbdat$SPECIES == ""), "\\i0 ", as.character(herbdat$SPECIES)), "\\i0  ", 
                    ifelse(is.na(herbdat$AUTHOR_OF_SPECIES)|herbdat$AUTHOR_OF_SPECIES == "", 
                   "", as.character(herbdat$AUTHOR_OF_SPECIES)), "\\b0\\par }", sep = ""), 
-            paste("{\\pard\\keep\\keepn\\fi-288\\li288", ifelse(is.na(herbdat$TYPE_STATUS)|herbdat$TYPE_STATUS == "", "\\sb200", "\\sb20"),"\\sa20\\fs20\\b\\i ", 
+            paste("{\\pard\\keep\\keepn\\fi-288\\li288", ifelse(is.na(herbdat$TYPE_STATUS)|herbdat$TYPE_STATUS == "", "\\sb180", "\\sb20"),"\\sa20\\fs20\\b\\i ", 
                 ifelse(is.na(herbdat$GENUS)|herbdat$GENUS == "", "", as.character(herbdat$GENUS)), "\\i0  \\i ", 
                 ifelse((is.na(herbdat$SPECIES)|herbdat$SPECIES == ""), "\\i0 ", as.character(herbdat$SPECIES)), "\\i0  ", 
                   ifelse(is.na(herbdat$AUTHOR_OF_SPECIES)|herbdat$AUTHOR_OF_SPECIES == "", 
@@ -114,10 +114,10 @@ annotation_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfi
                 "\\b0\\par }", sep = "")), 
         ifelse(is.na(herbdat$TYPE_REF)|herbdat$TYPE_REF == "", "",        
             paste("{\\pard\\keep\\keepn\\fi288\\li288\\brsp20\\sb10\\sa20\\fs16  " , ifelse(is.na(herbdat$TYPE_REF )|herbdat$TYPE_REF == "", "", herbdat$TYPE_REF), " \\par}")), 
-        paste("{\\pard\\keep\\sb200", ifelse((is.na(herbdat$DET_NOTE)|herbdat$DET_NOTE == "")&(is.na(herbdat$PROJECT)|herbdat$PROJECT == ""), "\\sa200","\\sa10"), "\\keepn\\fi0\\li0\\tqr\\tx4850 Det.: ", 
+        paste("{\\pard\\keep\\sb200", ifelse((is.na(herbdat$DET_NOTE)|herbdat$DET_NOTE == "")&(is.na(herbdat$PROJECT)|herbdat$PROJECT == ""), "\\sa150","\\sa10"), "\\keepn\\fi0\\li0\\tqr\\tx4850 Det.: ", 
                   ifelse(is.na(herbdat$IDENTIFIED_BY)|herbdat$IDENTIFIED_BY == "", "", as.character(herbdat$IDENTIFIED_BY)), 
-                  "  ", 
-                  ifelse(is.na(herbdat$INSTITUTION)|herbdat$INSTITUTION == "", "", as.character(herbdat$INSTITUTION)), 
+                  "", 
+                  ifelse(is.na(herbdat$INSTITUTION)|herbdat$INSTITUTION == "", "", paste(", ", as.character(herbdat$INSTITUTION), sep = "")), 
                   "  \\tab ", 
                   ifelse(is.na(herbdat$DATE_IDENTIFIED)|herbdat$DATE_IDENTIFIED == "", "", tryCatch(formatdate(herbdat$DATE_IDENTIFIED), 
                          error= function(e) {print("Warning: Date format incorrect, using original string"); 
@@ -125,11 +125,11 @@ annotation_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfi
                          " \\par }", sep = ""),
                          
         ifelse(is.na(herbdat$DET_NOTE)|herbdat$DET_NOTE == "", "", 
-            paste("{\\pard\\keep\\sb10", ifelse(is.na(herbdat$PROJECT)|herbdat$PROJECT == "", "\\sa200", "\\sa20"), "\\keepn\\fi0\\li0\\fs16 ", as.character(herbdat$DET_NOTE), " \\par}", sep = "")
+            paste("{\\pard\\keep\\sb10", ifelse(is.na(herbdat$PROJECT)|herbdat$PROJECT == "", "\\sa150", "\\sa20"), "\\keepn\\fi0\\li0\\fs16 ", as.character(herbdat$DET_NOTE), " \\par}", sep = "")
             ), 
             
         ifelse(is.na(herbdat$PROJECT)|is.null(herbdat$PROJECT)|herbdat$PROJECT == "", "", 
-            paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\qc\\sb10\\sa200\\fs16 ", 
+            paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\qc\\sb10\\sa150\\fs16 ", 
                 as.character(herbdat$PROJECT), "\\par }", sep = "")),
             "{\\pard\\keep\\qc .                     .                    .\\sa100\\par}" 
              )
