@@ -13,6 +13,8 @@ annotation_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfi
         herbdat000 <- dat
     }
     
+    herbdat000[herbdat000 == ""] <- NA
+    
     if (any(is.na(herbdat000$GENUS)|herbdat000$GENUS == "")) {
         warning(paste("\"GENUS\" not provided for row: ", 
             paste(which(is.na(herbdat000$GENUS)|herbdat000$GENUS == "") + 

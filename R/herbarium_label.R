@@ -12,6 +12,12 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
     } else {
         herbdat000 <- dat
     }
+    
+    herbdat000[herbdat000 == ""] <- NA
+    dat$LAT_FLAG <- toupper(dat$LAT_FLAG)
+    dat$LON_FLAG <- toupper(dat$LON_FLAG)
+    
+    #### Check the dataset
     if(any(is.na(herbdat000$HERBARIUM)|herbdat000$HERBARIUM == "")){
         stop(paste("\"HERBARIUM\" must be provided for row: ", 
              paste(which(is.na(herbdat000$HERBARIUM))+1, collapse = ", ")))
@@ -61,6 +67,8 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         warning(paste("\"DATE_IDENTIFIED\" not provided for row: ", 
              paste(which(is.na(herbdat000$DATE_IDENTIFIED)|herbdat000$DATE_IDENTIFIED == "") + 1, collapse = ", ")))
         }
+        
+    
 
     print(paste(nrow(herbdat000), "herbarium specimen labels to create:"))
     #### Load the internal Data base to check Genus-Family relationship in APGIII system
@@ -108,8 +116,6 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         res.split[found] <- paste("\\cf6 \\i ",res.split[found], "\\i0 \\cf1 ", sep = "")
         paste(res.split, collapse = " ", sep = "")
     }
-
-
 
     #### To keep all of the fields clean and tidy.
     herbdat000$FAMILY                           <- toupper(herbdat000$FAMILY)
@@ -196,6 +202,62 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind] <- paste(ifelse(is.na(herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind])|herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind] == "", 
                                                                      "", herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind]), "\\cf1", sep = "")
    }
+   
+   lat_check_ind_1 <- rep(FALSE, nrow(herbdat000))
+   lat_check_ind_2 <- rep(FALSE, nrow(herbdat000))
+   lat_check_ind_3 <- rep(FALSE, nrow(herbdat000))
+   lon_check_ind_1 <- rep(FALSE, nrow(herbdat000))
+   lon_check_ind_2 <- rep(FALSE, nrow(herbdat000))
+   lon_check_ind_3 <- rep(FALSE, nrow(herbdat000))
+   
+   for(i in 1:nrow(herbdat000)){  
+        herbdat_temp <- herbdat000[i, ]
+        #### Check the Lat Flag
+        if(any(!is.na(herbdat_temp$LAT_DEGREE), !is.na(herbdat_temp$LAT_MINUTE), !is.na(herbdat_temp$LAT_SECOND)) & is.na(herbdat_temp$LAT_FLAG)){
+            lat_check_ind_1[i] <- TRUE
+        }
+        if(all(!is.na(herbdat_temp$LAT_DEGREE), !is.na(herbdat_temp$LAT_MINUTE), !is.na(herbdat_temp$LAT_SECOND)) & is.na(herbdat_temp$LAT_FLAG)){
+            lat_check_ind_2[i] <- TRUE
+        }
+        if(!herbdat_temp$LAT_FLAG %in% c("N", "S")){
+            lat_check_ind_3[i] <- TRUE
+        }
+        #### Check the LON Flag
+        if(any(!is.na(herbdat_temp$LON_DEGREE), !is.na(herbdat_temp$LON_MINUTE), !is.na(herbdat_temp$LON_SECOND)) & is.na(herbdat_temp$LON_FLAG)){
+            lon_check_ind_1[i] <- TRUE
+        }
+        if(all(!is.na(herbdat_temp$LON_DEGREE), !is.na(herbdat_temp$LON_MINUTE), !is.na(herbdat_temp$LON_SECOND)) & is.na(herbdat_temp$LON_FLAG)){
+            lon_check_ind_2[i] <- TRUE
+        }
+        if(!herbdat_temp$LON_FLAG %in% c("E", "W")){
+            lon_check_ind_3[i] <- TRUE
+        }
+    }
+    
+    if(any(lat_check_ind_1)){
+        stop(paste("Degree, Minutes and Seconds for Latitude not completed in row:", paste(which(lat_check_ind_1), collapse = ", ")))
+    }
+    
+    if(any(lat_check_ind_2)){
+        stop(paste("LAT_FLAG not specified in row:", paste(which(lat_check_ind_2), collapse = ", ")))
+    }
+    
+    if(any(lat_check_ind_3)){
+        stop(paste("Only N or S is allowed for the LAT_FLAG in row:", paste(which(lat_check_ind_3), collapse = ", ")))
+    }
+    
+    if(any(lon_check_ind_1)){
+        stop(paste("Degree, Minutes and Seconds for Longitude not completed in row:", paste(which(lon_check_ind_1), collapse = ", ")))
+    }
+    
+    if(any(lon_check_ind_2)){
+        stop(paste("LON_FLAG must be specified in row:", paste(which(lon_check_ind_2), collapse = ", ")))
+    }
+    
+    if(any(lon_check_ind_3)){
+        stop(paste("Only N or S is allowed for the LON_FLAG in row:", paste(which(lon_check_ind_3), collapse = ", ")))
+    }
+    
    ###########################################################################################################
     temp1 <- c("{\\rtf1\\ansi\\deff0", #### Staring a RTF 
                "{\\fonttbl{\\f01\\froman\\fcharset01 Times New Roman;}}",    
@@ -221,7 +283,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         
         if(nrow(herbdat000) > 5){  ### Imply the progress of printing
             if(i %in% temp_count){
-                print(paste("Creating label for row: ", i))
+                print(paste("Making label for row: ", i))
             }
         }
         ########## Highlighting the names with problem 
