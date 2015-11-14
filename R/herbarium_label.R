@@ -68,7 +68,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
              paste(which(is.na(herbdat000$DATE_IDENTIFIED)|herbdat000$DATE_IDENTIFIED == "") + 1, collapse = ", ")))
         }
         
-    
+    #######################################################
 
     print(paste(nrow(herbdat000), "herbarium specimen labels to create:"))
     #### Load the internal Data base to check Genus-Family relationship in APGIII system
@@ -149,8 +149,8 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
     herbdat000$LON_SECOND                       <- replace_space(herbdat000$LON_SECOND                       )
     herbdat000$LON_FLAG                         <- replace_space(herbdat000$LON_FLAG                         )
     herbdat000$ELEVATION                        <- replace_space(herbdat000$ELEVATION                        )
-    herbdat000$ATTRIBUTES                       <- replace_space(herbdat000$ATTRIBUTES                       )
-    herbdat000$REMARKS                          <- replace_space(herbdat000$REMARKS                          )
+    herbdat000$ATTRIBUTES                       <- replace_space(herbdat000$ATTRIBUTES                       ) ### Change the first letter to Upper Case.
+    herbdat000$REMARKS                          <- replace_space(herbdat000$REMARKS                          ) ### Change the first letter to Upper Case.
     herbdat000$GEOREFERENCE_SOURCES             <- replace_space(herbdat000$GEOREFERENCE_SOURCES             )
     herbdat000$PROJECT                          <- replace_space(herbdat000$PROJECT                          )
     herbdat000$IDENTIFIED_BY                    <- replace_space(herbdat000$IDENTIFIED_BY                    )
@@ -219,7 +219,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         if(all(!is.na(herbdat_temp$LAT_DEGREE), !is.na(herbdat_temp$LAT_MINUTE), !is.na(herbdat_temp$LAT_SECOND)) & is.na(herbdat_temp$LAT_FLAG)){
             lat_check_ind_2[i] <- TRUE
         }
-        if(!herbdat_temp$LAT_FLAG %in% c("N", "S")){
+        if(!herbdat_temp$LAT_FLAG %in% c("N", "S", NA)){
             lat_check_ind_3[i] <- TRUE
         }
         #### Check the LON Flag
@@ -229,7 +229,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         if(all(!is.na(herbdat_temp$LON_DEGREE), !is.na(herbdat_temp$LON_MINUTE), !is.na(herbdat_temp$LON_SECOND)) & is.na(herbdat_temp$LON_FLAG)){
             lon_check_ind_2[i] <- TRUE
         }
-        if(!herbdat_temp$LON_FLAG %in% c("E", "W")){
+        if(!herbdat_temp$LON_FLAG %in% c("E", "W", NA)){
             lon_check_ind_3[i] <- TRUE
         }
     }
