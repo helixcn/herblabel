@@ -1,10 +1,10 @@
 \name{annotation_label}
 \alias{annotation_label}
 \title{
-    Making RTF Annotation labels based on annotation template in CSV
+    Making RTF Annotation labels based on annotation template
 }
 \description{
-    Making RTF Annotation labels based on annotation template in CSV
+    Making RTF Annotation labels based on annotation template
 }
 \usage{
     annotation_label(dat = NULL, infile = NULL, spellcheck = TRUE, outfile = "Annotation_Labels.rtf")
@@ -15,7 +15,7 @@
 data frame of Annotation Template.  
 }
   \item{infile}{
-Character string, the name of the csv file.
+Character string, the name of the csv template.
 }
   \item{spellcheck}{
 Logical, whether the spell checking for species should be porformed. 
@@ -25,8 +25,43 @@ the names of the output rtf file.
 }
 }
 \details{
-This function reads csv template, and generates an RTF file containing 
+This function reads csv or data frame "annoation template", and generates RTF file containing 
 annotation labels. 
+
+\code{PROJECT}: project related with this annotation. eg. Examined for the Revision for the Fern Flora of Hong Kong
+
+\code{TYPE_STATUS}: which kind of type specimen: eg. ISOTYPE
+
+\code{TYPE_REF}: what reference the identification was based upon. DC. Monogr. Phanerog. 6: 409. 1889.
+
+\code{FAMILY}: Family, eg. Magnoliaceae
+
+\code{GENUS}:Genus, eg. Ophioglossum
+
+\code{SPECIES}:Species, eg. petiolatum
+
+\code{AUTHOR_OF_SPECIES}: Author, eg. Hook.
+
+\code{INFRASPECIFIC_RANK}: Infra-specific Rank, eg. var., f., subsp. 
+
+\code{INFRASPECIFIC_EPITHET}: Epithet for the infra specific rank. 
+
+\code{AUTHOR_OF_INFRASPECIFIC_RANK}: Author for the infra specific rank. 
+
+\code{IDENTIFIED_BY}:Who identified the species, eg. Jin-Long Zhang
+
+\code{INSTITUTION}:The institution where the identification was made, eg. KFBG
+
+\code{DATE_IDENTIFIED}: should follow the format: 2014-12-19 for "19 December 2014". 
+
+\code{DET_NOTE}:The specimen is extremely close to Ranunculus japonicus
+
+\code{SPECIMEN_NUMBER}: Global Unique Identifier, see the help file for \code{\link{herbarium_label}} for more information. 
+
+\code{COLLECTOR}: Collector of this specimen
+
+\code{COLLECTOR_NUMBER}: collector's number of this specimen.
+
 }
 
 \author{
