@@ -84,6 +84,9 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         paste(toupper(substring(x, 1, 1)), tolower(substring(x, 2)), sep = "")
     }
     
+    Cap2 <- function(x) {
+        paste(toupper(substring(x, 1, 1)), substring(x, 2), sep = "")
+    }
         #### replace the whitespace from the start or end of a string
     replace_space <- function(x){gsub("^[[:space:]]+|[[:space:]]+$", "", x)}
     
@@ -374,9 +377,9 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         ifelse((is.na(herbdat$ATTRIBUTES)) & (is.na(herbdat$REMARKS)), "",
                 italic_latin(gsub("\\.  ", "\\. ", gsub(" \\.", "\\.", gsub("\\. \\.", "\\. ", gsub("\\. +", "\\. ", 
                              REPLACE(paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb60", 
-                                            ifelse(is.na(herbdat$ATTRIBUTES), "", Cap(as.character(herbdat$ATTRIBUTES))),
+                                            ifelse(is.na(herbdat$ATTRIBUTES), "", Cap2(as.character(herbdat$ATTRIBUTES))),
                                             ifelse(is.na(herbdat$ATTRIBUTES), "", ". "),
-                                            ifelse(is.na(herbdat$REMARKS)   , "", Cap(as.character(herbdat$REMARKS))), 
+                                            ifelse(is.na(herbdat$REMARKS)   , "", Cap2(as.character(herbdat$REMARKS))), 
                                              "\\sa80\\par}", sep = " ")))))))), 
                 
         ##### COLLECTOR and COLLECTION NUMBER !
