@@ -12,7 +12,7 @@ fill_sp_dwc <- function(dat){
     #### add scientific name based on the local Chinese Name
     datspcn <- merge(dat2, spcn, by.x = "LOCAL_NAME", by.y = "NAME_CN", sort = FALSE, all.x = TRUE)
     datspcn$SCIENTIFIC_NAME <- ifelse((is.na(datspcn$SCIENTIFIC_NAME)|datspcn$SCIENTIFIC_NAME == "")&(!is.na(datspcn$LOCAL_NAME)|datspcn$LOCAL_NAME == ""), datspcn$LOCAL_NAME, datspcn$SCIENTIFIC_NAME)
-    datspcn$SCIENTIFIC_NAME <- ifelse((is.na(datspcn$SCIENTIFIC_NAME)|datspcn$SCIENTIFIC_NAME == ""), "NOT_PROVIDED", datspcn$SCIENTIFIC_NAME)
+    datspcn$SCIENTIFIC_NAME <- ifelse((is.na(datspcn$SCIENTIFIC_NAME)|datspcn$SCIENTIFIC_NAME == ""), "", datspcn$SCIENTIFIC_NAME)
     #### 
     ### add family
     res_parse0 <- parse_taxa(as.character(datspcn$SCIENTIFIC_NAME))
