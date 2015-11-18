@@ -2,15 +2,17 @@
 
 ### What is it?
 
-It is an R package helps to create and check RTF herbarium labels, annotation labels, based on the Darwin Core Format. 
+It is an R package helps to create and check RTF herbarium labels, annotation labels, based on the Darwin Core Format. Including the following functionalities: 
 
-1. It helps you to parse a scientific name, and automatically fill the relevant fields including, FAMILY, GENUS, SPECIES. 
+1. Parse a scientific name, and automatically fill the relevant fields including, FAMILY (in APGIII classification system), GENUS, SPECIES. 
 
-2. It will check the validity based on The Plant List Accepted Species Database. 
+2. Check the validity based on The Plant List Accepted Species Database/Flora of China. 
 
-3. It also provides number of conversion utilities.
+3. Number of conversion utilities to create the template.
 
-4. Its output is RTF, which could be opened and viewed in MS Word or Libre Office etc.
+4. Identify, lighlight and change the font to Italic for Latin Words. 
+
+5. Its output is RTF, which could be opened and viewed in MS Word or Libre Office etc.
 
 ### How to Install: 
 
@@ -44,7 +46,6 @@ install.packages("devtools")
     ```R
     path <- system.file("extdata", "ANNOTATION_TEMPLATE.csv", package = "herblabel")
     annotation_label(infile = path)
-    
     ```
     
 Please feel free to send an email to **Jinlong Zhang** <jinlongzhang01@gmail.com> if you have any questions on how to use this package.
