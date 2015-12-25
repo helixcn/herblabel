@@ -1,10 +1,10 @@
 \name{herbarium_label}
 \alias{herbarium_label}
 \title{
-Creating RTF herbarium labels based on Darwin Core herbarium records template in CSV
+Creating RTF herbarium labels based on Darwin Core herbarium records template
 }
 \description{
-Creating RTF herbarium labels based on Darwin Core herbarium records template in CSV.
+Creating RTF herbarium labels based on Darwin Core herbarium records template.
 }
 \usage{
 herbarium_label(dat = NULL, infile = NULL, spellcheck = TRUE, outfile = "herblabel.rtf")
@@ -12,129 +12,129 @@ herbarium_label(dat = NULL, infile = NULL, spellcheck = TRUE, outfile = "herblab
 
 \arguments{
    \item{dat}{
-data frame of Darwin Core Template.  
+dataframe of Darwin Core Template.  
 }
    \item{infile}{
-Character representing the template file in csv.
+Character string representing the name of the csv template.
 }
   \item{spellcheck}{ 
-Logical, indicating whether the spell check will be performed.
+Logical, indicating whether the check of spelling should be performed.
 }
   \item{outfile}{
-the output rtf file.
+Character string, name of the rtf file to be generated.
 }
 }
 \details{
-This function reads Darwin Core herbarium records template in CSV, and generates a RTF file containing 
-herbarium labels. Only a limited number of the columns can be left blank. 
-This function was inspired The Plabel program developed by Kent D. Perkins at the University of 
-Florida Herbarium.
+This function reads Darwin Core herbarium records template in CSV, and generates a RTF file. It will check the completeness for each entry: Labels will not generated if some critical fields is missing, eg. Collector, Collector's Number. Therefore, a specimen without collector's number, the collector's number should be marked as "s.n.". 
 
-\url{ http://www.flmnh.ufl.edu/natsci/herbarium/pl/ }
+Please follow the APGIII families for all the species, if mismatch is found, there will be a warning in the RTF label. 
 
+The validity of the species will be checked based on the Plant List Website \url{http://www.theplantlist.org/ } or Flora of China \url{http://frps.eflora.cn/ }. So make sure the species is spelled correctly, and the Abbreviation of Authors is correctly spelled. 
 
-Columns of the template:
+The function will also identify and highlight the latin words in the Remarks field. 
 
-1	GLOBAL_UNIQUE_IDENTIFIER: Institution code plus the number
+Details for the columns of the template. please look at the file "DARWIN_CORE_HERBARIUM_RECORDS_TEMPLATE.xlsx" in the extdata folder:
 
-2	INSTITUTION_CODE: Code for the herbarium
+1. \code{GLOBAL_UNIQUE_IDENTIFIER}: Institution code plus the number, eg. KFBG000102
 
-3	COLLECTION_CODE: the collection code for the herbarium specimen, eg. the barcode number
+2. \code{INSTITUTION_CODE}: Code for the herbarium, eg. KFBG
 
-4	BASIS_OF_RECORD: type of the specimen, eg. herbarium specimen
+3. \code{COLLECTION_CODE}: the collection code for the herbarium specimen, eg. the barcode number
 
-5	PREPARATIONS:fruiting, flowering or vegetative
+4. \code{BASIS_OF_RECORD}: type of the specimen, eg. herbarium specimen
 
-6	HERBARIUM:Name of the herbarium
+5. \code{PREPARATIONS}:fruiting, flowering or vegetative, eg. fruiting
 
-7	TITLE:Title of the collection, eg. Plants of Hong Kong
+6. \code{HERBARIUM}:Name of the herbarium, eg. Kadoorie Farm and Botanic Garden Herbarium (KFBG).
 
-8	COLLECTOR:Full Name of the collector
+7. \code{TITLE}: Title of the collection, eg. Plants of Hong Kong
 
-9	ADDITIONAL_COLLECTOR:people assisted the collection
+8. \code{COLLECTOR}:Full Name of the collector.
 
-10	COLLECTOR_NUMBER:collector's number
+9. \code{ADDITIONAL_COLLECTOR}:People assisted the collection.
 
-11	DATE_COLLECTED:2013_4_11
+10. \code{COLLECTOR_NUMBER}:Collector's number
 
-12	LOCAL_NAME:local name for this plant
+11. \code{DATE_COLLECTED}:eg. Must must follow the YYYY-MM-DD format, eg. 2013-4-11, representing 11 April 2013.
 
-13	FAMILY:APGIII Family
+12. \code{LOCAL_NAME}:Local name for this plant.
 
-14	GENUS:genus
+13. \code{FAMILY}:APGIII Family
 
-15	SPECIES:specific epithetic
+14. \code{GENUS}:Genus
 
-16	AUTHOR_OF_SPECIES:author
+15. \code{SPECIES}:specific epithetic
 
-17	INFRASPECIFIC_RANK:"var.", "f.", or "subsp."
+16. \code{AUTHOR_OF_SPECIES}:author
 
-18	INFRASPECIFIC_EPITHET:infraspecific epithet
+17. \code{INFRASPECIFIC_RANK}: Infra-specific rank, one of "var.", "f.", or "subsp."
 
-19	AUTHOR_OF_INFRASPECIFIC_RANK:author of the infraspecific epithet
+18. \code{INFRASPECIFIC_EPITHET}:infraspecific epithet
 
-20	COUNTRY:country of the specimen collected
+19. \code{AUTHOR_OF_INFRASPECIFIC_RANK}:author of the infraspecific epithet
 
-21	STATE_PROVINCE:state or province 
+20. \code{COUNTRY}:country of the specimen collected, must be provided. 
 
-22	COUNTY: county
+21. \code{STATE_PROVINCE}:state or province, must be provided.
 
-23	LOCALITY: precise locality
+22. \code{COUNTY}: county
 
-24	LOCALITY_ORIGINAL: locality in local language
+23. \code{LOCALITY}: precise locality
 
-25	IMAGE_URL: url for the image
+24. \code{LOCALITY_ORIGINAL}: locality in local language.
 
-26	RELATED_INFORMATION: the reference of the name
+25. \code{IMAGE_URL}: url for the image of this specimen. 
 
-27	LAT_DEGREE:latitude, degrees
+26. \code{RELATED_INFORMATION}: the reference of the name
 
-28	LAT_MINUTE:latitude, minutes
+27. \code{LAT_DEGREE}:latitude, degrees, in WGS1984 geocoordinate system.
 
-29	LAT_SECOND:latitude, seconds
+28. \code{LAT_MINUTE}:latitude, minutes, in WGS1984 geocoordinate system.
 
-30	LAT_FLAG:N for northern hemisphere, S for southern hemisphere
+29. \code{LAT_SECOND}:latitude, seconds, in WGS1984 geocoordinate system.
 
-31	LON_DEGREE:longitude, degrees
+30. \code{LAT_FLAG}:N for northern hemisphere, S for southern hemisphere
 
-32	LON_MINUTE:longitude, minutes
+31. \code{LON_DEGREE}:longitude, degrees, in WGS1984 geocoordinate system.
 
-33	LON_SECOND:longitude, seconds
+32. \code{LON_MINUTE}:longitude, minutes, in WGS1984 geocoordinate system.
 
-34	LON_FLAG:E for eastern hemisphere, W for western hemisphere
+33. \code{LON_SECOND}:longitude, seconds, in WGS1984 geocoordinate system.
 
-35	ELEVATION:elevation in meters
+34. \code{LON_FLAG}:E for eastern hemisphere, W for western hemisphere
 
-36	ATTRIBUTES:description of the species
+35. \code{ELEVATION}:elevation in meters, please only provide the number. 
 
-37	REMARKS:the associated species, and the description of habitats
+36. \code{ATTRIBUTES}:description of the species. eg. Tree, 8m tall. Bark brownish. Young branchlet covered with dense hair. Leaf Underside greenish grey. Anthers yellow, petals red. Fruit 8-12mm, globose, yellow.  
 
-38	CABINET:location of the specimen
+37. \code{REMARKS}:the associated species, and the description of habitats. Eg. Understory, with Lasianthus fordii, Ardisia quinquegona etc.
 
-39	DISPOSITION:in herbarium, 
+38. \code{CABINET}:location of the specimen
 
-40	GEOREFERENCE_SOURCES:GPS or Google Earth
+39. \code{DISPOSITION}:eg. in herbarium 
 
-41	GEOREFERENCE_VERIFICATION_STATUS:YES
+40. \code{GEOREFERENCE_SOURCES}:GPS or Google Earth
 
-42	GEOREFERENCE_REMARKS:accuracy for the georeference
+41. \code{GEOREFERENCE_VERIFICATION_STATUS}:whether the georeferecing data has been veryfied or not. eg. YES
 
-43	PROJECT:Project the specimen related with
+42. \code{GEOREFERENCE_REMARKS}:accuracy for the georeference
 
-44	IDENTIFIED_BY: who did the identification
+43. \code{PROJECT}:Project the specimen related with
 
-45	DATE_IDENTIFIED: date of identification
+44. \code{IDENTIFIED_BY}: who did the identification
 
-46	TYPE_STATUS:if not type, 
+45. \code{DATE_IDENTIFIED}: date of identification, eg. 2015-10-18
 
-47	PROCESSED_BY: data entered by
+46. \code{TYPE_STATUS}:if the specimen is a type specimen or not. if yes, please specify which kind of type specimen it belong to. 
 
-48	DATE_LASTMODIFIED: date of the modification
+47. \code{PROCESSED_BY}: data entered by
 
-If spellcheck is TRUE, text will be highlighted if the genus does not match the family. 
-Comments will be automatically generated. If you do not want to change 
-the information, just suppress it by changing "spellcheck = FALSE". 
+48. \code{DATE_LASTMODIFIED}: date of the modification, eg. 2015-10-18
 
+}
+
+\references{
+The Plabel program developed by Kent D. Perkins at the University of Florida Herbarium \url{ http://www.flmnh.ufl.edu/natsci/herbarium/pl/ }.
 }
 
 \author{

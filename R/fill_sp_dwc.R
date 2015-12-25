@@ -12,7 +12,7 @@ fill_sp_dwc <- function(dat){
     #### add scientific name based on the local Chinese Name
     datspcn <- merge(dat2, spcn, by.x = "LOCAL_NAME", by.y = "NAME_CN", sort = FALSE, all.x = TRUE)
     datspcn$SCIENTIFIC_NAME <- ifelse((is.na(datspcn$SCIENTIFIC_NAME)|datspcn$SCIENTIFIC_NAME == "")&(!is.na(datspcn$LOCAL_NAME)|datspcn$LOCAL_NAME == ""), datspcn$LOCAL_NAME, datspcn$SCIENTIFIC_NAME)
-    datspcn$SCIENTIFIC_NAME <- ifelse((is.na(datspcn$SCIENTIFIC_NAME)|datspcn$SCIENTIFIC_NAME == ""), "NOT_PROVIDED", datspcn$SCIENTIFIC_NAME)
+    datspcn$SCIENTIFIC_NAME <- ifelse((is.na(datspcn$SCIENTIFIC_NAME)|datspcn$SCIENTIFIC_NAME == ""), "", datspcn$SCIENTIFIC_NAME)
     #### 
     ### add family
     res_parse0 <- parse_taxa(as.character(datspcn$SCIENTIFIC_NAME))
@@ -32,10 +32,38 @@ fill_sp_dwc <- function(dat){
     datspcn2 <- merge(datspcn2, families, by.x = "GENUS",by.y = "GENUS", all.x = TRUE, sort = FALSE)
     datspcn2$FAMILY                        <- ifelse(is.na(datspcn2$FAMILY.x)                    |datspcn2$FAMILY.x                     == "", datspcn2$FAMILY.y,                            datspcn2$FAMILY.x                     )
     
-    
     datspcn2 <- datspcn2[order(datspcn2$add.sort.id), ]
-    res <- subset(datspcn2, select = colnames(dat)) 
     
+    ##### If the data has been successfully filled, do not fill again. Avoid duplicate entries introduced by merge. 
+    datspcn2_unique <- unique(datspcn2)
+    res.test <- subset(datspcn2_unique, select = colnames(dat))
+    
+    res.test_combine_tax <- paste(
+        res.test$COLLECTOR,
+        res.test$COLLECTOR_NUMBER,
+        res.test$FAMILY,
+        res.test$GENUS,
+        res.test$SPECIES,
+        res.test$AUTHOR_OF_SPECIES,
+        res.test$INFRASPECIFIC_RANK,
+        res.test$INFRASPECIFIC_EPITHET,
+        res.test$AUTHOR_OF_INFRASPECIFIC_RANK, sep = "_")
+    
+    dat_combine_tax <- paste(
+        dat$COLLECTOR,
+        dat$COLLECTOR_NUMBER,
+        dat$FAMILY,
+        dat$GENUS,
+        dat$SPECIES,
+        dat$AUTHOR_OF_SPECIES,
+        dat$INFRASPECIFIC_RANK,
+        dat$INFRASPECIFIC_EPITHET,
+        dat$AUTHOR_OF_INFRASPECIFIC_RANK, sep = "_")
+    
+    if(all(res.test_combine_tax %in% dat_combine_tax)){
+        res <- dat 
+    } else {
+        res <- subset(datspcn2, select = colnames(dat)) 
+    }
     return(res)
 }
-

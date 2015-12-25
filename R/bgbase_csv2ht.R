@@ -8,7 +8,8 @@ bgbase_csv2ht  <- function(infile, outfile = NULL,
                                 PROCESSED_BY = NA, 
                                 DATE_LASTMODIFIED = NA
                                 )
-{
+{   
+    Sys.setlocale("LC_TIME", "C")
     cap  <- function(x) {
         paste(toupper(substring(x, 1, 1)), tolower(substring(x, 2)), sep = "")
     }
@@ -42,10 +43,9 @@ bgbase_csv2ht  <- function(infile, outfile = NULL,
     COLLECTOR_NUMBER      <- ifelse(bg_base_export_dat$COLL_.                    == " ", NA,  bg_base_export_dat$COLL_.                   )
     COUNTRY               <- ifelse(toupper(bg_base_export_dat$COUNTRY_ON_LABEL) == " ", NA,  toupper(bg_base_export_dat$COUNTRY_ON_LABEL))
     COUNTY                <- ifelse(bg_base_export_dat$SUB.SUB.COUNTRY           == " ", NA,  bg_base_export_dat$SUB.SUB.COUNTRY          )
-    DATE_COLLECTED        <- ifelse(bg_base_export_dat$COLL_DT                   == " ", NA,  bg_base_export_dat$COLL_DT                  )
-    DATE_IDENTIFIED       <- ifelse(bg_base_export_dat$REC_UPDATE                == " ", NA,  bg_base_export_dat$REC_UPDATE               )
+    DATE_COLLECTED        <- ifelse(bg_base_export_dat$COLL_DT                   == " ", NA,  as.character(as.Date(bg_base_export_dat$COLL_DT, format = "%d %b %Y" )))
+    DATE_IDENTIFIED       <- ifelse(bg_base_export_dat$REC_UPDATE                == " ", NA,  as.character(as.Date(bg_base_export_dat$REC_UPDATE, format = "%d %b %Y" )))
     ELEVATION             <- ifelse(bg_base_export_dat$ALTITUDE                  == " ", NA,  bg_base_export_dat$ALTITUDE                 )
-
     GEOREFERENCE_SOURCES  <- ifelse(bg_base_export_dat$GEOREF                    == " ", NA,  bg_base_export_dat$GEOREF                   )
     
 
