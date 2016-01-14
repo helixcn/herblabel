@@ -35,7 +35,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
              paste(which(is.na(herbdat000$DATE_COLLECTED)) + 1, collapse = ", ")))
         }
     if(any(is.na(herbdat000$FAMILY) )){
-        stop(paste("\"FAMILY\" must be provided for row: ", 
+        warning(paste("\"FAMILY\" must be provided for row: ", 
              paste(which(is.na(herbdat000$FAMILY)) + 1, collapse = ", ")))
         }
     if(any(is.na(herbdat000$GENUS))){
@@ -60,7 +60,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
              paste(which(is.na(herbdat000$LOCALITY)) + 1, collapse = ", ")))
         }
     if(any(is.na(herbdat000$IDENTIFIED_BY))){
-        stop(paste("\"IDENTIFIED_BY\" must be provided for row: ", 
+        warning(paste("\"IDENTIFIED_BY\" must be provided for row: ", 
              paste(which(is.na(herbdat000$DETERMINOR)) + 1, collapse = ", ")))
         }
     if(any(is.na(herbdat000$DATE_IDENTIFIED))){
