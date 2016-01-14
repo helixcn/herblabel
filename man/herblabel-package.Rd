@@ -12,8 +12,8 @@ This package is designed for making herbarium labels and annotation slips based 
 \tabular{ll}{
 Package: \tab herblabel\cr
 Type: \tab Package\cr
-Version: \tab 0.3.24\cr
-Date: \tab 2015-11-14\cr
+Version: \tab 0.3.25\cr
+Date: \tab 2016-1-15\cr
 License: \tab GLP-2\cr
 LazyLoad: \tab yes\cr
 }

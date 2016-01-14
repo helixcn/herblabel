@@ -146,4 +146,6 @@ Jinlong Zhang
                         package = "herblabel")
     herbarium_label(infile = path,  
                   outfile = "DARWIN_CORE_HERBARIUM_RECORDS_TEMPLATE_herbarium_label.rtf")
+    herbarium_label(infile = path,  spellcheck = FALSE, 
+                  outfile = "DARWIN_CORE_HERBARIUM_RECORDS_TEMPLATE_herbarium_label_spell_check_FALSE.rtf")
 }

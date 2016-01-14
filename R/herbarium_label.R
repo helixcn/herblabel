@@ -39,7 +39,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
              paste(which(is.na(herbdat000$FAMILY)) + 1, collapse = ", ")))
         }
     if(any(is.na(herbdat000$GENUS))){
-        stop(paste("\"GENUS\" must be provided for row: ", 
+        warning(paste("\"GENUS\" must be provided for row: ", 
              paste(which(is.na(herbdat000$GENUS)) + 1, collapse = ", ")))
         }
     if(any(is.na(herbdat000$COUNTRY))){
@@ -67,7 +67,6 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         warning(paste("\"DATE_IDENTIFIED\" not provided for row: ", 
              paste(which(is.na(herbdat000$DATE_IDENTIFIED)) + 1, collapse = ", ")))
         }
-        
     #######################################################
 
     print(paste(nrow(herbdat000), "herbarium specimen labels to create:"))
@@ -348,12 +347,12 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         
         #### FAMILY, in BOLD FACE, must be either in Flora of Hong Kong, or The Plant List
         paste("{\\pard\\keep\\keepn\\fi0\\li0\\qc\\sb10\\sa100\\fs18\\b ",
-               herbdat$FAMILY,"\\b0\\qc0 \\par }", sep = ""),
+               ifelse(is.na(herbdat$FAMILY)," ",herbdat$FAMILY),"\\b0\\qc0 \\par }", sep = ""),
 
         #### SPECIES INFO
         paste("{\\pard\\keep\\keepn\\fi-288\\li288\\sb100\\sa200\\fs20\\b\\i ",
-                    REPLACE(paste(herbdat$GENUS,"\\i0 \\i", 
-                                  ifelse((is.na(herbdat$SPECIES)|herbdat$SPECIES == "sp."),  "\\i0 sp.", paste(" ", as.character(herbdat$SPECIES),                          sep = "")), "\\i0",
+                    REPLACE(paste(ifelse( is.na(herbdat$GENUS), "", herbdat$GENUS),"\\i0 \\i", 
+                                  ifelse( is.na(herbdat$SPECIES),                           "\\i0 ",    paste(" ", as.character(herbdat$SPECIES),                          sep = "")), "\\i0",
                                   ifelse( is.na(herbdat$AUTHOR_OF_SPECIES),                  "",         paste(" ", as.character(herbdat$AUTHOR_OF_SPECIES),                sep = "")),
                                   ifelse( is.na(herbdat$INFRASPECIFIC_RANK),                 "",         paste(" ", as.character(herbdat$INFRASPECIFIC_RANK),               sep = "")), "\\i",
                                   ifelse( is.na(herbdat$INFRASPECIFIC_EPITHET),              "",         paste(" ", as.character(herbdat$INFRASPECIFIC_EPITHET),            sep = "")), "\\i0",
@@ -409,23 +408,14 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
               ),
         ##### IDENTIFICATION INFOMATION
         ##### "    ", gsub("_", "", as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER)), 
-        ifelse(!(is.na(herbdat$TYPE_STATUS)), 
-            paste("{\\pard\\keep\\sa40\\keepn\\fi0\\li0\\tqr ",
+            paste("{\\pard\\keep\\sa40\\keepn\\fi0\\li0\\tqr\\tx4850 ",
                   gsub("_", "", ifelse(is.na(herbdat$GLOBAL_UNIQUE_IDENTIFIER), 
                   "", as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER))), 
-                  "\\tx4850\\tab ", herbdat$TYPE_STATUS,
+                  " \\tab ", ifelse(is.na(herbdat$TYPE_STATUS), "",herbdat$TYPE_STATUS),
                  " Det.: ",herbdat$IDENTIFIED_BY,", ", 
                  tryCatch(formatdate(herbdat$DATE_IDENTIFIED), 
                  error= function(e) {print("Warning: Date format incorrect, using original string"); 
                  herbdat$DATE_IDENTIFIED}), "\\par}",sep = ""),
-            paste("{\\pard\\keep\\sa40\\keepn\\fi0\\li0\\tqr ", gsub("_", 
-                  "", ifelse(is.na(herbdat$GLOBAL_UNIQUE_IDENTIFIER), 
-                 "", as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER))),
-                 "\\tx4850\\tab Det.: ", herbdat$IDENTIFIED_BY,", ", 
-                 tryCatch(formatdate(herbdat$DATE_IDENTIFIED), 
-                 error= function(e) {print("Warning: Date format incorrect, using original string"); 
-                 herbdat$DATE_IDENTIFIED}), "\\par}",sep = "")
-            ),
         "{\\pard\\keep\\keepn\\sa100 \\par }", 
         "{\\pard\\keep\\qc  .                  .                   .\\par}" 
          )                             ### End of one label
