@@ -344,20 +344,22 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         ifelse(is.na(herbdat$TITLE), "", 
                paste("{\\pard\\keep\\keepn\\fi0\\li0\\fs18\\qc\\sb10\\sa100\\b ",
                 herbdat$TITLE,"\\b0 \\par }", sep = "")),
-        
         #### FAMILY, in BOLD FACE, must be either in Flora of Hong Kong, or The Plant List
-        paste("{\\pard\\keep\\keepn\\fi0\\li0\\qc\\sb10\\sa100\\fs18\\b ",
-               ifelse(is.na(herbdat$FAMILY)," ",herbdat$FAMILY),"\\b0\\qc0 \\par }", sep = ""),
+        ifelse(is.na(herbdat$FAMILY), paste("{\\pard\\keep\\keepn\\fi0\\li0\\qc\\sb10\\sa100\\fs18\\b ",
+               "\\b0\\qc0 \\par }", sep = ""), paste("{\\pard\\keep\\keepn\\fi0\\li0\\qc\\sb10\\sa100\\fs18\\b ",
+               herbdat$FAMILY,"\\b0\\qc0 \\par }", sep = "")),
 
         #### SPECIES INFO
-        paste("{\\pard\\keep\\keepn\\fi-288\\li288\\sb100\\sa200\\fs20\\b\\i ",
+        ifelse(is.na(herbdat$GENUS) & is.na(herbdat$SPECIES) & is.na(herbdat$AUTHOR_OF_SPECIES) & is.na(herbdat$INFRASPECIFIC_RANK) & is.na(herbdat$INFRASPECIFIC_EPITHET) & is.na(herbdat$AUTHOR_OF_INFRASPECIFIC_RANK), 
+                    "", 
+                    paste("{\\pard\\keep\\keepn\\fi-288\\li288\\sb100\\sa200\\fs20\\b\\i ",
                     REPLACE(paste(ifelse( is.na(herbdat$GENUS), "", herbdat$GENUS),"\\i0 \\i", 
                                   ifelse( is.na(herbdat$SPECIES),                           "\\i0 ",    paste(" ", as.character(herbdat$SPECIES),                          sep = "")), "\\i0",
                                   ifelse( is.na(herbdat$AUTHOR_OF_SPECIES),                  "",         paste(" ", as.character(herbdat$AUTHOR_OF_SPECIES),                sep = "")),
                                   ifelse( is.na(herbdat$INFRASPECIFIC_RANK),                 "",         paste(" ", as.character(herbdat$INFRASPECIFIC_RANK),               sep = "")), "\\i",
                                   ifelse( is.na(herbdat$INFRASPECIFIC_EPITHET),              "",         paste(" ", as.character(herbdat$INFRASPECIFIC_EPITHET),            sep = "")), "\\i0",
                                   ifelse( is.na(herbdat$AUTHOR_OF_INFRASPECIFIC_RANK),       "",         paste(" ", as.character(herbdat$AUTHOR_OF_INFRASPECIFIC_RANK),     sep = "")), sep = " ")),
-                                  "\\b0\\par}", sep = ""),
+                                  "\\b0\\par}", sep = "")),
         ##### COUNTY and LOCALITY
         paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb120\\sa20 ", 
         REPLACE(paste(toupper(herbdat$COUNTRY),", ", herbdat$STATE_PROVINCE,
@@ -408,14 +410,16 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
               ),
         ##### IDENTIFICATION INFOMATION
         ##### "    ", gsub("_", "", as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER)), 
-            paste("{\\pard\\keep\\sa40\\keepn\\fi0\\li0\\tqr\\tx4850 ",
+        ifelse(is.na(herbdat$GLOBAL_UNIQUE_IDENTIFIER) & is.na(herbdat$TYPE_STATUS  ) & is.na(herbdat$IDENTIFIED_BY           ) & is.na(herbdat$DATE_IDENTIFIED         ) , "", paste("{\\pard\\keep\\sa40\\keepn\\fi0\\li0\\tqr\\tx4850 ",
                   gsub("_", "", ifelse(is.na(herbdat$GLOBAL_UNIQUE_IDENTIFIER), 
-                  "", as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER))), 
+                                       "", as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER))), 
                   " \\tab ", ifelse(is.na(herbdat$TYPE_STATUS), "",herbdat$TYPE_STATUS),
-                 " Det.: ",herbdat$IDENTIFIED_BY,", ", 
-                 tryCatch(formatdate(herbdat$DATE_IDENTIFIED), 
-                 error= function(e) {print("Warning: Date format incorrect, using original string"); 
-                 herbdat$DATE_IDENTIFIED}), "\\par}",sep = ""),
+                  ifelse(is.na(herbdat$IDENTIFIED_BY),"",paste(" Det.: ",herbdat$IDENTIFIED_BY)),
+                  ifelse(is.na(herbdat$DATE_IDENTIFIED), "", ", "), 
+                  ifelse(is.na(herbdat$DATE_IDENTIFIED), "", 
+                         tryCatch(formatdate(herbdat$DATE_IDENTIFIED), 
+                         error= function(e) {print("Warning: Date format incorrect, using original string"); 
+                         herbdat$DATE_IDENTIFIED})), "\\par}",sep = "")),
         "{\\pard\\keep\\keepn\\sa100 \\par }", 
         "{\\pard\\keep\\qc  .                  .                   .\\par}" 
          )                             ### End of one label
