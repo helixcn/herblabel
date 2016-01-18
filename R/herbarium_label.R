@@ -2,15 +2,69 @@
 
 herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfile = "herblabel.rtf"){
     if(is.null(dat)&is.null(infile)){
-        stop("at least dat or infile should be specified")
+        stop("at least the argument \'dat\' or \'infile\' should be specified")
     }
     if(!is.null(dat)&!is.null(infile)){
-        stop("dat and infile should be not be specified at the same time")
+        stop("argument \'dat\' and \'infile\' should not be specified at the same time")
     }
     if(is.null(dat)){
         herbdat000 <- read.csv(infile, header = TRUE, stringsAsFactors = FALSE)
     } else {
         herbdat000 <- dat
+    }
+    ### Column names of the standard template
+    colnames_template <- c("GLOBAL_UNIQUE_IDENTIFIER",
+    "INSTITUTION_CODE",
+    "COLLECTION_CODE",
+    "BASIS_OF_RECORD",
+    "PREPARATIONS",
+    "HERBARIUM",
+    "TITLE",
+    "COLLECTOR",
+    "ADDITIONAL_COLLECTOR",
+    "COLLECTOR_NUMBER",
+    "DATE_COLLECTED",
+    "LOCAL_NAME",
+    "FAMILY",
+    "GENUS",
+    "SPECIES",
+    "AUTHOR_OF_SPECIES",
+    "INFRASPECIFIC_RANK",
+    "INFRASPECIFIC_EPITHET",
+    "AUTHOR_OF_INFRASPECIFIC_RANK",
+    "COUNTRY",
+    "STATE_PROVINCE",
+    "COUNTY",
+    "LOCALITY",
+    "LOCALITY_ORIGINAL",
+    "IMAGE_URL",
+    "RELATED_INFORMATION",
+    "LAT_DEGREE",
+    "LAT_MINUTE",
+    "LAT_SECOND",
+    "LAT_FLAG",
+    "LON_DEGREE",
+    "LON_MINUTE",
+    "LON_SECOND",
+    "LON_FLAG",
+    "ELEVATION",
+    "ATTRIBUTES",
+    "REMARKS",
+    "CABINET",
+    "DISPOSITION",
+    "GEOREFERENCE_SOURCES",
+    "GEOREFERENCE_VERIFICATION_STATUS",
+    "GEOREFERENCE_REMARKS",
+    "PROJECT",
+    "IDENTIFIED_BY",
+    "DATE_IDENTIFIED",
+    "TYPE_STATUS",
+    "PROCESSED_BY",
+    "DATE_LASTMODIFIED")
+    
+    ### Check if the standardized template is used. 
+    if(!all(colnames(herbdat000) %in% colnames_template)){
+       warning(paste("The following Columns are needed ", paste(colnames(herbdat000)[!colnames(herbdat000) %in% colnames_template], collapse = ", ")))
     }
     
     herbdat000[herbdat000 == ""] <- NA
@@ -19,23 +73,23 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
     
     #### Check the dataset
     if(any(is.na(herbdat000$HERBARIUM))){
-        stop(paste("\"HERBARIUM\" must be provided for row: ", 
+        stop(paste("\"HERBARIUM\" not provided for row: ", 
              paste(which(is.na(herbdat000$HERBARIUM))+1, collapse = ", ")))
         }
     if(any(is.na(herbdat000$COLLECTOR))){
-        stop(paste("\"COLLECTOR\" must be provided for row: ", 
+        stop(paste("\"COLLECTOR\" not provided for row: ", 
              paste(which(is.na(herbdat000$COLLECTOR))+1, collapse = ", ")))
         }
     if(any(is.na(herbdat000$COLLECTOR_NUMBER))){
-        stop(paste("\"COLLECTOR_NUMBER\" must be provided for row: ", 
+        stop(paste("\"COLLECTOR_NUMBER\" not provided for row: ", 
              paste(which(is.na(herbdat000$COLLECTOR_NUMBER)) + 1, collapse = ", ")))
         }
     if(any(is.na(herbdat000$DATE_COLLECTED))){
-        stop(paste("\"DATE_COLLECTED\" must be provided for row: ", 
+        stop(paste("\"DATE_COLLECTED\" not provided for row: ", 
              paste(which(is.na(herbdat000$DATE_COLLECTED)) + 1, collapse = ", ")))
         }
     if(any(is.na(herbdat000$FAMILY) )){
-        warning(paste("\"FAMILY\" must be provided for row: ", 
+        warning(paste("\"FAMILY\" not provided for row: ", 
              paste(which(is.na(herbdat000$FAMILY)) + 1, collapse = ", ")))
         }
     if(any(is.na(herbdat000$GENUS))){
@@ -43,24 +97,24 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
              paste(which(is.na(herbdat000$GENUS)) + 1, collapse = ", ")))
         }
     if(any(is.na(herbdat000$COUNTRY))){
-        stop(paste("\"COUNTRY\" must be provided for row: ", 
+        stop(paste("\"COUNTRY\" not provided for row: ", 
              paste(which(is.na(herbdat000$COUNTRY)) + 1, collapse = ", ")))
          }
     if(any(is.na(herbdat000$STATE_PROVINCE))){
-        stop(paste("\"STATE_PROVINCE\" must be provided for row: ", 
+        stop(paste("\"STATE_PROVINCE\" not provided for row: ", 
              paste(which(is.na(herbdat000$STATE_PROVINCE)) + 1, collapse = ", ")))
         }
     if(any(is.na(herbdat000$COUNTY))){
-        warning(paste("\"COUNTY\" has not been provided for row: ", 
+        warning(paste("\"COUNTY\" not provided for row: ", 
              paste(which(is.na(herbdat000$COUNTY)) + 1, collapse = ", ")))
              herbdat000$COUNTY[is.na(herbdat000$COUNTY)] <- " "
         }
     if(any(is.na(herbdat000$LOCALITY))){
-        warning(paste("\"LOCALITY\" not provided  for row: ", 
+        warning(paste("\"LOCALITY\" not provided for row: ", 
              paste(which(is.na(herbdat000$LOCALITY)) + 1, collapse = ", ")))
         }
     if(any(is.na(herbdat000$IDENTIFIED_BY))){
-        warning(paste("\"IDENTIFIED_BY\" must be provided for row: ", 
+        warning(paste("\"IDENTIFIED_BY\" not provided for row: ", 
              paste(which(is.na(herbdat000$DETERMINOR)) + 1, collapse = ", ")))
         }
     if(any(is.na(herbdat000$DATE_IDENTIFIED))){
@@ -162,7 +216,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
     herbdat000$DATE_LASTMODIFIED                <- replace_space(herbdat000$DATE_LASTMODIFIED                )
 
     ####################
-    ##### truncated the the very small error introduced by openxlsx for seconds
+    ##### truncated the digits introduced by openxlsx for seconds
     
     herbdat000$LAT_DEGREE   <- as.character(as.integer(herbdat000$LAT_DEGREE ))
     herbdat000$LAT_MINUTE   <- as.character(as.integer(herbdat000$LAT_MINUTE ))
@@ -200,7 +254,9 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
              ### cat(message_txt, file = paste(gsub(":", "", Sys.time()), "herblabel_scientific_name_warning.txt", sep = ""))  
         }
         
-        herbdat000$GENUS[ind] <- paste("\\cf2\\i0 Name not found. Check Spelling or Validity at {\\field{\\*\\fldinst{HYPERLINK \"http://www.theplantlist.org/\"}}{\\fldrslt{\\ul\\cf2 http://www.theplantlist.org/}}} or {\\field{\\*\\fldinst{HYPERLINK \"http://frps.eflora.cn/\"}}{\\fldrslt{\\ul\\cf2 http://frps.eflora.cn/}}} for:\\i  ", herbdat000$GENUS[ind], sep = "")
+        herbdat000$GENUS[ind] <- ifelse(is.na(herbdat000$GENUS[ind]), "(Empty Species)", herbdat000$GENUS[ind])
+        
+        herbdat000$GENUS[ind] <- paste("\\cf2\\i0 This species can not be found in the embedded database in herblabel package. Check Spelling or Validity at {\\field{\\*\\fldinst{HYPERLINK \"http://www.theplantlist.org/\"}}{\\fldrslt{\\ul\\cf2 http://www.theplantlist.org/}}} or {\\field{\\*\\fldinst{HYPERLINK \"http://frps.eflora.cn/\"}}{\\fldrslt{\\ul\\cf2 http://frps.eflora.cn/}}} for:\\i  ", herbdat000$GENUS[ind], sep = "")
         herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind] <- paste(ifelse(is.na(herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind]), 
                                                                      "", herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind]), "\\cf1", sep = "")
    }
@@ -293,7 +349,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         if(spellcheck){ ### = TRUE
             
             temp.genus <- herbdat$GENUS
-            if(!grepl("Name not found. Check Spelling or Validity at", as.character(temp.genus))){
+            if(!grepl("This species can not be found in the embedded database in herblabel package.", as.character(temp.genus))){
                  ### It the name is accepted, then check the match of the genus/family
                 if(!Cap(as.character(temp.genus)) %in% Cap(as.character(pgenus$GENUS)) ){          ### 
                     herbdat$GENUS <- paste("\\highlight6 ", as.character(temp.genus), 
@@ -303,6 +359,9 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
             #### Check the family spelling 
             temp.family <- herbdat$FAMILY
             if(!Cap(as.character(temp.family)) %in% Cap(as.character(pgenus$FAMILY))){
+                if(is.na(temp.family)){
+                    temp.family <- "(Empty Family)"
+                }
                 herbdat$FAMILY <- paste("\\highlight6 ", as.character(temp.family), 
                 "\\highlight6 (Family not accepted at The Plant List Website.) \\highlight0", sep = "")
             }
