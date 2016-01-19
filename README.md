@@ -2,17 +2,13 @@
 
 ### What is it?
 
-It is an R package helps to create and check RTF herbarium labels, annotation labels, based on the Darwin Core Format. Including the following functionalities: 
+It is an R package to create and check herbarium specimen labels and annotation labels, based on the Darwin Core Template. Including the following functionalities: 
 
-1. Parse a scientific name, and automatically fill the relevant fields including, FAMILY (in APGIII classification system), GENUS, SPECIES. 
+1. Parsing a scientific name, and filling the relevant fields automatically, including: FAMILY (according to the Plantlist Website), GENUS, SPECIES. 
 
-2. Check the validity based on The Plant List Accepted Species Database/Flora of China. 
+2. Checking the validity based on The Plant List Accepted Species Database/Flora Reipublicae Popularis Sinicae (FRPS). 
 
-3. Number of conversion utilities to create the template.
-
-4. Identify, lighlight and change the font to Italic for Latin Words. 
-
-5. Its output is RTF, which could be opened and viewed in MS Word or Libre Office etc.
+3. Identify and change the Latin Words to Italic in remarks field. 
 
 ### How to Install: 
 
@@ -21,7 +17,7 @@ library(devtools)
 install_github("helixcn/herblabel")
 ```
 
-If "devtools" has not been installed, install it by typing: 
+If "devtools" has not been installed, please install it by typing: 
 
 ```R
 install.packages("devtools")
