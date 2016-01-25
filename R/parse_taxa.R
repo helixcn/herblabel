@@ -55,12 +55,12 @@ parse_taxa <- function(taxa){
                                 space_position_f <- which(position_space[[1]] %in% position_f[[1]])
                                 space_position_f_1 <- space_position_f - 1
                                 word_before_f <- replace_space(substr(taxon, start = position_space[[1]][space_position_f_1], stop = position_space[[1]][space_position_f]))
-                                if( replace_space(word_before_f) == SPECIES){
-                                    INFRASPECIFIC_RANK            <- "f."
-                                    gap_f <- regexpr(pattern = " f\\. ", text = author_temp) + nchar(" f. ")
-                                    AUTHOR_OF_SPECIES <- replace_space(substr(author_temp, start = 1, stop = gap_f - nchar(" f. ") -1))
-                                    part_INFRASP_EP_AUTHOR_OF_INFRASP <- replace_space(substr(author_temp, start = gap_f + 1, stop = nchar(author_temp)))
-                                }
+                                
+                                INFRASPECIFIC_RANK            <- "f."
+                                gap_f <- regexpr(pattern = " f\\. ", text = author_temp) + nchar(" f. ")
+                                AUTHOR_OF_SPECIES <- replace_space(substr(author_temp, start = 1, stop = gap_f - nchar(" f. ") -1))
+                                part_INFRASP_EP_AUTHOR_OF_INFRASP <- replace_space(substr(author_temp, start = gap_f + 1, stop = nchar(author_temp)))
+                                
                             }
                         }
                     }
