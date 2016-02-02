@@ -42,11 +42,13 @@ annotation labels.
 
 \code{AUTHOR_OF_SPECIES}: Author, eg. Hook.
 
-\code{INFRASPECIFIC_RANK}: Infra-specific Rank, eg. var., f., subsp. 
+\code{INFRASPECIFIC_RANK}: Infra-specific Rank, eg. var., f. or subsp. 
 
 \code{INFRASPECIFIC_EPITHET}: Epithet for the infra specific rank. 
 
 \code{AUTHOR_OF_INFRASPECIFIC_RANK}: Author for the infra specific rank. 
+
+\code{ABBREVIATION}: Role of the person annotating this herbarium specimen, eg. "Det.", "Verified by".
 
 \code{IDENTIFIED_BY}:Who identified the species, eg. Jin-Long Zhang
 

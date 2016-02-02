@@ -106,7 +106,7 @@ annotation_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfi
         
         ifelse((is.na(herbdat$FAMILY)), 
             "", 
-            paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\", ifelse((is.na(herbdat$TYPE_STATUS)), "sb20", "sb180"), "\\sa50\\fs20\\b ", toupper(as.character(herbdat$FAMILY)), "\\b0\\par }", sep = "")
+            paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\", ifelse((is.na(herbdat$TYPE_STATUS)), "sb20", "sb180"), "\\sa50\\fs20\\b ", as.character(herbdat$FAMILY), "\\b0\\par }", sep = "")
             ),
         ifelse(((is.na(herbdat$GENUS)                        )& 
                 (is.na(herbdat$SPECIES)                      )& 
@@ -139,7 +139,17 @@ annotation_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfi
             ), 
         ifelse(is.na(herbdat$DET_NOTE), 
               "", 
-              paste("{\\pard\\keep\\sb10\\sa20\\keepn\\fi0\\li0\\fs16 ", as.character(herbdat$DET_NOTE), " \\par}", sep = "")
+              paste("{\\pard\\keep",
+                  ifelse(((is.na(herbdat$TYPE_STATUS                 ))&
+                                       (is.na(herbdat$TYPE_REF                    ))&
+                                       (is.na(herbdat$FAMILY                      ))&
+                                       (is.na(herbdat$GENUS                       ))&
+                                       (is.na(herbdat$SPECIES                     ))&
+                                       (is.na(herbdat$AUTHOR_OF_SPECIES           ))&
+                                       (is.na(herbdat$INFRASPECIFIC_RANK          ))&
+                                       (is.na(herbdat$INFRASPECIFIC_EPITHET       ))&
+                                       (is.na(herbdat$AUTHOR_OF_INFRASPECIFIC_RANK))), "\\sb150", "\\sb10")
+                          ,"\\sa20\\keepn\\fi0\\li0\\fs16 ", as.character(herbdat$DET_NOTE), " \\par}", sep = "")
             ), 
         paste("{\\pard\\keep", ifelse(((is.na(herbdat$TYPE_STATUS                 ))&
                                        (is.na(herbdat$TYPE_REF                    ))&
