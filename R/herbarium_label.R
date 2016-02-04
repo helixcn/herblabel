@@ -101,7 +101,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
              paste(which(is.na(herbdat000$COUNTRY)) + 1, collapse = ", ")))
          }
     if(any(is.na(herbdat000$STATE_PROVINCE))){
-        stop(paste("\"STATE_PROVINCE\" not provided for row: ", 
+        warning(paste("\"STATE_PROVINCE\" not provided for row: ", 
              paste(which(is.na(herbdat000$STATE_PROVINCE)) + 1, collapse = ", ")))
         }
     if(any(is.na(herbdat000$COUNTY))){
