@@ -63,9 +63,9 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
     "DATE_LASTMODIFIED")
     
     ### Check if the standardized template is used. 
-    if(!all(colnames(herbdat000) %in% colnames_template)){
+    if(!all(colnames_template %in% colnames(herbdat000) )){
        warning(paste("The following Columns are needed ", 
-               paste(colnames(herbdat000)[!colnames(herbdat000) %in% colnames_template], collapse = ", ")))
+               paste(colnames_template [! colnames_template %in% colnames(herbdat000) ], collapse = ", ")))
     }
     
     herbdat000[herbdat000 == ""] <- NA

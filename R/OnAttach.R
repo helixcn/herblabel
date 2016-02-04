@@ -1,5 +1,5 @@
 .onAttach <- function(libname, pkgname)  {
-    Sys.setlocale("LC_TIME", "C")
+    suppressMessages(Sys.setlocale("LC_TIME", "C"))
     options(stringsAsFactors = FALSE)
     options(scipen=999)
     packageStartupMessage(paste("This is herblabel ", packageVersion("herblabel"),".", sep = ""))
