@@ -323,7 +323,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
     
    ###########################################################################################################
     temp1 <- c("{\\rtf1\\ansi\\deff0", #### Staring a RTF 
-               "{\\fonttbl{\\f01\\froman\\fcharset01 Times New Roman; \\f02\\fmodern\\fcharset134 MingLiU; \\f03\\fmodern\\fcharset134 SimSun;}}",    
+               "{\\fonttbl{\\f01\\froman\\fcharset01 Times New Roman; \\f02\\fmodern\\fcharset134 MingLiU; \\f03\\fmodern\\fcharset134 SimSun; \\f04\\fmodern\\fcharset134 adobe-source-han-sans-otc-fonts; }}",    
                "{\\colortbl;\\red0\\green0\\blue0;\\red0\\green0\\blue255;\\red0\\green255\\blue255;
                \\red0\\green255\\blue0;\\red255\\green0\\blue255;\\red255\\green0\\blue0;
                \\red255\\green255\\blue0;\\red255\\green255\\blue255;\\red0\\green0\\blue128;
@@ -495,7 +495,13 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
     res <- replace_space(res)          ### replace the space at the beginning or ending. 
     ###### replace multiple commas or space from the string
     ### Create the RTF file
-    writeLines(res, outfile)
+    syst <- Sys.info()[['sysname']]
+    if(syst == "Windows"){
+        writeLines(res, outfile)
+    } else {
+        res <- iconv(x = res, from = "UTF-8", to = "GB18030")
+        writeLines(res, outfile)
+    }
     ### Notice
     cat("Herbarium Labels have been saved to:\n", 
          file.path(getwd(), outfile),"\n", sep = "")
