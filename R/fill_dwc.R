@@ -1,4 +1,4 @@
-fill_sp_dwc <- function(dat){
+fill_dwc <- function(dat){
     add.sort.id <- 1:nrow(dat)
     dat2 <- data.frame(dat, add.sort.id)
     syst <- Sys.info()[['sysname']]

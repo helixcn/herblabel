@@ -27,7 +27,7 @@ Jinlong Zhang
 }
 
 \seealso{
-See Also as \code{\link{fill_sp_dwc}} for the application of this function.
+See Also as \code{\link{fill_dwc}} for the application of this function.
 } 
 \examples{
 

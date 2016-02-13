@@ -1,17 +1,10 @@
 #### Create RTF annotation labels 
 
-annotation_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfile = "Annotation_Labels.rtf") {
-    if(is.null(dat)&is.null(infile)){
-        stop("at least dat or infile should be specified")
-    }
-    if(!is.null(dat)&!is.null(infile)){
-        stop("dat and infile should be not be specified at the same time")
-    }
+annotation_label <- function(dat = NULL, spellcheck = TRUE, outfile = "Annotation_Labels.rtf") {
     if(is.null(dat)){
-        herbdat000 <- read.csv(infile, header = TRUE, stringsAsFactors = FALSE, na.strings = "NA")
-    } else {
-        herbdat000 <- dat
+        stop("dat should be specified")
     }
+    herbdat000 <- dat
     
     herbdat000[herbdat000 == ""] <- NA
     
@@ -78,20 +71,32 @@ annotation_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfi
         herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind] <- paste(ifelse(is.na(herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind]), "", herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind]), "\\cf1", sep = "")
         
    }
-    
+    ### {\\stylesheet {\\qj \\li0 \\ri0 \\widctlpar \\aspalpha \\aspnum \\adjustright \\lin0 \\rin0 \\itap0 \\fs21 \\kerning2 \\dbch \\af2 \\hich \\af0 \\loch \\f0 \\snext0 \\spriority0 Normal;}
     ### match.gf(herbdat000$FAMIL, herbdat000$GENUS)
-    temp1 <- c("{\\rtf1\\ansi\\deff0", 
-                "{\\fonttbl{\\f01\\froman\\fcharset01 Times New Roman; \\f02\\fmodern\\fcharset134 MingLiU;  \\f03\\fmodern\\fcharset134 SimSun; \\f04\\fmodern\\fcharset134 adobe-source-han-sans-otc-fonts;}}", 
-                "{\\colortbl;\\red0\\green0\\blue0;\\red0\\green0\\blue255;
-                \\red0\\green255\\blue255;\n \\red0\\green255\\blue0;
-                \\red255\\green0\\blue255;\\red255\\green0\\blue0;\n
-                \\red255\\green255\\blue0;\\red255\\green255\\blue255;
-                \\red0\\green0\\blue128;\n \\red0\\green128\\blue128;
-                \\red0\\green128\\blue0;\\red128\\green0\\blue128;\n
-                \\red128\\green0\\blue0;\\red128\\green128\\blue0;
-                \\red128\\green128\\blue128;\n\\red192\\green192\\blue192;}", 
-                "\\viewkind4\\uc1\\pard\\f01\\fs19\\fi-144\\li288\\ri3480 ",
-                "\\paperw11906\\paperh16838\\margt540\\margb90\\margl600\\margr600\\cols2\\colsx1080\\linebetcol ")
+    ### {\\*\\cs10 \\snext10 \\sunhideused \\spriority99 Default Paragraph Font;}
+    temp1 <- "{\\rtf1\\ansi\\ansicpg0\\deff0\\stshfdbch2
+\\stshfloch0\\stshfhich0\\deflang2048\\deflangfe2048
+{\\fonttbl{\\f0\\froman\\fcharset0\\fprq2
+{\\*\\panose 02020603050405020304}Times New Roman{\\*\\falt Times New Roman};}}
+{\\colortbl;\\red0\\green0\\blue0;\\red128\\green0\\blue0;
+\\red255\\green0\\blue0;\\red0\\green128\\blue0;
+\\red128\\green128\\blue0;\\red0\\green255\\blue0;
+\\red255\\green255\\blue0;\\red0\\green0\\blue128;
+\\red128\\green0\\blue128;\\red0\\green128\\blue128;
+\\red128\\green128\\blue128;\\red192\\green192\\blue192;
+\\red0\\green0\\blue255;\\red255\\green0\\blue255;
+\\red0\\green255\\blue255;\\red255\\green255\\blue255;}
+{\\stylesheet{\\qj\\li0\\ri0\\widctlpar\\aspalpha\\aspnum
+\\adjustright\\lin0\\rin0\\itap0\\fs18\\kerning2\\dbch
+\\af2\\hich\\af0\\loch\\f0\\snext0\\spriority0 Normal;}
+{\\*\\cs10\\snext10\\sunhideused\\spriority99 Default Paragraph Font;}}
+\\paperw12240\\paperh15840\\margl1800\\margr1800\\margt1440
+\\margb1440\\gutter0\\ftnbj\\aenddoc\\jcompress1\\viewkind4
+\\viewscale100\\asianbrkrule\\allowfieldendsel\\snaptogridincell
+\\viewkind4\\sectd\\sbkpage\\pgwsxn11906\\pghsxn16838
+\\marglsxn600\\margrsxn600\\margtsxn720\\margbsxn10
+\\guttersxn0\\headery720\\footery720\\pgbrdropt0
+\\sectdefaultcl\\cols2\\colsx1080\\linebetcol1\\endnhere"
     ### fcharset134 to specify Chinese Font Herbarium Label Default Font Size if 18
     ### Default font is Time New Roman
     temp2 <- c()
@@ -99,7 +104,7 @@ annotation_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfi
         herbdat <- herbdat000[i, ]
         ### Set the size for each label
         res <- c(
-        ifelse((is.na(herbdat$COLLECTOR))|(is.na(herbdat$COLLECTOR_NUMBER)), "", paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\sb100\\sa50 Coll.: ", herbdat$COLLECTOR, "  #",herbdat$COLLECTOR_NUMBER, "\\par }", sep = "")), 
+        ifelse((is.na(herbdat$COLLECTOR))|(is.na(herbdat$COLLECTOR_NUMBER)), "", paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\fs18\\sb100\\sa50 Coll.: ", herbdat$COLLECTOR, "  #",herbdat$COLLECTOR_NUMBER, "\\par }", sep = "")), 
         ifelse(is.na(herbdat$TYPE_STATUS), 
             "", 
             paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\sb100\\sa50\\fs20\\b ", toupper(as.character(herbdat$TYPE_STATUS)), "\\b0  of:\\par }", sep = "")), 
@@ -166,7 +171,7 @@ annotation_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfi
              ifelse((is.na(herbdat$PROJECT)), 
                    "\\sa150",
                    "\\sa10"), 
-             "\\keepn\\fi0\\li0\\tqr\\tx4850 ", 
+             "\\keepn\\fi0\\li0\\fs18\\tqr\\tx4850 ", 
                   ifelse(is.na(herbdat$ABBREVIATION), 
                          "", 
                          paste(herbdat$ABBREVIATION,": ", sep = "")), 
@@ -191,7 +196,7 @@ annotation_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfi
               paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\qc\\sb10\\sa150\\fs16 ", 
                 as.character(herbdat$PROJECT), "\\par }", sep = "")
               ),
-        "{\\pard\\keep\\qc .                     .                    .\\sa100\\par}" 
+        "{\\pard\\keep\\qc\\fs18 .                     .                    .\\sa100\\par}" 
              )
         ### End of one label
         temp2 <- c(temp2, res)  ### Add label to the RTF file.

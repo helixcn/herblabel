@@ -12,8 +12,8 @@ This package is designed for making herbarium labels and annotation slips based 
 \tabular{ll}{
 Package: \tab herblabel\cr
 Type: \tab Package\cr
-Version: \tab 0.3.28\cr
-Date: \tab 2016-2-4\cr
+Version: \tab 0.4.0\cr
+Date: \tab 2016-2-12\cr
 License: \tab GLP-2\cr
 LazyLoad: \tab yes\cr
 }
@@ -27,10 +27,9 @@ Maintainer: Jinlong Zhang <jinlongzhang01@gmail.com>
 
 \keyword{ package }
 \examples{
-    path <- system.file("extdata", "DARWIN_CORE_HERBARIUM_RECORDS_TEMPLATE.csv", 
+    path <- system.file("extdata", "DARWIN_CORE_HERBARIUM_RECORDS.xlsx", 
                          package = "herblabel")
-    herbarium_label(infile = path,  
-                 outfile = "HERBARIUM_LABELS.rtf")
-    dat_test <- read.csv(path)
+    library(openxlsx)
+    dat_test <- read.xlsx(path)
     herbarium_label(dat = dat_test, outfile = "HERBARIUM_LABELS_dat.rtf")
 }

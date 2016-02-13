@@ -1,17 +1,11 @@
 #### create herbarium labels in RTF, default size of paper is A4.
 
-herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfile = "herblabel.rtf"){
-    if(is.null(dat)&is.null(infile)){
-        stop("at least the argument \'dat\' or \'infile\' should be specified")
-    }
-    if(!is.null(dat)&!is.null(infile)){
-        stop("argument \'dat\' and \'infile\' should not be specified at the same time")
-    }
+herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.rtf"){
     if(is.null(dat)){
-        herbdat000 <- read.csv(infile, header = TRUE, stringsAsFactors = FALSE)
-    } else {
-        herbdat000 <- dat
+        stop("\'dat\' should be specified")
     }
+
+    herbdat000 <- dat
     ### Column names of the standard template
     colnames_template <- c("GLOBAL_UNIQUE_IDENTIFIER",
     "INSTITUTION_CODE",
@@ -322,18 +316,29 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
     }
     
    ###########################################################################################################
-    temp1 <- c("{\\rtf1\\ansi\\deff0", #### Staring a RTF 
-               "{\\fonttbl{\\f01\\froman\\fcharset01 Times New Roman; \\f02\\fmodern\\fcharset134 MingLiU; \\f03\\fmodern\\fcharset134 SimSun; \\f04\\fmodern\\fcharset134 adobe-source-han-sans-otc-fonts; }}",    
-               "{\\colortbl;\\red0\\green0\\blue0;\\red0\\green0\\blue255;\\red0\\green255\\blue255;
-               \\red0\\green255\\blue0;\\red255\\green0\\blue255;\\red255\\green0\\blue0;
-               \\red255\\green255\\blue0;\\red255\\green255\\blue255;\\red0\\green0\\blue128;
-               \\red0\\green128\\blue128;\\red0\\green128\\blue0;\\red128\\green0\\blue128;
-               \\red128\\green0\\blue0;\\red128\\green128\\blue0;\\red128\\green128\\blue128;
-               \\red192\\green192\\blue192;}",
-                "\\viewkind4\\uc1\\pard\\f01\\fs18\\fi-144\\li288\\ri3480 ",
-                "\\paperw11906\\paperh16838\\margt720\\margb10\\margl600\\margr600\\cols2\\colsx1080\\linebetcol"
-               ) 
-    ### fcharset134 to specify Chinese Font
+    temp1 <- "{\\rtf1\\ansi\\ansicpg0\\deff0\\stshfdbch2
+\\stshfloch0\\stshfhich0\\deflang2048\\deflangfe2048
+{\\fonttbl{\\f0\\froman\\fcharset0\\fprq2
+{\\*\\panose 02020603050405020304}Times New Roman{\\*\\falt Times New Roman};}}
+{\\colortbl;\\red0\\green0\\blue0;\\red128\\green0\\blue0;
+\\red255\\green0\\blue0;\\red0\\green128\\blue0;
+\\red128\\green128\\blue0;\\red0\\green255\\blue0;
+\\red255\\green255\\blue0;\\red0\\green0\\blue128;
+\\red128\\green0\\blue128;\\red0\\green128\\blue128;
+\\red128\\green128\\blue128;\\red192\\green192\\blue192;
+\\red0\\green0\\blue255;\\red255\\green0\\blue255;
+\\red0\\green255\\blue255;\\red255\\green255\\blue255;}
+{\\stylesheet{\\qj\\li0\\ri0\\widctlpar\\aspalpha\\aspnum
+\\adjustright\\lin0\\rin0\\itap0\\fs18\\kerning2\\dbch
+\\af2\\hich\\af0\\loch\\f0\\snext0\\spriority0 Normal;}
+{\\*\\cs10\\snext10\\sunhideused\\spriority99 Default Paragraph Font;}}
+\\paperw12240\\paperh15840\\margl1800\\margr1800\\margt1440
+\\margb1440\\gutter0\\ftnbj\\aenddoc\\jcompress1\\viewkind4
+\\viewscale100\\asianbrkrule\\allowfieldendsel\\snaptogridincell
+\\viewkind4\\sectd\\sbkpage\\pgwsxn11906\\pghsxn16838
+\\marglsxn600\\margrsxn600\\margtsxn720\\margbsxn10
+\\guttersxn0\\headery720\\footery720\\pgbrdropt0
+\\sectdefaultcl\\cols2\\colsx1080\\linebetcol1\\endnhere"
     #### Herbarium Label
     #### Default Font Size if 18
     #### Default font is Time New Roman
@@ -425,14 +430,14 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
                                   ifelse( is.na(herbdat$AUTHOR_OF_INFRASPECIFIC_RANK),       "",         paste(" ", as.character(herbdat$AUTHOR_OF_INFRASPECIFIC_RANK),     sep = "")), sep = " ")),
                                   "\\b0\\par}", sep = "")),
         ##### COUNTY and LOCALITY
-        paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb120\\sa20 ", 
+        paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb120\\sa20\\fs18 ", 
         REPLACE(paste(toupper(herbdat$COUNTRY),", ", herbdat$STATE_PROVINCE,
                  ", ", herbdat$COUNTY, ", ", ifelse(is.na(herbdat$LOCALITY), 
                  "", as.character(herbdat$LOCALITY)), sep = "")), "\\par}",sep = ""), 
         
         ##### LONGITUDE, LATITUDE and ELEVATION
         REPLACE(ifelse(is.na(herbdat$LAT_DEGREE), "", 
-               paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb20\\sa150\\qj ",
+               paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb20\\sa150\\fs18\\qj ",
                      herbdat$LAT_DEGREE,"\\u176;", herbdat$LAT_MINUTE, "\\u39;",herbdat$LAT_SECOND, 
                      "\\u34;", herbdat$LAT_FLAG,", ",herbdat$LON_DEGREE,"\\u176;",herbdat$LON_MINUTE,
                      "\\u39;",herbdat$LON_SECOND,"\\u34;", herbdat$LON_FLAG, 
@@ -441,7 +446,7 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         ##### Attributes and Remarks
         ifelse((is.na(herbdat$ATTRIBUTES)) & (is.na(herbdat$REMARKS)), "",
                 italic_latin(gsub("\\.  ", "\\. ", gsub(" \\.", "\\.", gsub("\\. \\.", "\\. ", gsub("\\. +", "\\. ", 
-                             REPLACE(paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb60", 
+                             REPLACE(paste("{\\pard\\keep\\keepn\\fi0\\li0\\fs18\\sb60", 
                                             ifelse(is.na(herbdat$ATTRIBUTES), "", Cap2(as.character(herbdat$ATTRIBUTES))),
                                             ifelse(is.na(herbdat$ATTRIBUTES), "", ". "),
                                             ifelse(is.na(herbdat$REMARKS)   , "", Cap2(as.character(herbdat$REMARKS))), 
@@ -449,14 +454,14 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
                 
         ##### COLLECTOR and COLLECTION NUMBER !
         ifelse(is.na(herbdat$ADDITIONAL_COLLECTOR), 
-            paste("{\\pard\\keep\\keepn\\fi0\\sb200\\sa100\\tqr\\tx4850\\b ",
+            paste("{\\pard\\keep\\keepn\\fi0\\sb200\\sa100\\fs18\\tqr\\tx4850\\b ",
                    herbdat$COLLECTOR,", #" ,herbdat$COLLECTOR_NUMBER,"\\b0", 
                    "",ifelse(nchar(paste(herbdat$COLLECTOR,herbdat$ADDITIONAL_COLLECTOR,", #", herbdat$COLLECTOR_NUMBER )) < 50, "", "\\line"), " \\tab ",
                    tryCatch(formatdate(herbdat$DATE_COLLECTED), 
                    error= function(e) {print("Warning: Date format incorrect, using original string"); 
                    herbdat$DATE_COLLECTED}),
                    "\\par}",sep = ""), 
-            paste("{\\pard\\keep\\keepn\\fi0\\sb200\\sa100\\tqr\\tx4850\\b ",
+            paste("{\\pard\\keep\\keepn\\fi0\\sb200\\sa100\\fs18\\tqr\\tx4850\\b ",
                    herbdat$COLLECTOR,", ",herbdat$ADDITIONAL_COLLECTOR,"  #" ,
                    herbdat$COLLECTOR_NUMBER, "\\b0",
                    ifelse(nchar(paste(herbdat$COLLECTOR,herbdat$ADDITIONAL_COLLECTOR,", #", herbdat$COLLECTOR_NUMBER )) < 50, "", "\\line")," \\tab ",
@@ -468,24 +473,27 @@ herbarium_label <- function(dat = NULL, infile = NULL, spellcheck = TRUE, outfil
         
         ##### Project
         ifelse(is.na(herbdat$PROJECT), "", 
-               paste("{\\pard\\keep\\keepn\\fi0\\li0\\sa160\\ql\\b ",
+               paste("{\\pard\\keep\\keepn\\fi0\\li0\\sa160\\fs18\\ql\\b ",
                       as.character(herbdat$PROJECT) ,
                      "\\ql0\\b0\\par }",sep = "")
               ),
         ##### IDENTIFICATION INFOMATION
-        ##### "    ", gsub("_", "", as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER)), 
-        ifelse(is.na(herbdat$GLOBAL_UNIQUE_IDENTIFIER) & is.na(herbdat$TYPE_STATUS  ) & is.na(herbdat$IDENTIFIED_BY           ) & is.na(herbdat$DATE_IDENTIFIED         ) , "", paste("{\\pard\\keep\\sa40\\keepn\\fi0\\li0\\tqr\\tx4850 ",
-                  gsub("_", "", ifelse(is.na(herbdat$GLOBAL_UNIQUE_IDENTIFIER), 
-                                       "", as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER))), 
-                  " \\tab ", ifelse(is.na(herbdat$TYPE_STATUS), "",herbdat$TYPE_STATUS),
-                  ifelse(is.na(herbdat$IDENTIFIED_BY),"",paste(" Det.: ",herbdat$IDENTIFIED_BY)),
-                  ifelse(is.na(herbdat$DATE_IDENTIFIED), "", ", "), 
-                  ifelse(is.na(herbdat$DATE_IDENTIFIED), "", 
-                         tryCatch(formatdate(herbdat$DATE_IDENTIFIED), 
-                         error= function(e) {print("Warning: Date format incorrect, using original string"); 
-                         herbdat$DATE_IDENTIFIED})), "\\par}",sep = "")),
-        "{\\pard\\keep\\keepn\\sa100 \\par }", 
-        "{\\pard\\keep\\qc  .                  .                   .\\par}" 
+        ##### "    ", gsub("_", "", as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER)),  
+                  ifelse(is.na(herbdat$GLOBAL_UNIQUE_IDENTIFIER) & is.na(herbdat$TYPE_STATUS  ) & 
+                         is.na(herbdat$IDENTIFIED_BY  ) & is.na(herbdat$DATE_IDENTIFIED         ) , 
+                         "", paste("{\\pard\\keep\\sa40\\keepn\\fi0\\li0\\fs18\\tqr\\tx4850 ",
+                          gsub("_", "", ifelse(is.na(herbdat$GLOBAL_UNIQUE_IDENTIFIER), 
+                                               "", as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER))), 
+                          " \\tab ", 
+                          ifelse(is.na(herbdat$TYPE_STATUS), "",herbdat$TYPE_STATUS),
+                          ifelse(is.na(herbdat$IDENTIFIED_BY),"",paste(" Det.: ",herbdat$IDENTIFIED_BY)),
+                          ifelse(is.na(herbdat$DATE_IDENTIFIED), "", ", "), 
+                          ifelse(is.na(herbdat$DATE_IDENTIFIED), "", 
+                                 tryCatch(formatdate(herbdat$DATE_IDENTIFIED), 
+                                 error= function(e) {print("Warning: Date format incorrect, using original string"); 
+                                 herbdat$DATE_IDENTIFIED})), "\\par}",sep = "")),
+        "{\\pard\\keep\\keepn\\sa100\\fs18 \\par }", 
+        "{\\pard\\keep\\qc\\fs18  .                  .                   .\\par}" 
          )                             ### End of one label
         temp2 <- c(temp2, res)         ### Add label to the RTF file.
     }

@@ -1,5 +1,5 @@
-\name{fill_sp_dwc}
-\alias{fill_sp_dwc}
+\name{fill_dwc}
+\alias{fill_dwc}
 \title{
 Filling taxonomic information based on Local Name for Darwin Core Template 
 }
@@ -8,7 +8,7 @@ Searching and parsing Scientific Names in the Local Name field, and automaticall
 
 }
 \usage{
-fill_sp_dwc(dat)
+fill_dwc(dat)
 }
 
 \arguments{
@@ -49,14 +49,9 @@ Jinlong Zhang
 }
 \examples{
 
-syst <- Sys.info()[['sysname']]
-if(syst == "Windows"){
-    dat <- read.csv(system.file("extdata", "DARWIN_CORE_HERBARIUM_RECORDS_TEMPLATE2_win.csv", package = "herblabel"), header = TRUE, stringsAsFactors = FALSE)
-} else {
-    dat <- read.csv(system.file("extdata", "DARWIN_CORE_HERBARIUM_RECORDS_TEMPLATE2.csv", package = "herblabel"), header = TRUE, stringsAsFactors = FALSE, encoding = "UTF-8")
-}
-
-dwc_filled <- fill_sp_dwc(dat)
+library(openxlsx)
+dat <- read.xlsx(system.file("extdata", "DARWIN_CORE_HERBARIUM_RECORDS.xlsx", package = "herblabel"))
+dwc_filled <- fill_dwc(dat)
 herbarium_label(dat = dwc_filled, outfile = "herblabel_fill_sp_dwc_example.rtf")
 
 }

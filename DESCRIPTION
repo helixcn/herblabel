@@ -1,13 +1,14 @@
 Package: herblabel
 Type: Package
 Title: Making Labels for Herbarium Specimens in RTF and More
-Version: 0.3.28
-Date: 2016-2-4
+Version: 0.4.0
+Date: 2016-2-13
 Authors@R: person("Jinlong", "Zhang", role = c("aut", "cre"),
                   email = "jinlongzhang01@gmail.com")
 Author: Jinlong Zhang [aut, cre]
 Maintainer: Jinlong Zhang <jinlongzhang01@gmail.com>
 Description: Making Labels for Herbarium Specimens in RTF based on Darwin Core Templates.
+Depends: openxlsx
 License: GPL-2
 LazyLoad: yes
 URL: https://github.com/helixcn/herblabel
