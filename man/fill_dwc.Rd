@@ -41,7 +41,7 @@ The dataframe containing FAMILY, GENUS, SPECIES, AUTHOR_OF_SPECIES, INFRASPECIFI
 }
 
 \author{
-Jinlong Zhang
+Jinlong Zhang \email{ jinlongzhang01@gmail.com }
 }
 
 \seealso{

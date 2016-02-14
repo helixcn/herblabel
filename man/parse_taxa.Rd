@@ -23,7 +23,7 @@ A dataframe containing the following columns TAXON_PARSED, GENUS_PARSED, SPECIES
 }
 
 \author{
-Jinlong Zhang
+Jinlong Zhang \email{ jinlongzhang01@gmail.com }
 }
 
 \seealso{

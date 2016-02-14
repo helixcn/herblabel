@@ -135,7 +135,7 @@ The Plabel program developed by Kent D. Perkins at the University of Florida Her
 }
 
 \author{
-Jinlong Zhang 
+Jinlong Zhang \email{ jinlongzhang01@gmail.com }
 }
 
 \examples{
