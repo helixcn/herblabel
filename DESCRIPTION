@@ -8,7 +8,7 @@ Authors@R: person("Jinlong", "Zhang", role = c("aut", "cre"),
 Author: Jinlong Zhang [aut, cre]
 Maintainer: Jinlong Zhang <jinlongzhang01@gmail.com>
 Description: Making Labels for Herbarium Specimens in RTF based on Darwin Core Templates.
-Depends: openxlsx
+Suggests: openxlsx
 License: GPL-2
 LazyLoad: yes
 URL: https://github.com/helixcn/herblabel
