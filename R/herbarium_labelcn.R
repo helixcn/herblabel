@@ -1,74 +1,19 @@
 #### create herbarium labels in RTF, default size of paper is A4.
 
-herbarium_labelcn <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.rtf"){
+herbarium_labelcn <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabelcn.rtf"){
     if(is.null(dat)){
         stop("\'dat\' should be specified")
     }
 
     herbdat000 <- dat
-    ### Column names of the standard template
-    colnames_template <- c("GLOBAL_UNIQUE_IDENTIFIER",
-    "INSTITUTION_CODE",
-    "COLLECTION_CODE",
-    "BASIS_OF_RECORD",
-    "PREPARATIONS",
-    "HERBARIUM",
-    "TITLE",
-    "COLLECTOR",
-    "ADDITIONAL_COLLECTOR",
-    "COLLECTOR_NUMBER",
-    "DATE_COLLECTED",
-    "LOCAL_NAME",
-    "FAMILY",
-    "GENUS",
-    "SPECIES",
-    "AUTHOR_OF_SPECIES",
-    "INFRASPECIFIC_RANK",
-    "INFRASPECIFIC_EPITHET",
-    "AUTHOR_OF_INFRASPECIFIC_RANK",
-    "COUNTRY",
-    "STATE_PROVINCE",
-    "COUNTY",
-    "LOCALITY",
-    "LOCALITY_ORIGINAL",
-    "IMAGE_URL",
-    "RELATED_INFORMATION",
-    "LAT_DEGREE",
-    "LAT_MINUTE",
-    "LAT_SECOND",
-    "LAT_FLAG",
-    "LON_DEGREE",
-    "LON_MINUTE",
-    "LON_SECOND",
-    "LON_FLAG",
-    "ELEVATION",
-    "ATTRIBUTES",
-    "REMARKS",
-    "CABINET",
-    "DISPOSITION",
-    "GEOREFERENCE_SOURCES",
-    "GEOREFERENCE_VERIFICATION_STATUS",
-    "GEOREFERENCE_REMARKS",
-    "PROJECT",
-    "IDENTIFIED_BY",
-    "DATE_IDENTIFIED",
-    "TYPE_STATUS",
-    "PROCESSED_BY",
-    "DATE_LASTMODIFIED")
-    
-    ### Check if the standardized template is used. 
-    if(!all(colnames_template %in% colnames(herbdat000) )){
-       warning(paste("The following Columns are needed ", 
-               paste(colnames_template [! colnames_template %in% colnames(herbdat000) ], collapse = ", ")))
-    }
-    
+   
     herbdat000[herbdat000 == ""] <- NA
     dat$LAT_FLAG <- toupper(dat$LAT_FLAG)
     dat$LON_FLAG <- toupper(dat$LON_FLAG)
     
     #### Check the dataset
     if(any(is.na(herbdat000$HERBARIUM))){
-        stop(paste("\"HERBARIUM\" not provided for row: ", 
+        warning(paste("\"HERBARIUM\" not provided for row: ", 
              paste(which(is.na(herbdat000$HERBARIUM))+1, collapse = ", ")))
         }
     if(any(is.na(herbdat000$COLLECTOR))){
@@ -316,10 +261,7 @@ herbarium_labelcn <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabe
     }
     
    ###########################################################################################################
-    temp1 <- "{\\rtf1\\ansi\\ansicpg0\\deff0\\stshfdbch2
-\\stshfloch0\\stshfhich0\\deflang2048\\deflangfe2048
-{\\fonttbl{\\f0\\froman\\fcharset0\\fprq2
-{\\*\\panose 02020603050405020304}Times New Roman{\\*\\falt Times New Roman};}}
+    temp1 <- "{\\rtf1\\ansi\\ansicpg1252\\fromtext \\deff2{\\fonttbl{\\f0\\fswiss\\fcharset0 Times New Roman;}{\\f2\\fmodern\\fcharset134 SimSun;}}
 {\\colortbl;\\red0\\green0\\blue0;\\red128\\green0\\blue0;
 \\red255\\green0\\blue0;\\red0\\green128\\blue0;
 \\red128\\green128\\blue0;\\red0\\green255\\blue0;
@@ -330,7 +272,7 @@ herbarium_labelcn <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabe
 \\red0\\green255\\blue255;\\red255\\green255\\blue255;}
 {\\stylesheet{\\qj\\li0\\ri0\\widctlpar\\aspalpha\\aspnum
 \\adjustright\\lin0\\rin0\\itap0\\fs18\\kerning2\\dbch
-\\af2\\hich\\af0\\loch\\f0\\snext0\\spriority0 Normal;}
+\\af2\\hich\\af0\\loch\\f2\\snext0\\spriority0 Normal;}
 {\\*\\cs10\\snext10\\sunhideused\\spriority99 Default Paragraph Font;}}
 \\paperw12240\\paperh15840\\margl1800\\margr1800\\margt1440
 \\margb1440\\gutter0\\ftnbj\\aenddoc\\jcompress1\\viewkind4
