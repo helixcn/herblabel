@@ -6,61 +6,6 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
     }
 
     herbdat000 <- dat
-    ### Column names of the standard template
-    colnames_template <- c("GLOBAL_UNIQUE_IDENTIFIER",
-    "INSTITUTION_CODE",
-    "COLLECTION_CODE",
-    "BASIS_OF_RECORD",
-    "PREPARATIONS",
-    "HERBARIUM",
-    "TITLE",
-    "COLLECTOR",
-    "ADDITIONAL_COLLECTOR",
-    "COLLECTOR_NUMBER",
-    "DATE_COLLECTED",
-    "LOCAL_NAME",
-    "FAMILY",
-    "GENUS",
-    "SPECIES",
-    "AUTHOR_OF_SPECIES",
-    "INFRASPECIFIC_RANK",
-    "INFRASPECIFIC_EPITHET",
-    "AUTHOR_OF_INFRASPECIFIC_RANK",
-    "COUNTRY",
-    "STATE_PROVINCE",
-    "COUNTY",
-    "LOCALITY",
-    "LOCALITY_ORIGINAL",
-    "IMAGE_URL",
-    "RELATED_INFORMATION",
-    "LAT_DEGREE",
-    "LAT_MINUTE",
-    "LAT_SECOND",
-    "LAT_FLAG",
-    "LON_DEGREE",
-    "LON_MINUTE",
-    "LON_SECOND",
-    "LON_FLAG",
-    "ELEVATION",
-    "ATTRIBUTES",
-    "REMARKS",
-    "CABINET",
-    "DISPOSITION",
-    "GEOREFERENCE_SOURCES",
-    "GEOREFERENCE_VERIFICATION_STATUS",
-    "GEOREFERENCE_REMARKS",
-    "PROJECT",
-    "IDENTIFIED_BY",
-    "DATE_IDENTIFIED",
-    "TYPE_STATUS",
-    "PROCESSED_BY",
-    "DATE_LASTMODIFIED")
-    
-    ### Check if the standardized template is used. 
-    if(!all(colnames_template %in% colnames(herbdat000) )){
-       warning(paste("The following Columns are needed ", 
-               paste(colnames_template [! colnames_template %in% colnames(herbdat000) ], collapse = ", ")))
-    }
     
     herbdat000[herbdat000 == ""] <- NA
     dat$LAT_FLAG <- toupper(dat$LAT_FLAG)
