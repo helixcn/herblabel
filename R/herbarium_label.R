@@ -261,7 +261,7 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
     }
     
    ###########################################################################################################
-    temp1 <- "{\\rtf1\\ansi\\ansicpg936\\deflangfe2052\\fcharset134 \\deff2{\\fonttbl{\\f0\\fmodern\\fcharset134 SimSun;}{\\f1\\fswiss\\fcharset0 Times New Roman;}} {\\colortbl;\\red0\\green0\\blue0;\\red128\\green0\\blue0; \\red255\\green0\\blue0;\\red0\\green128\\blue0; \\red128\\green128\\blue0;\\red0\\green255\\blue0; \\red255\\green255\\blue0;\\red0\\green0\\blue128; \\red128\\green0\\blue128;\\red0\\green128\\blue128; \\red128\\green128\\blue128;\\red192\\green192\\blue192; \\red0\\green0\\blue255;\\red255\\green0\\blue255; \\red0\\green255\\blue255;\\red255\\green255\\blue255;} \\paperw12240\\paperh15840\\margl1800\\margr1800\\margt1440 \\margb1440\\gutter0\\ftnbj\\aenddoc\\jcompress1\\viewkind4 \\viewscale100\\asianbrkrule\\allowfieldendsel\\snaptogridincell \\viewkind4\\sectd\\sbkpage\\pgwsxn11906\\pghsxn16838 \\marglsxn600\\margrsxn600\\margtsxn720\\margbsxn10 \\guttersxn0\\headery720\\footery720\\pgbrdropt0 \\sectdefaultcl\\cols2\\colsx1080\\linebetcol1\\endnhere "
+    temp1 <- "{\\rtf1\\ansi\\ansicpg936\\deflangfe2052\\fcharset134 \\deff6{\\fonttbl{\\f0\\froman\\fcharset134 SimSun;}{\\f1\\froman\\fcharset0 Times New Roman;}} {\\colortbl;\\red0\\green0\\blue0;\\red128\\green0\\blue0; \\red255\\green0\\blue0;\\red0\\green128\\blue0; \\red128\\green128\\blue0;\\red0\\green255\\blue0; \\red255\\green255\\blue0;\\red0\\green0\\blue128; \\red128\\green0\\blue128;\\red0\\green128\\blue128; \\red128\\green128\\blue128;\\red192\\green192\\blue192; \\red0\\green0\\blue255;\\red255\\green0\\blue255; \\red0\\green255\\blue255;\\red255\\green255\\blue255;} \\paperw12240\\paperh15840\\margl1800\\margr1800\\margt1440 \\margb1440\\gutter0\\ftnbj\\aenddoc\\jcompress1\\viewkind4 \\viewscale100\\asianbrkrule\\allowfieldendsel\\snaptogridincell \\viewkind4\\sectd\\sbkpage\\pgwsxn11906\\pghsxn16838 \\marglsxn600\\margrsxn600\\margtsxn720\\margbsxn10 \\guttersxn0\\headery720\\footery720\\pgbrdropt0 \\sectdefaultcl\\cols2\\colsx1080\\linebetcol1\\endnhere"
     #### Herbarium Label
     #### Default Font Size if 18
     #### Default font is Time New Roman
@@ -425,14 +425,8 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
     res <- res[!res %in% " "]          ### Omit the rows without any information
     res <- replace_space(res)          ### replace the space at the beginning or ending. 
     ###### replace multiple commas or space from the string
-    ### Create the RTF file
-    syst <- Sys.info()[['sysname']]
-    if(syst == "Windows"){
-        writeLines(res, outfile)
-    } else {
-        res <- iconv(x = res, from = "UTF-8", to = "GB18030")
-        writeLines(res, outfile)
-    }
+    res <- iconv(x = res, from = "UTF-8", to = "GB18030")
+    writeLines(res, outfile)
     ### Notice
     cat("Herbarium Labels have been saved to:\n", 
          file.path(getwd(), outfile),"\n", sep = "")
