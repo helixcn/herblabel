@@ -67,7 +67,7 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
     #### Load the internal Data base to check Genus-Family relationship in APGIII system
     dirpgenus <- system.file("extdata", "APGIII_GENERA.csv", 
                               package = "herblabel")
-    pgenus <- read.csv(dirpgenus, header = TRUE)
+    pgenus <- read.csv(dirpgenus, header = TRUE, stringsAsFactors = FALSE)
     
     #### Formating Date
     formatdate <- function(x){format(as.Date(x),"%d %B %Y")}
@@ -77,6 +77,7 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
         paste(toupper(substring(x, 1, 1)), tolower(substring(x, 2)), sep = "")
     }
     
+    #### Conver the first Letter to capital, but left the rest as they are. 
     Cap2 <- function(x) {
         paste(toupper(substring(x, 1, 1)), substring(x, 2), sep = "")
     }
@@ -105,12 +106,19 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
     
     dirlatin <- system.file("extdata", "latin_source.txt", package = "herblabel")
     latin_source <- readLines(dirlatin)
+    genera_names <- as.character(pgenus$GENUS)
     #### Change the Scientific names in the Remarks section into Italic. 
     italic_latin <- function(x) {
         res.split <- unlist(strsplit(x, split = " "))
         res.split2 <- tolower(gsub(",|\\.", "", res.split))
+        res.split3 <- gsub(",|\\.", "", res.split) ### will be compared with the Genera
         found <- res.split2 %in% latin_source
-        res.split[found] <- paste("\\cf2 \\i ",res.split[found], "\\i0 ", sep = "")
+        
+        genus_found <- Cap(res.split3) %in% genera_names
+        
+        res.split[genus_found] <- Cap(res.split[genus_found])
+        
+        res.split[found] <- paste("\\cf3 \\i ",res.split[found], "\\i0\\cf0 ", sep = "")
         paste(res.split, collapse = " ", sep = "")
     }
 
@@ -197,7 +205,7 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
         
         herbdat000$GENUS[ind] <- ifelse(is.na(herbdat000$GENUS[ind]), "(Empty Species)", herbdat000$GENUS[ind])
         
-        herbdat000$GENUS[ind] <- paste("\\cf2\\i0 This species can not be found in the embedded database in herblabel package. Check Spelling or Validity at {\\field{\\*\\fldinst{HYPERLINK \"http://www.theplantlist.org/\"}}{\\fldrslt{\\ul\\cf2 http://www.theplantlist.org/}}} or {\\field{\\*\\fldinst{HYPERLINK \"http://frps.eflora.cn/\"}}{\\fldrslt{\\ul\\cf2 http://frps.eflora.cn/}}} for:\\i  ", herbdat000$GENUS[ind], sep = "")
+        herbdat000$GENUS[ind] <- paste("\\cf3\\i0 This species can not be found in the embedded database in herblabel package. Check Spelling or Validity at {\\field{\\*\\fldinst{HYPERLINK \"http://www.theplantlist.org/\"}}{\\fldrslt{\\ul\\cf3 http://www.theplantlist.org/}}} or {\\field{\\*\\fldinst{HYPERLINK \"http://frps.eflora.cn/\"}}{\\fldrslt{\\ul\\cf3 http://frps.eflora.cn/}}} for:\\i  ", herbdat000$GENUS[ind], sep = "")
         herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind] <- paste(ifelse(is.na(herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind]), 
                                                                      "", herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind]), "", sep = "")
    }
@@ -261,7 +269,7 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
     }
     
    ###########################################################################################################
-    temp1 <- "{\\rtf1\\ansi\\ansicpg936\\deflangfe2052\\fcharset134\\deff1{\\fonttbl{\\f0\\froman\\fcharset134 SimSun;}{\\f1\\froman\\fcharset134 Times New Roman;}}{\\stylesheet{\\*\\cs3 Default Paragraph Font;}}{\\colortbl\\red255\\green0\\blue0;\\red0\\green255\\blue0;\\red0\\green0\\blue255;}\\paperw12240\\paperh15840\\margl1800\\margr1800\\margt1440\\margb1440\\gutter0\\ftnbj\\aenddoc\\jcompress1\\viewkind4\\viewscale100\\asianbrkrule\\allowfieldendsel\\snaptogridincell\\viewkind4\\sectd\\sbkpage\\pgwsxn11906\\pghsxn16838\\marglsxn600\\margrsxn600\\margtsxn720\\margbsxn10\\guttersxn0\\headery720\\footery720\\pgbrdropt0\\sectdefaultcl\\cols2\\colsx1080\\linebetcol1\\endnhere"
+    temp1 <- "{\\rtf1\\ansi\\ansicpg936\\deflangfe2052\\fcharset134\\deff1{\\fonttbl{\\f0\\froman\\fcharset134 SimSun;}{\\f1\\froman\\fcharset134 Times New Roman;}}{\\stylesheet{\\*\\cs3 Default Paragraph Font;}}{\\colortbl\\red0\\green0\\blue0;\\red255\\green0\\blue0;\\red0\\green255\\blue0;\\red0\\green0\\blue255;}\\paperw12240\\paperh15840\\margl1800\\margr1800\\margt1440\\margb1440\\gutter0\\ftnbj\\aenddoc\\jcompress1\\viewkind4\\viewscale100\\asianbrkrule\\allowfieldendsel\\snaptogridincell\\viewkind4\\sectd\\sbkpage\\pgwsxn11906\\pghsxn16838\\marglsxn600\\margrsxn600\\margtsxn720\\margbsxn10\\guttersxn0\\headery720\\footery720\\pgbrdropt0\\sectdefaultcl\\cols2\\colsx1080\\linebetcol1\\endnhere"
     #### Herbarium Label
     #### Default Font Size if 18
     #### Default font is Time New Roman
@@ -285,8 +293,8 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
             if(!grepl("This species can not be found in the embedded database in herblabel package.", as.character(temp.genus))){
                  ### It the name is accepted, then check the match of the genus/family
                 if(!Cap(as.character(temp.genus)) %in% Cap(as.character(pgenus$GENUS)) ){          ### 
-                    herbdat$GENUS <- paste("\\cf2 ", as.character(temp.genus), 
-                    "\\cf2 \\i0  (Genus not accepted at The Plant List Website.)", sep = "")
+                    herbdat$GENUS <- paste("\\cf3 ", as.character(temp.genus), 
+                    "\\cf3 \\i0  (Genus not accepted at The Plant List Website.)", sep = "")
                   }
             }
             #### Check the family spelling 
@@ -295,8 +303,8 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
                 if(is.na(temp.family)){
                     temp.family <- "(Empty Family)"
                 }
-                herbdat$FAMILY <- paste("\\cf2 ", as.character(temp.family), 
-                "\\cf2 (Family not accepted at The Plant List Website.) ", sep = "")
+                herbdat$FAMILY <- paste("\\cf3 ", as.character(temp.family), 
+                "\\cf3 (Family not accepted at The Plant List Website.) ", sep = "")
             }
                 
             ### check if the family provided in the excel matches APGIII or not, the results 
@@ -309,18 +317,18 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
                         & !is.na(as.character(fgmerge.temp$FAMILY.y)))){
                 if(unique(as.character(Cap(fgmerge.temp$FAMILY.x))) 
                           %in% as.character(Cap(fgmerge.temp$FAMILY.y))){
-                    herbdat$FAMILY <- paste("\\cf2 ", unique(as.character(fgmerge.temp$FAMILY.x)), 
+                    herbdat$FAMILY <- paste("\\cf3 ", unique(as.character(fgmerge.temp$FAMILY.x)), 
                                         "  ", sep = "")
-                    herbdat$GENUS  <- paste("\\cf2 ", unique(as.character(fgmerge.temp$GENUS)), 
-                                       "\\i0\\cf2  (could also be under \"", 
+                    herbdat$GENUS  <- paste("\\cf3 ", unique(as.character(fgmerge.temp$GENUS)), 
+                                       "\\i0\\cf3  (could also be under \"", 
                                         toupper(paste(as.character(Cap(fgmerge.temp$FAMILY.y))[!as.character(Cap(fgmerge.temp$FAMILY.y)) %in% as.character(Cap(fgmerge.temp$FAMILY.x))],   collapse = "\", \"")) ,
                                        "\" according to The Plant List Website.) ", sep = "")
                         
                 } else{
-                herbdat$FAMILY <- paste("\\cf2 ", unique(as.character(fgmerge.temp$FAMILY.x)), 
+                herbdat$FAMILY <- paste("\\cf3 ", unique(as.character(fgmerge.temp$FAMILY.x)), 
                                         " ", sep = "")
-                herbdat$GENUS <- paste("\\cf2 ", unique(as.character(fgmerge.temp$GENUS)), 
-                                       "\\i0 \\cf2  (should be under \"", 
+                herbdat$GENUS <- paste("\\cf3 ", unique(as.character(fgmerge.temp$GENUS)), 
+                                       "\\i0 \\cf3  (should be under \"", 
                                        toupper(paste(as.character(fgmerge.temp$FAMILY.y), 
                                        collapse = "\", \"")) ,
                                        "\" according to The Plant List Website.) ", sep = "")

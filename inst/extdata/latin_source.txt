@@ -51182,8 +51182,6 @@ dzumacensis
 dzurnacensis
 dzusetsu
 dzyschrica
-e
-e-
 e?linifolius
 eachamensis
 eakroensis
@@ -56893,7 +56891,6 @@ faeroensis
 faetidum
 fafinaceus
 fafnir
-fagaceae
 fagara
 fagaracantha
 fagarasense
@@ -153276,7 +153273,6 @@ serrarium
 serrasuela
 serrata
 serratae
-serrate
 serrateulaefolia
 serrati
 serraticauda
@@ -165687,8 +165683,6 @@ tahuantinsuyuana
 tahuataensis
 tahuatensis
 tahubangensis
-tai
-tai-wanense
 taiana
 taiarapuensis
 taibaiense
@@ -172016,7 +172010,6 @@ tredecimloba
 tredecimsquamosus
 treeneanus
 treeoia
-trees
 trefferi
 trefferianum
 treichelia
