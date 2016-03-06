@@ -15154,7 +15154,6 @@ azutavica
 azutavicum
 azzanum
 azzizi
-b
 baadii
 baalan
 baalbekensis
@@ -51182,7 +51181,6 @@ dzumacensis
 dzurnacensis
 dzusetsu
 dzyschrica
-e?linifolius
 eachamensis
 eakroensis
 ealaense
@@ -61689,7 +61687,6 @@ fynbosensis
 fysonii
 fytchianthe
 fytchianum
-g
 gaaliana
 gaarroutei
 gabanense
@@ -76191,7 +76188,6 @@ hyugaense
 hyugaensis
 hyugamontanum
 hyulina
-i
 iabadicensis
 iadica
 iae
@@ -119262,7 +119258,6 @@ ozturkii
 ozua
 ozunraicum
 ozyurtii
-p
 paa
 paabaensis
 paagoumenensis
@@ -139632,7 +139627,6 @@ quqsipinnatum
 quxiangensis
 qyathea
 qygeoides
-r
 raabei
 raackii
 raapii
@@ -140353,7 +140347,6 @@ rantonnetii
 ranuii
 ranuncellifolium
 ranunculacea
-ranunculaceae
 ranunculaceum
 ranunculastrum
 ranunculiflora
@@ -144455,7 +144448,6 @@ rosa-campestris
 rosa-de-monte
 rosa-sinensis
 rosacea
-rosaceae
 rosaceum
 rosaceus
 rosae
@@ -146275,7 +146267,6 @@ rutabula
 rutabuloideum
 rutabulum
 rutacea
-rutaceae
 rutaceum
 rutaceus
 rutae-murariae
@@ -146451,7 +146442,6 @@ rzedowskiana
 rzedowskianum
 rzedowskii
 rzedowskiorum
-s
 s-stylata
 sa£­vatieri
 saadae
@@ -147209,7 +147199,6 @@ salgarense
 salgirensis
 saliana
 salic-
-salicaceae
 salicaria
 salicariaefolia
 salicariaefolium
@@ -148324,7 +148313,6 @@ sapiiflorus
 sapiifolium
 sapiifolius
 sapiiformis
-sapindaceae
 sapindifolia
 sapindifolium
 sapindiifolia
@@ -149106,7 +149094,6 @@ saxicolum
 saxicolus
 saxifractor
 saxifraga
-saxifragaceae
 saxifragaefolia
 saxifragella
 saxifragi-varia
@@ -151178,7 +151165,6 @@ scrophlariiflora
 scrophucephalus
 scrophulari-verbascum
 scrophularia
-scrophulariaceae
 scrophulariaefolia
 scrophulariiflora
 scrophulariifolia
@@ -156301,7 +156287,6 @@ solacolui
 solaenacanthus
 solana
 solanacea
-solanaceae
 solanaceous
 solanaceum
 solanaceus
@@ -157176,7 +157161,6 @@ spath-
 spatha
 spathacanthus
 spathacea
-spathaceae
 spathacens
 spathaceum
 spathaceus
@@ -157794,7 +157778,6 @@ spieigera
 spielhausii
 spiesia
 spigelia
-spigeliaceae
 spigelieae
 spigeliiflora
 spigeliiflorus
@@ -160730,7 +160713,6 @@ struthiopteris
 struthiopteroides
 struthium
 struzlianum
-strychnaceae
 strychneae
 strychnifolia
 strychnifolium
@@ -160906,7 +160888,6 @@ stypodes
 styppeiochloa
 stypticum
 styra-
-styracaceae
 styraciflorum
 styraciflua
 styraciflum
@@ -161723,7 +161704,6 @@ subdolus
 subdoniana
 subdoronicifolium
 subdrepanocarpum
-subdrupaceae
 subdrynariaceum
 subdryopteris
 subdubia
@@ -165339,7 +165319,6 @@ szurulensis
 szweykowskia
 szyszylowcizii
 szyszylowiczii
-t
 ta
 taafense
 taamii
@@ -171641,7 +171620,6 @@ trachytricha
 trachytrichium
 trachytrichus
 trachyxiphium
-track
 trackyclada
 tractabilis
 tractum
@@ -176840,7 +176818,6 @@ uzonica
 uzungwae
 uzungwaensis
 uzunoglui
-v
 va
 vaalputsiana
 vabrensis
@@ -180538,7 +180515,6 @@ vyschinii
 vyshinii
 vysokensis
 vytegrensis
-w
 waallichiana
 waandersiana
 waasii
@@ -182572,7 +182548,6 @@ wysokae
 wyssiana
 wythei
 wyvern
-x
 x-aizoides
 xaiasme
 xainzaense
@@ -183264,7 +183239,6 @@ xystrophyllus
 xytriophora
 xytriophorum
 xyzhuii
-y
 yaanense
 yaanensis
 yaanica
