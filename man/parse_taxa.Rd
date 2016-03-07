@@ -31,14 +31,14 @@ See Also as \code{\link{fill_dwc}} for the application of this function.
 } 
 \examples{
 
-parse_taxa("Acer"                                                        )
+parse_taxa("Acer"                                                         )
 parse_taxa("Acer caudatifolium Hayata"                                    )
-parse_taxa("Acer caudatifolium"                                          )
-parse_taxa("Acer sp."                                                    )
+parse_taxa("Acer caudatifolium"                                           )
+parse_taxa("Acer sp."                                                     )
 parse_taxa("Acer caudatum Wall. var. multiserratum (Maxim.) Rehd."        )
 parse_taxa("Acer caudatum var. multiserratum (Maxim.) Rehd."              )
 parse_taxa("Acer caudatum Wall. var. multiserratum"                       )
-parse_taxa("Acer caudatum var. multiserratum"                            )
+parse_taxa("Acer caudatum var. multiserratum"                             )
 parse_taxa("Acer caesium Wall. ex Brandis subsp. giraldii (Pax) E. Murr." )
 parse_taxa("Acer caesium subsp. giraldii (Pax) E. Murr."                  )
 parse_taxa("Acer caesium Wall. ex Brandis subsp. giraldii"                )
