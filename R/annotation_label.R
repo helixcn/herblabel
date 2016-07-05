@@ -146,7 +146,7 @@ annotation_label <- function(dat = NULL, spellcheck = TRUE, outfile = "Annotatio
                                        (is.na(herbdat$INFRASPECIFIC_EPITHET       ))&
                                        (is.na(herbdat$AUTHOR_OF_INFRASPECIFIC_RANK))&
                                        (is.na(herbdat$DET_NOTE                    ))),
-                                       "\\sb800",
+                                       "\\sb800", # if all are missing, extent the space
                                        "\\sb200"), 
              ifelse((is.na(herbdat$PROJECT)), 
                    "\\sa150",
