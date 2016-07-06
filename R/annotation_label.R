@@ -162,7 +162,7 @@ annotation_label <- function(dat = NULL, spellcheck = TRUE, outfile = "Annotatio
                   ifelse(is.na(herbdat$INSTITUTION), 
                          "", 
                          ifelse(is.na(herbdat$IDENTIFIED_BY), 
-                               paste("                                                  ", as.character(herbdat$INSTITUTION), sep = ""),
+                               paste("                         ", as.character(herbdat$INSTITUTION), sep = ""),
                                paste(", ", as.character(herbdat$INSTITUTION), sep = ""))), 
                   "  \\tab ", 
                   ifelse(is.na(herbdat$DATE_IDENTIFIED), 
