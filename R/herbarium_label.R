@@ -65,10 +65,8 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
 
     print(paste(nrow(herbdat000), "herbarium specimen labels to create:"))
     #### Load the internal Data base to check Genus-Family relationship in APGIII system
-    dirpgenus <- system.file("extdata", "APGIII_GENERA.csv", 
-                              package = "herblabel")
-    pgenus <- read.csv(dirpgenus, header = TRUE, stringsAsFactors = FALSE)
     
+    pgenus <- herblabel::pgenus
     #### Formating Date
     formatdate <- function(x){format(as.Date(x),"%d %B %Y")}
         
@@ -103,9 +101,7 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
         return(res)
     }
     
-    
-    dirlatin <- system.file("extdata", "latin_source.txt", package = "herblabel")
-    latin_source <- readLines(dirlatin)
+    latin_source <- herblabel::latin_source
     genera_names <- as.character(pgenus$GENUS)
     #### Change the Scientific names in the Remarks section into Italic. 
     italic_latin <- function(x) {
@@ -191,9 +187,7 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
         for(i in 1:length(sptemp)){
             sptemp2[i] <- REPLACE(sptemp[i])   
         }
-        tplsplistdir <- system.file("extdata", "tplsplist.txt", 
-                                   package = "herblabel")
-        tplsplist <- readLines(tplsplistdir)
+        tplsplist <- herblabel::tplsplist
         ind <- !sptemp2 %in% tplsplist
         if(length(which(ind)) > 0){
              message_txt <- paste("Species:\n", paste(sptemp2[ind], collapse = "\n"), 

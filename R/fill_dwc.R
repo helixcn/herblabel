@@ -1,14 +1,11 @@
+#### dat <- dat_test
+
 fill_dwc <- function(dat){
     add.sort.id <- 1:nrow(dat)
     dat2 <- data.frame(dat, add.sort.id)
     syst <- Sys.info()[['sysname']]
-    if(syst == "Windows"){
-        families <- read.csv(system.file("extdata", "APGIII_GENERA.csv",         package = "herblabel"), header = TRUE, stringsAsFactors = FALSE)
-        spcn     <- read.csv(system.file("extdata", "species_chinese_names_win.csv", package = "herblabel"), header = TRUE, stringsAsFactors = FALSE)
-    } else {
-        families <- read.csv(system.file("extdata", "APGIII_GENERA.csv",         package = "herblabel"), header = TRUE, stringsAsFactors = FALSE, fileEncoding = "UTF-8")
-        spcn     <- read.csv(system.file("extdata", "species_chinese_names.csv", package = "herblabel"), header = TRUE, stringsAsFactors = FALSE, fileEncoding = 'UTF-8')
-    }
+    pgenus <- herblabel::pgenus
+    spcn   <- herblabel::spcn
     #### add scientific name based on the local Chinese Name
     datspcn <- merge(dat2, spcn, by.x = "LOCAL_NAME", by.y = "NAME_CN", sort = FALSE, all.x = TRUE)
     datspcn$SCIENTIFIC_NAME <- ifelse((is.na(datspcn$SCIENTIFIC_NAME)|datspcn$SCIENTIFIC_NAME == "")&(!is.na(datspcn$LOCAL_NAME)|datspcn$LOCAL_NAME == ""), datspcn$LOCAL_NAME, datspcn$SCIENTIFIC_NAME)
@@ -29,7 +26,7 @@ fill_dwc <- function(dat){
     datspcn2$INFRASPECIFIC_EPITHET         <- ifelse(is.na(datspcn2$INFRASPECIFIC_EPITHET)       |datspcn2$INFRASPECIFIC_EPITHET        == "", datspcn2$INFRASPECIFIC_EPITHET_PARSED,        datspcn2$INFRASPECIFIC_EPITHET        )
     datspcn2$AUTHOR_OF_INFRASPECIFIC_RANK  <- ifelse(is.na(datspcn2$AUTHOR_OF_INFRASPECIFIC_RANK)|datspcn2$AUTHOR_OF_INFRASPECIFIC_RANK == "", datspcn2$AUTHOR_OF_INFRASPECIFIC_RANK_PARSED, datspcn2$AUTHOR_OF_INFRASPECIFIC_RANK )
     
-    datspcn2 <- merge(datspcn2, families, by.x = "GENUS",by.y = "GENUS", all.x = TRUE, sort = FALSE)
+    datspcn2 <- merge(datspcn2, pgenus, by.x = "GENUS",by.y = "GENUS", all.x = TRUE, sort = FALSE)
     datspcn2$FAMILY                        <- ifelse(is.na(datspcn2$FAMILY.x)                    |datspcn2$FAMILY.x                     == "", datspcn2$FAMILY.y,                            datspcn2$FAMILY.x                     )
     
     datspcn2 <- datspcn2[order(datspcn2$add.sort.id), ]

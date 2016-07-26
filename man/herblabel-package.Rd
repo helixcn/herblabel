@@ -9,8 +9,8 @@ Making Labels for Herbarium Specimens in RTF and more.
 This package is designed for making herbarium labels and annotation slips based on the information stored in template files. The RTF file can be edited in MS Word or Open Office etc. It also provides a number of conversion utilities.
 }
 \details{
-\packageDESCRIPTION{ephem}
-\packageIndices{ephem}
+\packageDESCRIPTION{herblabel}
+\packageIndices{herblabel}
 }
 
 \author{
