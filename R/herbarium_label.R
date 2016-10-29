@@ -362,10 +362,9 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
                                                    collapse = "\", \"")) ,
                                                    "\" according to The Plant List Website.) ", sep = "")
                                                    
-                            comment_genus[i] <- paste(unique(as.character(fgmerge.temp$GENUS)), 
-                                                      "(should be under,", 
-                                                      toupper(paste(as.character(fgmerge.temp$FAMILY.y), collapse = ",")) ,
-                                                      "according to The Plant List Website.)")
+                            comment_genus[i] <- paste( "(should be under,", 
+                                                       toupper(paste(as.character(fgmerge.temp$FAMILY.y), collapse = ",")) ,
+                                                       "according to The Plant List Website.)")
                         }
                     }
                 }

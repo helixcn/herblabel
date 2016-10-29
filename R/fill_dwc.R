@@ -58,10 +58,6 @@ fill_dwc <- function(dat){
         dat$INFRASPECIFIC_EPITHET,
         dat$AUTHOR_OF_INFRASPECIFIC_RANK, sep = "_")
     
-    if(all(res.test_combine_tax %in% dat_combine_tax)){
-        res <- dat 
-    } else {
-        res <- subset(datspcn2, select = colnames(dat)) 
-    }
+    res <- subset(datspcn2, select = colnames(dat)) 
     return(res)
 }
