@@ -68,8 +68,14 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
     
     pgenus <- herblabel::pgenus
     #### Formating Date
-    formatdate <- function(x){format(as.Date(x),"%d %B %Y")}
-        
+    formatdate <- function(x){
+        if(!is.na(suppressWarnings(as.integer(x)))){
+            x <- as.Date(as.integer(x), origin="1899-12-30")
+        }
+        res <- format(as.Date(x),"%d %B %Y")
+        return(res)
+    }
+    
     #### Convert the first Letter to capital
     Cap <- function(x) {
         paste(toupper(substring(x, 1, 1)), tolower(substring(x, 2)), sep = "")
@@ -112,11 +118,15 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
         
         genus_found <- Cap(res.split3) %in% genera_names
         
-        res.split[genus_found] <- Cap(res.split[genus_found])
+        res.split[genus_found] <- res.split[genus_found]
         
         res.split[found] <- paste("\\cf3 \\i ",res.split[found], "\\i0\\cf0 ", sep = "")
         paste(res.split, collapse = " ", sep = "")
     }
+    
+    same_families <- c("Palmae","Arecaceae","Gramineae","Poaceae","Leguminosae",
+                       "Fabaceae","Guttiferae","Clusiaceae","Cruciferae","Brassicaceae",
+                       "Labiatae","Lamiaceae","Compositae","Asteraceae","Umbelliferae","Apiaceae")
 
     #### To keep all of the fields clean and tidy.
     herbdat000$FAMILY                           <- toupper(herbdat000$FAMILY)
@@ -175,6 +185,11 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
     ##################################################################################################
     #### Check the spelling of the scientific names
     #### Issue a warning if the names generated do not match with the accepted names at the Plant List Website
+    
+    ##### For storaging comments
+    comment_genus  <- rep("", length(herbdat000$GENUS))
+    comment_family <- rep("", length(herbdat000$FAMILY))
+   
     if(spellcheck){
         sptemp <- paste( ifelse(is.na(herbdat000$GENUS)                       , "",  herbdat000$GENUS                       ),
                          ifelse(is.na(herbdat000$SPECIES)                     , "",  herbdat000$SPECIES                     ),
@@ -200,6 +215,9 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
         herbdat000$GENUS[ind] <- ifelse(is.na(herbdat000$GENUS[ind]), "(Empty Species)", herbdat000$GENUS[ind])
         
         herbdat000$GENUS[ind] <- paste("\\cf3\\i0 This species can not be found in the embedded database in herblabel package. Check Spelling or Validity at {\\field{\\*\\fldinst{HYPERLINK \"http://www.theplantlist.org/\"}}{\\fldrslt{\\ul\\cf3 http://www.theplantlist.org/}}} or {\\field{\\*\\fldinst{HYPERLINK \"http://frps.eflora.cn/\"}}{\\fldrslt{\\ul\\cf3 http://frps.eflora.cn/}}} for:\\i  ", herbdat000$GENUS[ind], sep = "")
+        
+        comment_genus[ind] <- paste("This species can not be found in the embedded database in herblabel package", dat$GENUS[ind])
+        
         herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind] <- paste(ifelse(is.na(herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind]), 
                                                                      "", herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind]), "", sep = "")
    }
@@ -213,6 +231,7 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
    
    herbdat000$LAT_FLAG <- toupper(herbdat000$LAT_FLAG)
    herbdat000$LON_FLAG <- toupper(herbdat000$LON_FLAG)
+   
    for(i in 1:nrow(herbdat000)){
         
         herbdat_temp <- herbdat000[i, ]
@@ -239,27 +258,33 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
     }
     
     if(any(lat_check_ind_1)){
-        stop(paste("Degree, Minutes and Seconds for Latitude not completed in row:", paste(which(lat_check_ind_1), collapse = ", ")))
+        lat_check_ind_1_msg <- paste("Degree, Minutes and Seconds for Latitude not completed in row:", paste(which(lat_check_ind_1), collapse = ", "))
+        stop(lat_check_ind_1_msg)
     }
     
     if(any(lat_check_ind_2)){
-        stop(paste("LAT_FLAG not specified in row:", paste(which(lat_check_ind_2), collapse = ", ")))
+        lat_check_ind_2_msg <- paste("LAT_FLAG not specified in row:", paste(which(lat_check_ind_2), collapse = ", "))
+        stop(lat_check_ind_2_msg)
     }
     
     if(any(lat_check_ind_3)){
-        stop(paste("Only N or S is allowed for the LAT_FLAG in row:", paste(which(lat_check_ind_3), collapse = ", ")))
+        lat_check_ind_3_msg <- paste("Only N or S is allowed for the LAT_FLAG in row:", paste(which(lat_check_ind_3), collapse = ", "))
+        stop(lat_check_ind_3_msg)
     }
     
     if(any(lon_check_ind_1)){
-        stop(paste("Degree, Minutes and Seconds for Longitude not completed in row:", paste(which(lon_check_ind_1), collapse = ", ")))
+        lon_check_ind_1_msg <- paste("Degree, Minutes and Seconds for Longitude not completed in row:", paste(which(lon_check_ind_1), collapse = ", "))
+        stop(lon_check_ind_1_msg)
     }
     
     if(any(lon_check_ind_2)){
-        stop(paste("LON_FLAG must be specified in row:", paste(which(lon_check_ind_2), collapse = ", ")))
+        lon_check_ind_2_msg <- paste("LON_FLAG must be specified in row:", paste(which(lon_check_ind_2), collapse = ", "))
+        stop(lon_check_ind_2_msg)
     }
     
     if(any(lon_check_ind_3)){
-        stop(paste("Only N or S is allowed for the LON_FLAG in row:", paste(which(lon_check_ind_3), collapse = ", ")))
+        lon_check_ind_3_msg <- paste("Only N or S is allowed for the LON_FLAG in row:", paste(which(lon_check_ind_3), collapse = ", "))
+        stop(lon_check_ind_3_msg)
     }
     
    ###########################################################################################################
@@ -271,6 +296,9 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
     temp_count <- seq(0, nrow(herbdat000), by = 5)  ### Counter
     temp_count[1] <- 1
     
+    
+    herbdat_row1 <- herbdat000[1,]
+    
     for(i in 1:nrow(herbdat000)){
         herbdat <- herbdat000[i,]
         
@@ -279,54 +307,68 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
                 print(paste("Making label for row: ", i))
             }
         }
+        
         ########## Highlighting the names with problem 
         ### Check the genus spelling 
         if(spellcheck){ ### = TRUE
-            
             temp.genus <- herbdat$GENUS
-            if(!grepl("This species can not be found in the embedded database in herblabel package.", as.character(temp.genus))){
+            if(!grepl("This species can not be found in the embedded database in herblabel package", as.character(temp.genus))){
                  ### It the name is accepted, then check the match of the genus/family
-                if(!Cap(as.character(temp.genus)) %in% Cap(as.character(pgenus$GENUS)) ){          ### 
-                    herbdat$GENUS <- paste("\\cf3 ", as.character(temp.genus), 
-                    "\\cf3 \\i0  (Genus not accepted at The Plant List Website.)", sep = "")
-                  }
+                     if(!Cap(as.character(temp.genus)) %in% Cap(as.character(pgenus$GENUS)) ){### 
+                        if(!grepl("Genus not accepted at The Plant List Website", as.character(temp.genus))){
+                            herbdat$GENUS <- paste("\\cf3 ", as.character(temp.genus), 
+                                "\\cf3 \\i0  (Genus not accepted at The Plant List Website.)", sep = "")
+                            ### For comments in the excel
+                            comment_genus[i] <- paste(as.character(temp.genus), "(Genus not accepted at The Plant List Website.)", sep = "")
+                         }
+                        }
             }
             #### Check the family spelling 
             temp.family <- herbdat$FAMILY
-            if(!Cap(as.character(temp.family)) %in% Cap(as.character(pgenus$FAMILY))){
-                if(is.na(temp.family)){
+            if(!Cap(as.character(temp.family)) %in% c(Cap(as.character(pgenus$FAMILY)), same_families)){  ### Consider the equal names for some families
+                if(is.na(temp.family)&!grepl("Empty Family", as.character(comment_family[i]))){
                     temp.family <- "(Empty Family)"
                 }
-                herbdat$FAMILY <- paste("\\cf3 ", as.character(temp.family), 
-                "\\cf3 (Family not accepted at The Plant List Website.) ", sep = "")
+                herbdat$FAMILY <- paste("\\cf3 ", as.character(temp.family),  "\\cf3 (Family not accepted at The Plant List Website.) ", sep = "")
+                comment_family[i] <- paste(gsub("\\\\\\cf3", "", as.character(temp.family)), "Family not accepted at The Plant List Website.")  ### For comments in the excel
             }
-                
-            ### check if the family provided in the excel matches APGIII or not, the results 
-            ### will be highlighted in yellow 
+            ### check if the family provided in the excel matches APGIII or not
             fam.genus.temp <- data.frame(FAMILY = as.character(herbdat$FAMILY), 
                                          GENUS = as.character(herbdat$GENUS))
             fgmerge.temp <- merge(x = fam.genus.temp, y = pgenus, by.x = "GENUS", by.y = "GENUS", 
                              all.x = TRUE, sort = FALSE)
-            if(any(as.character(Cap(fgmerge.temp$FAMILY.x)) !=  as.character(Cap(fgmerge.temp$FAMILY.y)) 
-                        & !is.na(as.character(fgmerge.temp$FAMILY.y)))){
+            if(any(as.character(Cap(fgmerge.temp$FAMILY.x)) !=  as.character(Cap(fgmerge.temp$FAMILY.y)) & !is.na(as.character(fgmerge.temp$FAMILY.y)))){
                 if(unique(as.character(Cap(fgmerge.temp$FAMILY.x))) 
-                          %in% as.character(Cap(fgmerge.temp$FAMILY.y))){
+                          %in% as.character(Cap(fgmerge.temp$FAMILY.y)) & !grepl("could also be under",  as.character(temp.genus))){
                     herbdat$FAMILY <- paste("\\cf3 ", unique(as.character(fgmerge.temp$FAMILY.x)), 
                                         "  ", sep = "")
                     herbdat$GENUS  <- paste("\\cf3 ", unique(as.character(fgmerge.temp$GENUS)), 
                                        "\\i0\\cf3  (could also be under \"", 
                                         toupper(paste(as.character(Cap(fgmerge.temp$FAMILY.y))[!as.character(Cap(fgmerge.temp$FAMILY.y)) %in% as.character(Cap(fgmerge.temp$FAMILY.x))],   collapse = "\", \"")) ,
                                        "\" according to The Plant List Website.) ", sep = "")
-                        
+                    comment_genus[i] <- paste(unique(as.character(fgmerge.temp$GENUS)), 
+                                        "(could also be under ", 
+                                        toupper(paste(as.character(Cap(fgmerge.temp$FAMILY.y))[!as.character(Cap(fgmerge.temp$FAMILY.y)) %in% as.character(Cap(fgmerge.temp$FAMILY.x))], collapse = ",")) ,
+                                        "according to The Plant List Website.) ", sep = "")
+
                 } else{
-                herbdat$FAMILY <- paste("\\cf3 ", unique(as.character(fgmerge.temp$FAMILY.x)), 
-                                        " ", sep = "")
-                herbdat$GENUS <- paste("\\cf3 ", unique(as.character(fgmerge.temp$GENUS)), 
-                                       "\\i0 \\cf3  (should be under \"", 
-                                       toupper(paste(as.character(fgmerge.temp$FAMILY.y), 
-                                       collapse = "\", \"")) ,
-                                       "\" according to The Plant List Website.) ", sep = "")
-                 }
+                if(!grepl("should be under",  as.character(temp.genus))){
+                    herbdat$FAMILY <- paste("\\cf3 ", unique(as.character(fgmerge.temp$FAMILY.x)), " ", sep = "")
+                    comment_family[i] <- paste(unique(gsub("\\\\\\cf3", "", as.character(fgmerge.temp$FAMILY.x))), collapse = "")
+                        if(!toupper(as.character(fgmerge.temp$FAMILY.x)) %in% toupper(same_families)){
+                            herbdat$GENUS <- paste("\\cf3 ", unique(as.character(fgmerge.temp$GENUS)), 
+                                                   "\\i0 \\cf3  (should be under \"", 
+                                                   toupper(paste(as.character(fgmerge.temp$FAMILY.y), 
+                                                   collapse = "\", \"")) ,
+                                                   "\" according to The Plant List Website.) ", sep = "")
+                                                   
+                            comment_genus[i] <- paste(unique(as.character(fgmerge.temp$GENUS)), 
+                                                      "(should be under,", 
+                                                      toupper(paste(as.character(fgmerge.temp$FAMILY.y), collapse = ",")) ,
+                                                      "according to The Plant List Website.)")
+                        }
+                    }
+                }
             }
         }
         res <- c(
@@ -421,6 +463,7 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
         "{\\pard\\keep\\qc\\fs18  .                  .                   .\\par}" 
          )                             ### End of one label
         temp2 <- c(temp2, res)         ### Add label to the RTF file.
+        herbdat_row1 <- rbind(herbdat_row1, herbdat)
     }
     template <- c(temp1, temp2, "}")   ## End of the RTF file
     res <- template[!template %in% ""] ## Omit the rows without any information
@@ -432,4 +475,9 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
     ### Notice
     cat("Herbarium Labels have been saved to:\n", 
          file.path(getwd(), outfile),"\n", sep = "")
+    modified_dat <- herbdat_row1[-1,]
+    modified_dat$GENUS  <- comment_genus
+    modified_dat$FAMILY <- comment_family
+    
+    return(invisible(list(dat = dat, modified_dat = modified_dat)))
 }

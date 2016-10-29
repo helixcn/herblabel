@@ -32,8 +32,9 @@ fill_dwc <- function(dat){
     datspcn2 <- datspcn2[order(datspcn2$add.sort.id), ]
     
     ##### If the data has been successfully filled, do not fill again. Avoid duplicate entries introduced by merge. 
-    datspcn2_unique <- unique(datspcn2)
-    res.test <- subset(datspcn2_unique, select = colnames(dat))
+    ##### datspcn2_unique <- unique(datspcn2)
+    ##### res.test <- subset(datspcn2_unique, select = colnames(dat))
+    res.test <- subset(datspcn2, select = colnames(dat))
     
     res.test_combine_tax <- paste(
         res.test$COLLECTOR,

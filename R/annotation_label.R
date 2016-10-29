@@ -24,8 +24,13 @@ annotation_label <- function(dat = NULL, spellcheck = TRUE, outfile = "Annotatio
                 1, collapse = ", ")))
     }
     
+    #### Formating Date
     formatdate <- function(x){
-        format(as.Date(x),"%d %B %Y")
+        if(!is.na(suppressWarnings(as.integer(x)))){
+            x <- as.Date(as.integer(x), origin="1899-12-30")
+        }
+        res <- format(as.Date(x),"%d %B %Y")
+        return(res)
     }
     
     pgenus <- herblabel::pgenus
