@@ -69,10 +69,26 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
     pgenus <- herblabel::pgenus
     #### Formating Date
     formatdate <- function(x){
-        if(!is.na(suppressWarnings(as.integer(x)))){
-            x <- as.Date(as.integer(x), origin="1899-12-30")
+        if(!is.na(suppressWarnings(as.integer(x))) ){
+            if(!grepl("^darwin", R.version$os)){  
+                x <- as.Date(as.integer(x), origin="1899-12-30")   ### Default in MacOS
+            } else {                              
+                x <- as.Date(as.integer(x), origin = "1904-01-01") ### Default in Windows
+            }
         }
         res <- format(as.Date(x),"%d %B %Y")
+        return(res)
+    }
+    
+    formatdate2 <- function(x){
+        if(!is.na(suppressWarnings(as.integer(x))) ){
+            if(!grepl("^darwin", R.version$os)){
+                x <- as.Date(as.integer(x), origin="1899-12-30")
+            } else {
+                x <- as.Date(as.integer(x), origin = "1904-01-01")
+            }
+        }
+        res <- format(as.Date(x))
         return(res)
     }
     
@@ -288,6 +304,7 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
     }
     
    ###########################################################################################################
+    
     temp1 <- "{\\rtf1\\ansi\\ansicpg936\\deflangfe2052\\fcharset134\\deff1{\\fonttbl{\\f0\\froman\\fcharset134 SimSun;}{\\f1\\froman\\fcharset134 Times New Roman;}}{\\stylesheet{\\*\\cs3 Default Paragraph Font;}}{\\colortbl\\red0\\green0\\blue0;\\red255\\green0\\blue0;\\red0\\green255\\blue0;\\red0\\green0\\blue255;}\\paperw12240\\paperh15840\\margl1800\\margr1800\\margt1440\\margb1440\\gutter0\\ftnbj\\aenddoc\\jcompress1\\viewkind4\\viewscale100\\asianbrkrule\\allowfieldendsel\\snaptogridincell\\viewkind4\\sectd\\sbkpage\\pgwsxn11906\\pghsxn16838\\marglsxn600\\margrsxn600\\margtsxn720\\margbsxn10\\guttersxn0\\headery720\\footery720\\pgbrdropt0\\sectdefaultcl\\cols2\\colsx1080\\linebetcol1\\endnhere"
     #### Herbarium Label
     #### Default Font Size if 18
@@ -295,7 +312,8 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
     temp2 <- c()
     temp_count <- seq(0, nrow(herbdat000), by = 5)  ### Counter
     temp_count[1] <- 1
-    
+    NEW_DATE_COLLECTED <- as.character(c())
+    NEW_DATE_IDENTIFIED <- as.character(c())
     
     herbdat_row1 <- herbdat000[1,]
     
@@ -461,6 +479,11 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
         "{\\pard\\keep\\keepn\\sa100\\fs18 \\par }", 
         "{\\pard\\keep\\qc\\fs18  .                  .                   .\\par}" 
          )                             ### End of one label
+        
+        NEW_DATE_COLLECTED[i] <- tryCatch(formatdate2(herbdat$DATE_COLLECTED), 
+                   error= function(e) {herbdat$DATE_COLLECTED})
+        NEW_DATE_IDENTIFIED[i] <- tryCatch(formatdate2(herbdat$DATE_IDENTIFIED), 
+                                 error= function(e) {herbdat$DATE_IDENTIFIED}) 
         temp2 <- c(temp2, res)         ### Add label to the RTF file.
         herbdat_row1 <- rbind(herbdat_row1, herbdat)
     }
@@ -477,6 +500,8 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
     modified_dat <- herbdat_row1[-1,]
     modified_dat$GENUS  <- comment_genus
     modified_dat$FAMILY <- comment_family
-    
+    #### Convert the dates to character string, and replace them
+    dat$DATE_COLLECTED <- NEW_DATE_COLLECTED
+    dat$DATE_IDENTIFIED <- NEW_DATE_IDENTIFIED
     return(invisible(list(dat = dat, modified_dat = modified_dat)))
 }
