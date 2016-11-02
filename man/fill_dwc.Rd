@@ -15,7 +15,7 @@ fill_dwc(dat, namedb = c("spfrps", "spfoc"))
   \item{dat}{
     Data frame, usually a dataframe representing Darwin Core Herbarium Templates
 }
-  \item{dat}{
+  \item{namedb}{
     Character string, represent the database to use to fill the scientific names, spfrps for Flora Rpublicae Popularis Sinicae, spfoc for Flora of China.
 }
 }
