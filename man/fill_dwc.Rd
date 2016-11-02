@@ -8,12 +8,15 @@ Searching and parsing Scientific Names in the Local Name field, and automaticall
 
 }
 \usage{
-fill_dwc(dat)
+fill_dwc(dat, namedb = c("spfrps", "spfoc"))
 }
 
 \arguments{
   \item{dat}{
     Data frame, usually a dataframe representing Darwin Core Herbarium Templates
+}
+  \item{dat}{
+    Character string, represent the database to use to fill the scientific names, spfrps for Flora Rpublicae Popularis Sinicae, spfoc for Flora of China.
 }
 }
 \details{

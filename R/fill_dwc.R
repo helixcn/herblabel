@@ -1,13 +1,22 @@
 #### dat <- dat_test
 
-fill_dwc <- function(dat){
+fill_dwc <- function(dat, namedb = c("spfrps", "spfoc")){
+    namedb <- match.arg(namedb)
     add.sort.id <- 1:nrow(dat)
     dat2 <- data.frame(dat, add.sort.id)
     syst <- Sys.info()[['sysname']]
     pgenus <- herblabel::pgenus
-    spcn   <- herblabel::spcn
+    spfrps  <- herblabel::spfrps
+    spfoc   <- herblabel::spfoc
     #### add scientific name based on the local Chinese Name
-    datspcn <- merge(dat2, spcn, by.x = "LOCAL_NAME", by.y = "NAME_CN", sort = FALSE, all.x = TRUE)
+    if(namedb == "spfrps"){
+        datspcn <- merge(dat2, spfrps, by.x = "LOCAL_NAME", by.y = "NAME_CN", sort = FALSE, all.x = TRUE)
+    }
+    
+    if(namedb == "spfoc"){
+            datspcn <- merge(dat2, spfoc, by.x = "LOCAL_NAME", by.y = "NAME_CN", sort = FALSE, all.x = TRUE)
+    }
+    
     datspcn$SCIENTIFIC_NAME <- ifelse((is.na(datspcn$SCIENTIFIC_NAME)|datspcn$SCIENTIFIC_NAME == "")&(!is.na(datspcn$LOCAL_NAME)|datspcn$LOCAL_NAME == ""), datspcn$LOCAL_NAME, datspcn$SCIENTIFIC_NAME)
     datspcn$SCIENTIFIC_NAME <- ifelse((is.na(datspcn$SCIENTIFIC_NAME)|datspcn$SCIENTIFIC_NAME == ""), "", datspcn$SCIENTIFIC_NAME)
     #### 
