@@ -61,6 +61,7 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
         warning(paste("\"DATE_IDENTIFIED\" not provided for row: ", 
              paste(which(is.na(herbdat000$DATE_IDENTIFIED)) + 1, collapse = ", ")))
         }
+        
     #######################################################
 
     print(paste(nrow(herbdat000), "herbarium specimen labels to create:"))
@@ -503,5 +504,8 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
     #### Convert the dates to character string, and replace them
     dat$DATE_COLLECTED <- NEW_DATE_COLLECTED
     dat$DATE_IDENTIFIED <- NEW_DATE_IDENTIFIED
+    if(any(as.Date(NEW_DATE_IDENTIFIED) < as.Date(NEW_DATE_COLLECTED))){
+        warning(paste("NEW_DATE_IDENTIFIED is earlier than NEW_DATE_COLLECTED for row:", which(as.Date(NEW_DATE_IDENTIFIED) <- as.Date(NEW_DATE_COLLECTED)) + 1))
+    }
     return(invisible(list(dat = dat, modified_dat = modified_dat)))
 }
