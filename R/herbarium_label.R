@@ -416,9 +416,13 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, outfile = "herblabel.
                                   "\\b0\\par}", sep = "")),
         ##### COUNTY and LOCALITY
         paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb120\\sa20\\fs18 ", 
-        REPLACE(paste(toupper(herbdat$COUNTRY),", ", herbdat$STATE_PROVINCE,
-                 ", ", herbdat$COUNTY, ", ", ifelse(is.na(herbdat$LOCALITY), 
-                 "", as.character(herbdat$LOCALITY)), sep = "")), "\\par}",sep = ""), 
+            REPLACE(paste(toupper(ifelse(is.na(herbdat$COUNTRY), "", herbdat$COUNTRY)),", ", 
+		                          ifelse(is.na(herbdat$STATE_PROVINCE), "", herbdat$STATE_PROVINCE),
+                                  ", ", 
+							      ifelse(is.na(herbdat$COUNTY), "", herbdat$COUNTY), 
+							      ", ", 
+							      ifelse(is.na(herbdat$LOCALITY), "", as.character(herbdat$LOCALITY)), sep = "")), 
+							      "\\par}",sep = ""), 
         
         ##### LONGITUDE, LATITUDE and ELEVATION
         REPLACE(ifelse(is.na(herbdat$LAT_DEGREE), "", 
