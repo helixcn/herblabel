@@ -1,9 +1,10 @@
 #### create herbarium labels in RTF, default size of paper is A4.
 
-herbarium_label <- function(dat = NULL, spellcheck = TRUE, theme = c("KFBG", "PE", "KUN"),outfile = "herblabel.rtf"){
+herbarium_label <- function(dat = NULL, spellcheck = TRUE, theme = c("KFBG", "PE", "KUN", "HU"),outfile = "herblabel.rtf"){
     if(is.null(dat)){
         stop("\'dat\' should be specified")
     }
+    theme <- match.arg(theme)
 
     herbdat000 <- dat
     
@@ -372,7 +373,7 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, theme = c("KFBG", "PE
 
                 } else{
                 if(!grepl("should be under",  as.character(temp.genus))){
-                    herbdat$FAMILY <- paste("\\cf3 ", unique(as.character(fgmerge.temp$FAMILY.x)), " ", sep = "")
+                    #### herbdat$FAMILY <- paste("\\cf3 ", unique(as.character(fgmerge.temp$FAMILY.x)), " ", sep = "")
                     comment_family[i] <- paste(unique(gsub("\\\\\\cf3", "", as.character(fgmerge.temp$FAMILY.x))), collapse = "")
                         if(!toupper(as.character(fgmerge.temp$FAMILY.x)) %in% toupper(same_families)){
                             herbdat$GENUS <- paste("\\cf3 ", unique(as.character(fgmerge.temp$GENUS)), 
@@ -647,6 +648,70 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, theme = c("KFBG", "PE
                     "\\par}", sep = "")),
              
             "{\\pard\\keep\\keepn\\sa100\\fs18 \\par }", 
+            "{\\pard\\keep\\qc\\fs18  .                  .                   .\\par}" 
+             )                             ### End of one label
+        }
+        
+         ######################### HU ###############################
+         if(theme == "HU"){
+         res <- c(
+            #### Title of the Herbarium
+            paste(
+            ####  FLORA OF SOME PLACE
+            ifelse(is.na(herbdat$TITLE), "", 
+                   paste("{\\pard\\keep\\keepn\\fi0\\li0\\fs22\\qc\\sb100\\sa250\\b ",
+                    herbdat$TITLE,"\\b0 \\par }", sep = "")),
+                    
+            #### FAMILY, in BOLD FACE
+            ifelse(is.na(herbdat$FAMILY), "", paste("{\\pard\\keep\\keepn\\fi0\\li0\\fs18\\b ",
+                   Cap(REPLACE(herbdat$FAMILY)),"\\b0 \\par }", sep = "")),        
+            #### SPECIES INFO
+            ifelse(is.na(herbdat$GENUS) & is.na(herbdat$SPECIES) & is.na(herbdat$AUTHOR_OF_SPECIES) & is.na(herbdat$INFRASPECIFIC_RANK) & is.na(herbdat$INFRASPECIFIC_EPITHET) & is.na(herbdat$AUTHOR_OF_INFRASPECIFIC_RANK), 
+                        "", 
+                paste("{\\pard\\keep\\keepn\\fi-288\\li288\\fs18\\sa300\\i ",
+                REPLACE(paste(ifelse( is.na(herbdat$GENUS), "", herbdat$GENUS),"\\i0 \\i", 
+                    ifelse( is.na(herbdat$SPECIES),                           "\\i0 ",     paste(" ", as.character(herbdat$SPECIES),                          sep = "")), "\\i0",
+                    ifelse( is.na(herbdat$AUTHOR_OF_SPECIES),                  "",         paste(" ", as.character(herbdat$AUTHOR_OF_SPECIES),                sep = "")),
+                    ifelse( is.na(herbdat$INFRASPECIFIC_RANK),                 "",         paste(" ", as.character(herbdat$INFRASPECIFIC_RANK),               sep = "")), "\\i",
+                    ifelse( is.na(herbdat$INFRASPECIFIC_EPITHET),              "",         paste(" ", as.character(herbdat$INFRASPECIFIC_EPITHET),            sep = "")), "\\i0",
+                    ifelse( is.na(herbdat$AUTHOR_OF_INFRASPECIFIC_RANK),       "",         paste(" ", as.character(herbdat$AUTHOR_OF_INFRASPECIFIC_RANK),     sep = "")), sep = " ")),
+                    "\\par}", sep = "")),
+            
+            ##### LOCATION
+            paste("{\\pard\\keep\\keepn\\fi0\\li0\\fs18\\sa200", 
+                REPLACE(paste(ifelse(is.na(herbdat$STATE_PROVINCE), "", paste(as.character(herbdat$STATE_PROVINCE),", ", sep = "")),
+                              ifelse(is.na(herbdat$COUNTY),         "", paste(as.character(herbdat$COUNTY), ", "       , sep = "")), 
+                              ifelse(is.na(herbdat$LOCALITY),       "", paste(as.character(herbdat$LOCALITY)           , sep = "")), sep = "")),". ",
+                paste(
+                      ##### LONGITUDE, LATITUDE
+                   REPLACE(ifelse(is.na(herbdat$LAT_DEGREE), "", 
+                      paste(herbdat$LAT_DEGREE,"\\u176;", herbdat$LAT_MINUTE, "\\u39;",herbdat$LAT_SECOND, "\\u34;", herbdat$LAT_FLAG,
+                                     ", ",herbdat$LON_DEGREE,"\\u176;",herbdat$LON_MINUTE,"\\u39;",herbdat$LON_SECOND,"\\u34;", herbdat$LON_FLAG, sep = ""))), 
+                      #### ELEVATION
+                      ";", ifelse(is.na(herbdat$ELEVATION),"", paste(herbdat$ELEVATION, "m. ",sep = "")),
+                      ##### Description
+                      gsub("\\.  ", "\\. ", gsub(" \\.", "\\.", gsub("\\. \\.", "\\. ", gsub("\\. +", "\\. ", 
+                          REPLACE(paste( ifelse(is.na(herbdat$ATTRIBUTES), "", Cap2(as.character(herbdat$ATTRIBUTES))),
+                          ifelse(is.na(herbdat$ATTRIBUTES), "", ". "), 
+                           sep = " ")))))), 
+                      ##### Remarks
+                      italic_latin(gsub("\\.  ", "\\. ", gsub(" \\.", "\\.", gsub("\\. \\.", "\\. ", gsub("\\. +", "\\. ", 
+                           REPLACE(paste(ifelse(is.na(herbdat$REMARKS), "", Cap2(as.character(herbdat$REMARKS))), sep = " "))))))), sep = ""
+                     ), 
+                 "\\par}",sep = ""
+                ),
+           
+            ##### COLLECTOR
+            paste("{\\pard\\keep\\keepn\\fi0\\fs18\\tqr ",
+                       paste(herbdat$COLLECTOR, sep = ""),"\\par}", sep = ""), 
+                    
+            ##### COLLECTOR NUMBER and Date
+            paste("{\\pard\\keep\\keepn\\fi0\\fs18\\tqr\\tx5000",
+                       herbdat$COLLECTOR_NUMBER, "\\tab",tryCatch(formatdate(herbdat$DATE_COLLECTED), 
+                       error= function(e) {print("Warning: Date format incorrect, using original string"); 
+                       herbdat$DATE_COLLECTED}), "\\par}"),
+            "{\\pard\\keep\\keepn\\sa100\\fs18 \\par }", 
+            "{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\qc\\sb600\\sa100\\fs20\\b ", herbdat$HERBARIUM,"\\b0\\par }", sep = ""),
             "{\\pard\\keep\\qc\\fs18  .                  .                   .\\par}" 
              )                             ### End of one label
         }
