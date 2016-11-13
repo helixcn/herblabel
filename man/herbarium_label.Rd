@@ -7,7 +7,7 @@ Creating RTF herbarium labels based on Darwin Core herbarium records template
 Creating RTF herbarium labels based on Darwin Core herbarium records template.
 }
 \usage{
-herbarium_label(dat = NULL, spellcheck = TRUE, outfile = "herblabel.rtf")
+herbarium_label(dat = NULL, spellcheck = TRUE,theme = c("KFBG", "PE", "KUN"), outfile = "herblabel.rtf")
 }
 
 \arguments{
@@ -17,6 +17,11 @@ dataframe of Darwin Core Template.
   \item{spellcheck}{ 
 Logical, indicating whether the check of spelling should be performed.
 }
+
+  \item{theme}{ 
+a character string speficying the theme of herbarium labels
+}
+
   \item{outfile}{
 Character string, name of the rtf file to be generated.
 }
@@ -143,6 +148,8 @@ Jinlong Zhang \email{ jinlongzhang01@gmail.com }
                         package = "herblabel")
     library(openxlsx)
     dat <- read.xlsx(path)
-    herbarium_label(dat, outfile = "herbarium_labels.rtf")
+    herbarium_label(dat, theme = "KFBG", outfile = "herbarium_labels_KFBG.rtf")
+    herbarium_label(dat, theme = "PE",   outfile = "herbarium_labels_PE.rtf")
+    herbarium_label(dat, theme = "KUN",  outfile = "herbarium_labels_KUN.rtf")
     herbarium_label(dat, spellcheck = FALSE, outfile = "herbarium_labels_no_checking.rtf")
 }
