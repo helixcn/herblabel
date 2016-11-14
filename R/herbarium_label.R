@@ -528,7 +528,7 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, theme = c("KFBG", "PE
                        error= function(e) {print("Warning: Date format incorrect, using original string"); 
                        herbdat$DATE_COLLECTED}),"\\par}"),
             ##### COUNTY and LOCALITY
-            paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb100\\sa100\\fs18 \\b Loc: \\b0", 
+            paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb100\\sa100\\fs18 \\b Location: \\b0", 
                 REPLACE(paste(toupper(ifelse(is.na(herbdat$COUNTRY), "", herbdat$COUNTRY)),", ", 
                                       ifelse(is.na(herbdat$STATE_PROVINCE), "", herbdat$STATE_PROVINCE),
                                       ", ", 
@@ -549,7 +549,7 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, theme = c("KFBG", "PE
                                                  "\\sa80\\par}", sep = " "))))))),
             ##### LONGITUDE, LATITUDE and ELEVATION
             REPLACE(ifelse(is.na(herbdat$LAT_DEGREE), "", 
-                   paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb100\\sa100\\fs18\\qj\\b Alt.: \\b0 ",paste(herbdat$ELEVATION, "m; ", sep = ""), 
+                   paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb100\\sa100\\fs18\\qj\\b Altitude.: \\b0 ",paste(herbdat$ELEVATION, "m; ", sep = ""), 
                          "\\b Lat.: \\b0 ",herbdat$LAT_DEGREE,"\\u176;", herbdat$LAT_MINUTE, "\\u39;",herbdat$LAT_SECOND, "\\u34;", herbdat$LAT_FLAG,
                          ", \\b Lon.: \\b0 ",herbdat$LON_DEGREE,"\\u176;",herbdat$LON_MINUTE,"\\u39;",herbdat$LON_SECOND,"\\u34;", herbdat$LON_FLAG, 
                          "\\par }",sep = ""))), 
@@ -570,11 +570,6 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, theme = c("KFBG", "PE
                                       ifelse( is.na(herbdat$INFRASPECIFIC_EPITHET),              "",         paste(" ", as.character(herbdat$INFRASPECIFIC_EPITHET),            sep = "")), "\\i0",
                                       ifelse( is.na(herbdat$AUTHOR_OF_INFRASPECIFIC_RANK),       "",         paste(" ", as.character(herbdat$AUTHOR_OF_INFRASPECIFIC_RANK),     sep = "")), sep = " ")),
                                       "\\par}", sep = "")),
-            ##### Remarks
-            ifelse((is.na(herbdat$REMARKS)), "",
-                    italic_latin(gsub("\\.  ", "\\. ", gsub(" \\.", "\\.", gsub("\\. \\.", "\\. ", gsub("\\. +", "\\. ", 
-                                 REPLACE(paste("{\\pard\\keep\\keepn\\fi0\\li0\\fs18\\sa100\\sb100\\b Remarks: \\b0", ifelse(is.na(herbdat$REMARKS), "", Cap2(as.character(herbdat$REMARKS))), 
-                                                 "\\sa80\\par}", sep = " ")))))))),
             "{\\pard\\keep\\keepn\\sa100\\fs18 \\par }", 
             "{\\pard\\keep\\qc\\fs18  .                  .                   .\\par}" 
              )                             ### End of one label
@@ -591,16 +586,20 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, theme = c("KFBG", "PE
             ifelse(is.na(herbdat$TITLE), "", 
                    paste("{\\pard\\keep\\keepn\\fi0\\li0\\fs18\\qc\\sb50\\sa50\\b ",
                     herbdat$TITLE,"\\b0 \\par }", sep = "")),
-            ##### COLLECTOR NUMBER
-            paste("{\\pard\\keep\\keepn\\fi0\\fs18\\tqr\\b No.: \\b0 ",
-                       herbdat$COLLECTOR_NUMBER, "\\par}"),
-            ##### COLLECTION DATE
-            paste("{\\pard\\keep\\keepn\\fi0\\fs18\\tqr\\b Date of Coll. : \\b0", tryCatch(formatdate(herbdat$DATE_COLLECTED), 
-                       error= function(e) {print("Warning: Date format incorrect, using original string"); 
-                       herbdat$DATE_COLLECTED}),"\\par}"),
+            
             ##### COLLECTOR
             paste("{\\pard\\keep\\keepn\\fi0\\fs18\\tqr\\b Col.: \\b0 ",
                        paste(herbdat$COLLECTOR, sep = ""),"\\par}", sep = ""), 
+                       
+            ##### COLLECTOR NUMBER
+            paste("{\\pard\\keep\\keepn\\fi0\\fs18\\tqr\\b No.: \\b0 ",
+                       herbdat$COLLECTOR_NUMBER, "\\par}"),
+                       
+            ##### COLLECTION DATE
+            paste("{\\pard\\keep\\keepn\\fi0\\fs18\\tqr\\b Date.: \\b0", tryCatch(formatdate(herbdat$DATE_COLLECTED), 
+                       error= function(e) {print("Warning: Date format incorrect, using original string"); 
+                       herbdat$DATE_COLLECTED}),"\\par}"),
+
                        
             ##### LOCATION
             paste("{\\pard\\keep\\keepn\\fi0\\li0\\fs18 \\b Loc: \\b0", 
@@ -668,7 +667,7 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, theme = c("KFBG", "PE
             #### SPECIES INFO
             ifelse(is.na(herbdat$GENUS) & is.na(herbdat$SPECIES) & is.na(herbdat$AUTHOR_OF_SPECIES) & is.na(herbdat$INFRASPECIFIC_RANK) & is.na(herbdat$INFRASPECIFIC_EPITHET) & is.na(herbdat$AUTHOR_OF_INFRASPECIFIC_RANK), 
                         "", 
-                paste("{\\pard\\keep\\keepn\\fi-288\\li288\\fs18\\sa300\\i ",
+                paste("{\\pard\\keep\\keepn\\fi-288\\li288\\fs18\\sa200\\i ",
                 REPLACE(paste(ifelse( is.na(herbdat$GENUS), "", herbdat$GENUS),"\\i0 \\i", 
                     ifelse( is.na(herbdat$SPECIES),                           "\\i0 ",     paste(" ", as.character(herbdat$SPECIES),                          sep = "")), "\\i0",
                     ifelse( is.na(herbdat$AUTHOR_OF_SPECIES),                  "",         paste(" ", as.character(herbdat$AUTHOR_OF_SPECIES),                sep = "")),
@@ -711,7 +710,7 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, theme = c("KFBG", "PE
                        error= function(e) {print("Warning: Date format incorrect, using original string"); 
                        herbdat$DATE_COLLECTED}), "\\par}"),
             "{\\pard\\keep\\keepn\\sa100\\fs18 \\par }", 
-            "{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\qc\\sb600\\sa100\\fs20\\b ", herbdat$HERBARIUM,"\\b0\\par }", sep = ""),
+            "{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\qc\\sb500\\sa100\\fs20\\b ", herbdat$HERBARIUM,"\\b0\\par }", sep = ""),
             "{\\pard\\keep\\qc\\fs18  .                  .                   .\\par}" 
              )                             ### End of one label
         }
