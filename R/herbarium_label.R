@@ -523,7 +523,7 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, theme = c("KFBG", "PE
             paste("{\\pard\\keep\\keepn\\fi0\\sb100\\sa100\\fs18\\tqr\\b Collector: \\b0 ",
                        paste(herbdat$COLLECTOR, sep = ""),"\\par}", sep = ""),  
             paste("{\\pard\\keep\\keepn\\fi0\\sb100\\sa100\\fs18\\tx2000\\tqr\\b No.: \\b0 ",
-                       herbdat$COLLECTOR_NUMBER,"\\tab \\b Date of Coll.: \\b0", tryCatch(formatdate(herbdat$DATE_COLLECTED), 
+                       herbdat$COLLECTOR_NUMBER,"\\tab \\b Date of Coll.: \\b0 ", tryCatch(formatdate(herbdat$DATE_COLLECTED), 
                        error= function(e) {print("Warning: Date format incorrect, using original string"); 
                        herbdat$DATE_COLLECTED}),"\\par}", sep = ""),
             ##### COUNTY and LOCALITY
@@ -556,7 +556,7 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, theme = c("KFBG", "PE
             #### FAMILY, in BOLD FACE
             ifelse(is.na(herbdat$FAMILY), paste("{\\pard\\keep\\keepn\\fi0\\li0\\tx3000\\sb100\\sa100\\fs18\\b Family: ",
                    "\\b0 ", "\\tab\\b Local Name: \\b0 ", ifelse(is.na(herbdat$LOCAL_NAME), "", herbdat$LOCAL_NAME), "\\par }", sep = ""), paste("{\\pard\\keep\\keepn\\fi0\\li0\\tx2000\\sb100\\sa100\\fs18\\b Family: \\b0 ",
-                   Cap(herbdat$FAMILY), "\\tab\\b Local Name: \\b0 ", ifelse(is.na(herbdat$LOCAL_NAME), "", herbdat$LOCAL_NAME), "\\par }", sep = "")),
+                   Cap(herbdat$FAMILY), "\\tab\\b Local Name:  \\b0 ", ifelse(is.na(herbdat$LOCAL_NAME), "", herbdat$LOCAL_NAME), "\\par }", sep = "")),
             
             #### SPECIES INFO
             ifelse(is.na(herbdat$GENUS) & is.na(herbdat$SPECIES) & is.na(herbdat$AUTHOR_OF_SPECIES) & is.na(herbdat$INFRASPECIFIC_RANK) & is.na(herbdat$INFRASPECIFIC_EPITHET) & is.na(herbdat$AUTHOR_OF_INFRASPECIFIC_RANK), 
@@ -632,7 +632,7 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, theme = c("KFBG", "PE
             ifelse(is.na(herbdat$FAMILY), paste("{\\pard\\keep\\keepn\\fi0\\li0\\fs18\\b Family: ",
                    "\\b0 \\par }", sep = ""), paste("{\\pard\\keep\\keepn\\fi0\\li0\\fs18\\b Family: \\b0 ",
                    Cap(herbdat$FAMILY),"\\par }", sep = "")),
-            paste("{\\pard\\keep\\keepn\\fs18 \\b Local Name:\\b0 ", ifelse(is.na(herbdat$LOCAL_NAME), "", herbdat$LOCAL_NAME)," \\par }", sep = ""),
+            paste("{\\pard\\keep\\keepn\\fs18 \\b Local Name: \\b0 ", ifelse(is.na(herbdat$LOCAL_NAME), "", herbdat$LOCAL_NAME)," \\par }", sep = ""),
             #### SPECIES INFO
             ifelse(is.na(herbdat$GENUS) & is.na(herbdat$SPECIES) & is.na(herbdat$AUTHOR_OF_SPECIES) & is.na(herbdat$INFRASPECIFIC_RANK) & is.na(herbdat$INFRASPECIFIC_EPITHET) & is.na(herbdat$AUTHOR_OF_INFRASPECIFIC_RANK), 
                         "", 
