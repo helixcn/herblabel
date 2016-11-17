@@ -377,14 +377,13 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, theme = c("KFBG", "PE
                     comment_family[i] <- paste(unique(gsub("\\\\\\cf3", "", as.character(fgmerge.temp$FAMILY.x))), collapse = "")
                         if(!toupper(as.character(fgmerge.temp$FAMILY.x)) %in% toupper(same_families)){
                             herbdat$GENUS <- paste("\\cf3 ", unique(as.character(fgmerge.temp$GENUS)), 
-                                                   "\\i0 \\cf3  (should be under \"", 
+                                                   "\\i0 \\cf3 (should be under \"", 
                                                    toupper(paste(as.character(fgmerge.temp$FAMILY.y), 
                                                    collapse = "\", \"")) ,
                                                    "\" according to The Plant List Website.) ", sep = "")
                                                    
-                            comment_genus[i] <- paste( "(should be under,", 
-                                                       toupper(paste(as.character(fgmerge.temp$FAMILY.y), collapse = ",")) ,
-                                                       "according to The Plant List Website.)")
+                            comment_genus[i] <- paste(" (should be under", toupper(paste(as.character(fgmerge.temp$FAMILY.y), collapse = ",")) ,
+                                                       "according to The Plant List Website.)", sep = "")
                         }
                     }
                 }
@@ -513,20 +512,20 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, theme = c("KFBG", "PE
          #### 
          res <- c(
             #### Title of the Herbarium
-            paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\qc\\sb350\\sa400\\fs20\\ ", 
+            paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\qc\\sb350", ifelse(!is.na(herbdat$TITLE), "\\sa200", "\\sa400"), "\\fs20\\ ", 
                     herbdat$HERBARIUM,"\\b0\\par }", sep = ""),
             ####  
             ### FLORA OF SOME PLACE
             ifelse(is.na(herbdat$TITLE), "", 
-                   paste("{\\pard\\keep\\keepn\\fi0\\li0\\fs18\\qc\\sb10\\sa100\\b ",
+                   paste("{\\pard\\keep\\keepn\\fi0\\li0\\fs18\\qc\\sb10\\sa200\\b ",
                     herbdat$TITLE,"\\b0 \\par }", sep = "")),
             ##### COLLECTOR and COLLECTION NUMBER !
-            paste("{\\pard\\keep\\keepn\\fi0\\sb100\\sa100\\fs18\\tqr\\b Collector:\\b0 ",
+            paste("{\\pard\\keep\\keepn\\fi0\\sb100\\sa100\\fs18\\tqr\\b Collector: \\b0 ",
                        paste(herbdat$COLLECTOR, sep = ""),"\\par}", sep = ""),  
             paste("{\\pard\\keep\\keepn\\fi0\\sb100\\sa100\\fs18\\tx2000\\tqr\\b No.: \\b0 ",
                        herbdat$COLLECTOR_NUMBER,"\\tab \\b Date of Coll.: \\b0", tryCatch(formatdate(herbdat$DATE_COLLECTED), 
                        error= function(e) {print("Warning: Date format incorrect, using original string"); 
-                       herbdat$DATE_COLLECTED}),"\\par}"),
+                       herbdat$DATE_COLLECTED}),"\\par}", sep = ""),
             ##### COUNTY and LOCALITY
             paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb100\\sa100\\fs18 \\b Location: \\b0", 
                 REPLACE(paste(toupper(ifelse(is.na(herbdat$COUNTRY), "", herbdat$COUNTRY)),", ", 
@@ -549,15 +548,15 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, theme = c("KFBG", "PE
                                                  "\\sa80\\par}", sep = " "))))))),
             ##### LONGITUDE, LATITUDE and ELEVATION
             REPLACE(paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb100\\sa100\\fs18\\qj\\b Altitude.: \\b0 ", 
-                         ifelse(is.na(herbdat$ELEVATION),"", paste(herbdat$ELEVATION, "m; ", sep = "")), 
-                         ifelse(is.na(herbdat$LAT_DEGREE),"", "\\b Lat.: \\b0 ", herbdat$LAT_DEGREE,"\\u176;", herbdat$LAT_MINUTE, "\\u39;",herbdat$LAT_SECOND, "\\u34;", herbdat$LAT_FLAG),
-                         ifelse(is.na(herbdat$LON_DEGREE), "", ", \\b Lon.: \\b0 ",herbdat$LON_DEGREE,"\\u176;",herbdat$LON_MINUTE,"\\u39;",herbdat$LON_SECOND,"\\u34;", herbdat$LON_FLAG), 
-                         "\\par }",sep = "")), 
+                         ifelse(is.na(herbdat$ELEVATION), "", paste(herbdat$ELEVATION, "m; ", sep = "")), 
+                         ifelse(is.na(herbdat$LAT_DEGREE), "", paste("\\b Lat.: \\b0 ", herbdat$LAT_DEGREE,"\\u176;", herbdat$LAT_MINUTE, "\\u39;",herbdat$LAT_SECOND, "\\u34;", herbdat$LAT_FLAG, sep = "")),
+                         ifelse(is.na(herbdat$LON_DEGREE), "", paste(", \\b Lon.: \\b0 ",herbdat$LON_DEGREE,"\\u176;",herbdat$LON_MINUTE,"\\u39;",herbdat$LON_SECOND,"\\u34;", herbdat$LON_FLAG, sep = "")), 
+                         "\\par }", sep = "")), 
                     
             #### FAMILY, in BOLD FACE
-            ifelse(is.na(herbdat$FAMILY), paste("{\\pard\\keep\\keepn\\fi0\\li0\\tx2000\\sb100\\sa100\\fs18\\b Family: ",
+            ifelse(is.na(herbdat$FAMILY), paste("{\\pard\\keep\\keepn\\fi0\\li0\\tx3000\\sb100\\sa100\\fs18\\b Family: ",
                    "\\b0 ", "\\tab\\b Local Name: \\b0 ", ifelse(is.na(herbdat$LOCAL_NAME), "", herbdat$LOCAL_NAME), "\\par }", sep = ""), paste("{\\pard\\keep\\keepn\\fi0\\li0\\tx2000\\sb100\\sa100\\fs18\\b Family: \\b0 ",
-                   herbdat$FAMILY, "\\tab\\b Local Name: \\b0 ", ifelse(is.na(herbdat$LOCAL_NAME), "", herbdat$LOCAL_NAME), "\\par }", sep = "")),
+                   Cap(herbdat$FAMILY), "\\tab\\b Local Name: \\b0 ", ifelse(is.na(herbdat$LOCAL_NAME), "", herbdat$LOCAL_NAME), "\\par }", sep = "")),
             
             #### SPECIES INFO
             ifelse(is.na(herbdat$GENUS) & is.na(herbdat$SPECIES) & is.na(herbdat$AUTHOR_OF_SPECIES) & is.na(herbdat$INFRASPECIFIC_RANK) & is.na(herbdat$INFRASPECIFIC_EPITHET) & is.na(herbdat$AUTHOR_OF_INFRASPECIFIC_RANK), 
@@ -579,12 +578,12 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, theme = c("KFBG", "PE
          if(theme == "KUN"){
          res <- c(
             #### Title of the Herbarium
-            paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\qc\\sb350\\sa400\\fs20\\b ", 
+            paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\qc\\sb350",ifelse(!is.na(herbdat$TITLE), "\\sa200", "\\sa400"),"\\fs20\\b ", 
                     herbdat$HERBARIUM,"\\b0\\par }", sep = ""),
             ####  
             ####  FLORA OF SOME PLACE
             ifelse(is.na(herbdat$TITLE), "", 
-                   paste("{\\pard\\keep\\keepn\\fi0\\li0\\fs18\\qc\\sb50\\sa50\\b ",
+                   paste("{\\pard\\keep\\keepn\\fi0\\li0\\fs18\\qc\\sb0\\sa250\\b ",
                     herbdat$TITLE,"\\b0 \\par }", sep = "")),
             
             ##### COLLECTOR
@@ -592,7 +591,7 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, theme = c("KFBG", "PE
                        paste(herbdat$COLLECTOR, sep = ""),"\\par}", sep = ""), 
                        
             ##### COLLECTOR NUMBER
-            paste("{\\pard\\keep\\keepn\\fi0\\fs18\\tqr\\b No.:\\b0 ",
+            paste("{\\pard\\keep\\keepn\\fi0\\fs18\\tqr\\b No.: \\b0 ",
                        herbdat$COLLECTOR_NUMBER, "\\par}", sep = ""),
                        
             ##### COLLECTION DATE
@@ -705,7 +704,7 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, theme = c("KFBG", "PE
                        paste(herbdat$COLLECTOR, sep = ""),"\\par}", sep = ""), 
                     
             ##### COLLECTOR NUMBER and Date
-            paste("{\\pard\\keep\\keepn\\fi0\\fs18\\tqr\\tx5000",
+            paste("{\\pard\\keep\\keepn\\fi0\\fs18\\tqr\\tx4500",
                        herbdat$COLLECTOR_NUMBER, "\\tab",tryCatch(formatdate(herbdat$DATE_COLLECTED), 
                        error= function(e) {print("Warning: Date format incorrect, using original string"); 
                        herbdat$DATE_COLLECTED}), "\\par}"),
