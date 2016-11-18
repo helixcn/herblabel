@@ -36,28 +36,24 @@ install.packages("devtools")
 
     ```R
     library(openxlsx)
-    library(herblabel)
-    path <- system.file("extdata", "DARWIN_CORE_HERBARIUM_RECORDS.xlsx", 
-                        package = "herblabel")
-    dat <- read.xlsx(path)
-    herbarium_label(dat, theme = "KFBG", outfile = "herbarium_labels_KFBG.rtf")
-    herbarium_label(dat, theme = "PE",   outfile = "herbarium_labels_PE.rtf")
-    herbarium_label(dat, theme = "KUN",  outfile = "herbarium_labels_KUN.rtf")
-    herbarium_label(dat, theme = "HU",   outfile = "herbarium_labels_HU.rtf")
-    herbarium_label(dat, spellcheck = FALSE, outfile = "herbarium_labels_no_checking.rtf")
+    library(herblabel)
+    path <- system.file("extdata", "DARWIN_CORE_HERBARIUM_RECORDS.xlsx", 
+                        package = "herblabel")
+    dat <- read.xlsx(path)
+    herbarium_label(dat, theme = "KFBG", outfile = "herbarium_labels_KFBG.rtf")
+    herbarium_label(dat, theme = "PE",   outfile = "herbarium_labels_PE.rtf")
+    herbarium_label(dat, theme = "KUN",  outfile = "herbarium_labels_KUN.rtf")
+    herbarium_label(dat, theme = "HU",   outfile = "herbarium_labels_HU.rtf")
+    herbarium_label(dat, spellcheck = FALSE, outfile = "herbarium_labels_no_checking.rtf")
     ```
 2. Annotation Labels
 
     ```R
     library(herblabel)
-    
     library(openxlsx)
-    
     path <- system.file("extdata", "ANNOTATION_TEMPLATE.xlsx", 
                        package = "herblabel")
-                       
     dat <- read.xlsx(path)
-    
     annotation_label(dat)
     ```
     
