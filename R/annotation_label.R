@@ -26,8 +26,12 @@ annotation_label <- function(dat = NULL, spellcheck = TRUE, outfile = "Annotatio
     
     #### Formating Date
     formatdate <- function(x){
-        if(!is.na(suppressWarnings(as.integer(x)))){
-            x <- as.Date(as.integer(x), origin="1899-12-30")
+        if(!is.na(suppressWarnings(as.integer(x))) ){
+            if(!grepl("^darwin", R.version$os)){  
+                x <- as.Date(as.integer(x), origin="1899-12-30")   ### Default in MacOS
+            } else {                              
+                x <- as.Date(as.integer(x), origin = "1904-01-01") ### Default in Windows
+            }
         }
         res <- format(as.Date(x),"%d %B %Y")
         return(res)
