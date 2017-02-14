@@ -200,6 +200,7 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, theme = c("KFBG", "PE
     ### truncated the the very small error introduced by openxlsx
     herbdat000$LON_SECOND   <- as.character(round(as.numeric(herbdat000$LON_SECOND ), digits = 2)) 
 
+    herbdat000$ELEVATION    <- as.character(round(as.numeric(herbdat000$ELEVATION ), digits = 0)) ##### Important as Rcpp or Openxlsx introduces many digits randomly
     ##################################################################################################
     #### Check the spelling of the scientific names
     #### Issue a warning if the names generated do not match with the accepted names at the Plant List Website
