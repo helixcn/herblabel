@@ -715,9 +715,9 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, theme = c("KFBG", "PE
              )                             ### End of one label
         }
         NEW_DATE_COLLECTED[i] <- tryCatch(formatdate2(herbdat$DATE_COLLECTED), 
-                   error= function(e) {herbdat$DATE_COLLECTED})
+                   error= function(e) {herbdat$DATE_COLLECTED})  ### formatdate2, Do not convert to date if could not be identified. 
         NEW_DATE_IDENTIFIED[i] <- tryCatch(formatdate2(herbdat$DATE_IDENTIFIED), 
-                                 error= function(e) {herbdat$DATE_IDENTIFIED}) 
+                                 error= function(e) {herbdat$DATE_IDENTIFIED})  ### formatdate2, Do not convert to date if could not be identified. 
         temp2 <- c(temp2, res)         ### Add label to the RTF file.
         herbdat_row1 <- rbind(herbdat_row1, herbdat)
     }
