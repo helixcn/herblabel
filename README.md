@@ -54,4 +54,7 @@ For more information, please refer to (in Chinese): [http://blog.sciencenet.cn/b
     ```
 The R script "run_herblabel" helps you to generate herbarium labels by a simple click. See [https://github.com/helixcn/run_herblabel](https://github.com/helixcn/run_herblabel)
 
+### Citation:
+Jinlong Zhang, Huiling Zhu, Jingang Liu, Gunter A. Fischer. (2016). Principles behind designing herbarium specimen labels and the R package 'herblabel'. Biodiversity Science, 24(12): 1345-1352 (DOI: 10.17520/biods.2016230) 
+
 Please feel free to send an email to **Jinlong Zhang** <jinlongzhang01@gmail.com> if you have any questions.

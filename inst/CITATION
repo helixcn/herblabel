@@ -1,0 +1,11 @@
+citHeader("To cite herblabel in a publication:")
+
+citEntry(entry="Article",
+	title = "Principles behind designing herbarium specimen labels and the {R} package 'herblabel'",
+        author = personList(as.person("Jinlong Zhang"), as.person("Huiling Zhu"), as.person("Jingang Liu"), as.person("Gunter A. Fischer")),
+	journal = "Biodiversity Science",
+    volume="24",
+    issue="12",
+    pages="1345-1352",
+    year="2016",
+	textVersion = "Jinlong Zhang, Huiling Zhu, Jingang Liu, Gunter A. Fischer. Principles behind designing herbarium specimen labels and the R package 'herblabel'. Biodiversity Science, 2016, 24(12): 1345-1352." )
