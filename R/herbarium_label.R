@@ -1,11 +1,13 @@
 #### create herbarium labels in RTF, default size of paper is A4.
 
-herbarium_label <- function(dat = NULL, spellcheck = TRUE, theme = c("KFBG", "PE", "KUN", "HU"),outfile = "herblabel.rtf"){
+herbarium_label <- function(dat = NULL, spellcheck = TRUE, theme = c("KFBG", "PE", "KUN", "HU"), outfile = "herblabel.rtf", font = c("Roman","Arial")){
     if(is.null(dat)){
         stop("\'dat\' should be specified")
     }
+    
     theme <- match.arg(theme)
-
+    font  <- match.arg(font )
+    
     herbdat000 <- dat
     
     herbdat000[herbdat000 == ""] <- NA
@@ -200,7 +202,6 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, theme = c("KFBG", "PE
     ### truncated the the very small error introduced by openxlsx
     herbdat000$LON_SECOND   <- as.character(round(as.numeric(herbdat000$LON_SECOND ), digits = 2)) 
 
-    herbdat000$ELEVATION    <- as.character(round(as.numeric(herbdat000$ELEVATION ), digits = 0)) ##### Important as Rcpp or Openxlsx introduces many digits randomly
     ##################################################################################################
     #### Check the spelling of the scientific names
     #### Issue a warning if the names generated do not match with the accepted names at the Plant List Website
@@ -307,8 +308,15 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, theme = c("KFBG", "PE
     }
     
    ###########################################################################################################
+    if (font == "Roman"){
+        fonttab <- "{\\fonttbl{\\f0\\froman\\fcharset134 SimSun;}{\\f1\\froman\\fcharset134 Times New Roman;}}"
+    }
+    if( font == "Arial"){
+        fonttab <- "{\\fonttbl{\\f0\\fswiss\\fcharset134 SimSun;}{\\f1\\fswiss\\fcharset134 Arial;}}"
+    }
     
-    temp1 <- "{\\rtf1\\ansi\\ansicpg936\\deflangfe2052\\fcharset134\\deff1{\\fonttbl{\\f0\\froman\\fcharset134 SimSun;}{\\f1\\froman\\fcharset134 Times New Roman;}}{\\stylesheet{\\*\\cs3 Default Paragraph Font;}}{\\colortbl\\red0\\green0\\blue0;\\red255\\green0\\blue0;\\red0\\green255\\blue0;\\red0\\green0\\blue255;}\\paperw12240\\paperh15840\\margl1800\\margr1800\\margt1440\\margb1440\\gutter0\\ftnbj\\aenddoc\\jcompress1\\viewkind4\\viewscale100\\asianbrkrule\\allowfieldendsel\\snaptogridincell\\viewkind4\\sectd\\sbkpage\\pgwsxn11906\\pghsxn16838\\marglsxn600\\margrsxn600\\margtsxn720\\margbsxn10\\guttersxn0\\headery720\\footery720\\pgbrdropt0\\sectdefaultcl\\cols2\\colsx1080\\linebetcol1\\endnhere"
+    temp1 <- paste("{\\rtf1\\ansi\\ansicpg936\\deflangfe2052\\fcharset134\\deff1",fonttab,
+    "{\\stylesheet{\\*\\cs3 Default Paragraph Font;}}{\\colortbl\\red0\\green0\\blue0;\\red255\\green0\\blue0;\\red0\\green255\\blue0;\\red0\\green0\\blue255;}\\paperw12240\\paperh15840\\margl1800\\margr1800\\margt1440\\margb1440\\gutter0\\ftnbj\\aenddoc\\jcompress1\\viewkind4\\viewscale100\\asianbrkrule\\allowfieldendsel\\snaptogridincell\\viewkind4\\sectd\\sbkpage\\pgwsxn11906\\pghsxn16838\\marglsxn600\\margrsxn600\\margtsxn720\\margbsxn10\\guttersxn0\\headery720\\footery720\\pgbrdropt0\\sectdefaultcl\\cols2\\colsx1080\\linebetcol1\\endnhere", sep = "")
     #### Herbarium Label
     #### Default Font Size is 18
     #### Default font is Times New Roman
@@ -449,15 +457,15 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, theme = c("KFBG", "PE
             ifelse(is.na(herbdat$ADDITIONAL_COLLECTOR), 
                 paste("{\\pard\\keep\\keepn\\fi0\\sb200\\sa100\\fs18\\tqr\\tx4850\\b ",
                        herbdat$COLLECTOR,", #" ,herbdat$COLLECTOR_NUMBER,"\\b0", 
-                       " ", ifelse(nchar(paste(herbdat$COLLECTOR,herbdat$ADDITIONAL_COLLECTOR,", #", herbdat$COLLECTOR_NUMBER )) < 50, "", "\\line"), " \\tab ",
+                       "",ifelse(nchar(paste(herbdat$COLLECTOR,herbdat$ADDITIONAL_COLLECTOR,", #", herbdat$COLLECTOR_NUMBER )) < 50, "", "\\line"), " \\tab ",
                        tryCatch(formatdate(herbdat$DATE_COLLECTED), 
                        error= function(e) {print("Warning: Date format incorrect, using original string"); 
                        herbdat$DATE_COLLECTED}),
                        "\\par}",sep = ""), 
                 paste("{\\pard\\keep\\keepn\\fi0\\sb200\\sa100\\fs18\\tqr\\tx4850\\b ",
                        herbdat$COLLECTOR,", ",herbdat$ADDITIONAL_COLLECTOR,"  #" ,
-                       herbdat$COLLECTOR_NUMBER, "\\b0", 
-                       " ", ifelse(nchar(paste(herbdat$COLLECTOR,herbdat$ADDITIONAL_COLLECTOR,", #", herbdat$COLLECTOR_NUMBER )) < 50, "", "\\line")," \\tab ",
+                       herbdat$COLLECTOR_NUMBER, "\\b0",
+                       ifelse(nchar(paste(herbdat$COLLECTOR,herbdat$ADDITIONAL_COLLECTOR,", #", herbdat$COLLECTOR_NUMBER )) < 50, "", "\\line")," \\tab ",
                        tryCatch(formatdate(herbdat$DATE_COLLECTED), 
                        error= function(e) {print("Warning: Date format incorrect, using original string");
                        herbdat$DATE_COLLECTED}),
@@ -715,9 +723,9 @@ herbarium_label <- function(dat = NULL, spellcheck = TRUE, theme = c("KFBG", "PE
              )                             ### End of one label
         }
         NEW_DATE_COLLECTED[i] <- tryCatch(formatdate2(herbdat$DATE_COLLECTED), 
-                   error= function(e) {herbdat$DATE_COLLECTED})  ### formatdate2, Do not convert to date if could not be identified. 
+                   error= function(e) {herbdat$DATE_COLLECTED})
         NEW_DATE_IDENTIFIED[i] <- tryCatch(formatdate2(herbdat$DATE_IDENTIFIED), 
-                                 error= function(e) {herbdat$DATE_IDENTIFIED})  ### formatdate2, Do not convert to date if could not be identified. 
+                                 error= function(e) {herbdat$DATE_IDENTIFIED}) 
         temp2 <- c(temp2, res)         ### Add label to the RTF file.
         herbdat_row1 <- rbind(herbdat_row1, herbdat)
     }

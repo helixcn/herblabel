@@ -7,7 +7,7 @@ Creating RTF herbarium labels based on Darwin Core herbarium records template
 Creating RTF herbarium labels based on Darwin Core herbarium records template.
 }
 \usage{
-herbarium_label(dat = NULL, spellcheck = TRUE,theme = c("KFBG", "PE", "KUN", "HU"), outfile = "herblabel.rtf")
+herbarium_label(dat = NULL, spellcheck = TRUE, theme = c("KFBG", "PE", "KUN", "HU"), outfile = "herblabel.rtf", font = c("Roman","Arial"))
 }
 
 \arguments{
@@ -25,6 +25,11 @@ a character string speficying the theme of herbarium labels
   \item{outfile}{
 Character string, name of the rtf file to be generated.
 }
+
+  \item{font}{
+  Font for all the labels to be generated,either "Roman" for proportionally spaced serif fonts or "Arial", proportionally spaced sans serif fonts respectively.  
+}
+
 }
 \details{
 This function reads Darwin Core herbarium records template in CSV, and generates a RTF file. It will check the completeness for each entry: Labels will not generated if some critical fields is missing, eg. Collector, Collector's Number. Therefore, a specimen without collector's number, the collector's number should be marked as "s.n.". 
@@ -153,4 +158,12 @@ Jinlong Zhang \email{ jinlongzhang01@gmail.com }
     herbarium_label(dat, theme = "KUN",  outfile = "herbarium_labels_KUN.rtf")
     herbarium_label(dat, theme = "HU",  outfile = "herbarium_labels_HU.rtf")
     herbarium_label(dat, spellcheck = FALSE, outfile = "herbarium_labels_no_checking.rtf")
+    
+    ##### Labels using Sans Serif Fonts
+    herbarium_label(dat, theme = "KFBG", outfile = "herbarium_labels_KFBG_Arial.rtf", font = "Arial")
+    herbarium_label(dat, theme = "PE",   outfile = "herbarium_labels_PE_Arial.rtf", font = "Arial")
+    herbarium_label(dat, theme = "KUN",  outfile = "herbarium_labels_KUN_Arial.rtf", font = "Arial")
+    herbarium_label(dat, theme = "HU",  outfile = "herbarium_labels_HU_Arial.rtf", font = "Arial")
+    herbarium_label(dat, spellcheck = FALSE, outfile = "herbarium_labels_no_checking_Arial.rtf", font = "Arial")
+    
 }
