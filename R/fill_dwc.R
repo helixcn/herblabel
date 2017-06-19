@@ -28,28 +28,34 @@ fill_dwc <- function(dat, namedb = c("spfrps", "spfoc")){
        warning("Multiple families assigned for one genus")
     }
 
-    #### Clear the previous results
-    datspcn2$GENUS                              <- ""
-    datspcn2$SPECIES                            <- ""
-    datspcn2$AUTHOR_OF_SPECIES                  <- ""
-    datspcn2$INFRASPECIFIC_RANK                 <- ""
-    datspcn2$INFRASPECIFIC_EPITHET              <- ""
-    datspcn2$AUTHOR_OF_INFRASPECIFIC_RANK       <- ""
+    ##### #### Clear the previous results
+    ##### datspcn2$GENUS                              <- ""
+    ##### datspcn2$SPECIES                            <- ""
+    ##### datspcn2$AUTHOR_OF_SPECIES                  <- ""
+    ##### datspcn2$INFRASPECIFIC_RANK                 <- ""
+    ##### datspcn2$INFRASPECIFIC_EPITHET              <- ""
+    ##### datspcn2$AUTHOR_OF_INFRASPECIFIC_RANK       <- ""
     
     #### Make sure that no NA in the dataframe so all the cells could be compared.
     datspcn2[is.na(datspcn2)] <- ""
     
     for (i in 1:nrow(datspcn2)){
+        if(!datspcn2$LOCAL_NAME[i] == ""){
         datspcn2$GENUS[i]                         <- ifelse(!datspcn2$GENUS_PARSED [i]                         == datspcn2$GENUS[i]                        , datspcn2$GENUS_PARSED[i],                        datspcn2$GENUS[i]                        )
         datspcn2$SPECIES[i]                       <- ifelse(!datspcn2$SPECIES_PARSED [i]                       == datspcn2$SPECIES [i]                     , datspcn2$SPECIES_PARSED[i],                      datspcn2$SPECIES [i]                     )
         datspcn2$AUTHOR_OF_SPECIES[i]             <- ifelse(!datspcn2$AUTHOR_OF_SPECIES_PARSED [i]             == datspcn2$AUTHOR_OF_SPECIES [i]           , datspcn2$AUTHOR_OF_SPECIES_PARSED[i],            datspcn2$AUTHOR_OF_SPECIES  [i]          )
         datspcn2$INFRASPECIFIC_RANK[i]            <- ifelse(!datspcn2$INFRASPECIFIC_RANK_PARSED [i]            == datspcn2$INFRASPECIFIC_RANK [i]          , datspcn2$INFRASPECIFIC_RANK_PARSED[i],           datspcn2$INFRASPECIFIC_RANK [i]          )
         datspcn2$INFRASPECIFIC_EPITHET[i]         <- ifelse(!datspcn2$INFRASPECIFIC_EPITHET_PARSED [i]         == datspcn2$INFRASPECIFIC_EPITHET [i]       , datspcn2$INFRASPECIFIC_EPITHET_PARSED[i],        datspcn2$INFRASPECIFIC_EPITHET [i]       )
         datspcn2$AUTHOR_OF_INFRASPECIFIC_RANK[i]  <- ifelse(!datspcn2$AUTHOR_OF_INFRASPECIFIC_RANK_PARSED [i]  == datspcn2$AUTHOR_OF_INFRASPECIFIC_RANK [i], datspcn2$AUTHOR_OF_INFRASPECIFIC_RANK_PARSED[i], datspcn2$AUTHOR_OF_INFRASPECIFIC_RANK [i])
+        }
     }
     
     datspcn2 <- merge(datspcn2, pgenus, by.x = "GENUS", by.y = "GENUS", all.x = TRUE, sort = FALSE)
-    datspcn2$FAMILY                        <- ifelse(is.na(datspcn2$FAMILY.x)                    |datspcn2$FAMILY.x                     == "", datspcn2$FAMILY.y,                            datspcn2$FAMILY.x                     )
+    
+    
+    for (i in 1:nrow(datspcn2)){
+        datspcn2$FAMILY[i]                        <- ifelse(!datspcn2$FAMILY.x[i] == datspcn2$FAMILY.y[i],  datspcn2$FAMILY.y[i],  datspcn2$FAMILY.x[i])
+    }
     
     datspcn2 <- datspcn2[order(datspcn2$add.sort.id), ]
     

@@ -1,7 +1,7 @@
 Package: herblabel
 Type: Package
 Title: Making Labels for Herbarium Specimens in RTF and More
-Version: 0.6.0
+Version: 0.6.1
 Date: 2017-06-19
 Authors@R: person("Jinlong", "Zhang", role = c("aut", "cre"),
                   email = "jinlongzhang01@gmail.com")
