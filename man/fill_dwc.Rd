@@ -53,7 +53,8 @@ Jinlong Zhang \email{ jinlongzhang01@gmail.com }
 \examples{
 
 library(openxlsx)
-dat <- read.xlsx(system.file("extdata", "DARWIN_CORE_HERBARIUM_RECORDS.xlsx", package = "herblabel"))
+dat <- read.xlsx(system.file("extdata", "DARWIN_CORE_HERBARIUM_RECORDS.xlsx", 
+                 package = "herblabel"))
 dwc_filled <- fill_dwc(dat)
 herbarium_label(dat = dwc_filled, outfile = "herblabel_fill_sp_dwc_example.rtf")
 

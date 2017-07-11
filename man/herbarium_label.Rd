@@ -7,7 +7,8 @@ Creating RTF herbarium labels based on Darwin Core herbarium records template
 Creating RTF herbarium labels based on Darwin Core herbarium records template.
 }
 \usage{
-herbarium_label(dat = NULL, spellcheck = TRUE, theme = c("KFBG", "PE", "KUN", "HU"), outfile = "herblabel.rtf", font = c("Roman","Arial"))
+herbarium_label(dat = NULL, spellcheck = TRUE, theme = c("KFBG", "PE", "KUN", "HU"), 
+                outfile = "herblabel.rtf", font = c("Roman","Arial"))
 }
 
 \arguments{
@@ -157,13 +158,24 @@ Jinlong Zhang \email{ jinlongzhang01@gmail.com }
     herbarium_label(dat, theme = "PE",   outfile = "herbarium_labels_PE.rtf")
     herbarium_label(dat, theme = "KUN",  outfile = "herbarium_labels_KUN.rtf")
     herbarium_label(dat, theme = "HU",  outfile = "herbarium_labels_HU.rtf")
-    herbarium_label(dat, spellcheck = FALSE, outfile = "herbarium_labels_no_checking.rtf")
+    herbarium_label(dat, spellcheck = FALSE, 
+                    outfile = "herbarium_labels_no_checking.rtf")
     
     ##### Labels using Sans Serif Fonts
-    herbarium_label(dat, theme = "KFBG", outfile = "herbarium_labels_KFBG_Arial.rtf", font = "Arial")
-    herbarium_label(dat, theme = "PE",   outfile = "herbarium_labels_PE_Arial.rtf", font = "Arial")
-    herbarium_label(dat, theme = "KUN",  outfile = "herbarium_labels_KUN_Arial.rtf", font = "Arial")
-    herbarium_label(dat, theme = "HU",  outfile = "herbarium_labels_HU_Arial.rtf", font = "Arial")
-    herbarium_label(dat, spellcheck = FALSE, outfile = "herbarium_labels_no_checking_Arial.rtf", font = "Arial")
+    herbarium_label(dat, theme = "KFBG", 
+                    outfile = "herbarium_labels_KFBG_Arial.rtf", 
+                    font = "Arial")
+    herbarium_label(dat, theme = "PE",   
+                    outfile = "herbarium_labels_PE_Arial.rtf", 
+                    font = "Arial")
+    herbarium_label(dat, theme = "KUN",  
+                    outfile = "herbarium_labels_KUN_Arial.rtf", 
+                    font = "Arial")
+    herbarium_label(dat, theme = "HU",  
+                    outfile = "herbarium_labels_HU_Arial.rtf", 
+                    font = "Arial")
+    herbarium_label(dat, spellcheck = FALSE, 
+                    outfile = "herbarium_labels_no_checking_Arial.rtf", 
+                    font = "Arial")
     
 }
