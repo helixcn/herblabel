@@ -8,7 +8,7 @@ Creating RTF herbarium labels based on Darwin Core herbarium records template.
 }
 \usage{
 herbarium_label(dat = NULL, spellcheck = TRUE, theme = c("KFBG", "PE", "KUN", "HU"), 
-                outfile = "herblabel.rtf", font = c("Roman","Arial"))
+                outfile = "herblabel.rtf", font = c("Roman","Arial"), font_size = 1)
 }
 
 \arguments{
@@ -29,6 +29,10 @@ Character string, name of the rtf file to be generated.
 
   \item{font}{
   Font for all the labels to be generated,either "Roman" for proportionally spaced serif fonts or "Arial", proportionally spaced sans serif fonts respectively.  
+}
+
+  \item{font_size}{
+  Relative Font Size, by default it is 1. 
 }
 
 }
@@ -154,12 +158,20 @@ Jinlong Zhang \email{ jinlongzhang01@gmail.com }
                         package = "herblabel")
     library(openxlsx)
     dat <- read.xlsx(path)
+    
     herbarium_label(dat, theme = "KFBG", outfile = "herbarium_labels_KFBG.rtf")
     herbarium_label(dat, theme = "PE",   outfile = "herbarium_labels_PE.rtf")
     herbarium_label(dat, theme = "KUN",  outfile = "herbarium_labels_KUN.rtf")
     herbarium_label(dat, theme = "HU",  outfile = "herbarium_labels_HU.rtf")
     herbarium_label(dat, spellcheck = FALSE, 
                     outfile = "herbarium_labels_no_checking.rtf")
+    
+    herbarium_label(dat, theme = "KFBG", outfile = "herbarium_labels_KFBG_1.1.rtf", font_size = 1.1)
+    herbarium_label(dat, theme = "PE",   outfile = "herbarium_labels_PE_1.2.rtf"  , font_size = 1.2)
+    herbarium_label(dat, theme = "KUN",  outfile = "herbarium_labels_KUN_0.8.rtf" , font_size = 0.8)
+    herbarium_label(dat, theme = "HU",   outfile = "herbarium_labels_HU_0.8.rtf"  , font_size = 0.8)
+    herbarium_label(dat, spellcheck = FALSE, 
+                    outfile = "herbarium_labels_no_checking.rtf"              , font_size = 1.5)
     
     ##### Labels using Sans Serif Fonts
     herbarium_label(dat, theme = "KFBG", 
