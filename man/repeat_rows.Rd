@@ -5,7 +5,7 @@
 Repeat rows of a dataframe for n times
 }
 \description{
-Repeat the rows for certain times based on the number specified in the column "NUMBER_OF_LABELS_TO_CREATE".
+Repeat the rows for certain times based on the number specified in the column \code{NUMBER_OF_LABELS_TO_CREATE}.
 }
 \usage{
 repeat_rows(dat = NULL)
@@ -13,14 +13,14 @@ repeat_rows(dat = NULL)
 
 \arguments{
   \item{dat}{
-A dataframe with a column "NUMBER_OF_LABELS_TO_CREATE". If the column is missing, the function return the original dataframe.
+A dataframe with a column \code{NUMBER_OF_LABELS_TO_CREATE}. If the column is missing, the function return the original dataframe.
 }
 }
 \details{
-This function helps to create multiple labels for one collector's number. Its output can then be supplied to the function `herbarium_label()` to generate labels. For NUMBER_OF_LABELS_TO_CREATE, any missing values (NA) will be replaced by 1. Anything in NUMBER_OF_LABELS_TO_CREATE that could not be converted into a number, will be treated as NA, but not being replaced.
+This function helps to create multiple labels for one collector's number. Its output can then be supplied to the function `herbarium_label()` to generate labels. For \code{NUMBER_OF_LABELS_TO_CREATE}, any missing values (NA) will be replaced by 1. Anything in \code{NUMBER_OF_LABELS_TO_CREATE} that could not be converted into a number, will be treated as NA, but not being replaced.
 }
 \value{
-dataframe with rows repeated for a certain number of times as specified in NUMBER_OF_LABELS_TO_CREATE.
+A dataframe with rows repeated for a certain number of times as specified in \code{NUMBER_OF_LABELS_TO_CREATE}. Note all the values will be converted to characters.
 }
 
 \author{
