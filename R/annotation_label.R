@@ -69,7 +69,8 @@ annotation_label <- function(dat = NULL, spellcheck = TRUE, outfile = "Annotatio
         for(i in 1:length(sptemp)){
             sptemp2[i] <- REPLACE(sptemp[i])   
         }
-        tplsplist <- herblabel::tplsplist
+        
+        tplsplist <- unique(c(herblabel::tplsplist, herblabel::spfrps[,2],herblabel::spfoc[,2],herblabel::colcn2019[,2])) ## automatically add the names for checking
         ind <- (!sptemp2 %in% tplsplist) & (!gsub(" ", "", sptemp2 ) == "")  ### Make sure the empty entries were excluded. 
         herbdat000$GENUS[ind] <- paste("\\cf2\\i0 Name not found. Check Spelling at {\\field{\\*\\fldinst{HYPERLINK \"http://www.theplantlist.org/\"}}{\\fldrslt{\\ul\\cf2 http://www.theplantlist.org/}}} or {\\field{\\*\\fldinst{HYPERLINK \"http://frps.eflora.cn/\"}}{\\fldrslt{\\ul\\cf2 http://frps.eflora.cn/}}} for:\\i  ", herbdat000$GENUS[ind], sep = "")
         herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind] <- paste(ifelse(is.na(herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind]), "", herbdat000$AUTHOR_OF_INFRASPECIFIC_RANK[ind]), "\\cf1", sep = "")

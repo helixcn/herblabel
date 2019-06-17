@@ -1,8 +1,9 @@
 #### create herbarium labels in RTF, default size of paper is A4.
 
-herbarium_label <- function(dat = NULL, spellcheck = TRUE, 
-theme = c("KFBG", "PE", "KUN", "HU"), 
-outfile = "herblabel.rtf", 
+herbarium_label <- function(dat = NULL,
+spellcheck = TRUE,
+theme = c("KFBG", "PE", "KUN", "HU"),
+outfile = "herblabel.rtf",
 font = c("Roman","Arial"),
 font_size = 1
 ){
@@ -227,7 +228,7 @@ font_size = 1
         for(i in 1:length(sptemp)){
             sptemp2[i] <- REPLACE(sptemp[i])   
         }
-        tplsplist <- herblabel::tplsplist
+        tplsplist <- unique(c(herblabel::tplsplist, herblabel::spfrps[,2],herblabel::spfoc[,2],herblabel::colcn2019[,2])) ## automatically add the names for checking
         ind <- !sptemp2 %in% tplsplist
         if(length(which(ind)) > 0){
              message_txt <- paste("Species:\n", paste(sptemp2[ind], collapse = "\n"), 
