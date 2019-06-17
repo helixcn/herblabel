@@ -1,14 +1,14 @@
 Package: herblabel
 Type: Package
 Title: Making Labels for Herbarium Specimens in RTF and More
-Version: 0.8.0
-Date: 2018-05-10
+Version: 0.9.0
+Date: 2019-06-17
 Authors@R: person("Jinlong", "Zhang", role = c("aut", "cre"),
                   email = "jinlongzhang01@gmail.com")
 Author: Jinlong Zhang [aut, cre]
 Maintainer: Jinlong Zhang <jinlongzhang01@gmail.com>
 Description: Making Labels for Herbarium Specimens in RTF based on Darwin Core Templates.
-Depends: R (>= 3.0.3)
+Depends: R (>= 3.5.0)
 Encoding: UTF-8
 Suggests: openxlsx
 License: GPL-2

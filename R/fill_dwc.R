@@ -1,4 +1,4 @@
-fill_dwc <- function(dat, namedb = c("spfrps", "spfoc")){
+fill_dwc <- function(dat, namedb = c("spfrps", "spfoc", "colcn2019")){
     namedb <- match.arg(namedb)
     add.sort.id <- 1:nrow(dat)
     dat2 <- data.frame(dat, add.sort.id)
@@ -6,6 +6,7 @@ fill_dwc <- function(dat, namedb = c("spfrps", "spfoc")){
     pgenus  <- herblabel::pgenus
     spfrps  <- herblabel::spfrps
     spfoc   <- herblabel::spfoc
+    colcn2019   <- herblabel::colcn2019
     #### add scientific name based on the local Chinese Name
     if(namedb == "spfrps"){
         datspcn <- merge(dat2, spfrps, by.x = "LOCAL_NAME", by.y = "NAME_CN", sort = FALSE, all.x = TRUE)
@@ -15,6 +16,10 @@ fill_dwc <- function(dat, namedb = c("spfrps", "spfoc")){
         datspcn <- merge(dat2, spfoc,  by.x = "LOCAL_NAME", by.y = "NAME_CN", sort = FALSE, all.x = TRUE)
     }
     
+    if(namedb == "colcn2019"){
+        datspcn <- merge(dat2, colcn2019,  by.x = "LOCAL_NAME", by.y = "NAME_CN", sort = FALSE, all.x = TRUE)
+    }
+
     datspcn$SCIENTIFIC_NAME <- ifelse((is.na(datspcn$SCIENTIFIC_NAME)|datspcn$SCIENTIFIC_NAME == "")&(!is.na(datspcn$LOCAL_NAME)|datspcn$LOCAL_NAME == ""), datspcn$LOCAL_NAME, datspcn$SCIENTIFIC_NAME)
     datspcn$SCIENTIFIC_NAME <- ifelse((is.na(datspcn$SCIENTIFIC_NAME)|datspcn$SCIENTIFIC_NAME == ""), "", datspcn$SCIENTIFIC_NAME)
     #### 
