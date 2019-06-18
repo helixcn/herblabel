@@ -1,8 +1,8 @@
 Package: herblabel
 Type: Package
 Title: Making Labels for Herbarium Specimens in RTF and More
-Version: 0.9.1
-Date: 2019-06-17
+Version: 0.9.2
+Date: 2019-06-18
 Authors@R: person("Jinlong", "Zhang", role = c("aut", "cre"),
                   email = "jinlongzhang01@gmail.com")
 Author: Jinlong Zhang [aut, cre]

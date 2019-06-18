@@ -7,16 +7,21 @@ fill_dwc <- function(dat, namedb = c("spfrps", "spfoc", "colcn2019")){
     spfrps  <- herblabel::spfrps
     spfoc   <- herblabel::spfoc
     colcn2019   <- herblabel::colcn2019
+    genera_cn <- (herblabel::genera_cn)[,c(1,2)]
+    colnames(genera_cn) <- c("NAME_CN", "SCIENTIFIC_NAME")
     #### add scientific name based on the local Chinese Name
     if(namedb == "spfrps"){
+        spfrps <- unique(rbind(spfrps, genera_cn))
         datspcn <- merge(dat2, spfrps, by.x = "LOCAL_NAME", by.y = "NAME_CN", sort = FALSE, all.x = TRUE)
     }
     
     if(namedb == "spfoc"){
+        spfoc <- unique(rbind(spfoc, genera_cn))
         datspcn <- merge(dat2, spfoc,  by.x = "LOCAL_NAME", by.y = "NAME_CN", sort = FALSE, all.x = TRUE)
     }
     
     if(namedb == "colcn2019"){
+        colcn2019 <- unique(rbind(colcn2019, genera_cn))
         datspcn <- merge(dat2, colcn2019,  by.x = "LOCAL_NAME", by.y = "NAME_CN", sort = FALSE, all.x = TRUE)
     }
 
