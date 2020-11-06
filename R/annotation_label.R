@@ -29,7 +29,7 @@ annotation_label <- function(dat = NULL, spellcheck = TRUE, outfile = "Annotatio
         if(!is.na(suppressWarnings(as.integer(x))) ){
             if(!grepl("^darwin", R.version$os)){  
                 x <- as.Date(as.integer(x), origin="1899-12-30")   ### Default in MacOS
-            } else {                              
+            } else {
                 x <- as.Date(as.integer(x), origin = "1904-01-01") ### Default in Windows
             }
         }
@@ -88,7 +88,7 @@ annotation_label <- function(dat = NULL, spellcheck = TRUE, outfile = "Annotatio
         res <- c(
         ifelse((is.na(herbdat$COLLECTOR))|(is.na(herbdat$COLLECTOR_NUMBER)), 
                 "", 
-                paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\fs18\\sb100\\sa50 Coll.: ", herbdat$COLLECTOR, "  #",herbdat$COLLECTOR_NUMBER, "\\par }", sep = "")), 
+                paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\fs18\\sb100\\sa50 Coll.: ", herbdat$COLLECTOR, " #",herbdat$COLLECTOR_NUMBER, "\\par }", sep = "")), 
         ifelse(is.na(herbdat$TYPE_STATUS), 
             "", 
             paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\sb100\\sa50\\fs20\\b ", toupper(as.character(herbdat$TYPE_STATUS)), "\\b0  of:\\par }", sep = "")), 
@@ -107,39 +107,67 @@ annotation_label <- function(dat = NULL, spellcheck = TRUE, outfile = "Annotatio
             paste("{\\pard\\keep\\keepn\\fi-288\\li288", 
                 ifelse((is.na(herbdat$TYPE_STATUS)), 
                         "\\sb180", "\\sb20"),
-                "\\sa20\\fs20\\b\\i ", 
-                ifelse(is.na(herbdat$GENUS),                          "",      as.character(herbdat$GENUS)), 
-                      "\\i0  \\i ", 
-                ifelse((is.na(herbdat$SPECIES)),                      "\\i0 ", as.character(herbdat$SPECIES)), 
-                      "\\i0  ", 
-                ifelse(is.na(herbdat$AUTHOR_OF_SPECIES),              "",      as.character(herbdat$AUTHOR_OF_SPECIES)), 
-                  " ", 
-                ifelse(is.na(herbdat$INFRASPECIFIC_RANK),             "",      as.character(herbdat$INFRASPECIFIC_RANK)), 
-                " \\i ", 
-                ifelse(is.na(herbdat$INFRASPECIFIC_EPITHET),          "",      as.character(herbdat$INFRASPECIFIC_EPITHET)), 
-                "\\i0  ", 
-                ifelse(is.na(herbdat$AUTHOR_OF_INFRASPECIFIC_RANK),   "",      as.character(herbdat$AUTHOR_OF_INFRASPECIFIC_RANK)
-                ), 
+                "\\sa20\\fs20\\b\\i ",
+                paste(ifelse( is.na(herbdat$GENUS), 
+                                             "", 
+                                             herbdat$GENUS),
+                                     "\\i0 \\i", # Close and start italic
+                                      ifelse( is.na(herbdat$SPECIES), 
+                                             "\\i0 ", # stop italic
+                                             paste("  ", as.character(herbdat$SPECIES), sep = "")
+                                            ), 
+                                      "\\i0", 
+                                      ifelse( is.na(herbdat$AUTHOR_OF_SPECIES), 
+                                             "", 
+                                             paste("  ", as.character(herbdat$AUTHOR_OF_SPECIES), sep = "")
+                                            ),
+                                      ifelse( is.na(herbdat$INFRASPECIFIC_RANK), 
+                                             "", 
+                                             paste("  ", as.character(herbdat$INFRASPECIFIC_RANK), sep = "")
+                                            ), 
+                                      "\\i", # starting italic
+                                      ifelse( is.na(herbdat$INFRASPECIFIC_EPITHET), 
+                                             "",  
+                                             paste("  ", as.character(herbdat$INFRASPECIFIC_EPITHET), sep = "")
+                                             ), 
+                                      "\\i0",
+                                      ifelse( is.na(herbdat$AUTHOR_OF_INFRASPECIFIC_RANK), 
+                                             "", 
+                                             paste("  ", as.character(herbdat$AUTHOR_OF_INFRASPECIFIC_RANK), sep = "")
+                                             ), 
+                                      sep = ""
+                                    ), 
                 "\\b0\\par }", sep = "")
             ), 
         ifelse(is.na(herbdat$TYPE_REF), 
-            "",        
-            paste("{\\pard\\keep\\keepn\\fi288\\li288\\brsp20\\sb10\\sa20\\fs16  " , ifelse(is.na(herbdat$TYPE_REF ), "", herbdat$TYPE_REF), " \\par}")
-            ), 
-        ifelse(is.na(herbdat$DET_NOTE), 
-              "", 
-              paste("{\\pard\\keep",
-                  ifelse(((is.na(herbdat$TYPE_STATUS                              ))&
-                                       (is.na(herbdat$TYPE_REF                    ))&
-                                       (is.na(herbdat$FAMILY                      ))&
-                                       (is.na(herbdat$GENUS                       ))&
-                                       (is.na(herbdat$SPECIES                     ))&
-                                       (is.na(herbdat$AUTHOR_OF_SPECIES           ))&
-                                       (is.na(herbdat$INFRASPECIFIC_RANK          ))&
-                                       (is.na(herbdat$INFRASPECIFIC_EPITHET       ))&
-                                       (is.na(herbdat$AUTHOR_OF_INFRASPECIFIC_RANK))), "\\sb150", "\\sb10")
-                                      ,"\\sa20\\keepn\\fi0\\li0\\fs16 ", as.character(herbdat$DET_NOTE), " \\par}", sep = "")
-            ), 
+              "",
+              paste("{\\pard\\keep\\keepn\\fi288\\li288\\brsp20\\sb10\\sa20\\fs16", 
+                  ifelse(is.na(herbdat$TYPE_REF ), 
+                         "", 
+                         herbdat$TYPE_REF), 
+                         "\\par}", sep = ""
+                   )
+              ), 
+        ifelse(is.na(herbdat$DET_NOTE), # the notes
+               "", 
+               paste("{\\pard\\keep",
+                       ifelse(   ((is.na(herbdat$TYPE_STATUS                 ))&
+                                  (is.na(herbdat$TYPE_REF                    ))&
+                                  (is.na(herbdat$FAMILY                      ))&
+                                  (is.na(herbdat$GENUS                       ))&
+                                  (is.na(herbdat$SPECIES                     ))&
+                                  (is.na(herbdat$AUTHOR_OF_SPECIES           ))&
+                                  (is.na(herbdat$INFRASPECIFIC_RANK          ))&
+                                  (is.na(herbdat$INFRASPECIFIC_EPITHET       ))&
+                                  (is.na(herbdat$AUTHOR_OF_INFRASPECIFIC_RANK))
+                                ), 
+                             "\\sb150", 
+                             "\\sb10"
+                            ),
+                       "\\sa20\\keepn\\fi0\\li0\\fs16", 
+                       as.character(herbdat$DET_NOTE), "\\par}", sep = ""
+                    )
+              ),
         paste("{\\pard\\keep", ifelse(((is.na(herbdat$TYPE_STATUS                 ))&
                                        (is.na(herbdat$TYPE_REF                    ))&
                                        (is.na(herbdat$FAMILY                      ))&
@@ -153,34 +181,38 @@ annotation_label <- function(dat = NULL, spellcheck = TRUE, outfile = "Annotatio
                                        "\\sb800", # if all are missing, extent the space
                                        "\\sb200"), 
              ifelse((is.na(herbdat$PROJECT)), 
-                   "\\sa150",
+                   "\\sa150", # space after PROJECT
                    "\\sa10"), 
              "\\keepn\\fi0\\li0\\fs18\\tqr\\tx4850 ", 
-                  ifelse(is.na(herbdat$ABBREVIATION), 
+                  ifelse(is.na(herbdat$ABBREVIATION),  # refers to "det., Det, Verified by, "
                          "", 
-                         paste(herbdat$ABBREVIATION,": ", sep = "")), 
+                         paste(herbdat$ABBREVIATION,": ", sep = "")
+                         ), 
                   ifelse(is.na(herbdat$IDENTIFIED_BY), 
                          "", 
-                         as.character(herbdat$IDENTIFIED_BY)), 
+                         as.character(herbdat$IDENTIFIED_BY)
+                         ), 
                   "", 
                   ifelse(is.na(herbdat$INSTITUTION), 
                          "", 
                          ifelse(is.na(herbdat$IDENTIFIED_BY), 
                                paste("                         ", as.character(herbdat$INSTITUTION), sep = ""),
-                               paste(", ", as.character(herbdat$INSTITUTION), sep = ""))), 
-                  "  \\tab ", 
+                               paste(", ", as.character(herbdat$INSTITUTION), sep = "")
+                               )
+                        ), 
+                  "\\tab ", 
                   ifelse(is.na(herbdat$DATE_IDENTIFIED), 
                          "", 
                          tryCatch(formatdate(herbdat$DATE_IDENTIFIED), 
                                   error= function(e) {print("Warning: Date format incorrect, using original string"); 
                                              herbdat$DATE_IDENTIFIED})
                          ), 
-                         " \\par }", sep = ""
+                         "\\par}", sep = ""
         ),
         ifelse(is.na(herbdat$PROJECT), 
                "", 
-              paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\qc\\sb10\\sa150\\fs16 ", 
-                as.character(herbdat$PROJECT), "\\par }", sep = "")
+              paste("{\\pard\\keep\\keepn\\fi0\\li0\\brsp20\\qc\\sb10\\sa150\\fs16", 
+                as.character(herbdat$PROJECT), "\\par}", sep = "")
               ),
         "{\\pard\\keep\\qc\\fs18 .                     .                    .\\sa100\\par}" 
              )

@@ -418,28 +418,62 @@ font_size = 1
                     herbdat$TITLE,"\\b0 \\par }", sep = "")),
             #### FAMILY, in BOLD FACE, must be either in Flora of Hong Kong, or The Plant List
             ifelse(is.na(herbdat$FAMILY), paste("{\\pard\\keep\\keepn\\fi0\\li0\\qc\\sb10\\sa100\\fs",trunc(font_size*18),"\\b ",
-                   "\\b0\\qc0 \\par }", sep = ""), paste("{\\pard\\keep\\keepn\\fi0\\li0\\qc\\sb10\\sa100\\fs",trunc(font_size*18),"\\b ",
-                   herbdat$FAMILY,"\\b0\\qc0 \\par }", sep = "")),
-            
+                   "\\b0\\qc0\\par }", sep = ""), paste("{\\pard\\keep\\keepn\\fi0\\li0\\qc\\sb10\\sa100\\fs",trunc(font_size*18),"\\b ",
+                   herbdat$FAMILY,"\\b0\\qc0\\par }", sep = "")),
+
             #### SPECIES INFO
             ifelse(is.na(herbdat$GENUS) & is.na(herbdat$SPECIES) & is.na(herbdat$AUTHOR_OF_SPECIES) & is.na(herbdat$INFRASPECIFIC_RANK) & is.na(herbdat$INFRASPECIFIC_EPITHET) & is.na(herbdat$AUTHOR_OF_INFRASPECIFIC_RANK), 
                         "", 
-                        paste("{\\pard\\keep\\keepn\\fi-288\\li288\\sb100\\sa200\\fs",trunc(font_size*20),"\\b\\i ",
-                        REPLACE(paste(ifelse( is.na(herbdat$GENUS), "", herbdat$GENUS),"\\i0 \\i", 
-                                      ifelse( is.na(herbdat$SPECIES),                           "\\i0 ",    paste(" ", as.character(herbdat$SPECIES),                          sep = "")), "\\i0",
-                                      ifelse( is.na(herbdat$AUTHOR_OF_SPECIES),                  "",         paste(" ", as.character(herbdat$AUTHOR_OF_SPECIES),                sep = "")),
-                                      ifelse( is.na(herbdat$INFRASPECIFIC_RANK),                 "",         paste(" ", as.character(herbdat$INFRASPECIFIC_RANK),               sep = "")), "\\i",
-                                      ifelse( is.na(herbdat$INFRASPECIFIC_EPITHET),              "",         paste(" ", as.character(herbdat$INFRASPECIFIC_EPITHET),            sep = "")), "\\i0",
-                                      ifelse( is.na(herbdat$AUTHOR_OF_INFRASPECIFIC_RANK),       "",         paste(" ", as.character(herbdat$AUTHOR_OF_INFRASPECIFIC_RANK),     sep = "")), sep = " ")),
-                                      "\\b0\\par}", sep = "")),
+                        paste("{\\pard\\keep\\keepn\\fi-288\\li288\\sb100\\sa200\\fs",trunc(font_size*20),"\\b\\i ", # starting italic
+                                paste(ifelse( is.na(herbdat$GENUS), 
+                                             "", 
+                                             herbdat$GENUS),
+                                     "\\i0 \\i", # Close and start italic
+                                      ifelse( is.na(herbdat$SPECIES), 
+                                             "\\i0 ", # stop italic
+                                             paste("  ", as.character(herbdat$SPECIES), sep = "")
+                                            ), 
+                                      "\\i0", 
+                                      ifelse( is.na(herbdat$AUTHOR_OF_SPECIES), 
+                                             "", 
+                                             paste("  ", as.character(herbdat$AUTHOR_OF_SPECIES), sep = "")
+                                            ),
+                                      ifelse( is.na(herbdat$INFRASPECIFIC_RANK), 
+                                             "", 
+                                             paste("  ", as.character(herbdat$INFRASPECIFIC_RANK), sep = "")
+                                            ), 
+                                      "\\i", # starting italic
+                                      ifelse( is.na(herbdat$INFRASPECIFIC_EPITHET), 
+                                             "",  
+                                             paste("  ", as.character(herbdat$INFRASPECIFIC_EPITHET), sep = "")
+                                             ), 
+                                      "\\i0",
+                                      ifelse( is.na(herbdat$AUTHOR_OF_INFRASPECIFIC_RANK), 
+                                             "", 
+                                             paste("  ", as.character(herbdat$AUTHOR_OF_INFRASPECIFIC_RANK), sep = "")
+                                             ), 
+                                      sep = ""
+                                    ),
+                                      "\\b0\\par}", sep = ""
+                              )
+                 ),
             ##### COUNTY and LOCALITY
             paste("{\\pard\\keep\\keepn\\fi0\\li0\\sb120\\sa20\\fs",trunc(font_size*18)," ", 
-                REPLACE(paste(toupper(ifelse(is.na(herbdat$COUNTRY), "", herbdat$COUNTRY)),", ", 
-                                      ifelse(is.na(herbdat$STATE_PROVINCE), "", herbdat$STATE_PROVINCE),
+                REPLACE(paste(toupper(ifelse(is.na(herbdat$COUNTRY), 
+                                             "", 
+                                             herbdat$COUNTRY)),
+                                             ", ", 
+                                      ifelse(is.na(herbdat$STATE_PROVINCE), 
+                                             "", 
+                                             herbdat$STATE_PROVINCE), 
                                       ", ", 
-                                      ifelse(is.na(herbdat$COUNTY), "", herbdat$COUNTY), 
+                                      ifelse(is.na(herbdat$COUNTY), 
+                                             "", 
+                                             herbdat$COUNTY), 
                                       ", ", 
-                                      ifelse(is.na(herbdat$LOCALITY), "", as.character(herbdat$LOCALITY)), sep = "")), 
+                                      ifelse(is.na(herbdat$LOCALITY), 
+                                             "", 
+                                             as.character(herbdat$LOCALITY)), sep = "")), 
                                       "\\par}",sep = ""), 
             
             ##### LONGITUDE, LATITUDE and ELEVATION
@@ -452,26 +486,26 @@ font_size = 1
             
             ##### Attributes and Remarks
             ifelse((is.na(herbdat$ATTRIBUTES)) & (is.na(herbdat$REMARKS)), "",
-                    italic_latin(gsub("\\.  ", "\\. ", gsub(" \\.", "\\.", gsub("\\. \\.", "\\. ", gsub("\\. +", "\\. ", 
-                                 REPLACE(paste("{\\pard\\keep\\keepn\\fi0\\li0", paste("\\fs",trunc(font_size*18), sep = ""),"\\sb60", 
+                    italic_latin(gsub("\\.\\.", "\\.", gsub("\\.  ", "\\. ", gsub(" \\.", "\\.", gsub("\\. \\.", "\\. ", gsub("\\. +", "\\. ", 
+                                 REPLACE(paste("{\\pard\\keep\\keepn\\fi0\\li0", paste("\\fs",trunc(font_size*18), sep = ""),"\\sb60 ", 
                                                 ifelse(is.na(herbdat$ATTRIBUTES), "", Cap2(as.character(herbdat$ATTRIBUTES))),
                                                 ifelse(is.na(herbdat$ATTRIBUTES), "", ". "),
                                                 ifelse(is.na(herbdat$REMARKS)   , "", Cap2(as.character(herbdat$REMARKS))), 
-                                                 "\\sa80\\par}", sep = " ")))))))), 
+                                                 "\\sa80\\par}", sep = ""))))))))), 
                     
             ##### COLLECTOR and COLLECTION NUMBER !
             ifelse(is.na(herbdat$ADDITIONAL_COLLECTOR), 
                 paste("{\\pard\\keep\\keepn\\fi0\\sb200\\sa100\\fs",trunc(font_size*18),"\\tqr\\tx4850\\b ",
                        herbdat$COLLECTOR,", #" ,herbdat$COLLECTOR_NUMBER,"\\b0", 
-                       "  ",ifelse(nchar(paste(herbdat$COLLECTOR,herbdat$ADDITIONAL_COLLECTOR,", #", herbdat$COLLECTOR_NUMBER )) > 40, "\\line", "  "), " \\tab ",
+                       " ",ifelse(nchar(paste(herbdat$COLLECTOR,herbdat$ADDITIONAL_COLLECTOR,", #", herbdat$COLLECTOR_NUMBER )) > 40, "\\line", ""), "\\tab ",
                        tryCatch(formatdate(herbdat$DATE_COLLECTED), 
                        error= function(e) {print("Warning: Date format incorrect, using original string"); 
                        herbdat$DATE_COLLECTED}),
                        "\\par}",sep = ""), 
                 paste("{\\pard\\keep\\keepn\\fi0\\sb200\\sa100",paste("\\fs",trunc(font_size*18), sep = ""),"\\tqr\\tx4850\\b ",
                        herbdat$COLLECTOR,", ",herbdat$ADDITIONAL_COLLECTOR,"  #" ,
-                       herbdat$COLLECTOR_NUMBER, "\\b0", "  ",
-                       ifelse(nchar(paste(herbdat$COLLECTOR,herbdat$ADDITIONAL_COLLECTOR,", #", herbdat$COLLECTOR_NUMBER )) > 40, "\\line", "  ")," \\tab ",
+                       herbdat$COLLECTOR_NUMBER, "\\b0", "",
+                       ifelse(nchar(paste(herbdat$COLLECTOR,herbdat$ADDITIONAL_COLLECTOR,", #", herbdat$COLLECTOR_NUMBER )) > 40, "\\line", ""),"\\tab ",
                        tryCatch(formatdate(herbdat$DATE_COLLECTED), 
                        error= function(e) {print("Warning: Date format incorrect, using original string");
                        herbdat$DATE_COLLECTED}),
@@ -489,11 +523,15 @@ font_size = 1
                       ifelse(is.na(herbdat$GLOBAL_UNIQUE_IDENTIFIER) & is.na(herbdat$TYPE_STATUS  ) & 
                              is.na(herbdat$IDENTIFIED_BY  ) & is.na(herbdat$DATE_IDENTIFIED         ) , 
                              "", paste("{\\pard\\keep\\sa40\\keepn\\fi0\\li0\\fs",trunc(font_size*18),"\\tqr\\tx4850 ",
-                              gsub("_", "", ifelse(is.na(herbdat$GLOBAL_UNIQUE_IDENTIFIER), 
-                                                   "", as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER))), 
-                              " \\tab ", 
-                              ifelse(is.na(herbdat$TYPE_STATUS), "",herbdat$TYPE_STATUS),
-                              ifelse(is.na(herbdat$IDENTIFIED_BY),"",paste(" Det.: ",herbdat$IDENTIFIED_BY)),
+                              gsub("_", "", 
+                                     ifelse(is.na(herbdat$GLOBAL_UNIQUE_IDENTIFIER), 
+                                                   "", 
+                                                   paste(as.character(herbdat$GLOBAL_UNIQUE_IDENTIFIER), " ", sep = "")
+                                            )
+                                  ), 
+                              "\\tab ", 
+                              ifelse(is.na(herbdat$TYPE_STATUS), "",paste(herbdat$TYPE_STATUS, " ", sep = "")),
+                              ifelse(is.na(herbdat$IDENTIFIED_BY),"",paste("Det.: ",herbdat$IDENTIFIED_BY, sep = "")),
                               ifelse(is.na(herbdat$DATE_IDENTIFIED), "", ", "), 
                               ifelse(is.na(herbdat$DATE_IDENTIFIED), "", 
                                      tryCatch(formatdate(herbdat$DATE_IDENTIFIED), 
