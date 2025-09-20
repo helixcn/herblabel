@@ -73,6 +73,6 @@ Jinlong Zhang \email{ jinlongzhang01@gmail.com }
                        package = "herblabel")
     library(openxlsx)
     dat <- read.xlsx(path)                    
-    annotation_label(dat)
+    annotation_label(dat, outfile = "Annotation_Labels.rtf")
    
 }

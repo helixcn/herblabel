@@ -201,14 +201,14 @@ herbarium_label <- function(dat = NULL,
         res.split2 <- tolower(gsub(",|\\.", "", res.split))
         res.split3 <-
             gsub(",|\\.", "", res.split) ### will be compared with the Genera
-        found <- res.split2 %in% latin_source
+        found <- res.split2 %in% latin_source  ## Now using res.split3 instead of res.split2 to match
         
         genus_found <- Cap(res.split3) %in% genera_names
         
         res.split[genus_found] <- res.split[genus_found]
         
         res.split[found] <-
-            paste("\\cf3 \\i ", res.split[found], "\\i0\\cf0 ", sep = "")
+            paste("\\cf3 \\i ", res.split[found], " \\i0 \\cf0", sep = "")
         paste(res.split, collapse = " ", sep = "")
     }
     
@@ -883,13 +883,12 @@ herbarium_label <- function(dat = NULL,
                         sep = ""
                     )
                 )),
-                
                 ##### Attributes and Remarks
-                ifelse((is.na(
+                ifelse(is.na(
                     herbdat$ATTRIBUTES
-                )) & (is.na(
+                ) & is.na(
                     herbdat$REMARKS
-                )), "",
+                ), "",
                 italic_latin(gsub(
                     "\\.\\.", "\\.", gsub("\\.  ", "\\. ", gsub(
                         " \\.", "\\.", gsub("\\. \\.", "\\. ", gsub(
@@ -905,17 +904,16 @@ herbarium_label <- function(dat = NULL,
                                         Cap2(as.character(herbdat$ATTRIBUTES))
                                     ),
                                     ifelse(is.na(herbdat$ATTRIBUTES), "", ". "),
-                                    ifelse(is.na(herbdat$REMARKS)   , "", Cap2(
+                                    (ifelse(is.na(herbdat$REMARKS)   , "", Cap2(
                                         as.character(herbdat$REMARKS)
-                                    )),
-                                    "\\sa80\\par}",
+                                    ))),
+                                    " \\sa80\\par}",
                                     sep = ""
                                 )
                             )
                         ))
                     ))
                 ))),
-                
                 ##### COLLECTOR and COLLECTION NUMBER !
                 ifelse(
                     is.na(herbdat$ADDITIONAL_COLLECTOR),

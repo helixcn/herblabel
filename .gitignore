@@ -1,3 +1,7 @@
 .idea
 .DS_Store
 
+.Rproj.user
+herblabel.Rproj
+.Rbuildignore
+.gitignore
